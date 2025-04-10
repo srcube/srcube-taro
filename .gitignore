@@ -1,0 +1,25 @@
+
+# moon
+.moon/cache
+.moon/docker
+
+# node
+node_modules
+
+# build
+dist
+.next
+
+# Taro
+deploy_versions
+.temp
+.rn_temp
+.swc
+*.local
+
+# OSX
+.DS_Store
+
+.vercel
+
+*storybook.log

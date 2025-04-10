@@ -1,0 +1,28 @@
+{
+  "name": "@srcube-taro/ui",
+  "version": "0.0.1",
+  "keywords": [
+    "taro.js",
+    "ui",
+    "button"
+  ],
+  "main": "src/index.ts",
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public",
+    "directory": "package",
+    "main": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup --dts",
+    "prepublishOnly": "rm -rf ./package && clean-publish",
+    "postpublish": "rm -rf ./package"
+  },
+  "dependencies": {
+    "@srcube-taro/button": "workspace:*"
+  },
+  "devDependencies": {
+    "@srcube-taro/ts-config": "workspace:*"
+  }
+}

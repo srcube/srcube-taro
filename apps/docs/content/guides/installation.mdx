@@ -1,0 +1,71 @@
+# Installation
+
+Requirements:
+
+- [React.js 18+](https://reactjs.org)
+- [Taro.js 4.0+](https://docs.taro.zone/docs/)
+- [Tailwind CSS 4.0+](https://tailwindcss.com) and [Weapp Tailwind CSS 4.0+](https://tw.icebreaker.top/)
+
+## Global Installation
+
+The one way to get started with SrcubeUI Taro is to use the global installation, which means that all the components in one package.
+
+Follow the steps below to install all SrcubeUI Taro components:
+
+<Steps>
+
+#### Install Packages
+
+<PackageInstall
+  commands={{
+    npm: 'npm install @srcube/ui @tarojs/components',
+    yarn: 'yarn add @srcube/ui @tarojs/components',
+    pnpm: 'pnpm add @srcube/ui @tarojs/components',
+  }}
+/>
+
+#### Hoisted Dependencies Setup
+
+<Blockquote color='primary'>
+  This step is only for those who use `pnpm` to install. You may skip this step when using other package managers.
+</Blockquote>
+
+If you are using pnpm, you need to add the following line to your `.npmrc` file to hoist our packages to the root `node_modules`.
+
+```bash
+public-hoist-pattern[]=*@srcube/*
+```
+
+#### (Weapp) Tailwind CSS Setup
+
+SrcubeUI Taro is build on top of Tailwind CSS with Weapp Tailwind CSS, so you need to install Tailwind CSS and Weapp Tailwind CSS in your project.
+You can follow the official installation guide to install Tailwind CSS and Weapp Tailwind CSS. Then you need to add the following code to your 
+`app.css`, `tailwind.config.js` file:
+
+**app.css**
+
+```css
+@import 'weapp-tailwindcss';
+```
+
+**tailwind.config.js**
+
+```js
+// tailwind.config.js
+const {srcubeUI} = require('@srcube/ui')
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    // ...
+    // make sure it's pointing to the ROOT node_module
+    './node_modules/@srcube-taro/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  darkMode: 'class',
+  plugins: [srcubeUI()],
+};
+```
+</Steps>

@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+@config '../tailwind.config.mjs';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* code block*/
+  --color-code-block: #151515;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@utility step {
+  counter-increment: step;
+
+  &:before {
+    @apply absolute w-7 h-7 border-1 border-default-200 bg-default-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
+    @apply ml-[-41px];
+    content: counter(step);
+  }
+}
+
+@utility prose {
+  pre {
+    @apply bg-transparent p-0;
+  }
+  code {
+    /* @apply before:hidden after:hidden text-current; */
+  }
+}
+
+@utility shiki {
+  @apply !bg-transparent;
+}
+
+body {
+  /* background: var(--background);
+  color: var(--foreground); */
+  font-family: Arial, Helvetica, sans-serif;
+}

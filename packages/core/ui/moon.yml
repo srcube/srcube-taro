@@ -1,0 +1,9 @@
+type: library
+
+id: core-ui
+
+tasks:
+  dev:
+    command: pnpm dev
+  build:
+    command: pnpm build

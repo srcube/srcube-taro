@@ -1,0 +1,17 @@
+type: application
+
+id: docs
+
+tasks:
+  dev:
+    command: pnpm dev
+    deps:
+      - core-ui:dev
+  build:
+    command: pnpm build
+    deps:
+      - core-ui:build
+  start:
+    command: pnpm start
+    deps:
+      - core-ui:build
