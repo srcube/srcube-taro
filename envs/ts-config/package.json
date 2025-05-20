@@ -1,5 +1,9 @@
 {
   "name": "@srcube-taro/ts-config",
-  "version": "0.0.1",
-  "keywords": ["srcube-taro", "ts-config"]
+  "version": "1.0.0",
+  "private": true,
+  "keywords": [
+    "srcube-taro",
+    "ts-config"
+  ]
 }

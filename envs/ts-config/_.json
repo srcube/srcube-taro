@@ -5,6 +5,7 @@
     "composite": false,
     "target": "esnext",
     "moduleDetection": "force",
+    "lib": ["dom", "esnext"],
     "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "node",
