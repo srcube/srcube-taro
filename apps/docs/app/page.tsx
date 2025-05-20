@@ -31,7 +31,7 @@ export default function Home() {
                 Get Started
               </Button>
               <Snippet>
-                pnpm add @srcube/ui
+                pnpm add @srcube-taro/ui
               </Snippet>
             </div>
           </div>

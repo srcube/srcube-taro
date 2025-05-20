@@ -5,5 +5,9 @@ id: core-ui
 tasks:
   dev:
     command: pnpm dev
+    deps:
+      - core-theme:dev
   build:
     command: pnpm build
+    deps:
+      - core-theme:build

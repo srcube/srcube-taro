@@ -50,7 +50,6 @@ export function PackageInstall(props: PackageInstallProps) {
           >
             <Snippet
               fullWidth
-              className="not-prose"
               classNames={{
                 base: 'dark not-prose bg-code-block',
                 pre: 'px-2 font-light',

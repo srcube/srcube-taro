@@ -1,28 +1,40 @@
 {
   "name": "@srcube-taro/button",
   "version": "0.0.1",
-  "author": "Chioio <srcube.chioio@gmail.com>",
+  "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
     "ui",
     "button"
   ],
   "main": "src/index.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
-    "directory": "package",
     "main": "dist/index.js"
   },
   "scripts": {
     "build": "tsup --dts",
-    "prepublishOnly": "rm -rf ./package && clean-publish",
-    "postpublish": "rm -rf ./package"
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "@tarojs/components": "4.0.9"
+    "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/theme": "workspace:^",
+    "@srcube-taro/utils-react": "workspace:^",
+    "@srcube-taro/utils-taro": "workspace:^",
+    "@srcube-taro/utils-tv": "workspace:^",
+    "@tarojs/components": "catalog:",
+    "classnames": "catalog:"
   },
   "devDependencies": {
-    "@srcube-taro/ts-config": "workspace:*"
+    "@srcube-taro/ts-config": "workspace:^",
+    "@types/react": "catalog:"
   }
 }

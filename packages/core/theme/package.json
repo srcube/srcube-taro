@@ -1,0 +1,31 @@
+{
+  "name": "@srcube-taro/theme",
+  "version": "0.0.1",
+  "keywords": [
+    "taro.js",
+    "ui",
+    "button"
+  ],
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup --dts",
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
+  },
+  "dependencies": {
+    "@egoist/tailwindcss-icons": "catalog:",
+    "tailwind-variants": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@srcube-taro/ts-config": "workspace:^"
+  }
+}

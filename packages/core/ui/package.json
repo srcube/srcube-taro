@@ -6,23 +6,27 @@
     "ui",
     "button"
   ],
-  "main": "src/index.ts",
-  "files": ["dist"],
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public",
-    "directory": "package",
     "main": "dist/index.js"
   },
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup --dts",
-    "prepublishOnly": "rm -rf ./package && clean-publish",
-    "postpublish": "rm -rf ./package"
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
   },
   "dependencies": {
-    "@srcube-taro/button": "workspace:*"
+    "@srcube-taro/button": "workspace:^",
+    "@srcube-taro/layouts": "workspace:^",
+    "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/theme": "workspace:^"
   },
   "devDependencies": {
-    "@srcube-taro/ts-config": "workspace:*"
+    "@srcube-taro/ts-config": "workspace:^"
   }
 }

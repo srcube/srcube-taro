@@ -1,0 +1,18 @@
+type: application
+
+id: sample
+
+tasks:
+  dev-weapp:
+    command: pnpm dev:weapp
+    options:
+      cache: false
+      runInCI: false
+      persistent: true
+    deps:
+      - core-ui:build
+
+  build-weapp:
+    command: pnpm build:weapp
+    deps:
+      - core-ui:build

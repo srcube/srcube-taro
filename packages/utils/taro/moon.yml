@@ -1,0 +1,12 @@
+type: library
+
+id: utils-taro
+
+tasks:
+  build:
+    command: tsup --dts
+  dev:
+    command: tsup --watch
+    options:
+      runInCI: false
+      persistent: true
