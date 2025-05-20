@@ -1,0 +1,6 @@
+---
+to: '{{ name }}/src/index.ts'
+---
+
+export type { {{ name | capitalize }}Props } from './{{ name }}'
+export { default as {{ name | capitalize }} } from './{{ name }}'

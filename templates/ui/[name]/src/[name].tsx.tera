@@ -1,0 +1,34 @@
+---
+to: '{{ name }}/src/{{ name }}.tsx'
+---
+
+import { ViewProps } from '@tarojs/components'
+import { forwardRef } from 'react'
+import { use{{ name | capitalize }}, type Use{{ name | capitalize }}Props } from './use'
+
+export interface {{ name | capitalize }}Props extends Use{{ name | capitalize }}Props {}
+
+const {{ name | capitalize }} = forwardRef<ViewProps, {{ name | capitalize }}Props>((props, ref) => {
+  const {
+    Component,
+    domRef,
+    children,
+    get{{ name | capitalize }}Props,
+  } = use{{ name | capitalize }}({
+    ...props,
+    ref,
+  })
+
+  return (
+    <Component
+      ref={domRef}
+      {...get{{ name | capitalize }}Props()}
+    >
+      {children}
+    </Component>
+  )
+})
+
+{{ name | capitalize }}.displayName = 'Srcube.{{ name | capitalize }}'
+
+export default {{ name | capitalize }}

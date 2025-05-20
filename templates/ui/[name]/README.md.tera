@@ -1,0 +1,23 @@
+---
+to: '{{ name }}/README.md'
+---
+
+# @srcube-taro/{{ name }}
+
+{{ name | capitalize }} component.
+
+Refer the [docs](https://srcube-taro.vercel.app/docs/components/{{ name }})
+
+## Installation
+
+```bash
+pnpm add @srcube-taro/{{ name }}
+# or
+yarn add @srcube-taro/{{ name }}
+# or
+npm i @srcube-taro/{{ name }}
+```
+
+## License
+
+[MIT](https://github.com/srcube/srcube-taro/blob/main/LICENSE.md)

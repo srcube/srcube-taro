@@ -1,0 +1,40 @@
+---
+to: '{{ name }}/src/use.ts'
+---
+
+import type { ReactRef } from '@srcube-taro/utils-react'
+import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { ViewProps } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import { useCallback } from 'react'
+
+interface Props {
+  /**
+   * Ref to the DOM element
+   */
+  ref?: ReactRef<NativeProps<ViewProps>>
+}
+
+export type Use{{ name | capitalize }}Props = Props &
+  Omit<NativeProps<ViewProps>, keyof {{ name | capitalize }}VariantProps> &
+  {{ name | capitalize }}VariantProps
+
+export function use{{ name | capitalize }}(props: Use{{ name | capitalize }}Props) {
+  const { ref, children, className, ...rest } = props
+
+  const Component = View
+
+  const get{{ name | capitalize }}Props = useCallback(() => {
+    return {
+    }
+  }, [])
+
+  return {
+    Component,
+    domRef: ref,
+    children,
+    get{{ name | capitalize }}Props,
+  }
+}
+
+export type Use{{ name | capitalize }}Return = ReturnType<typeof use{{ name | capitalize }}>
