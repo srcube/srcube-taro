@@ -1,6 +1,10 @@
-# Srcube Taro UI
+<div align='center'>
+<h1>Srcube Taro UI</h1>
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/srcube/srcube-taro)
 
 A React component library for Taro.js applications with TailwindCSS support.
+</div>
 
 ## Features
 
