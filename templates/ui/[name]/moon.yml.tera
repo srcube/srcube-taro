@@ -1,7 +1,6 @@
 type: library
 
-id: 'ui-{{ name }}'
+id: ui-{{ name }}
 
-tasks:
-  build:
-    command: pnpm build
+tags:
+  - pkg

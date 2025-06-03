@@ -2,9 +2,10 @@
 to: '{{ name }}/src/{{ name }}.tsx'
 ---
 
-import { ViewProps } from '@tarojs/components'
+import type { ViewProps } from '@tarojs/components'
+import type { Use{{ name | capitalize }}Props } from './use'
 import { forwardRef } from 'react'
-import { use{{ name | capitalize }}, type Use{{ name | capitalize }}Props } from './use'
+import { use{{ name | capitalize }} } from './use'
 
 export interface {{ name | capitalize }}Props extends Use{{ name | capitalize }}Props {}
 

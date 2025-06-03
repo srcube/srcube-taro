@@ -6,7 +6,7 @@ to: '{{ name }}/package.json'
   "name": "@srcube-taro/{{ name }}",
   "version": "0.0.0",
   "author": "chioio <srcube.chioio@gmail.com>",
-    "keywords": [
+  "keywords": [
     "taro.js",
     "ui",
     "{{ name }}"
@@ -34,6 +34,9 @@ to: '{{ name }}/package.json'
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
+    "classnames": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",
