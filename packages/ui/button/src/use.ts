@@ -12,7 +12,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<NativeButtonProps>
+  ref?: ReactRef
   /**
    * Content to render before the button text
    */

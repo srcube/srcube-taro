@@ -1,6 +1,6 @@
 {
   "name": "@srcube-taro/button",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
@@ -31,7 +31,9 @@
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
-    "classnames": "catalog:"
+    "classnames": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",

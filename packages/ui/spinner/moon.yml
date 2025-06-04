@@ -3,4 +3,4 @@ type: library
 id: ui-spinner
 
 tags:
-  - ui
+  - pkg

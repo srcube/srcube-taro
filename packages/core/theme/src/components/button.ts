@@ -18,17 +18,17 @@ export const button = tv({
       warning: 'bg-warning border-warning text-white',
       danger: 'bg-danger border-danger text-white',
     },
+    variant: {
+      solid: '',
+      outline: 'bg-transparent border-4',
+      flat: 'border-none bg-slate-50',
+      text: 'bg-transparent border-none',
+    },
     size: {
       xs: 'h-6 px-2 text-xs rounded-md',
       sm: 'h-8 px-3 text-sm rounded-lg',
       md: 'h-10 px-4 text-base rounded-xl',
       lg: 'h-12 px-6 text-lg rounded-2xl',
-    },
-    variant: {
-      solid: '',
-      outline: 'bg-transparent border-4',
-      flat: 'border-none',
-      text: 'bg-transparent border-none',
     },
     isLoading: {
       true: 'opacity-50',
@@ -71,23 +71,28 @@ export const button = tv({
     },
     {
       variant: 'flat',
+      color: 'default',
+      class: 'bg-slate-50',
+    },
+    {
+      variant: 'flat',
       color: 'primary',
-      class: 'bg-primary-200',
+      class: 'bg-primary-50',
     },
     {
       variant: 'flat',
       color: 'success',
-      class: 'bg-success-200',
+      class: 'bg-success-50',
     },
     {
       variant: 'flat',
       color: 'warning',
-      class: 'bg-warning-200',
+      class: 'bg-warning-50',
     },
     {
       variant: 'flat',
       color: 'danger',
-      class: 'bg-danger-200',
+      class: 'bg-danger-50',
     },
     // isIcon state
     {
@@ -194,22 +199,22 @@ export const buttonHover = tv({
     {
       variant: 'flat',
       color: 'primary',
-      class: 'bg-primary-300 text-primary-600',
+      class: 'bg-primary-100 text-primary-600',
     },
     {
       variant: 'flat',
       color: 'success',
-      class: 'bg-success-300 text-success-600',
+      class: 'bg-success-100 text-success-600',
     },
     {
       variant: 'flat',
       color: 'warning',
-      class: 'bg-warning-300 text-warning-600',
+      class: 'bg-warning-100 text-warning-600',
     },
     {
       variant: 'flat',
       color: 'danger',
-      class: 'bg-danger-300 text-danger-600',
+      class: 'bg-danger-100 text-danger-600',
     },
     {
       variant: 'text',

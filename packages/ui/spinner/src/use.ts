@@ -13,7 +13,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
   /**
    * Label to display next to the spinner
    */

@@ -11,7 +11,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
   /**
    * Whether the buttons are disabled.
    * @default false

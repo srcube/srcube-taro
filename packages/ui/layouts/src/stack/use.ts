@@ -1,16 +1,15 @@
 import type { StackVariantsProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
-import type { ViewProps } from '@tarojs/components'
+import type { BoxProps } from '../box'
 import { stack } from '@srcube-taro/theme'
-import { View } from '@tarojs/components'
 import { useCallback, useMemo } from 'react'
+import { Box } from '../box'
 
 interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
   /**
    * Direction of the stack
    * @default 'vertical'
@@ -32,13 +31,13 @@ interface Props {
 }
 
 export type UseStackProps = Props &
-  Omit<NativeProps<ViewProps>, keyof StackVariantsProps> &
+  Omit<BoxProps, keyof StackVariantsProps> &
   StackVariantsProps
 
 export function useStack(props: UseStackProps) {
   const { ref, className, children, direction, spacing, align, justify, ...rest } = props
 
-  const Component = View
+  const Component = Box
 
   const styles = useMemo(
     () =>

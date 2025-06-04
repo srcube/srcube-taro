@@ -1,6 +1,6 @@
 {
   "name": "@srcube-taro/theme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "taro.js",
     "ui",
@@ -21,7 +21,6 @@
     "postpack": "rm -rf ./package"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "catalog:",
     "tailwind-variants": "catalog:",
     "tailwindcss": "catalog:"
   },
