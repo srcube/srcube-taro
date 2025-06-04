@@ -11,7 +11,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
   /**
    * Whether the buttons are disabled.
    * @default false
@@ -62,12 +62,11 @@ export function useButtonGroup(props: UseButtonGroupProps) {
     isLoading,
   }), [size, color, variant, isDisabled, isIcon, isBlock, isLoading])
 
-  const getButtonGroupProps = useCallback(() => ({
+  const getButtonGroupProps = useCallback((): ViewProps => ({
     role: 'group',
-    isBlock,
     className: styles,
     ...rest,
-  }), [isBlock, styles, rest])
+  }), [styles, rest])
 
   return {
     Component,

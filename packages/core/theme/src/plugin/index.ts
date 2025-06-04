@@ -16,8 +16,12 @@ export function srcubeUI() {
     (_) => {
       return ({ addBase, addComponents }) => {
         addBase({
+          // !!! Native style resets
           'wx-button[disabled]': {
             color: 'initial',
+          },
+          'taro-button-core+taro-button-core': {
+            'margin-top': 'unset !important',
           },
         })
         // Add icons

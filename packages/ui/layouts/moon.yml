@@ -2,6 +2,5 @@ type: library
 
 id: ui-layouts
 
-tasks:
-  build:
-    command: pnpm build
+tags:
+  - pkg

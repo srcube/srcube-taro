@@ -54,6 +54,7 @@ catalog:
   classnames: ^2.5.1
   clean-publish: ^5.1.0
   dayjs: ^1.11.13
+  eslint: ^9.23.0
   eslint-config-next: ^15.2.4
   eslint-config-taro: 4.0.9
   eslint-plugin-react: ^7.34.1
@@ -67,9 +68,9 @@ catalog:
   next: ^15.2.4
   next-themes: ^0.4.6
   postcss: ^8.4.38
-  react: ^18.0.0
-  react-dom: ^18.0.0
-  react-is: ^18.0.0
+  react: ^18
+  react-dom: ^18
+  react-is: ^18
   react-refresh: ^0.14.0
   rehype-slug: ^6.0.0
   remark-extract-frontmatter: ^3.2.0
@@ -82,6 +83,7 @@ catalog:
   tarojs-router-next-plugin: ^3.4.6
   tsconfig-paths-webpack-plugin: ^4.1.0
   tsup: ^8.4.0
+  typescript: ^5.8.3
   weapp-tailwindcss: ^3
   webpack: 5.91.0
   yaml: ^2.7.1

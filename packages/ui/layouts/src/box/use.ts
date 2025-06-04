@@ -7,7 +7,7 @@ import { View } from '@tarojs/components'
 import { useCallback, useMemo } from 'react'
 
 interface Props {
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
 }
 
 export type UseBoxProps = Props &
@@ -15,7 +15,7 @@ export type UseBoxProps = Props &
   BoxVariantsProps
 
 export function useBox(props: UseBoxProps) {
-  const { ref, className, children, ...rest } = props
+  const { ref, className, children, onTap, ...rest } = props
 
   const Component = View
 
@@ -31,9 +31,11 @@ export function useBox(props: UseBoxProps) {
     return {
       ref,
       className: styles,
+      onTap,
+      onClick: onTap,
       ...rest,
-    }
-  }, [styles, ref, rest])
+    } as ViewProps
+  }, [styles, ref, onTap, rest])
 
   return {
     Component,

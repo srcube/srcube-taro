@@ -5,15 +5,16 @@ import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { spinner } from '@srcube-taro/theme'
+import { useDOMRef } from '@srcube-taro/utils-react'
 import { View } from '@tarojs/components'
 import cn from 'classnames'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ViewProps>
+  ref?: ReactRef
   /**
    * Label to display next to the spinner
    */
@@ -33,6 +34,8 @@ export function useSpinner(props: UseSpinnerProps) {
 
   const Component = View
 
+  const domRef = useDOMRef(ref)
+
   const slots = useMemo(() => spinner({ size, color, className }), [size, color, className])
 
   const styles = useMemo(
@@ -44,13 +47,13 @@ export function useSpinner(props: UseSpinnerProps) {
     [className, classNames, slots],
   )
 
-  const getSpinnerProps = () => ({
+  const getSpinnerProps = useCallback((): ViewProps => ({
     ...rest,
-  })
+  }), [rest])
 
   return {
     Component,
-    domRef: ref,
+    domRef,
     slots,
     styles,
     label,

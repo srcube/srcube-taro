@@ -12,7 +12,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<NativeButtonProps>
+  ref?: ReactRef
   /**
    * Content to render before the button text
    */
@@ -112,10 +112,10 @@ export function useButton(props: UseButtonProps) {
     [isDisabled, isLoading, onTap],
   )
 
-  const getButtonProps = useCallback(() => {
+  const getButtonProps = useCallback((): NativeButtonProps => {
     return {
       disabled: isDisabled || isLoading,
-      lading: isLoading,
+      loading: isLoading,
       onClick: handleTap,
       ...rest,
     }
