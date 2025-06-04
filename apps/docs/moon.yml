@@ -6,7 +6,7 @@ tasks:
   dev:
     command: pnpm dev
     deps:
-      - core-ui:dev
+      - core-ui:build
   build:
     command: pnpm build
     deps:

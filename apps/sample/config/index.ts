@@ -34,7 +34,7 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
       prebundle: {
         exclude: [
           'tarojs-router-next',
-          // @ts-expect-error
+          // @ts-expect-error regex can be used
           /^@srcube-taro\/*/,
         ],
       },
@@ -74,6 +74,9 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
       },
     },
     h5: {
+      compile: {
+        include: [() => '@srcube-taro/*'],
+      },
       publicPath: '/',
       staticDirectory: 'static',
       output: {

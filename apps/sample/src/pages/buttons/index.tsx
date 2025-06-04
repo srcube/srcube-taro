@@ -2,13 +2,12 @@ import type { ButtonProps } from '@srcube-taro/ui'
 import { Box, Button, ButtonGroup } from '@srcube-taro/ui'
 import { View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { Page } from '@/components/page'
-import { Section } from '@/components/section'
+import { Page, Section } from '@/components'
 
 export default function Buttons() {
   const colors: Array<ButtonProps['color']> = ['default', 'primary', 'success', 'warning', 'danger']
-  const sizes: Array<ButtonProps['size']> = ['xs', 'sm', 'md', 'lg']
   const variants: Array<ButtonProps['variant']> = ['solid', 'outline', 'flat', 'text']
+  const sizes: Array<ButtonProps['size']> = ['xs', 'sm', 'md', 'lg']
 
   return (
     <Page>

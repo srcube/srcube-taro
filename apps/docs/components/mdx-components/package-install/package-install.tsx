@@ -22,7 +22,7 @@ export function PackageInstall(props: PackageInstallProps) {
 
   const [current, setCurrent] = useState<PackageManagerName>('npm')
 
-  const handleSelectionChange = (tabKey: Key) => {
+  const handleSelectionChange = (tabKey: Key | null) => {
     setCurrent(tabKey as PackageManagerName)
   }
 

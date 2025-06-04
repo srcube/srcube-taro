@@ -1,7 +1,7 @@
-import { Page } from '@/components/page'
-import { Section } from '@/components/section'
 import { Box, Stack } from '@srcube-taro/ui'
 import { nanoid } from 'nanoid/non-secure'
+import { Page } from '@/components/page'
+import { Section } from '@/components/section'
 
 export default function Buttons() {
   return (
