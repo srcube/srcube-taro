@@ -626,6 +626,40 @@ importers:
         specifier: 'catalog:'
         version: 18.3.22
 
+  packages/ui/input:
+    dependencies:
+      '@srcube-taro/theme':
+        specifier: workspace:^
+        version: link:../../core/theme
+      '@srcube-taro/utils-react':
+        specifier: workspace:^
+        version: link:../../utils/react
+      '@srcube-taro/utils-taro':
+        specifier: workspace:^
+        version: link:../../utils/taro
+      '@srcube-taro/utils-tv':
+        specifier: workspace:^
+        version: link:../../utils/tv
+      '@tarojs/components':
+        specifier: 'catalog:'
+        version: 4.0.9(@tarojs/helper@4.0.9(@swc/helpers@0.5.17))(@types/react@18.3.22)(html-webpack-plugin@5.6.3(webpack@5.91.0(@swc/core@1.3.96(@swc/helpers@0.5.17))(esbuild@0.25.4)))(postcss@8.5.3)(react@18.2.0)(rollup@3.29.5)(webpack-chain@6.5.1)(webpack-dev-server@4.15.2(webpack@5.91.0(@swc/core@1.3.96(@swc/helpers@0.5.17))(esbuild@0.25.4)))(webpack@5.91.0(@swc/core@1.3.96(@swc/helpers@0.5.17))(esbuild@0.25.4))
+      classnames:
+        specifier: 'catalog:'
+        version: 2.5.1
+      react:
+        specifier: 'catalog:'
+        version: 18.2.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@srcube-taro/ts-config':
+        specifier: workspace:^
+        version: link:../../../envs/ts-config
+      '@types/react':
+        specifier: 'catalog:'
+        version: 18.3.22
+
   packages/ui/layouts:
     dependencies:
       '@srcube-taro/theme':
@@ -696,12 +730,6 @@ importers:
 
   packages/utils/react:
     dependencies:
-      '@srcube-taro/utils-taro':
-        specifier: workspace:^
-        version: link:../taro
-      '@tarojs/runtime':
-        specifier: 'catalog:'
-        version: 4.0.9
       react:
         specifier: 'catalog:'
         version: 18.2.0
