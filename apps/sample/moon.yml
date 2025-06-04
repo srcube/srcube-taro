@@ -7,8 +7,13 @@ tasks:
     command: pnpm dev:weapp
     options:
       cache: false
-      runInCI: false
-      persistent: true
+    deps:
+      - core-ui:build
+
+  dev-h5:
+    command: pnpm dev:h5
+    options:
+      cache: false
     deps:
       - core-ui:build
 

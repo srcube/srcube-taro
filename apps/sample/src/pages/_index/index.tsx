@@ -1,9 +1,9 @@
-import Logo from '@/assets/imgs/srcube.png'
-import { Page } from '@/components/page'
 import { Box, Stack } from '@srcube-taro/ui'
 import { Image } from '@tarojs/components'
 import { useLoad } from '@tarojs/taro'
 import { Router } from 'tarojs-router-next'
+import Logo from '@/assets/imgs/srcube.png'
+import { Page } from '@/components'
 
 export default function Index() {
   useLoad(() => {
@@ -25,6 +25,10 @@ export default function Index() {
     {
       title: 'Buttons',
       to: () => Router.toButtons(),
+    },
+    {
+      title: 'Inputs',
+      to: () => Router.toInputs(),
     },
     {
       title: 'Spinner',
