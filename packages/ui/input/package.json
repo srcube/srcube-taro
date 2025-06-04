@@ -1,11 +1,11 @@
 {
-  "name": "@srcube-taro/layouts",
-  "version": "0.0.3",
+  "name": "@srcube-taro/input",
+  "version": "0.0.1",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
     "ui",
-    "layouts"
+    "input"
   ],
   "main": "src/index.ts",
   "files": [
