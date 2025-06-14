@@ -1,0 +1,6 @@
+type: library
+
+id: core-hooks
+
+tags:
+  - pkg

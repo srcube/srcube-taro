@@ -127,10 +127,14 @@ export function useInput(props: UseInputProps) {
     }
   }, [domRef, isDisabled])
 
-  const handleInput = useCallback((e: CommonEvent<NativeInputProps.inputEventDetail>) => {
+  const handleInput = useCallback((e: CommonEvent) => {
     setInputValue(e.detail.value)
     onChange?.(e)
   }, [setInputValue, onChange])
+
+  const handleInputTap = useCallback((e: CommonEvent) => {
+    e.stopPropagation()
+  }, [])
 
   const handleClear = useCallback((e: CommonEvent) => {
     e.stopPropagation()
@@ -160,9 +164,10 @@ export function useInput(props: UseInputProps) {
       password: isPassword,
       disabled: isDisabled,
       onInput: handleInput,
+      onClick: handleInputTap,
       ...rest,
     }
-  }, [inputValue, defaultValue, isPassword, isDisabled, handleInput, rest])
+  }, [inputValue, defaultValue, isPassword, isDisabled, handleInputTap, handleInput, rest])
 
   const getClearButtonProps = useCallback(() => {
     return {

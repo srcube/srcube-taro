@@ -21,3 +21,5 @@ deploy_versions
 .DS_Store
 
 .vercel
+
+.cursor

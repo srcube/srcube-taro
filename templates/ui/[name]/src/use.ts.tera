@@ -12,7 +12,7 @@ interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<NativeProps<ViewProps>>
+  ref?: ReactRef
 }
 
 export type Use{{ name | capitalize }}Props = Props &
