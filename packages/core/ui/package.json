@@ -1,6 +1,6 @@
 {
   "name": "@srcube-taro/ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "taro.js",
     "ui",
@@ -24,6 +24,7 @@
     "@srcube-taro/button": "workspace:^",
     "@srcube-taro/input": "workspace:^",
     "@srcube-taro/layouts": "workspace:^",
+    "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/theme": "workspace:^"
   },

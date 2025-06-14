@@ -1,6 +1,6 @@
 {
   "name": "@srcube-taro/theme",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "taro.js",
     "ui",
@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "tailwind-variants": "catalog:",
-    "tailwindcss": "catalog:"
+    "tailwindcss": "catalog:",
+    "tailwindcss-animated": "catalog:"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^"

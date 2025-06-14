@@ -93,6 +93,7 @@
     "react-refresh": "catalog:",
     "stylelint": "catalog:",
     "tailwindcss": "catalog:",
+    "tailwindcss-animated": "catalog:",
     "tsconfig-paths-webpack-plugin": "catalog:",
     "typescript": "^5.4.5",
     "weapp-tailwindcss": "catalog:",

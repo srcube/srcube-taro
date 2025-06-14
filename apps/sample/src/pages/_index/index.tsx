@@ -31,6 +31,10 @@ export default function Index() {
       to: () => Router.toInputs(),
     },
     {
+      title: 'Modals',
+      to: () => Router.toModals(),
+    },
+    {
       title: 'Spinner',
       to: () => Router.toSpinner(),
     },

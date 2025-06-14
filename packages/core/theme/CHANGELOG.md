@@ -1,10 +1,17 @@
 # @srcube-taro/theme
 
+## 0.0.4
+
+### Patch Changes
+
+- Components and hooks package
+  modal
+
 ## 0.0.3
 
 ### Patch Changes
 
-- Components:
+- Components
   input
 
 ## 0.0.2

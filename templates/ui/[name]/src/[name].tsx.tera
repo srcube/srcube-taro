@@ -9,7 +9,7 @@ import { use{{ name | capitalize }} } from './use'
 
 export interface {{ name | capitalize }}Props extends Use{{ name | capitalize }}Props {}
 
-const {{ name | capitalize }} = forwardRef<ViewProps, {{ name | capitalize }}Props>((props, ref) => {
+const {{ name | capitalize }} = forwardRef<any, {{ name | capitalize }}Props>((props, ref) => {
   const {
     Component,
     domRef,
