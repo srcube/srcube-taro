@@ -15,6 +15,7 @@ export default antfu(
       'node/prefer-global/process': 'off',
       'react/no-forward-ref': 'off',
       'react/no-use-context': 'off',
+      'react/no-children-to-array': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
     },
   },

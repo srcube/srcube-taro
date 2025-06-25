@@ -1,10 +1,10 @@
 {
-  "name": "@srcube-taro/hooks",
-  "version": "0.0.2",
+  "name": "@srcube-taro/utils-func",
+  "version": "0.0.0",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
-    "react",
+    "tailwind-variants",
     "utils"
   ],
   "main": "src/index.ts",
@@ -20,19 +20,9 @@
     "prepack": "rm -rf ./package && clean-publish",
     "postpack": "rm -rf ./package"
   },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "react-is": ">=18"
-  },
   "dependencies": {
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "react-is": "catalog:"
   },
   "devDependencies": {
-    "@srcube-taro/ts-config": "workspace:^",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:"
+    "@srcube-taro/ts-config": "workspace:^"
   }
 }

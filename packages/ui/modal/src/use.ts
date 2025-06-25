@@ -7,9 +7,8 @@ import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
 import { modal } from '@srcube-taro/theme'
-import { View } from '@tarojs/components'
 import cn from 'classnames'
-import { useCallback, useEffect, useId, useMemo } from 'react'
+import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 
 interface Props {
   /**
@@ -50,9 +49,12 @@ export function useModal(props: UseModalProps) {
     ...rest
   } = props
 
-  const Component = View
-
   const id = useId()
+
+  const [headerMounted, setHeaderMounted] = useState(false)
+  const [bodyMounted, setBodyMounted] = useState(false)
+  const [footerMounted, setFooterMounted] = useState(false)
+
   const { isVisible } = useAnimatePresence({ isOpen })
   const { addModalRecord, delModalRecord } = usePageScrollLock()
 
@@ -67,7 +69,7 @@ export function useModal(props: UseModalProps) {
     },
   })
 
-  const slots = useMemo(() => modal({ isOpen: state.isOpen, backdrop }), [state.isOpen])
+  const slots = useMemo(() => modal({ isOpen: state.isOpen, backdrop }), [state.isOpen, backdrop])
 
   const styles = useMemo(
     () => ({
@@ -109,12 +111,17 @@ export function useModal(props: UseModalProps) {
   }, [handleBackdropTap])
 
   return {
-    Component,
     domRef: ref,
     classNames,
     slots,
     styles,
     children,
+    headerMounted,
+    setHeaderMounted,
+    bodyMounted,
+    setBodyMounted,
+    footerMounted,
+    setFooterMounted,
     isOpen: state.isOpen,
     isVisible,
     onClose: state.close,

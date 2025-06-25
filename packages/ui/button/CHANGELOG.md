@@ -1,5 +1,15 @@
 # @srcube-taro/button
 
+## 0.0.5
+
+### Patch Changes
+
+- Components and hooks, utils package
+  dialog
+- Updated dependencies
+  - @srcube-taro/theme@0.0.5
+  - @srcube-taro/spinner@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes

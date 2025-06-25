@@ -5,6 +5,10 @@
   "compilerOptions": {
     "moduleResolution": "bundler",
 
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    "paths": {
+      "@tarojs/components": ["node_modules/@tarojs/components"]
+    }
   }
 }

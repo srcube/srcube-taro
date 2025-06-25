@@ -1,5 +1,12 @@
 # @srcube-taro/spinner
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @srcube-taro/theme@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes

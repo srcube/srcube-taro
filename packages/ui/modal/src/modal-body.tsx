@@ -3,6 +3,7 @@ import type { ViewProps } from '@tarojs/components'
 import type { FC } from 'react'
 import { View } from '@tarojs/components'
 import cn from 'classnames'
+import { useEffect } from 'react'
 import { useModalContext } from './context'
 
 export interface ModalBodyProps extends NativeProps<ViewProps> {}
@@ -10,7 +11,13 @@ export interface ModalBodyProps extends NativeProps<ViewProps> {}
 const ModalBody: FC<ModalBodyProps> = (props) => {
   const { children, className, ...rest } = props
 
-  const { slots, classNames } = useModalContext()
+  const { slots, classNames, setBodyMounted } = useModalContext()
+
+  useEffect(() => {
+    setBodyMounted(true)
+
+    return () => setBodyMounted(false)
+  }, [setBodyMounted])
 
   return (
     <View

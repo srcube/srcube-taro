@@ -32,7 +32,7 @@ interface Props {
   spinnerPlacement?: 'start' | 'end'
 }
 
-type NativePropsOmitKeys = 'type' | 'loading' | 'disabled' | 'size' | 'plain'
+type NativePropsOmitKeys = 'type' | 'loading' | 'disabled' | 'size' | 'plain' | 'onTap'
 
 type OmittedNativeButtonProps = Omit<
   NativeProps<Omit<NativeButtonProps, NativePropsOmitKeys>>,
@@ -115,7 +115,6 @@ export function useButton(props: UseButtonProps) {
   const getButtonProps = useCallback((): NativeButtonProps => {
     return {
       disabled: isDisabled || isLoading,
-      loading: isLoading,
       onClick: handleTap,
       ...rest,
     }

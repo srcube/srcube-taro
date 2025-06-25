@@ -1,5 +1,12 @@
 # @srcube-taro/input
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @srcube-taro/theme@0.0.5
+
 ## 0.0.2
 
 ### Patch Changes

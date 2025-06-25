@@ -1,5 +1,6 @@
 export * from './components/button'
 export * from './components/button-group'
+export * from './components/dialog'
 export * from './components/input'
 export * from './components/modal'
 export * from './components/spinner'

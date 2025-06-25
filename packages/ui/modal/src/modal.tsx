@@ -24,9 +24,9 @@ const Modal = forwardRef<TaroElement, ModalProps>((props, ref) => {
   return (
     <ModalProvider value={modal}>
       {isVisible && (
-        <RootPortal className={styles.wrapper} {...getModalProps()}>
+        <RootPortal className={styles.wrapper}>
           <View className={styles.backdrop} {...getBackdropProps()} />
-          {children}
+          <View className={styles.content} {...getModalProps()}>{children}</View>
         </RootPortal>
       )}
     </ModalProvider>

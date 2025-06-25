@@ -1,18 +1,23 @@
 import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { ViewProps } from '@tarojs/components'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { View } from '@tarojs/components'
 import cn from 'classnames'
+import { useEffect } from 'react'
 import { useModalContext } from './context'
 
-export interface ModalHeaderProps extends Omit<NativeProps<ViewProps>, 'children'> {
-  children: ReactNode
-}
+export interface ModalHeaderProps extends NativeProps<ViewProps> {}
 
 const ModalHeader: FC<ModalHeaderProps> = (props) => {
   const { children, className, ...rest } = props
 
-  const { slots, classNames } = useModalContext()
+  const { slots, classNames, setHeaderMounted } = useModalContext()
+
+  useEffect(() => {
+    setHeaderMounted(true)
+
+    return () => setHeaderMounted(false)
+  }, [setHeaderMounted])
 
   return (
     <View

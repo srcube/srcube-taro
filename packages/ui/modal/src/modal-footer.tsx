@@ -1,18 +1,23 @@
 import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { ViewProps } from '@tarojs/components'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { View } from '@tarojs/components'
 import cn from 'classnames'
+import { useEffect } from 'react'
 import { useModalContext } from './context'
 
-export interface ModalFooterProps extends Omit<NativeProps<ViewProps>, 'children'> {
-  children: ReactNode
-}
+export interface ModalFooterProps extends NativeProps<ViewProps> {}
 
 const ModalFooter: FC<ModalFooterProps> = (props) => {
   const { children, className, ...rest } = props
 
-  const { slots, classNames } = useModalContext()
+  const { slots, classNames, setFooterMounted } = useModalContext()
+
+  useEffect(() => {
+    setFooterMounted(true)
+
+    return () => setFooterMounted(false)
+  }, [setFooterMounted])
 
   return (
     <View

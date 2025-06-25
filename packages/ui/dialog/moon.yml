@@ -1,0 +1,6 @@
+type: library
+
+id: ui-dialog
+
+tags:
+  - pkg

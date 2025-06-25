@@ -29,11 +29,13 @@ to: '{{ name }}/package.json'
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
+    "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

@@ -1,14 +1,15 @@
 import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
-export const modal = tv({
+export const dialog = tv({
   slots: {
     wrapper: ['absolute'],
     backdrop: ['absolute inset-0'],
     content: ['absolute inset-0 overflow-hidden m-auto w-full max-w-[90%] h-fit rounded-3xl bg-white shadow-sm'],
-    header: ['px-3 py-3'],
-    body: ['px-4 py-2'],
-    footer: ['px-3 py-3'],
+    header: ['text-center text-lg font-semibold'],
+    body: ['pb-4 text-zinc-500'],
+    footer: ['p-0 border-t-2 border-t-solid border-t-zinc-200'],
+    actionButton: ['first:rounded-tl-none first:rounded-bl-3xl', 'last:rounded-tr-none last:rounded-br-3xl'],
   },
   variants: {
     isOpen: {
@@ -21,24 +22,17 @@ export const modal = tv({
         content: 'animate-modal-out',
       },
     },
-    backdrop: {
-      transparent: {
-        backdrop: 'bg-transparent',
-      },
-      opaque: {
-        backdrop: 'bg-zinc-900/25',
-      },
-      blur: {
-        backdrop: 'bg-zinc-900/25 backdrop-blur-sm',
+    isConfirmOnly: {
+      true: {
+        actionButton: ['rounded-b-3xl'],
       },
     },
   },
   compoundVariants: [
   ],
   defaultVariants: {
-    backdrop: 'opaque',
   },
 })
 
-export type ModalVariantProps = VariantProps<typeof modal>
-export type ModalSlots = keyof ReturnType<typeof modal>
+export type DialogVariantProps = VariantProps<typeof dialog>
+export type DialogSlots = keyof ReturnType<typeof dialog>
