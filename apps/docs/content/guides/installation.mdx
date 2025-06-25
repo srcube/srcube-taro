@@ -35,7 +35,7 @@ SrcubeUI Taro offers a global installation approach, providing access to all com
 For pnpm users, add the following configuration to your `.npmrc` file to ensure proper package hoisting:
 
 ```bash
-public-hoist-pattern[]=*@srcube/*
+public-hoist-pattern[]=*@srcube-taro/*
 ```
 
 ### (Weapp) Tailwind CSS Setup
@@ -89,6 +89,8 @@ import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 **tailwind.config.js**
 ```js
 // tailwind.config.js
+import { srcubeUI } from '@srcube-taro/theme'
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -103,7 +105,9 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
-  plugins: [],
+  plugins: [
+    srcubeUI(),
+  ],
 };
 ```
 </Steps>

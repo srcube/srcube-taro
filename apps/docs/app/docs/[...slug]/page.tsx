@@ -1,5 +1,5 @@
 import path from 'node:path'
-import imgQRCode from '@/assets/imgs/srcube-ui.png'
+import imgQRCode from '@/assets/imgs/srcube-ui.jpg'
 import { TableOfContents } from '@/components'
 import { Sidebar } from '@/layouts'
 import { compileMdx, flattenToc } from '@/utils/mdx'
