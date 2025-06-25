@@ -1,12 +1,12 @@
 import type { ModalProps } from '@srcube-taro/ui'
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta, View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
 import { useCallback, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
-export default function Buttons() {
+export default function Modals() {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
 
   const { isLocked } = usePageScrollLock()
@@ -26,13 +26,25 @@ export default function Buttons() {
     onOpen()
   }, [onOpen])
 
+  const reset = useCallback(() => {
+    setBackdrop(void 0)
+    setIsDismissable(void 0)
+  }, [])
+
+  const handleClose = useCallback(() => {
+    onClose()
+    setTimeout(() => {
+      reset()
+    }, 500)
+  }, [onClose, reset])
+
   return (
-    <Page className="flex flex-col gap-4 py-4">
+    <Page>
       <PageMeta
         pageStyle={isLocked ? 'overflow: hidden' : ''}
       />
       <Section title="Default" contentClass="">
-        <Button color="primary" onTap={onOpen}>
+        <Button color="primary" size="sm" onTap={onOpen}>
           Open Default
         </Button>
       </Section>
@@ -41,6 +53,7 @@ export default function Buttons() {
           <Button
             key={b}
             color="primary"
+            size="sm"
             onTap={() => handleOpenWithBackdrop(b)}
           >
             {capitalize(b)}
@@ -48,22 +61,20 @@ export default function Buttons() {
         ))}
       </Section>
       <Section title="States" contentClass="">
-        <Button color="primary" onTap={handleOpenWithNonDismissable}>
+        <Button color="primary" size="sm" onTap={handleOpenWithNonDismissable}>
           Non-dismissible
         </Button>
       </Section>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop={backdrop} isDismissable={isDismissable}>
-        <ModalContent>
-          <ModalHeader>
-            <View className="text-center text-lg font-semibold">Modal Title</View>
-          </ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
-          </ModalBody>
-          <ModalFooter className="">
-            <Button color="primary" isBlock onTap={onClose}>Confirm</Button>
-          </ModalFooter>
-        </ModalContent>
+        <ModalHeader>
+          <View className="text-center text-lg font-semibold">Modal Title</View>
+        </ModalHeader>
+        <ModalBody>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
+        </ModalBody>
+        <ModalFooter className="">
+          <Button color="primary" isBlock onTap={handleClose}>Confirm</Button>
+        </ModalFooter>
       </Modal>
     </Page>
   )

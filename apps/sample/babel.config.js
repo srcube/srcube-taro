@@ -11,5 +11,9 @@ module.exports = {
       useBuiltIns: process.env.TARO_ENV === 'h5' ? 'usage' : false,
     }],
   ],
-  plugins: ['@babel/plugin-transform-optional-chaining'],
+  plugins: [
+    '@babel/plugin-transform-class-properties',
+    '@babel/plugin-transform-nullish-coalescing-operator',
+    '@babel/plugin-transform-optional-chaining'
+  ],
 }

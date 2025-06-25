@@ -1,7 +1,6 @@
 import { Box, Stack } from '@srcube-taro/ui'
 import { Image } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
-import { Router } from 'tarojs-router-next'
+import Taro, { useLoad } from '@tarojs/taro'
 import Logo from '@/assets/imgs/srcube.png'
 import { Page } from '@/components'
 
@@ -13,30 +12,34 @@ export default function Index() {
   const layouts = [
     {
       title: 'Box',
-      to: () => Router.toLayoutBox(),
+      to: () => Taro.navigateTo({ url: '/pages/layout-box/index' }),
     },
     {
       title: 'Stack',
-      to: () => Router.toLayoutStack(),
+      to: () => Taro.navigateTo({ url: '/pages/layout-stack/index' }),
     },
   ]
 
   const components = [
     {
       title: 'Buttons',
-      to: () => Router.toButtons(),
+      to: () => Taro.navigateTo({ url: '/pages/buttons/index' }),
+    },
+    {
+      title: 'Dialogs',
+      to: () => Taro.navigateTo({ url: '/pages/dialogs/index' }),
     },
     {
       title: 'Inputs',
-      to: () => Router.toInputs(),
+      to: () => Taro.navigateTo({ url: '/pages/inputs/index' }),
     },
     {
       title: 'Modals',
-      to: () => Router.toModals(),
+      to: () => Taro.navigateTo({ url: '/pages/modals/index' }),
     },
     {
       title: 'Spinner',
-      to: () => Router.toSpinner(),
+      to: () => Taro.navigateTo({ url: '/pages/spinner/index' }),
     },
   ]
 
