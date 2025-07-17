@@ -2,7 +2,6 @@ import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { ViewProps } from '@tarojs/components'
 import type { FC } from 'react'
 import { View } from '@tarojs/components'
-import cn from 'classnames'
 import { useEffect } from 'react'
 import { useModalContext } from './context'
 
@@ -21,7 +20,7 @@ const ModalBody: FC<ModalBodyProps> = (props) => {
 
   return (
     <View
-      className={slots.body({ class: cn([classNames, className]) })}
+      className={slots.body({ class: className || classNames?.body })}
       {...rest}
     >
       {children}

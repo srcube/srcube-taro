@@ -1,8 +1,10 @@
 import type { ButtonProps } from '@srcube-taro/button'
 import type { ModalProps } from '@srcube-taro/modal'
+import type { DialogSlots } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-taro'
-import type { ViewProps } from '@tarojs/components'
+import type { SlotsToClasses } from '@srcube-taro/utils-tv'
+import type { ITouchEvent, ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { useAnimatePresence, useOverlayTriggerState } from '@srcube-taro/hooks'
 import { dialog } from '@srcube-taro/theme'
@@ -44,6 +46,10 @@ interface Props extends ModalProps {
    * Confirm content
    */
   confirmContent?: ((props: ButtonProps) => ReactNode) | ReactNode | string
+  /**
+   * Classnames to apply to the dialog
+   */
+  classNames?: SlotsToClasses<Exclude<DialogSlots, ''>>
   /**
    * Dialog cancel event
    */
@@ -114,29 +120,30 @@ export function useDialog(props: UseDialogProps) {
       header: slots.header({ class: classNames?.header }),
       body: slots.body({ class: classNames?.body }),
       footer: slots.footer({ class: classNames?.footer }),
+      actionGroup: slots.actionGroup({ class: classNames?.actionGroup }),
       actionButton: slots.actionButton({}),
     }),
     [slots, className, classNames],
   )
 
-  const handleCancel = useCallback(async () => {
+  const handleCancel = useCallback(async (e: ITouchEvent) => {
     if (!onCancel) {
       state.close()
       return
     }
 
-    await withLoading(onCancel, setCancelLoading)
+    await withLoading(onCancel, setCancelLoading, e)
 
     state.close()
   }, [state, onCancel, setCancelLoading])
 
-  const handleConfirm = useCallback(async () => {
+  const handleConfirm = useCallback(async (e: ITouchEvent) => {
     if (!onConfirm) {
       state.close()
       return
     }
 
-    await withLoading(onConfirm, setConfirmLoading)
+    await withLoading(onConfirm, setConfirmLoading, e)
 
     state.close()
   }, [state, onConfirm, setConfirmLoading])
@@ -150,6 +157,7 @@ export function useDialog(props: UseDialogProps) {
       onOpenChange,
       onClose,
       className: styles.wrapper,
+      classNames: styles,
       ...rest,
     }
   }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, onClose, styles, rest])

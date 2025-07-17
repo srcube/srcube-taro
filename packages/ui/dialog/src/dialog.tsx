@@ -91,7 +91,7 @@ const Dialog = forwardRef<TaroElement, DialogProps>((props, ref) => {
       )}
       {customFooter || (
         <ModalFooter className={styles.footer}>
-          <ButtonGroup size="lg" isBlock>
+          <ButtonGroup size="lg" isBlock className={styles.actionGroup}>
             {!isConfirmOnly && (
               cancelAction
             )}

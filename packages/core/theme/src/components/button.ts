@@ -1,5 +1,5 @@
-import type { VariantProps } from 'tailwind-variants'
-import { tv } from 'tailwind-variants'
+import type { VariantProps } from '@srcube-taro/utils-tv'
+import { tv } from '@srcube-taro/utils-tv'
 
 export const button = tv({
   base: [
@@ -7,7 +7,7 @@ export const button = tv({
     'gap-2 mx-0',
     'font-semibold',
     'transition-all duration-200 ease-out',
-    'border border-solid after:border-none',
+    'border border-solid after:border-none after:content-none',
     'outline-none',
   ],
   variants: {
@@ -33,6 +33,7 @@ export const button = tv({
     isLoading: {
       true: 'opacity-50',
       false: '',
+      auto: 'opacity',
     },
     isDisabled: {
       true: 'opacity-50',
@@ -240,6 +241,7 @@ export const buttonHover = tv({
   defaultVariants: {
     color: 'default',
     variant: 'solid',
+    isLoading: 'auto',
   },
 })
 

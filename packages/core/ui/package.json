@@ -23,6 +23,7 @@
   "dependencies": {
     "@srcube-taro/button": "workspace:^",
     "@srcube-taro/dialog": "workspace:^",
+    "@srcube-taro/drawer": "workspace:^",
     "@srcube-taro/input": "workspace:^",
     "@srcube-taro/layouts": "workspace:^",
     "@srcube-taro/modal": "workspace:^",

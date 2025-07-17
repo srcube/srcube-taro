@@ -27,14 +27,13 @@ export function useBox(props: UseBoxProps) {
     [className],
   )
 
-  const getBoxProps = useCallback(() => {
+  const getBoxProps = useCallback((): ViewProps => {
     return {
       ref,
       className: styles,
-      onTap,
       onClick: onTap,
       ...rest,
-    } as ViewProps
+    }
   }, [styles, ref, onTap, rest])
 
   return {

@@ -1,14 +1,14 @@
-import type { VariantProps } from 'tailwind-variants'
-import { tv } from 'tailwind-variants'
+import type { VariantProps } from '@srcube-taro/utils-tv'
+import { tv } from '@srcube-taro/utils-tv'
 
 export const modal = tv({
   slots: {
-    wrapper: ['absolute'],
+    wrapper: ['absolute inset-0 h-full w-full'],
     backdrop: ['absolute inset-0'],
-    content: ['absolute inset-0 overflow-hidden m-auto w-full max-w-[90%] h-fit rounded-3xl bg-white shadow-sm'],
-    header: ['px-3 py-3'],
-    body: ['px-4 py-2'],
-    footer: ['px-3 py-3'],
+    content: ['absolute inset-0 overflow-hidden h-fit bg-white'],
+    header: [''],
+    body: [''],
+    footer: [''],
   },
   variants: {
     isOpen: {

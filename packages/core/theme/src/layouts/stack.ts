@@ -1,5 +1,5 @@
-import type { VariantProps } from 'tailwind-variants'
-import { tv } from 'tailwind-variants'
+import type { VariantProps } from '@srcube-taro/utils-tv'
+import { tv } from '@srcube-taro/utils-tv'
 
 export const stack = tv({
   base: 'flex',

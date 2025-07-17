@@ -21,6 +21,7 @@
     "postpack": "rm -rf ./package"
   },
   "dependencies": {
+    "@srcube-taro/utils-tv": "workspace:^",
     "tailwind-variants": "catalog:",
     "tailwindcss": "catalog:",
     "tailwindcss-animated": "catalog:"

@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@srcube-taro/ts-config/ui.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

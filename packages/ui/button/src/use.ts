@@ -4,8 +4,9 @@ import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { ITouchEvent, ButtonProps as NativeButtonProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { button, buttonHover } from '@srcube-taro/theme'
+import { withLoading } from '@srcube-taro/utils-func'
 import { Button as NativeButton } from '@tarojs/components'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useButtonGroupContext } from './button-group/context'
 
 interface Props {
@@ -52,7 +53,6 @@ export function useButton(props: UseButtonProps) {
     color = groupCtx?.color,
     size = groupCtx?.size,
     isDisabled = groupCtx?.isDisabled,
-    isLoading = groupCtx?.isLoading,
     isIcon = groupCtx?.isIcon,
     isBlock = groupCtx?.isBlock,
     className,
@@ -68,6 +68,14 @@ export function useButton(props: UseButtonProps) {
 
   const Component = NativeButton
 
+  const isLoadingProps = rest?.isLoading || groupCtx?.isLoading || 'auto'
+
+  const isAutoLoading = isLoadingProps === 'auto'
+
+  const [autoLoading, setAutoLoading] = useState(false)
+
+  const isLoading = isAutoLoading ? autoLoading : Boolean(isLoadingProps)
+
   const styles = useMemo(
     () => ({
       normal: button({
@@ -75,6 +83,7 @@ export function useButton(props: UseButtonProps) {
         color,
         size,
         isDisabled: isDisabled || isLoading,
+        isLoading,
         isIcon,
         isBlock,
         isInGroup,
@@ -101,15 +110,15 @@ export function useButton(props: UseButtonProps) {
   )
 
   const handleTap = useCallback(
-    (event: ITouchEvent) => {
-      if (isDisabled || isLoading)
+    async (e: ITouchEvent) => {
+      if (isDisabled || isLoading || !onTap)
         return
 
-      if (onTap) {
-        onTap(event)
-      }
+      if (isAutoLoading)
+        await withLoading(onTap, setAutoLoading, e)
+      else onTap(e)
     },
-    [isDisabled, isLoading, onTap],
+    [isDisabled, isLoading, isAutoLoading, setAutoLoading, onTap],
   )
 
   const getButtonProps = useCallback((): NativeButtonProps => {

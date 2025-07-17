@@ -1,4 +1,4 @@
-import type { ReactRef } from 'types'
+import type { ReactRef } from '../types'
 import { useImperativeHandle, useRef } from 'react'
 
 export function useDOMRef<T = any>(

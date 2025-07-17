@@ -51,7 +51,7 @@ export function useStack(props: UseStackProps) {
     [direction, spacing, align, justify, className],
   )
 
-  const getStackProps = useCallback(() => {
+  const getStackProps = useCallback((): BoxProps => {
     return {
       className: styles,
       ...rest,

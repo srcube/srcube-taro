@@ -1,11 +1,11 @@
 {
-  "name": "@srcube-taro/button",
-  "version": "0.0.5",
+  "name": "@srcube-taro/drawer",
+  "version": "0.0.0",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
     "ui",
-    "button"
+    "drawer"
   ],
   "main": "src/index.ts",
   "files": [
@@ -25,13 +25,16 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/hooks": "workspace:^",
+    "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
-    "@srcube-taro/utils-func": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
+    "@tarojs/runtime": "catalog:",
+    "@tarojs/taro": "catalog:",
+    "@weapp-tailwindcss/merge": "^1.2.2",
     "classnames": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

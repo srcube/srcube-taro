@@ -2,6 +2,8 @@ export * from '@srcube-taro/button'
 
 export * from '@srcube-taro/dialog'
 
+export * from '@srcube-taro/drawer'
+
 export * from '@srcube-taro/input'
 
 export * from '@srcube-taro/layouts'
