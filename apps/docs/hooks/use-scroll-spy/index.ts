@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 export function useScrollSpy(selectors: string[], options?: IntersectionObserverInit) {
   const [activeId, setActiveId] = useState<string | null>()
   const observer = useRef<IntersectionObserver>()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const elements = selectors.map(selector => document.querySelector(selector))
 
     if (observer.current) {

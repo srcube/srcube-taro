@@ -1,16 +1,16 @@
 import type { MDXComponents as MDXComponentsType } from 'mdx/types'
 import NextImage from 'next/image'
 
+import { APITable } from './api-table'
 // import { Anchor } from './anchor'
 import { Blockquote } from './blockquote'
 import { Code } from './code'
-// import { CodeSample } from './code-sample'
-// import { ComponentLinks } from './component-links'
+import { CodeSample } from './code-sample'
+import { ComponentLinks } from './component-links'
 // import { H1, H2, H3, H4 } from './headings'
-// import { ImportComponent } from './import-component'
+import { ImportComponent } from './import-component'
 import { PackageInstall } from './package-install'
 import { Steps } from './steps'
-// import { APITable } from './table'
 // import { Strong } from './text'
 
 const MDXComponents: MDXComponentsType = {
@@ -21,10 +21,10 @@ const MDXComponents: MDXComponentsType = {
   /**
    * Docs components
    */
-  // ComponentLinks,
+  ComponentLinks,
   PackageInstall,
-  // ImportComponent,
-  // CodeSample,
+  ImportComponent,
+  CodeSample,
   Steps,
   Blockquote,
   /**
@@ -42,7 +42,7 @@ const MDXComponents: MDXComponentsType = {
   // thead: THead,
   // tr: TRow,
   // td: TCell,
-  // APITable,
+  APITable,
 }
 
 export default MDXComponents

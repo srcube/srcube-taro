@@ -51,7 +51,7 @@ export function PackageInstall(props: PackageInstallProps) {
             <Snippet
               fullWidth
               classNames={{
-                base: 'dark not-prose bg-code-block',
+                base: 'dark not-prose bg-codeblock',
                 pre: 'px-2 font-light',
                 copyButton: 'text-lg text-default-400',
               }}

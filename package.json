@@ -21,6 +21,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@eslint-react/eslint-plugin": "catalog:",
+    "@eslint/eslintrc": "catalog:",
     "clean-publish": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-react-refresh": "catalog:",

@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@heroui/react": "catalog:",
     "@mdx-js/loader": "catalog:",
     "@mdx-js/mdx": "catalog:",
     "@next/mdx": "catalog:",
     "@stefanprobst/rehype-extract-toc": "catalog:",
     "@tailwindcss/typography": "catalog:",
+    "@tarojs/components-react": "catalog:",
     "classnames": "catalog:",
     "dayjs": "catalog:",
     "hast-util-to-jsx-runtime": "catalog:",
@@ -22,8 +24,10 @@
     "nanoid": "catalog:",
     "next": "catalog:",
     "next-themes": "catalog:",
+    "raw-loader": "^4.0.2",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-live": "^4.1.8",
     "rehype-slug": "catalog:",
     "remark-extract-frontmatter": "catalog:",
     "remark-frontmatter": "catalog:",
@@ -31,6 +35,7 @@
     "yaml": "catalog:"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
     "@egoist/tailwindcss-icons": "catalog:",
     "@eslint/eslintrc": "catalog:",
     "@iconify/json": "catalog:",

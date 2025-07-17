@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import { ModeSwitcher, ScrollReset } from '@/components'
 // import { Geist, Geist_Mono } from 'next/font/google'
 import Link from 'next/link'
+import { ModeSwitcher, ScrollReset } from '@/components'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -42,7 +42,7 @@ export default function RootLayout({
               <div className="mr-4 flex">
                 <Link href="/" className="flex items-center space-x-4">
                   <Logo className="shrink-0 size-8" />
-                  <span className="text-lg text-nowrap font-light font-[PingFang_SC,mono]">SrcubeUI Taro</span>
+                  <span className="text-lg text-nowrap font-light font-['PingFang_SC','mono']">SrcubeUI Taro</span>
                 </Link>
               </div>
               <div className="flex-1" />
@@ -70,7 +70,7 @@ export default function RootLayout({
           </header>
           <main className="flex-1 flex flex-col mx-auto mt-16 px-8 2xl:px-0 max-w-screen-2xl w-full z-10 box-border">
             {children}
-            <div className="fixed top-0 inset-x-0 h-6 z-0 bg-linear-to-r/longer from-indigo-500 to-teal-400 filter blur-[50px]" />
+            <div className="fixed top-0 inset-x-0 h-6 z-0 bg-rainbow filter blur-[50px]" />
           </main>
         </Providers>
       </body>

@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-} */
-
 @layer utilities {
   .step {
     counter-increment: step;
@@ -19,6 +11,10 @@
     @apply absolute w-7 h-7 border-1 border-default-200 bg-default-100 rounded-full font-semibold text-center text-base inline-flex items-center justify-center -indent-px;
     @apply ml-[-41px];
     content: counter(step);
+  }
+
+  .bg-rainbow {
+    background-image: linear-gradient(to right, #f87171, #fb923c, #fbbf24, #facc15, #a3e635, #4ade80, #34d399, #2dd4bf, #22d3ee, #38bdf8, #60a5fa, #818cf8, #a78bfa, #c084fc, #e879f9, #f472b6, #fb7185);
   }
 }
 

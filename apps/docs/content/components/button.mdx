@@ -1,1 +1,137 @@
+---
+title: Button
+---
+
+import { samples } from '@/samples/button'
+
 # Button
+
+Buttons allow users to trigger an action or event with a single tap.
+
+<ComponentLinks npm="button" taro="forms/button" source="button"/>
+
+## Installation
+
+<PackageInstall
+  commands={{ 
+    npm: 'npm install @srcube-taro/button',
+    yarn: 'yarn add @srcube-taro/button',
+    pnpm: 'pnpm add @srcube-taro/button',
+  }}
+/>
+
+## Import
+
+<ImportComponent commands={{
+  subpackage: 'import { Button, ButtonGroup } from "@srcube-taro/button"',
+  ui: 'import { Button, ButtonGroup } from "@srcube-taro/ui"',
+}} />
+
+## Usage
+
+<CodeSample files={samples.usage} />
+
+## API Reference
+
+### Props
+
+<APITable
+  data={[
+    {
+      attribute: 'color',
+      description: 'Sets the button color variant',
+      type: 'default | primary | success | warning | danger',
+      default: 'default',
+    },
+    {
+      attribute: 'variant',
+      description: 'Sets the button style variant',
+      type: 'solid | outline | flat | text | shadow',
+      default: 'solid',
+    },
+    {
+      attribute: 'size',
+      description: 'Sets the button size',
+      type: 'xs | sm | md | lg',
+      default: 'md',
+    },
+    {
+      attribute: 'isDisabled',
+      description: 'Whether the button is disabled',
+      type: 'boolean',
+      default: 'false',
+    },
+    {
+      attribute: 'isLoading',
+      description: 'Whether the button is in loading state. Supports "auto" for automatic loading when onTap returns a Promise.',
+      type: 'boolean | "auto"',
+      default: 'auto',
+    },
+    {
+      attribute: 'isBlock',
+      description: 'Whether the button should take full width',
+      type: 'boolean',
+      default: 'false',
+    },
+    {
+      attribute: 'isIcon',
+      description: 'Whether the button is an icon-only button',
+      type: 'boolean',
+      default: 'false',
+    },
+    {
+      attribute: 'startContent',
+      description: 'Content to render before button text',
+      type: 'ReactNode',
+      default: '-',
+    },
+    {
+      attribute: 'endContent',
+      description: 'Content to render after button text',
+      type: 'ReactNode',
+      default: '-',
+    },
+    {
+      attribute: 'spinner',
+      description: 'Custom spinner element for loading state',
+      type: 'ReactNode',
+      default: '<Spinner />',
+    },
+    {
+      attribute: 'spinnerPlacement',
+      description: 'Placement of the loading spinner',
+      type: 'start | end',
+      default: 'start',
+    },
+    {
+      attribute: 'onTap',
+      description: 'Event handler for tap event. Supports async functions.',
+      type: '(e) => void | Promise<void>',
+      default: '-',
+    },
+    {
+      attribute: 'className',
+      description: 'Custom class name',
+      type: 'string',
+      default: '-',
+    },
+    {
+      attribute: '[natives]',
+      description: 'Other taro components native props',
+      type: '-',
+      default: '-',
+    }
+  ]}
+/>
+
+## Examples
+
+<CodeSample files={samples.eg} />
+
+## Advanced Usage
+
+- `isLoading="auto"` is recommended for async onTap scenarios, as it will automatically handle the loading state.
+- `startContent` and `endContent` allow you to add custom content before or after the button text (such as icons or badges).
+- Button can inherit color, size, variant, isDisabled, isLoading, etc. from ButtonGroup, but individual Button props take precedence.
+- Controlled loading is suitable for global loading management, while auto loading is ideal for local async actions.
+

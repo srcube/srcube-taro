@@ -1,10 +1,10 @@
 import path from 'node:path'
+import cn from 'classnames'
+import Image from 'next/image'
 import imgQRCode from '@/assets/imgs/srcube-ui.jpg'
 import { TableOfContents } from '@/components'
 import { Sidebar } from '@/layouts'
 import { compileMdx, flattenToc } from '@/utils/mdx'
-import cn from 'classnames'
-import Image from 'next/image'
 
 interface DocsPageProps {
   params: Promise<{ slug: string[] }>

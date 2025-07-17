@@ -1,5 +1,5 @@
-import { heroui } from '@heroui/react'
 import { dynamicIconsPlugin } from '@egoist/tailwindcss-icons'
+import { heroui } from '@heroui/react'
 import typography from '@tailwindcss/typography'
 
 export default {
@@ -11,12 +11,15 @@ export default {
     '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
     '../../node_modules/@srcube-taro/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: "class",
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        'code-block': '#151515',
-      }
+        codeblock: {
+          DEFAULT: '#151515',
+          100: '#2d2d2d',
+        },
+      },
     },
   },
   plugins: [
@@ -24,13 +27,13 @@ export default {
       themes: {
         light: {
           layout: {},
-          colors: {}
+          colors: {},
         },
         dark: {
           layout: {},
-          colors: {}
+          colors: {},
         },
-      }
+      },
     }),
     typography(),
     dynamicIconsPlugin(),

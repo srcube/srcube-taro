@@ -1,10 +1,10 @@
 'use client'
 
-import { routes, Status } from '@/conf/sidebar'
 import cn from 'classnames'
 import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { routes, Status } from '@/conf/sidebar'
 
 function getSidebarData() {
   const data = routes.map((route) => {

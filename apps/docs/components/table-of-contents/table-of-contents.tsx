@@ -1,8 +1,8 @@
 'use client'
 
 import type { Toc } from '@stefanprobst/rehype-extract-toc'
-import { useScrollSpy } from '@/hooks/use-scroll-spy'
 import cn from 'classnames'
+import { useScrollSpy } from '@/hooks/use-scroll-spy'
 
 interface TableOfContentsProps {
   headings?: Toc
