@@ -1,5 +1,21 @@
 # @srcube-taro/ui
 
+## 0.0.6
+
+### Patch Changes
+
+- Components and hooks, theme styles, tailwind-variants merge config
+    drawer, dialog, button
+- Updated dependencies
+  - @srcube-taro/theme@0.0.6
+  - @srcube-taro/button@0.0.6
+  - @srcube-taro/dialog@0.0.2
+  - @srcube-taro/drawer@0.0.1
+  - @srcube-taro/input@0.0.4
+  - @srcube-taro/layouts@0.0.6
+  - @srcube-taro/modal@0.0.3
+  - @srcube-taro/spinner@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

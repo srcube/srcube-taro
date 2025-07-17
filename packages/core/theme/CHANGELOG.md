@@ -1,5 +1,14 @@
 # @srcube-taro/theme
 
+## 0.0.6
+
+### Patch Changes
+
+- Components and hooks, theme styles, tailwind-variants merge config
+    drawer, dialog, button
+- Updated dependencies
+  - @srcube-taro/utils-tv@0.0.3
+
 ## 0.0.5
 
 ### Patch Changes
