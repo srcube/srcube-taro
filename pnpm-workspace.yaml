@@ -26,6 +26,7 @@ catalog:
   '@tailwindcss/typography': ^0.5.16
   '@tarojs/cli': 4.0.9
   '@tarojs/components': 4.0.9
+  '@tarojs/components-react': 4.0.9
   '@tarojs/helper': 4.0.9
   '@tarojs/plugin-framework-react': 4.0.9
   '@tarojs/plugin-platform-alipay': 4.0.9
@@ -78,14 +79,13 @@ catalog:
   remark-frontmatter: ^5.0.0
   shiki: ^3.2.1
   stylelint: ^16.4.0
+  tailwind-merge: ^2.6.0
   tailwind-variants: ^1.0.0
   tailwindcss: ^3
   tailwindcss-animated: ^2.0.0
-  tarojs-router-next: ^3.4.6
-  tarojs-router-next-plugin: ^3.4.6
   tsconfig-paths-webpack-plugin: ^4.1.0
   tsup: ^8.4.0
   typescript: ^5.8.3
-  weapp-tailwindcss: ^3
+  weapp-tailwindcss: ^4
   webpack: 5.91.0
   yaml: ^2.7.1

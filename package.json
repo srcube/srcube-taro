@@ -31,6 +31,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
-    ]
+    ],
+    "patchedDependencies": {
+      "tailwind-variants@1.0.0": "patches/tailwind-variants@1.0.0.patch"
+    }
   }
 }

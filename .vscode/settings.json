@@ -3,6 +3,11 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
+  // Tailwind CSS
+  "tailwindCSS.experimental.classRegex": [
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

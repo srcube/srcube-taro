@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 /**
  * A hook that manages both controlled and uncontrolled component states.
@@ -27,7 +27,7 @@ export function useControlledState<T, C = T>(value: T, defaultValue: T, onChange
     isControlledRef.current = isControlled
   }, [isControlled])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isControlled && !Object.is(prevValueRef.current, value)) {
       setStateValue(value)
       prevValueRef.current = value
