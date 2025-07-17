@@ -66,13 +66,13 @@ export default function Modals() {
         </Button>
       </Section>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop={backdrop} isDismissable={isDismissable}>
-        <ModalHeader>
+        <ModalHeader className="p-3">
           <View className="text-center text-lg font-semibold">Modal Title</View>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody className="px-4 py-3">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
         </ModalBody>
-        <ModalFooter className="">
+        <ModalFooter className="p-3">
           <Button color="primary" isBlock onTap={handleClose}>Confirm</Button>
         </ModalFooter>
       </Modal>

@@ -9,6 +9,15 @@ export default function Buttons() {
   const variants: Array<ButtonProps['variant']> = ['solid', 'outline', 'flat', 'text']
   const sizes: Array<ButtonProps['size']> = ['xs', 'sm', 'md', 'lg']
 
+  const handleTap = async (e) => {
+    await new Promise((res) => {
+      setTimeout(() => {
+        console.log('E: ', e)
+        res(true)
+      }, 3000)
+    })
+  }
+
   return (
     <Page>
       <Section title="Colors" contentClass="grid grid-cols-3 gap-2">
@@ -26,6 +35,7 @@ export default function Buttons() {
       </Section>
       <Section title="Loadings" contentClass="grid grid-cols-3 gap-2">
         {colors.map(c => <Button key={c} color={c} isLoading>{capitalize(c)}</Button>)}
+        <Button color="primary" onTap={handleTap}>Auto</Button>
       </Section>
       <Section title="Disabled" contentClass="grid grid-cols-3 gap-2">
         {colors.map(c => <Button key={c} color={c} isDisabled>{capitalize(c)}</Button>)}

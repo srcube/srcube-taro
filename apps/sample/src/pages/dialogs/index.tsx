@@ -35,7 +35,7 @@ export default function Dialogs() {
   const handleOpenLangs = useCallback((l: DialogProps['lang']) => {
     setLang(l)
     I18N.onOpen()
-  }, [COLORS])
+  }, [I18N])
 
   const handleAsyncAction = useCallback(async () => {
     await new Promise((res) => {

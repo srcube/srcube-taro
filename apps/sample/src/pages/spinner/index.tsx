@@ -1,6 +1,6 @@
+import { Spinner } from '@srcube-taro/ui'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
-import { Spinner } from '@srcube-taro/ui'
 
 export default function SpinnerDemo() {
   return (

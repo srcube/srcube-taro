@@ -28,7 +28,8 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch"
+    "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch",
+    "lint": "eslint"
   },
   "browserslist": {
     "development": [
@@ -67,8 +68,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwind-variants": "catalog:",
-    "tarojs-router-next": "catalog:",
-    "tarojs-router-next-plugin": "catalog:",
     "use-mutative": "^1.3.0"
   },
   "devDependencies": {
@@ -87,6 +86,8 @@
     "@types/react": "catalog:",
     "@types/underscore": "catalog:",
     "@types/webpack-env": "catalog:",
+    "@weapp-core/escape": "^4.0.1",
+    "@weapp-tailwindcss/merge": "^1.2.2",
     "babel-preset-taro": "catalog:",
     "eslint": "^8.57.0",
     "eslint-config-taro": "catalog:",
@@ -97,6 +98,7 @@
     "stylelint": "catalog:",
     "tailwindcss": "catalog:",
     "tailwindcss-animated": "catalog:",
+    "terser-webpack-plugin": "^5.3.14",
     "tsconfig-paths-webpack-plugin": "catalog:",
     "typescript": "^5.4.5",
     "weapp-tailwindcss": "catalog:",

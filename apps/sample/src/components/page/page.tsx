@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 import { Box } from '@srcube-taro/ui'
-import { tv } from 'tailwind-variants'
+import { tv } from '@srcube-taro/utils-tv'
 
 export interface PageProps {
   className?: string

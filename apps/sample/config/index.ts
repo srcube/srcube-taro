@@ -1,25 +1,27 @@
 import type { UserConfigExport } from '@tarojs/cli'
 import { defineConfig } from '@tarojs/cli'
+import { ComplexMappingChars2String } from '@weapp-core/escape'
+import Terser from 'terser-webpack-plugin'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 import devConfig from './dev'
 import prodConfig from './prod'
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
+export default defineConfig<'webpack5'>(async (merge) => {
   const baseConfig: UserConfigExport<'webpack5'> = {
     projectName: 'sample',
     date: '1900-01-01',
     designWidth: 750,
     deviceRatio: {
-      640: 2.34 / 2,
+      // 640: 2.34 / 2,
       750: 1,
-      375: 2,
-      828: 1.81 / 2,
+      // 375: 2,
+      // 828: 1.81 / 2,
     },
     sourceRoot: 'src',
     outputRoot: 'dist',
-    plugins: ['tarojs-router-next-plugin'],
+    plugins: [],
     defineConstants: {
     },
     copy: {
@@ -33,7 +35,6 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
       type: 'webpack5',
       prebundle: {
         exclude: [
-          'tarojs-router-next',
           // @ts-expect-error regex can be used
           /^@srcube-taro\/*/,
         ],
@@ -66,8 +67,28 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
         chain.merge({
           plugin: {
             install: {
+              plugin: Terser,
+              args: [
+                {
+                  terserOptions: {
+                    compress: true,
+                    // mangle: false,
+                    keep_classnames: true,
+                    keep_fnames: true,
+                  },
+                },
+              ],
+            },
+          },
+        }).merge({
+          plugin: {
+            install: {
               plugin: UnifiedWebpackPluginV5,
-              args: [{ appType: 'taro' }],
+              args: [{
+                appType: 'taro',
+                rem2rpx: true,
+                customReplaceDictionary: ComplexMappingChars2String,
+              }],
             },
           },
         })

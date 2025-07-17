@@ -5,14 +5,21 @@ export default defineAppConfig({
     'pages/layout-stack/index',
     'pages/buttons/index',
     'pages/dialogs/index',
+    'pages/drawers/index',
     'pages/inputs/index',
-    'pages/spinner/index',
     'pages/modals/index',
+    'pages/spinner/index',
+  ],
+  subpackages: [
+    {
+      root: 'packages/drawers',
+      pages: ['pages/auto-safe-area/index'],
+    },
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
+    navigationBarTitleText: 'Srcube UI',
     navigationBarTextStyle: 'black',
   },
 })

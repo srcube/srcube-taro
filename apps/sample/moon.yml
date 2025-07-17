@@ -9,6 +9,12 @@ tasks:
       cache: false
     deps:
       - core-ui:build
+  dev-alipay:
+    command: pnpm dev:alipay
+    options:
+      cache: false
+    deps:
+      - core-ui:build
 
   dev-h5:
     command: pnpm dev:h5
@@ -19,5 +25,9 @@ tasks:
 
   build-weapp:
     command: pnpm build:weapp
+    deps:
+      - core-ui:build
+  build-alipay:
+    command: pnpm build:alipay
     deps:
       - core-ui:build
