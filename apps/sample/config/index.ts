@@ -64,34 +64,36 @@ export default defineConfig<'webpack5'>(async (merge) => {
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
-        chain.merge({
-          plugin: {
-            install: {
-              plugin: Terser,
-              args: [
-                {
-                  terserOptions: {
-                    compress: true,
-                    // mangle: false,
-                    keep_classnames: true,
-                    keep_fnames: true,
+        chain
+          .merge({
+            plugin: {
+              install: {
+                plugin: Terser,
+                args: [
+                  {
+                    terserOptions: {
+                      compress: true,
+                      // mangle: false,
+                      keep_classnames: true,
+                      keep_fnames: true,
+                    },
                   },
-                },
-              ],
+                ],
+              },
             },
-          },
-        }).merge({
-          plugin: {
-            install: {
-              plugin: UnifiedWebpackPluginV5,
-              args: [{
-                appType: 'taro',
-                rem2rpx: true,
-                customReplaceDictionary: ComplexMappingChars2String,
-              }],
+          })
+          .merge({
+            plugin: {
+              install: {
+                plugin: UnifiedWebpackPluginV5,
+                args: [{
+                  appType: 'taro',
+                  rem2rpx: true,
+                  customReplaceDictionary: ComplexMappingChars2String,
+                }],
+              },
             },
-          },
-        })
+          })
       },
     },
     h5: {
