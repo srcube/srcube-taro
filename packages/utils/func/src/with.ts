@@ -1,4 +1,4 @@
-import { isFunc } from './is'
+import { isFunc } from './assert'
 
 export async function withLoading(fn: ((...args: any[]) => any) | undefined, setLoading: (v: boolean) => void, ...args: any) {
   if (!fn)

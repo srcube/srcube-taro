@@ -20,8 +20,8 @@
     "prepack": "rm -rf ./package && clean-publish",
     "postpack": "rm -rf ./package"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@srcube-taro/ts-config": "workspace:^"
+    "@srcube-taro/ts-config": "workspace:^",
+    "@types/node": "catalog:"
   }
 }

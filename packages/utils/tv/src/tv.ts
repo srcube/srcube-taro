@@ -3,7 +3,7 @@ import { ComplexMappingChars2String, ComplexMappingChars2StringEntries, escape }
 import { extendTailwindMerge, getDefaultConfig } from 'tailwind-merge'
 import { createTV } from 'tailwind-variants'
 
-export { VariantProps } from 'tailwind-variants'
+export type { VariantProps } from 'tailwind-variants'
 
 export { ComplexMappingChars2String, ComplexMappingChars2StringEntries }
 

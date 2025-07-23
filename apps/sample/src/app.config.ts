@@ -4,6 +4,7 @@ export default defineAppConfig({
     'pages/layout-box/index',
     'pages/layout-stack/index',
     'pages/buttons/index',
+    'pages/checkboxs/index',
     'pages/dialogs/index',
     'pages/drawers/index',
     'pages/inputs/index',

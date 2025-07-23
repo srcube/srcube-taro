@@ -1,0 +1,48 @@
+{
+  "name": "@srcube-taro/checkbox",
+  "version": "0.0.0",
+  "author": "chioio <srcube.chioio@gmail.com>",
+  "keywords": [
+    "taro.js",
+    "ui",
+    "checkbox"
+  ],
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup --dts",
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@react-stately/checkbox": "^3.6.15",
+    "@react-stately/toggle": "^3.8.5",
+    "@react-stately/utils": "^3.10.7",
+    "@srcube-taro/hooks": "workspace:^",
+    "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/theme": "workspace:^",
+    "@srcube-taro/utils-func": "workspace:^",
+    "@srcube-taro/utils-react": "workspace:^",
+    "@srcube-taro/utils-taro": "workspace:^",
+    "@srcube-taro/utils-tv": "workspace:^",
+    "@tarojs/components": "catalog:",
+    "@tarojs/runtime": "catalog:",
+    "classnames": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@srcube-taro/ts-config": "workspace:^",
+    "@types/react": "catalog:"
+  }
+}

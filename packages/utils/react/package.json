@@ -26,6 +26,7 @@
     "react-is": ">=18"
   },
   "dependencies": {
+    "@tarojs/runtime": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-is": "catalog:"

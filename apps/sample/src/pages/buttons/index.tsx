@@ -40,24 +40,22 @@ export default function Buttons() {
       <Section title="Disabled" contentClass="grid grid-cols-3 gap-2">
         {colors.map(c => <Button key={c} color={c} isDisabled>{capitalize(c)}</Button>)}
       </Section>
-      <Section title="Icon Button">
-        <Box className="flex gap-2">
-          <Button isIcon>
-            <View className="i-[ion--home]" />
-          </Button>
-          <Button color="primary" isIcon>
-            <View className="i-[ion--camera]" />
-          </Button>
-          <Button color="success" isIcon>
-            <View className="i-[icon-park-solid--pay-code-one]" />
-          </Button>
-          <Button color="warning" isIcon>
-            <View className="i-[fluent--alert-32-filled]" />
-          </Button>
-          <Button color="danger" isIcon>
-            <View className="i-[ion--heart]" />
-          </Button>
-        </Box>
+      <Section title="Icon Button" contentClass="flex gap-2">
+        <Button isIcon>
+          <View className="i-[ion--home]" />
+        </Button>
+        <Button color="primary" isIcon>
+          <View className="i-[ion--camera]" />
+        </Button>
+        <Button color="success" isIcon>
+          <View className="i-[icon-park-solid--pay-code-one]" />
+        </Button>
+        <Button color="warning" isIcon>
+          <View className="i-[fluent--alert-32-filled]" />
+        </Button>
+        <Button color="danger" isIcon>
+          <View className="i-[ion--heart]" />
+        </Button>
       </Section>
       <Section title="Layouts" contentClass="flex flex-col gap-2">
         <Box className="grid grid-cols-2 gap-2">

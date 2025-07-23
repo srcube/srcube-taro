@@ -5,7 +5,7 @@ import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
-import { useAnimatePresence, useOverlayTriggerState } from '@srcube-taro/hooks'
+import { useOverlayTriggerState } from '@srcube-taro/hooks'
 import { drawer } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import Taro from '@tarojs/taro'
@@ -55,8 +55,6 @@ export function useDrawer(props: UseDrawerProps) {
   const pages = Taro.getCurrentPages()
 
   const domRef = useDOMRef(ref)
-
-  const { isClosing } = useAnimatePresence({ isOpen })
 
   const state = useOverlayTriggerState({
     isOpen,

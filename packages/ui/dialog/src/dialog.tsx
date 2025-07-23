@@ -4,7 +4,7 @@ import type { FC, ReactNode } from 'react'
 import type { UseDialogProps } from './use'
 import { Button, ButtonGroup } from '@srcube-taro/button'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from '@srcube-taro/modal'
-import { isFunc, isString, isUndefined } from '@srcube-taro/utils-func'
+import { isFunc, isString, isVoid0 } from '@srcube-taro/utils-func'
 import { Children, forwardRef, isValidElement } from 'react'
 import DialogBody from './dialog-body'
 import DialogFooter from './dialog-footer'
@@ -55,7 +55,7 @@ const Dialog = forwardRef<TaroElement, DialogProps>((props, ref) => {
   ): ReactNode => {
     const props = getProps()
 
-    if (isUndefined(content)) {
+    if (isVoid0(content)) {
       return <Button {...props}>{defaultText}</Button>
     }
     if (isFunc(content)) {

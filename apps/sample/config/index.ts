@@ -1,7 +1,7 @@
 import type { UserConfigExport } from '@tarojs/cli'
 import { defineConfig } from '@tarojs/cli'
 import { ComplexMappingChars2String } from '@weapp-core/escape'
-import Terser from 'terser-webpack-plugin'
+// import TerserPlugin from 'terser-webpack-plugin'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 import devConfig from './dev'
@@ -22,18 +22,16 @@ export default defineConfig<'webpack5'>(async (merge) => {
     sourceRoot: 'src',
     outputRoot: 'dist',
     plugins: [],
-    defineConstants: {
-    },
+    defineConstants: {},
     copy: {
-      patterns: [
-      ],
-      options: {
-      },
+      patterns: [],
+      options: {},
     },
     framework: 'react',
     compiler: {
       type: 'webpack5',
       prebundle: {
+        enable: true,
         exclude: [
           // @ts-expect-error regex can be used
           /^@srcube-taro\/*/,
@@ -50,9 +48,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
       postcss: {
         pxtransform: {
           enable: true,
-          config: {
-
-          },
+          config: {},
         },
         cssModules: {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
@@ -64,36 +60,37 @@ export default defineConfig<'webpack5'>(async (merge) => {
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
-        chain
-          .merge({
-            plugin: {
-              install: {
-                plugin: Terser,
-                args: [
-                  {
-                    terserOptions: {
-                      compress: true,
-                      // mangle: false,
-                      keep_classnames: true,
-                      keep_fnames: true,
-                    },
-                  },
-                ],
-              },
-            },
-          })
-          .merge({
-            plugin: {
-              install: {
-                plugin: UnifiedWebpackPluginV5,
-                args: [{
+        // chain.merge({
+        //   plugin: {
+        //     install: {
+        //       plugin: TerserPlugin,
+        //       args: [
+        //         {
+        //           terserOptions: {
+        //             compress: true,
+        //             // mangle: false,
+        //             keep_classnames: true,
+        //             keep_fnames: true,
+        //           },
+        //         },
+        //       ],
+        //     },
+        //   },
+        // })
+        chain.merge({
+          plugin: {
+            install: {
+              plugin: UnifiedWebpackPluginV5,
+              args: [
+                {
                   appType: 'taro',
                   rem2rpx: true,
                   customReplaceDictionary: ComplexMappingChars2String,
-                }],
-              },
+                },
+              ],
             },
-          })
+          },
+        })
       },
     },
     h5: {

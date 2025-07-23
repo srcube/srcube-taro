@@ -16,6 +16,7 @@ export default function Index() {
 
   const components = [
     { title: 'Buttons', to: () => Taro.navigateTo({ url: '/pages/buttons/index' }) },
+    { title: 'Checkboxs', to: () => Taro.navigateTo({ url: '/pages/checkboxs/index' }) },
     { title: 'Dialogs', to: () => Taro.navigateTo({ url: '/pages/dialogs/index' }) },
     { title: 'Drawer', to: () => Taro.navigateTo({ url: '/pages/drawers/index' }) },
     { title: 'Inputs', to: () => Taro.navigateTo({ url: '/pages/inputs/index' }) },

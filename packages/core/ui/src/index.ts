@@ -1,5 +1,7 @@
 export * from '@srcube-taro/button'
 
+export * from '@srcube-taro/checkbox'
+
 export * from '@srcube-taro/dialog'
 
 export * from '@srcube-taro/drawer'

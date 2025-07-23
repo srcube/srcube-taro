@@ -62,7 +62,7 @@ export function useButtonGroup(props: UseButtonGroupProps) {
     isLoading,
   }), [size, color, variant, isDisabled, isIcon, isBlock, isLoading])
 
-  const getButtonGroupProps = useCallback((): ViewProps => ({
+  const getGroupProps = useCallback((): ViewProps => ({
     role: 'group',
     className: styles,
     ...rest,
@@ -73,7 +73,7 @@ export function useButtonGroup(props: UseButtonGroupProps) {
     domRef: ref,
     context,
     children,
-    getButtonGroupProps,
+    getGroupProps,
   }
 }
 

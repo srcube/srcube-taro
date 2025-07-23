@@ -111,8 +111,11 @@ export function useButton(props: UseButtonProps) {
 
   const handleTap = useCallback(
     async (e: ITouchEvent) => {
-      if (isDisabled || isLoading || !onTap)
+      if (isDisabled || isLoading || !onTap) {
+        e.preventDefault()
+
         return
+      }
 
       if (isAutoLoading)
         await withLoading(onTap, setAutoLoading, e)

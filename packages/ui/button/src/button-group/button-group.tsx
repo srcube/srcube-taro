@@ -7,11 +7,11 @@ import { useButtonGroup } from './use'
 export interface ButtonGroupProps extends UseButtonGroupProps { }
 
 const ButtonGroup = forwardRef<ViewProps, ButtonGroupProps>((props, ref) => {
-  const { Component, domRef, context, children, getButtonGroupProps } = useButtonGroup({ ...props, ref })
+  const { Component, domRef, context, children, getGroupProps } = useButtonGroup({ ...props, ref })
 
   return (
     <ButtonGroupProvider value={context}>
-      <Component ref={domRef} {...getButtonGroupProps()}>
+      <Component ref={domRef} {...getGroupProps()}>
         {children}
       </Component>
     </ButtonGroupProvider>
