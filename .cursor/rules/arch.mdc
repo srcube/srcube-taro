@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+# Technology Stack & Design Principles
+
+## Core Frameworks
+
+- Taro.js - Cross-platform mini-program development framework
+- React.js - UI development framework
+- TailwindCSS - Styling framework
+
+## Key Libraries
+
+- Weapp TailwindCSS - Mini-program TailwindCSS adapter
+- Tailwind Variants - Component style variants management
+
+## Design Principles
+
+1. Reference [HeroUI Codebase](mdc:https:/github.com/heroui-inc/heroui) for code style
+2. Follow [Adobe React Spectrum](mdc:https:/react-spectrum.adobe.com/react-spectrum/index.html) component design principles
+3. Each component should be an independent package
+
+## Component Design Guidelines
+
+1. Keep UI and logic separate
+2. Follow presentation/container pattern
+3. Use default export for components
+4. Manage component styles with tailwind-variants
+
+## Rules
+
+1. Coding with English
+
