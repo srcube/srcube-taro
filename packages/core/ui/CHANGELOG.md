@@ -12,7 +12,7 @@
   - @srcube-taro/dialog@0.0.2
   - @srcube-taro/drawer@0.0.1
   - @srcube-taro/input@0.0.4
-  - @srcube-taro/layouts@0.0.6
+  - @srcube-taro/layout@0.0.6
   - @srcube-taro/modal@0.0.3
   - @srcube-taro/spinner@0.0.6
 
@@ -28,7 +28,7 @@
   - @srcube-taro/modal@0.0.2
   - @srcube-taro/dialog@0.0.1
   - @srcube-taro/input@0.0.3
-  - @srcube-taro/layouts@0.0.5
+  - @srcube-taro/layout@0.0.5
   - @srcube-taro/spinner@0.0.5
 
 ## 0.0.4
@@ -42,7 +42,7 @@
   - @srcube-taro/modal@0.0.1
   - @srcube-taro/button@0.0.4
   - @srcube-taro/input@0.0.2
-  - @srcube-taro/layouts@0.0.4
+  - @srcube-taro/layout@0.0.4
   - @srcube-taro/spinner@0.0.4
 
 ## 0.0.3
@@ -55,7 +55,7 @@
   - @srcube-taro/theme@0.0.3
   - @srcube-taro/input@0.0.1
   - @srcube-taro/button@0.0.3
-  - @srcube-taro/layouts@0.0.3
+  - @srcube-taro/layout@0.0.3
   - @srcube-taro/spinner@0.0.3
 
 ## 0.0.2
@@ -65,7 +65,7 @@
 - Code styles and components ref type
 - Updated dependencies
   - @srcube-taro/theme@0.0.2
-  - @srcube-taro/layouts@0.0.3
+  - @srcube-taro/layout@0.0.3
   - @srcube-taro/spinner@0.0.3
   - @srcube-taro/button@0.0.2
 
@@ -81,4 +81,4 @@
   - @srcube-taro/theme@0.0.1
   - @srcube-taro/spinner@0.0.1
   - @srcube-taro/button@0.0.1
-  - @srcube-taro/layouts@0.0.1
+  - @srcube-taro/layout@0.0.1

@@ -8,7 +8,7 @@ export * from '@srcube-taro/drawer'
 
 export * from '@srcube-taro/input'
 
-export * from '@srcube-taro/layouts'
+export * from '@srcube-taro/layout'
 
 export * from '@srcube-taro/modal'
 

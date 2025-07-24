@@ -653,9 +653,9 @@ importers:
       '@srcube-taro/input':
         specifier: workspace:^
         version: link:../../ui/input
-      '@srcube-taro/layouts':
+      '@srcube-taro/layout':
         specifier: workspace:^
-        version: link:../../ui/layouts
+        version: link:../../ui/layout
       '@srcube-taro/modal':
         specifier: workspace:^
         version: link:../../ui/modal
@@ -903,7 +903,7 @@ importers:
         specifier: 'catalog:'
         version: 18.3.22
 
-  packages/ui/layouts:
+  packages/ui/layout:
     dependencies:
       '@srcube-taro/theme':
         specifier: workspace:^
@@ -5431,6 +5431,7 @@ packages:
 
   '@zod/mini@4.0.0-beta.20250505T195954':
     resolution: {integrity: sha512-ioybPtU4w4TqwHvJv0gkAiYNaBkZ/BaGHBpK7viCIRSE8BiiZucVZ8vS0YE04Qy1R120nAnFy1d+tD9ByMO0yw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   abortcontroller-polyfill@1.7.8:
     resolution: {integrity: sha512-9f1iZ2uWh92VcrU9Y8x+LdM4DLj75VE0MJB8zuF1iUnroEptStw+DQ8EQPMUdfe5k+PkB1uUfDQfWbhstH8LrQ==}

@@ -58,7 +58,7 @@
 
 - Components with theme and global package.
 
-  layouts, button, spinner
+  layout, button, spinner
 
 - Updated dependencies
   - @srcube-taro/utils-react@0.0.1

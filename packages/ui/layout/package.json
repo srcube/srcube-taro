@@ -1,11 +1,11 @@
 {
-  "name": "@srcube-taro/layouts",
+  "name": "@srcube-taro/layout",
   "version": "0.0.6",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
     "ui",
-    "layouts"
+    "layout"
   ],
   "main": "src/index.ts",
   "files": [

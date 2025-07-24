@@ -26,7 +26,7 @@
     "@srcube-taro/dialog": "workspace:^",
     "@srcube-taro/drawer": "workspace:^",
     "@srcube-taro/input": "workspace:^",
-    "@srcube-taro/layouts": "workspace:^",
+    "@srcube-taro/layout": "workspace:^",
     "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/theme": "workspace:^"

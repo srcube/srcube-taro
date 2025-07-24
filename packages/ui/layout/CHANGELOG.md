@@ -1,4 +1,4 @@
-# @srcube-taro/layouts
+# @srcube-taro/layout
 
 ## 0.0.6
 
@@ -50,7 +50,7 @@
 
 - Components with theme and global package.
 
-  layouts, button, spinner
+  layout, button, spinner
 
 - Updated dependencies
   - @srcube-taro/utils-react@0.0.1
