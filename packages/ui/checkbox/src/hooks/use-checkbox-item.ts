@@ -19,7 +19,9 @@ export function useCheckboxItem(props: CheckboxProps, groupState?: CheckboxGroup
     ? groupState.isSelected(value)
     : props.defaultSelected
 
-  const isSelected = defaultSelected
+  const isSelected = isInGroup
+    ? groupState.isSelected(value)
+    : props.isSelected
 
   const isDisabled = isInGroup
     ? groupState.isDisabled
