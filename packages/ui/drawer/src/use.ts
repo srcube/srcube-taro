@@ -1,4 +1,4 @@
-import type { ModalProps } from '@srcube-taro/modal'
+import type { ModalProps, ModalRef } from '@srcube-taro/modal'
 import type { DrawerSlots, DrawerVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-taro'
@@ -16,7 +16,7 @@ interface Props extends ModalProps {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef
+  ref?: ReactRef<DrawerRef>
   /**
    * Drawer placement
    * @default right
@@ -32,6 +32,8 @@ interface Props extends ModalProps {
   classNames?: SlotsToClasses<Exclude<DrawerSlots, ''>>
 }
 
+export interface DrawerRef extends ModalRef {}
+
 export type UseDrawerProps = Props &
   Omit<NativeProps<ViewProps>, ''> &
   Omit<DrawerVariantProps, 'hasCustomNavigation'>
@@ -39,9 +41,9 @@ export type UseDrawerProps = Props &
 export function useDrawer(props: UseDrawerProps) {
   const {
     ref,
-    isOpen,
+    isOpen: isOpenProp,
     defaultOpen,
-    isDismissable,
+    isDismissable = true,
     placement = 'bottom',
     title,
     children,
@@ -56,8 +58,8 @@ export function useDrawer(props: UseDrawerProps) {
 
   const domRef = useDOMRef(ref)
 
-  const state = useOverlayTriggerState({
-    isOpen,
+  const { isOpen, close } = useOverlayTriggerState({
+    isOpen: isOpenProp,
     defaultOpen,
     onOpenChange: (isOpen) => {
       onOpenChange?.(isOpen)
@@ -94,22 +96,22 @@ export function useDrawer(props: UseDrawerProps) {
       defaultOpen,
       isDismissable,
       onOpenChange,
-      onClose,
-      // className: styles.wrapper,
+      onClose: close,
       classNames: styles,
       ...rest,
     }
-  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, onClose, styles, rest])
+  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, styles, rest])
 
   return {
     domRef,
     slots,
     styles,
+    classNames,
     title,
-    isOpen: state.isOpen,
+    isOpen,
     isDismissable,
     children,
-    onClose: state.close,
+    onClose: close,
     getModalProps,
   }
 }

@@ -1,11 +1,11 @@
 {
-  "name": "@srcube-taro/checkbox",
+  "name": "@srcube-taro/app",
   "version": "0.0.0",
   "author": "chioio <srcube.chioio@gmail.com>",
   "keywords": [
     "taro.js",
     "ui",
-    "checkbox"
+    "app"
   ],
   "main": "src/index.ts",
   "files": [
@@ -25,16 +25,18 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@srcube-taro/dialog": "workspace:^",
+    "@srcube-taro/drawer": "workspace:^",
     "@srcube-taro/hooks": "workspace:^",
-    "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
-    "@srcube-taro/utils-func": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",
+    "nanoid": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

@@ -1,6 +1,5 @@
-import type { CheckboxGroupState } from '@react-stately/checkbox'
+import { CheckboxGroupState, useToggleState } from '@srcube-taro/hooks'
 import type { CheckboxProps } from '../checkbox'
-import { useToggleState } from '@react-stately/toggle'
 
 export interface CheckboxItemResult {
   isSelected?: boolean

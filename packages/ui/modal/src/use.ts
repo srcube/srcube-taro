@@ -7,14 +7,15 @@ import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
 import { modal } from '@srcube-taro/theme'
+import { useDOMRef } from '@srcube-taro/utils-react'
 import cn from 'classnames'
-import { useCallback, useEffect, useId, useMemo, useState } from 'react'
+import { useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from 'react'
 
 interface Props {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<TaroElement>
+  ref?: ReactRef<ModalRef>
   /**
    * Whether the modal can be closed by clicking on the backdrop.
    * @default true
@@ -25,19 +26,26 @@ interface Props {
    */
   classNames?: SlotsToClasses<Exclude<ModalSlots, ''>>
   /**
-   *  Callback fired when the modal is closed.
+   * Callback fired when the modal is closed.
    */
-  onClose?: () => void
+  onClose?: () => Promise<void> | void
 }
 
-export type UseModalProps = Props & OverlayTriggerProps &
+export interface ModalRef {
+  el: TaroElement
+  open: () => void
+  close: () => void
+}
+
+export type UseModalProps = Props &
+  OverlayTriggerProps &
   Omit<NativeProps<ViewProps>, keyof ModalVariantProps> &
   ModalVariantProps
 
 export function useModal(props: UseModalProps) {
   const {
     ref,
-    isOpen,
+    isOpen: isOpenProp,
     defaultOpen,
     isDismissable = true,
     backdrop,
@@ -49,17 +57,18 @@ export function useModal(props: UseModalProps) {
     ...rest
   } = props
 
+  const domRef = useDOMRef(ref)
+
   const id = useId()
 
   const [headerMounted, setHeaderMounted] = useState(false)
   const [bodyMounted, setBodyMounted] = useState(false)
   const [footerMounted, setFooterMounted] = useState(false)
 
-  const { isVisible } = useAnimatePresence({ isOpen })
   const { addModalRecord, delModalRecord } = usePageScrollLock()
 
-  const state = useOverlayTriggerState({
-    isOpen,
+  const { isOpen, open, close } = useOverlayTriggerState({
+    isOpen: isOpenProp,
     defaultOpen,
     onOpenChange: (isOpen) => {
       onOpenChange?.(isOpen)
@@ -68,8 +77,9 @@ export function useModal(props: UseModalProps) {
       }
     },
   })
+  const { isVisible } = useAnimatePresence({ isOpen })
 
-  const slots = useMemo(() => modal({ isOpen: state.isOpen, backdrop }), [state.isOpen, backdrop])
+  const slots = useMemo(() => modal({ isOpen, backdrop }), [isOpen, backdrop])
 
   const styles = useMemo(
     () => ({
@@ -83,26 +93,33 @@ export function useModal(props: UseModalProps) {
     [slots, className, classNames],
   )
 
+  useImperativeHandle(ref, () => ({
+    modalEl: domRef.current,
+    open,
+    close,
+  }))
+
   useEffect(() => {
-    if (state.isOpen) {
+    if (isOpen) {
       addModalRecord(id)
       return () => {
         delModalRecord(id)
       }
     }
-  }, [state.isOpen, id, addModalRecord, delModalRecord])
+  }, [isOpen, id, addModalRecord, delModalRecord])
 
   const handleBackdropTap = useCallback(() => {
     if (!isDismissable)
       return
-    state.close()
-  }, [isDismissable, state])
+    close()
+  }, [isDismissable, close])
 
   const getModalProps = useCallback((): ViewProps => {
     return {
+      ref: domRef,
       ...rest,
     }
-  }, [rest])
+  }, [domRef, rest])
 
   const getBackdropProps = useCallback((): ViewProps => {
     return {
@@ -111,7 +128,7 @@ export function useModal(props: UseModalProps) {
   }, [handleBackdropTap])
 
   return {
-    domRef: ref,
+    domRef,
     classNames,
     slots,
     styles,
@@ -122,9 +139,10 @@ export function useModal(props: UseModalProps) {
     setBodyMounted,
     footerMounted,
     setFooterMounted,
-    isOpen: state.isOpen,
+    isOpen,
     isVisible,
-    onClose: state.close,
+    open,
+    close,
     getModalProps,
     getBackdropProps,
   }

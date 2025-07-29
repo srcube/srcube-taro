@@ -1,11 +1,10 @@
-import type { CheckboxGroupState } from '@react-stately/checkbox'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { ViewProps } from '@tarojs/components'
 import type { CheckboxProps } from '../checkbox'
-import { useCheckboxGroupState } from '@react-stately/checkbox'
 import { checkboxGroup } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
+import { CheckboxGroupState, useCheckboxGroupState } from '@srcube-taro/hooks'
 import { useCallback, useMemo } from 'react'
 
 interface Props extends NativeProps<Omit<ViewProps, ''>> {

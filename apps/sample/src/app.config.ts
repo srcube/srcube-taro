@@ -1,6 +1,7 @@
 export default defineAppConfig({
   pages: [
     'pages/_index/index',
+    'pages/app/index',
     'pages/layout-box/index',
     'pages/layout-stack/index',
     'pages/buttons/index',

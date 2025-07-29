@@ -1,7 +1,7 @@
 import type { TaroElement } from '@tarojs/runtime'
 import type { UseCheckboxProps } from './use'
 import { Spinner } from '@srcube-taro/spinner'
-import { isFunc } from '@srcube-taro/utils-func'
+import { isFunction } from '@srcube-taro/utils-func'
 import { Checkbox as NCheckbox, View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useCheckbox } from './use'
@@ -25,7 +25,7 @@ const Checkbox = forwardRef<TaroElement, CheckboxProps>((props, ref) => {
   })
 
   const renderIcon = () => {
-    if (isFunc(icon)) {
+    if (isFunction(icon)) {
       return icon({
         isIndeterminate,
         isLoading,

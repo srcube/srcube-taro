@@ -1,3 +1,5 @@
+export * from '@srcube-taro/app'
+
 export * from '@srcube-taro/button'
 
 export * from '@srcube-taro/checkbox'

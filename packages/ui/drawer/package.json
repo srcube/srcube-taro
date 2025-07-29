@@ -34,7 +34,7 @@
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "@tarojs/taro": "catalog:",
-    "@weapp-tailwindcss/merge": "^1.2.2",
+    "@weapp-tailwindcss/merge": "catalog:",
     "classnames": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

@@ -1,4 +1,3 @@
-import type { ToggleStateOptions } from '@react-stately/toggle'
 import type { CheckboxSlots, CheckboxVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-taro'
@@ -12,6 +11,7 @@ import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 import { useCheckboxGroupContext } from './checkbox-group/context'
 import { useCheckboxItem } from './hooks/use-checkbox-item'
+import { ToggleStateOptions } from '@srcube-taro/hooks'
 
 type NativePropsOmitKeys = 'value' | 'checked' | 'disabled' | 'onChange'
 

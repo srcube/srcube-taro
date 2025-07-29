@@ -9,6 +9,10 @@ export default function Index() {
     console.log('Page loaded.')
   })
 
+  const app = [
+    { title: 'SrcubeUI Provider', to: () => Taro.navigateTo({ url: '/pages/app/index' }) },
+  ]
+
   const layouts = [
     { title: 'Box', to: () => Taro.navigateTo({ url: '/pages/layout-box/index' }) },
     { title: 'Stack', to: () => Taro.navigateTo({ url: '/pages/layout-stack/index' }) },
@@ -27,6 +31,19 @@ export default function Index() {
   return (
     <Page className="space-y-4">
       <Box className="text-xl font-bold text-center">Srcube UI</Box>
+      <Box className="text-xs font-bold uppercase">App</Box>
+      <Stack direction="vertical">
+        {app.map(link => (
+          <Box
+            className="flex justify-center py-2 rounded-lg bg-white font-medium"
+            hoverClass="bg-gray-200"
+            onTap={link.to}
+            key={link.title}
+          >
+            {link.title}
+          </Box>
+        ))}
+      </Stack>
       <Box className="text-xs font-bold uppercase">Layouts</Box>
       <Stack direction="vertical">
         {layouts.map(link => (

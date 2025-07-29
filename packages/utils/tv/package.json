@@ -21,8 +21,8 @@
     "postpack": "rm -rf ./package"
   },
   "dependencies": {
-    "@weapp-core/escape": "^4.0.1",
-    "@weapp-tailwindcss/merge": "^1.2.2",
+    "@weapp-core/escape": "catalog:",
+    "@weapp-tailwindcss/merge": "catalog:",
     "classnames": "catalog:",
     "tailwind-merge": "catalog:",
     "tailwind-variants": "catalog:"

@@ -1,10 +1,10 @@
-import { isFunc } from './assert'
+import { isFunction } from './assert'
 
-export async function withLoading(fn: ((...args: any[]) => any) | undefined, setLoading: (v: boolean) => void, ...args: any) {
+export async function withLoading(fn: ((...args: any[]) => (void | boolean) | Promise<void | boolean>) | undefined, setLoading: (v: boolean) => void, ...args: any) {
   if (!fn)
     return
   const ret = fn(...args)
-  if (ret && isFunc(ret.then)) {
+  if (ret && isFunction((ret as Promise<void | boolean>).then)) {
     setLoading(true)
     try {
       await ret

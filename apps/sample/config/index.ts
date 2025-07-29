@@ -1,7 +1,7 @@
 import type { UserConfigExport } from '@tarojs/cli'
 import { defineConfig } from '@tarojs/cli'
 import { ComplexMappingChars2String } from '@weapp-core/escape'
-// import TerserPlugin from 'terser-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 import devConfig from './dev'
@@ -31,11 +31,11 @@ export default defineConfig<'webpack5'>(async (merge) => {
     compiler: {
       type: 'webpack5',
       prebundle: {
-        enable: true,
-        exclude: [
-          // @ts-expect-error regex can be used
-          /^@srcube-taro\/*/,
-        ],
+        enable: false,
+        // exclude: [
+        //   // @ts-expect-error regex can be used
+        //   /^@srcube-taro\/*/,
+        // ],
       },
     },
     cache: {
@@ -60,23 +60,23 @@ export default defineConfig<'webpack5'>(async (merge) => {
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
-        // chain.merge({
-        //   plugin: {
-        //     install: {
-        //       plugin: TerserPlugin,
-        //       args: [
-        //         {
-        //           terserOptions: {
-        //             compress: true,
-        //             // mangle: false,
-        //             keep_classnames: true,
-        //             keep_fnames: true,
-        //           },
-        //         },
-        //       ],
-        //     },
-        //   },
-        // })
+        chain.merge({
+          plugin: {
+            install: {
+              plugin: TerserPlugin,
+              args: [
+                {
+                  terserOptions: {
+                    compress: true,
+                    // mangle: false,
+                    keep_classnames: true,
+                    keep_fnames: true,
+                  },
+                },
+              ],
+            },
+          },
+        })
         chain.merge({
           plugin: {
             install: {

@@ -21,6 +21,7 @@
     "postpack": "rm -rf ./package"
   },
   "dependencies": {
+    "@srcube-taro/app": "workspace:^",
     "@srcube-taro/button": "workspace:^",
     "@srcube-taro/checkbox": "workspace:^",
     "@srcube-taro/dialog": "workspace:^",

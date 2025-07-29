@@ -1,5 +1,5 @@
 import type { ButtonProps } from '@srcube-taro/button'
-import type { ModalProps } from '@srcube-taro/modal'
+import type { ModalProps, ModalRef } from '@srcube-taro/modal'
 import type { DialogSlots } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-taro'
@@ -16,10 +16,6 @@ import { useTranslation } from 'react-i18next'
 import './i18n'
 
 interface Props extends ModalProps {
-  /**
-   * Ref to the DOM element
-   */
-  ref?: ReactRef
   /**
    * Dialog type color
    * @default primary
@@ -53,13 +49,14 @@ interface Props extends ModalProps {
   /**
    * Dialog cancel event
    */
-  onCancel?: ButtonProps['onTap']
+  onCancel?: (e: ITouchEvent) => (void | boolean) | Promise<void | boolean>
   /**
    * Dialog confirm event
    */
-  onConfirm?: ButtonProps['onTap']
-
+  onConfirm?: (e: ITouchEvent) => (void | boolean) | Promise<void | boolean>
 }
+
+export interface DialogRef extends ModalRef {}
 
 export type UseDialogProps = Props &
   Omit<NativeProps<ViewProps>, ''>
@@ -67,7 +64,7 @@ export type UseDialogProps = Props &
 export function useDialog(props: UseDialogProps) {
   const {
     ref,
-    isOpen,
+    isOpen: isOpenProp,
     defaultOpen,
     isDismissable = false,
     isConfirmOnly = false,
@@ -80,15 +77,26 @@ export function useDialog(props: UseDialogProps) {
     className,
     classNames,
     onOpenChange,
-    onClose,
     onCancel,
     onConfirm,
+    onClose,
     ...rest
   } = props
 
   const domRef = useDOMRef(ref)
 
   const { t } = useTranslation(void 0, { lng: lang })
+
+  const { isOpen, close } = useOverlayTriggerState({
+    isOpen: isOpenProp,
+    defaultOpen,
+    onOpenChange: (isOpen) => {
+      onOpenChange?.(isOpen)
+      if (!isOpen) {
+        onClose?.()
+      }
+    },
+  })
 
   const { isClosing } = useAnimatePresence({ isOpen })
 
@@ -98,17 +106,6 @@ export function useDialog(props: UseDialogProps) {
   const isAnyLoading = useMemo(() => {
     return cancelLoading || confirmLoading || isClosing
   }, [cancelLoading, confirmLoading, isClosing])
-
-  const state = useOverlayTriggerState({
-    isOpen,
-    defaultOpen,
-    onOpenChange: (isOpen) => {
-      onOpenChange?.(isOpen)
-      if (!isOpen) {
-        onClose?.()
-      }
-    },
-  })
 
   const slots = useMemo(() => dialog({ isOpen, isConfirmOnly }), [isOpen, isConfirmOnly])
 
@@ -128,25 +125,27 @@ export function useDialog(props: UseDialogProps) {
 
   const handleCancel = useCallback(async (e: ITouchEvent) => {
     if (!onCancel) {
-      state.close()
+      close()
       return
     }
 
-    await withLoading(onCancel, setCancelLoading, e)
+    const autoClose = await withLoading(onCancel, setCancelLoading, e)
 
-    state.close()
-  }, [state, onCancel, setCancelLoading])
+    if (autoClose !== false)
+      close()
+  }, [close, onCancel, setCancelLoading])
 
   const handleConfirm = useCallback(async (e: ITouchEvent) => {
     if (!onConfirm) {
-      state.close()
+      close()
       return
     }
 
-    await withLoading(onConfirm, setConfirmLoading, e)
+    const autoClose = await withLoading(onConfirm, setConfirmLoading, e)
 
-    state.close()
-  }, [state, onConfirm, setConfirmLoading])
+    if (autoClose !== false)
+      close()
+  }, [close, onConfirm, setConfirmLoading])
 
   const getModalProps = useCallback((): ModalProps => {
     return {
@@ -155,12 +154,11 @@ export function useDialog(props: UseDialogProps) {
       defaultOpen,
       isDismissable,
       onOpenChange,
-      onClose,
-      className: styles.wrapper,
+      onClose: close,
       classNames: styles,
       ...rest,
     }
-  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, onClose, styles, rest])
+  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, styles, rest])
 
   const getCancelProps = useCallback((): ButtonProps => {
     return {
@@ -188,8 +186,9 @@ export function useDialog(props: UseDialogProps) {
     t,
     slots,
     styles,
+    classNames,
     title,
-    isOpen: state.isOpen,
+    isOpen,
     isDismissable,
     isConfirmOnly,
     cancelLoading,
@@ -197,7 +196,7 @@ export function useDialog(props: UseDialogProps) {
     cancelContent,
     confirmContent,
     children,
-    onClose: state.close,
+    onClose: close,
     onConfirm,
     onCancel,
     getModalProps,
