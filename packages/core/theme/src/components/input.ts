@@ -11,7 +11,7 @@ export const input = tv({
       'outline-none',
     ],
     input: ['w-full h-full', 'bg-transparent', 'border-none outline-none'],
-    clearButton: 'opacity-70 active:opacity-100',
+    clearButton: 'flex-shrink-0 flex items-center justify-center h-full opacity-70 active:opacity-100',
     startContent: 'flex-shrink-0 flex items-center justify-center',
     endContent: 'flex-shrink-0 flex items-center justify-center',
     iInputClear: 'icon-input-clear',

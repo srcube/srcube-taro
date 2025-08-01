@@ -27,7 +27,7 @@ moon g ui
    - `[component]/src/index.tsx` - Export component and type definitions
    - `[component]src/[component-name].tsx` - Component UI implementation
    - `[component]src/use.ts` - Component logic and hooks
-   - `packages/core/theme/[components|layouts]/[component-name].ts` - Style definitions using tailwind-variants
+   - `packages/core/theme/[components|layout]/[component-name].ts` - Style definitions using tailwind-variants
 
 ### Code Standards
 
@@ -41,7 +41,7 @@ moon g ui
 
 3. Style Management
    - Use tailwind-variants for component styles with `@srcube-taro/utils-tv`
-   - Style definitions in `packages/core/theme/[components|layouts]/[component-name].ts`
+   - Style definitions in `packages/core/theme/[components|layout]/[component-name].ts`
    - Follow TailwindCSS naming conventions
 
 ### Best Practices
@@ -85,6 +85,6 @@ For implementation details and best practices, refer to the following component 
 - dialog
 - drawer
 - input
-- layouts
+- layout
 - modal
 - spinner

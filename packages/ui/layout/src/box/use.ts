@@ -1,23 +1,21 @@
 import type { BoxVariantsProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import { box } from '@srcube-taro/theme'
-import { View } from '@tarojs/components'
+import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo } from 'react'
 
-interface Props {
+interface Props extends NativeProps<ViewProps> {
   ref?: ReactRef
 }
 
-export type UseBoxProps = Props &
-  Omit<NativeProps<ViewProps>, keyof BoxVariantsProps> &
-  BoxVariantsProps
+export type UseBoxProps = MergeVariantProps<Props, BoxVariantsProps>
 
 export function useBox(props: UseBoxProps) {
   const { ref, className, children, onTap, ...rest } = props
 
-  const Component = View
+  const domRef = useDOMRef(ref)
 
   const styles = useMemo(
     () =>
@@ -29,16 +27,15 @@ export function useBox(props: UseBoxProps) {
 
   const getBoxProps = useCallback((): ViewProps => {
     return {
-      ref,
+      ref: domRef,
       className: styles,
       onClick: onTap,
       ...rest,
     }
-  }, [styles, ref, onTap, rest])
+  }, [domRef, styles, onTap, rest])
 
   return {
-    Component,
-    domRef: ref,
+    domRef,
     children,
     getBoxProps,
   }

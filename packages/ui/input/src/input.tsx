@@ -1,4 +1,4 @@
-import type { InputProps as NativeInputProps } from '@tarojs/components'
+import type { TaroElement } from '@tarojs/runtime'
 import type { UseInputProps } from './use'
 import { Input as NativeInput, View } from '@tarojs/components'
 import { forwardRef } from 'react'
@@ -6,9 +6,8 @@ import { useInput } from './use'
 
 export interface InputProps extends UseInputProps { }
 
-const Input = forwardRef<NativeInputProps, InputProps>((props, ref) => {
+const Input = forwardRef<TaroElement, InputProps>((props, ref) => {
   const {
-    Component,
     domRef,
     styles,
     startContent,
@@ -24,7 +23,7 @@ const Input = forwardRef<NativeInputProps, InputProps>((props, ref) => {
   })
 
   return (
-    <Component className={styles.wrapper} {...getWrapperProps()}>
+    <View {...getWrapperProps()}>
       {startContent && <View className={styles.startContent}>{startContent}</View>}
       <NativeInput ref={domRef} className={styles.input} {...getInputProps()} />
       {isClearable && (
@@ -33,7 +32,7 @@ const Input = forwardRef<NativeInputProps, InputProps>((props, ref) => {
         </View>
       )}
       {endContent && <View className={styles.endContent}>{endContent}</View>}
-    </Component>
+    </View>
   )
 })
 

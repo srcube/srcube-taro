@@ -2,7 +2,7 @@ import type { DialogProps } from '@srcube-taro/dialog'
 import type { DrawerProps } from '@srcube-taro/drawer'
 import type { ModalProps, ModalRef } from '@srcube-taro/modal'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { ModalType, OpenModalProps } from './registry'
 import { useDOMRef } from '@srcube-taro/utils-react'
@@ -10,7 +10,7 @@ import { nanoid } from 'nanoid/non-secure'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { registerSrcubeUI, unregisterSrcubeUI } from './registry'
 
-interface Props {
+interface Props extends NativeProps<ViewProps> {
   /**
    * Ref to the DOM element
    */
@@ -26,11 +26,10 @@ export interface ModalItem {
 
 export type Modals = Array<ModalItem>
 
-export type UseSrcubeUIProps = Props &
-  Omit<NativeProps<ViewProps>, ''>
+export type UseSrcubeUIProps = MergeVariantProps<Props, ''>
 
 export function useSrcubeUI(props: UseSrcubeUIProps) {
-  const { ref, children, className, ..._rest } = props
+  const { ref, children, ...rest } = props
 
   const domRef = useDOMRef(ref)
 
@@ -63,6 +62,7 @@ export function useSrcubeUI(props: UseSrcubeUIProps) {
     ])
 
     return {
+      el: modalRefs.current.get(key)?.el,
       close,
     }
   }, [])
@@ -83,11 +83,17 @@ export function useSrcubeUI(props: UseSrcubeUIProps) {
     }
   }, [openModal, openDialog, openDrawer])
 
+  const getWrapperProps = useCallback((): ViewProps => ({
+    ...rest,
+    ref: domRef,
+  }), [rest, domRef])
+
   return {
     domRef,
     children,
     modalRefs,
     modals,
+    getWrapperProps,
   }
 }
 

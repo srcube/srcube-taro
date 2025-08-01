@@ -1,17 +1,18 @@
-import type { ViewProps } from '@tarojs/components'
+import type { TaroElement } from '@tarojs/runtime'
 import type { UseBoxProps } from './use'
+import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useBox } from './use'
 
 export interface BoxProps extends UseBoxProps { }
 
-const Box = forwardRef<ViewProps, BoxProps>((props: UseBoxProps, ref) => {
-  const { Component, domRef, children, getBoxProps } = useBox({ ...props, ref })
+const Box = forwardRef<TaroElement, BoxProps>((props: UseBoxProps, ref) => {
+  const { children, getBoxProps } = useBox({ ...props, ref })
 
   return (
-    <Component {...getBoxProps()} ref={domRef}>
+    <View {...getBoxProps()}>
       {children}
-    </Component>
+    </View>
   )
 })
 

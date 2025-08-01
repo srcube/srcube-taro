@@ -1,9 +1,8 @@
 import type { ModalProps, ModalRef } from '@srcube-taro/modal'
 import type { DrawerSlots, DrawerVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { ViewProps } from '@tarojs/components'
+import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { ReactNode } from 'react'
 import { useOverlayTriggerState } from '@srcube-taro/hooks'
 import { drawer } from '@srcube-taro/theme'
@@ -34,9 +33,7 @@ interface Props extends ModalProps {
 
 export interface DrawerRef extends ModalRef {}
 
-export type UseDrawerProps = Props &
-  Omit<NativeProps<ViewProps>, ''> &
-  Omit<DrawerVariantProps, 'hasCustomNavigation'>
+export type UseDrawerProps = MergeVariantProps<Props, DrawerVariantProps>
 
 export function useDrawer(props: UseDrawerProps) {
   const {
@@ -58,7 +55,7 @@ export function useDrawer(props: UseDrawerProps) {
 
   const domRef = useDOMRef(ref)
 
-  const { isOpen, close } = useOverlayTriggerState({
+  const { isOpen, open, close } = useOverlayTriggerState({
     isOpen: isOpenProp,
     defaultOpen,
     onOpenChange: (isOpen) => {
@@ -111,7 +108,8 @@ export function useDrawer(props: UseDrawerProps) {
     isOpen,
     isDismissable,
     children,
-    onClose: close,
+    open,
+    close,
     getModalProps,
   }
 }

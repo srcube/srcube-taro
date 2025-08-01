@@ -1,6 +1,6 @@
 import type { ButtonGroupVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { ButtonProps } from '../button'
 import { buttonGroup } from '@srcube-taro/theme'

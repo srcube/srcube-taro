@@ -1,16 +1,15 @@
 import type { SpinnerSlots, SpinnerVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { spinner } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import { View } from '@tarojs/components'
 import cn from 'classnames'
 import { useCallback, useMemo } from 'react'
 
-interface Props {
+interface Props extends NativeProps<ViewProps> {
   /**
    * Ref to the DOM element
    */
@@ -25,14 +24,11 @@ interface Props {
   classNames?: SlotsToClasses<SpinnerSlots>
 }
 
-export type UseSpinnerProps = Props &
-  Omit<NativeProps<ViewProps>, keyof SpinnerVariantProps> &
+export type UseSpinnerProps = Omit<Props, keyof SpinnerVariantProps> &
   SpinnerVariantProps
 
 export function useSpinner(props: UseSpinnerProps) {
   const { ref, size, color, label, className, classNames, ...rest } = props
-
-  const Component = View
 
   const domRef = useDOMRef(ref)
 
@@ -48,11 +44,12 @@ export function useSpinner(props: UseSpinnerProps) {
   )
 
   const getSpinnerProps = useCallback((): ViewProps => ({
+    ref: domRef,
+    className: styles.wrapper,
     ...rest,
-  }), [rest])
+  }), [domRef, styles, rest])
 
   return {
-    Component,
     domRef,
     slots,
     styles,

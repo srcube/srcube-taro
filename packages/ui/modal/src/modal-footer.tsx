@@ -1,4 +1,4 @@
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { FC } from 'react'
 import { View } from '@tarojs/components'

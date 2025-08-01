@@ -1,11 +1,12 @@
 import type { StackVariantsProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { BoxProps } from '../box'
 import { stack } from '@srcube-taro/theme'
+import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo } from 'react'
-import { Box } from '../box'
 
-interface Props {
+interface Props extends NativeProps<BoxProps> {
   /**
    * Ref to the DOM element
    */
@@ -30,14 +31,12 @@ interface Props {
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
 }
 
-export type UseStackProps = Props &
-  Omit<BoxProps, keyof StackVariantsProps> &
-  StackVariantsProps
+export type UseStackProps = MergeVariantProps<Props, StackVariantsProps>
 
 export function useStack(props: UseStackProps) {
   const { ref, className, children, direction, spacing, align, justify, ...rest } = props
 
-  const Component = Box
+  const domRef = useDOMRef(ref)
 
   const styles = useMemo(
     () =>
@@ -53,13 +52,13 @@ export function useStack(props: UseStackProps) {
 
   const getStackProps = useCallback((): BoxProps => {
     return {
+      ref: domRef,
       className: styles,
       ...rest,
     }
-  }, [styles, rest])
+  }, [domRef, styles, rest])
 
   return {
-    Component,
     domRef: ref,
     children,
     getStackProps,

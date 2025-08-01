@@ -11,6 +11,8 @@ import DialogFooter from './dialog-footer'
 import DialogHeader from './dialog-header'
 import { useDialog } from './use'
 
+export type { DialogRef }
+
 export interface DialogProps extends UseDialogProps {}
 
 const Dialog = forwardRef<DialogRef, DialogProps>((props, ref) => {

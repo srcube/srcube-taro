@@ -1,6 +1,6 @@
 import type { ButtonVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ITouchEvent, ButtonProps as NativeButtonProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { button, buttonHover } from '@srcube-taro/theme'
@@ -9,7 +9,9 @@ import { Button as NativeButton } from '@tarojs/components'
 import { useCallback, useMemo, useState } from 'react'
 import { useButtonGroupContext } from './button-group/context'
 
-interface Props {
+type OmitNativeKeys = 'type' | 'loading' | 'disabled' | 'size' | 'plain' | 'onTap'
+
+interface Props extends Omit<NativeProps<NativeButtonProps>, OmitNativeKeys> {
   /**
    * Ref to the DOM element
    */
@@ -31,16 +33,15 @@ interface Props {
    * @default 'start'
    */
   spinnerPlacement?: 'start' | 'end'
+  /**
+   * Event handler for the button tap
+   * @param e Touch event
+   * @returns void | boolean | Promise<void | boolean>
+   */
+  onTap: (e: ITouchEvent) => void | Promise<void>
 }
 
-type NativePropsOmitKeys = 'type' | 'loading' | 'disabled' | 'size' | 'plain' | 'onTap'
-
-type OmittedNativeButtonProps = Omit<
-  NativeProps<Omit<NativeButtonProps, NativePropsOmitKeys>>,
-  keyof ButtonVariantProps
->
-
-export type UseButtonProps = Props & OmittedNativeButtonProps & Omit<ButtonVariantProps, 'isInGroup'>
+export type UseButtonProps = MergeVariantProps<Props, ButtonVariantProps, 'isInGroup'>
 
 export function useButton(props: UseButtonProps) {
   const groupCtx = useButtonGroupContext()

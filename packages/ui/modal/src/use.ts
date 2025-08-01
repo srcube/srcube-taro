@@ -1,7 +1,7 @@
 import type { OverlayTriggerProps } from '@srcube-taro/hooks'
 import type { ModalSlots, ModalVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
@@ -11,7 +11,9 @@ import { useDOMRef } from '@srcube-taro/utils-react'
 import cn from 'classnames'
 import { useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from 'react'
 
-interface Props {
+type OmitNativeKeys = ''
+
+interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, OverlayTriggerProps {
   /**
    * Ref to the DOM element
    */
@@ -32,14 +34,13 @@ interface Props {
 }
 
 export interface ModalRef {
-  el: TaroElement
+  el: TaroElement | null
+  isOpen: boolean
   open: () => void
   close: () => void
 }
 
-export type UseModalProps = Props &
-  OverlayTriggerProps &
-  Omit<NativeProps<ViewProps>, keyof ModalVariantProps> &
+export type UseModalProps = Omit<Props, keyof ModalVariantProps> &
   ModalVariantProps
 
 export function useModal(props: UseModalProps) {
@@ -57,7 +58,7 @@ export function useModal(props: UseModalProps) {
     ...rest
   } = props
 
-  const domRef = useDOMRef(ref)
+  const domRef = useDOMRef()
 
   const id = useId()
 
@@ -94,7 +95,8 @@ export function useModal(props: UseModalProps) {
   )
 
   useImperativeHandle(ref, () => ({
-    modalEl: domRef.current,
+    el: domRef.current,
+    isOpen,
     open,
     close,
   }))

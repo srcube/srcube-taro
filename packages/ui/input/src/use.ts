@@ -1,16 +1,17 @@
 import type { InputSlots, InputVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { CommonEvent, InputProps as NativeInputProps } from '@tarojs/components'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
+import type { CommonEvent, InputProps, InputProps as NativeInputProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { input } from '@srcube-taro/theme'
 import { useControlledState, useDOMRef } from '@srcube-taro/utils-react'
-import { View } from '@tarojs/components'
 import cn from 'classnames'
 import { useCallback, useMemo } from 'react'
 
-interface Props {
+type OmitNativeKeys = 'disabled' | 'password' | 'onInput'
+
+interface Props extends Omit<NativeProps<InputProps>, OmitNativeKeys> {
   /**
    * Ref to the DOM element
    */
@@ -61,14 +62,7 @@ interface Props {
   onValueChange?: (value?: string) => void
 }
 
-type NativePropsOmitKeys = 'disabled' | 'password' | 'onInput'
-
-type OmittedNativeInputProps = Omit<
-  NativeProps<Omit<NativeInputProps, NativePropsOmitKeys>>,
-  keyof InputVariantProps
->
-
-export type UseInputProps = Props & OmittedNativeInputProps & InputVariantProps
+export type UseInputProps = MergeVariantProps<Props, InputVariantProps>
 
 export function useInput(props: UseInputProps) {
   const {
@@ -92,8 +86,6 @@ export function useInput(props: UseInputProps) {
     onValueChange = () => {},
     ...rest
   } = props
-
-  const Component = View
 
   const domRef = useDOMRef(ref)
 
@@ -119,13 +111,13 @@ export function useInput(props: UseInputProps) {
   const handleWrapperTap = useCallback((e: CommonEvent) => {
     e.stopPropagation()
 
-    if (isDisabled)
-      return
+    // if (isDisabled)
+    //   return
 
-    if (domRef.current) {
-      domRef.current.focus = true
-    }
-  }, [domRef, isDisabled])
+    // if (domRef.current) {
+    //   domRef.current.focus()
+    // }
+  }, [])
 
   const handleInput = useCallback((e: CommonEvent) => {
     setInputValue(e.detail.value)
@@ -147,15 +139,16 @@ export function useInput(props: UseInputProps) {
     onClear?.()
 
     if (domRef.current) {
-      domRef.current.focus = true
+      domRef.current.focus()
     }
   }, [domRef, isDisabled, onClear, setInputValue])
 
   const getWrapperProps = useCallback(() => {
     return {
+      className: styles.wrapper,
       onTap: handleWrapperTap,
     }
-  }, [handleWrapperTap])
+  }, [styles.wrapper, handleWrapperTap])
 
   const getInputProps = useCallback((): NativeInputProps => {
     return {
@@ -176,7 +169,6 @@ export function useInput(props: UseInputProps) {
   }, [handleClear])
 
   return {
-    Component,
     domRef,
     styles,
     children,

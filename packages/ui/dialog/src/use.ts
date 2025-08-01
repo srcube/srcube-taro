@@ -1,10 +1,9 @@
 import type { ButtonProps } from '@srcube-taro/button'
 import type { ModalProps, ModalRef } from '@srcube-taro/modal'
-import type { DialogSlots } from '@srcube-taro/theme'
-import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { DialogSlots, DialogVariantProps } from '@srcube-taro/theme'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { ITouchEvent, ViewProps } from '@tarojs/components'
+import type { MergeVariantProps } from '@srcube-taro/utils-types'
+import type { ITouchEvent } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { useAnimatePresence, useOverlayTriggerState } from '@srcube-taro/hooks'
 import { dialog } from '@srcube-taro/theme'
@@ -48,18 +47,21 @@ interface Props extends ModalProps {
   classNames?: SlotsToClasses<Exclude<DialogSlots, ''>>
   /**
    * Dialog cancel event
+   * @param e Touch event
+   * @returns void | boolean | Promise<void | boolean>
    */
   onCancel?: (e: ITouchEvent) => (void | boolean) | Promise<void | boolean>
   /**
    * Dialog confirm event
+   * @param e Touch event
+   * @returns void | boolean | Promise<void | boolean>
    */
   onConfirm?: (e: ITouchEvent) => (void | boolean) | Promise<void | boolean>
 }
 
 export interface DialogRef extends ModalRef {}
 
-export type UseDialogProps = Props &
-  Omit<NativeProps<ViewProps>, ''>
+export type UseDialogProps = MergeVariantProps<Props, DialogVariantProps>
 
 export function useDialog(props: UseDialogProps) {
   const {
@@ -87,7 +89,7 @@ export function useDialog(props: UseDialogProps) {
 
   const { t } = useTranslation(void 0, { lng: lang })
 
-  const { isOpen, close } = useOverlayTriggerState({
+  const { isOpen, open, close } = useOverlayTriggerState({
     isOpen: isOpenProp,
     defaultOpen,
     onOpenChange: (isOpen) => {
@@ -196,7 +198,8 @@ export function useDialog(props: UseDialogProps) {
     cancelContent,
     confirmContent,
     children,
-    onClose: close,
+    open,
+    close,
     onConfirm,
     onCancel,
     getModalProps,

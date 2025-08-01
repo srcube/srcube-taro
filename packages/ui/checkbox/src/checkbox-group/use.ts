@@ -1,13 +1,17 @@
+import type { CheckboxGroupState } from '@srcube-taro/hooks'
+import type { CheckboxGroupVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { CheckboxProps } from '../checkbox'
+import { useCheckboxGroupState } from '@srcube-taro/hooks'
 import { checkboxGroup } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import { CheckboxGroupState, useCheckboxGroupState } from '@srcube-taro/hooks'
 import { useCallback, useMemo } from 'react'
 
-interface Props extends NativeProps<Omit<ViewProps, ''>> {
+type PickCheckboxProps = Pick<CheckboxProps, 'color' | 'size' | 'radius' | 'isDisabled' | 'isReadOnly' | 'isLineThrough'>
+
+interface Props extends NativeProps<ViewProps>, PickCheckboxProps {
   /**
    * Ref to the DOM element
    */
@@ -31,13 +35,11 @@ interface Props extends NativeProps<Omit<ViewProps, ''>> {
   onValueChange?: (value: string[]) => void
 }
 
-type PickCheckboxProps = Pick<CheckboxProps, 'color' | 'size' | 'radius' | 'isDisabled' | 'isReadOnly' | 'isLineThrough'>
-
 export type ContextType = {
   groupState: CheckboxGroupState
 } & PickCheckboxProps
 
-export type UseCheckboxGroupProps = Props & PickCheckboxProps
+export type UseCheckboxGroupProps = MergeVariantProps<Props, CheckboxGroupVariantProps>
 
 export function useCheckboxGroup(props: UseCheckboxGroupProps) {
   const {
@@ -86,13 +88,14 @@ export function useCheckboxGroup(props: UseCheckboxGroupProps) {
   )
 
   const getGroupProps = useCallback((): ViewProps => ({
+    ref: domRef,
     role: 'group',
     className: styles,
     ...rest,
-  }), [styles, rest])
+  }), [domRef, styles, rest])
 
   return {
-    ref: domRef,
+    domRef,
     context,
     children,
     getGroupProps,

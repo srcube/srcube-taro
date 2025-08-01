@@ -29,7 +29,7 @@
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-func": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
-    "@srcube-taro/utils-taro": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@tarojs/components": "catalog:",
     "classnames": "catalog:",

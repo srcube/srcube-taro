@@ -9,3 +9,6 @@ export { default as DialogFooter } from './dialog-footer'
 
 export type { DialogHeaderProps } from './dialog-header'
 export { default as DialogHeader } from './dialog-header'
+
+// component hook
+export * from './use'

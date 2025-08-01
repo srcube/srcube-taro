@@ -1,3 +1,4 @@
+import type { TaroElement } from '@tarojs/runtime'
 import type { ModalItem, UseSrcubeUIProps } from './use'
 import { Dialog } from '@srcube-taro/dialog'
 import { Drawer } from '@srcube-taro/drawer'
@@ -8,11 +9,11 @@ import { useSrcubeUI } from './use'
 
 export interface SrcubeUIProps extends UseSrcubeUIProps {}
 
-const SrcubeUI = forwardRef<any, SrcubeUIProps>((props, ref) => {
+const SrcubeUI = forwardRef<TaroElement, SrcubeUIProps>((props, ref) => {
   const {
-    domRef,
     children,
     modals,
+    getWrapperProps,
   } = useSrcubeUI({
     ...props,
     ref,
@@ -31,7 +32,7 @@ const SrcubeUI = forwardRef<any, SrcubeUIProps>((props, ref) => {
   }
 
   return (
-    <View ref={domRef}>
+    <View {...getWrapperProps()}>
       {modals.map(renderModal)}
       {children}
     </View>

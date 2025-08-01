@@ -1,8 +1,9 @@
+import type { ToggleStateOptions } from '@srcube-taro/hooks'
 import type { CheckboxSlots, CheckboxVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-taro'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { ITouchEvent, CheckboxProps as NCheckboxProps, ViewProps } from '@tarojs/components'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
+import type { CheckboxProps, ITouchEvent, ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { checkbox } from '@srcube-taro/theme'
 import { __DEV__, warn, withLoading } from '@srcube-taro/utils-func'
@@ -11,11 +12,10 @@ import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 import { useCheckboxGroupContext } from './checkbox-group/context'
 import { useCheckboxItem } from './hooks/use-checkbox-item'
-import { ToggleStateOptions } from '@srcube-taro/hooks'
 
-type NativePropsOmitKeys = 'value' | 'checked' | 'disabled' | 'onChange'
+type OmitNativeKeys = 'value' | 'checked' | 'disabled' | 'onChange'
 
-export interface Props extends NativeProps<Omit<NCheckboxProps, NativePropsOmitKeys>>, ToggleStateOptions {
+export interface Props extends NativeProps<Omit<CheckboxProps, OmitNativeKeys>>, ToggleStateOptions {
   /**
    * Ref to the DOM element
    */
@@ -46,7 +46,7 @@ export interface Props extends NativeProps<Omit<NCheckboxProps, NativePropsOmitK
   onValueChange?: ToggleStateOptions['onChange']
 }
 
-export type UseCheckboxProps = Omit<Props, keyof CheckboxVariantProps> & CheckboxVariantProps
+export type UseCheckboxProps = MergeVariantProps<Props, CheckboxVariantProps>
 
 /**
  * Checkbox logic hook
@@ -142,7 +142,7 @@ export function useCheckbox(props: UseCheckboxProps) {
     className: styles.iconWrapper,
   }), [styles])
 
-  const getNCheckboxProps = useCallback((): NCheckboxProps => ({
+  const getNCheckboxProps = useCallback((): CheckboxProps => ({
     ...rest,
     value,
     checked: isSelected,
