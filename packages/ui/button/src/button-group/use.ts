@@ -2,6 +2,7 @@ import type { ButtonGroupVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
+import type { ReactElement } from 'react'
 import type { ButtonProps } from '../button'
 import { buttonGroup } from '@srcube-taro/theme'
 import { View } from '@tarojs/components'
@@ -17,6 +18,11 @@ interface Props {
    * @default false
    */
   isDisabled?: ButtonProps['isDisabled']
+  /**
+   * Button components as children
+   * Only Button components are allowed
+   */
+  children?: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
 }
 
 export type PickButtonProps = Pick<ButtonProps, 'size' | 'color' | 'variant' | 'isDisabled' | 'isIcon' | 'isBlock' | 'isLoading'>

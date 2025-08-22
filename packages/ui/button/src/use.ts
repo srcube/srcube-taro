@@ -118,9 +118,16 @@ export function useButton(props: UseButtonProps) {
         return
       }
 
-      if (isAutoLoading)
-        await withLoading(onTap, setAutoLoading, e)
-      else onTap(e)
+      try {
+        if (isAutoLoading)
+          await withLoading(onTap, setAutoLoading, e)
+        else onTap(e)
+      } catch (error) {
+        // 在移动端环境中，错误处理通常需要静默处理或通过全局错误处理机制
+        console.error('Button tap handler error:', error)
+        // 可以通过 props 传入自定义错误处理函数
+        // onError?.(error, e)
+      }
     },
     [isDisabled, isLoading, isAutoLoading, setAutoLoading, onTap],
   )
