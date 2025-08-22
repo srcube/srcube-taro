@@ -124,13 +124,23 @@ export function useCheckbox(props: UseCheckboxProps) {
       return
     }
 
-    if (onTap) {
-      if (isAutoLoading)
-        await withLoading(onTap, setAutoLoading, e)
-      else onTap(e)
-    }
+    try {
+      if (onTap) {
+        if (isAutoLoading)
+          await withLoading(onTap, setAutoLoading, e)
+        else onTap(e)
+      }
 
-    toggle()
+      toggle()
+    }
+    catch (error) {
+      if (__DEV__) {
+        warn(`Checkbox tap handler error: ${error}`, 'Checkbox')
+      }
+      if (isAutoLoading) {
+        setAutoLoading(false)
+      }
+    }
   }, [isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onTap, toggle])
 
   const getWrapperProps = useCallback((): ViewProps => ({

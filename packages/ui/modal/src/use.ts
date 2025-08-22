@@ -1,8 +1,8 @@
 import type { OverlayTriggerProps } from '@srcube-taro/hooks'
 import type { ModalSlots, ModalVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-types'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
@@ -23,6 +23,11 @@ interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, OverlayTri
    * @default true
    */
   isDismissable?: boolean
+  /**
+   * Whether to show the backdrop.
+   * @default true
+   */
+  hasBackdrop?: boolean
   /**
    * Classnames to apply to the modal
    */
@@ -49,6 +54,7 @@ export function useModal(props: UseModalProps) {
     isOpen: isOpenProp,
     defaultOpen,
     isDismissable = true,
+    hasBackdrop = true,
     backdrop,
     children,
     className,
@@ -113,7 +119,15 @@ export function useModal(props: UseModalProps) {
   const handleBackdropTap = useCallback(() => {
     if (!isDismissable)
       return
-    close()
+
+    try {
+      close()
+    }
+    catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[Modal] Backdrop tap failed:', error)
+      }
+    }
   }, [isDismissable, close])
 
   const getModalProps = useCallback((): ViewProps => {
@@ -143,6 +157,7 @@ export function useModal(props: UseModalProps) {
     setFooterMounted,
     isOpen,
     isVisible,
+    hasBackdrop,
     open,
     close,
     getModalProps,
