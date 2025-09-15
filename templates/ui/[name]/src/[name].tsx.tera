@@ -2,16 +2,16 @@
 to: '{{ name }}/src/{{ name }}.tsx'
 ---
 
-import type { ViewProps } from '@tarojs/components'
+import type { TaroElement } from '@tarojs/runtime'
 import type { Use{{ name | capitalize }}Props } from './use'
+import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { use{{ name | capitalize }} } from './use'
 
 export interface {{ name | capitalize }}Props extends Use{{ name | capitalize }}Props {}
 
-const {{ name | capitalize }} = forwardRef<any, {{ name | capitalize }}Props>((props, ref) => {
+const {{ name | capitalize }} = forwardRef<TaroElement, {{ name | capitalize }}Props>((props, ref) => {
   const {
-    Component,
     domRef,
     children,
     get{{ name | capitalize }}Props,
@@ -21,12 +21,12 @@ const {{ name | capitalize }} = forwardRef<any, {{ name | capitalize }}Props>((p
   })
 
   return (
-    <Component
+    <View
       ref={domRef}
       {...get{{ name | capitalize }}Props()}
     >
       {children}
-    </Component>
+    </View>
   )
 })
 

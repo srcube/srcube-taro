@@ -10,7 +10,8 @@ export default defineAppConfig({
     'pages/drawers/index',
     'pages/inputs/index',
     'pages/modals/index',
-    'pages/spinner/index',
+    'pages/spinners/index',
+    'pages/toasters/index',
   ],
   subpackages: [
     {

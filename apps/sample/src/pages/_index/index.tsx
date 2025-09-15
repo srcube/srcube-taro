@@ -25,12 +25,13 @@ export default function Index() {
     { title: 'Drawer', to: () => Taro.navigateTo({ url: '/pages/drawers/index' }) },
     { title: 'Inputs', to: () => Taro.navigateTo({ url: '/pages/inputs/index' }) },
     { title: 'Modals', to: () => Taro.navigateTo({ url: '/pages/modals/index' }) },
-    { title: 'Spinner', to: () => Taro.navigateTo({ url: '/pages/spinner/index' }) },
+    { title: 'Spinners', to: () => Taro.navigateTo({ url: '/pages/spinners/index' }) },
+    { title: 'Toasts', to: () => Taro.navigateTo({ url: '/pages/toasters/index' }) },
   ]
 
   return (
-    <Page className="space-y-4">
-      <Box className="text-xl font-bold text-center">Srcube UI</Box>
+    <Page className="space-y-4 pb-20">
+      <Box className="sticky top-0 py-4 text-xl font-bold text-center bg-slate-100">Srcube UI</Box>
       <Box className="text-xs font-bold uppercase">App</Box>
       <Stack direction="vertical">
         {app.map(link => (

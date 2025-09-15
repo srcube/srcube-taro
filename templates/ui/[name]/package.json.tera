@@ -34,6 +34,7 @@ to: '{{ name }}/package.json'
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-taro": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",

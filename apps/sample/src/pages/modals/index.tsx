@@ -1,13 +1,15 @@
-import type { ModalProps } from '@srcube-taro/ui'
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import type { ModalProps, ModalRef } from '@srcube-taro/ui'
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta, View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
 export default function Modals() {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
+
+  const modalRef = useRef<ModalRef>(null)
 
   const { isLocked } = usePageScrollLock()
 
@@ -43,9 +45,17 @@ export default function Modals() {
       <PageMeta
         pageStyle={isLocked ? 'overflow: hidden' : ''}
       />
-      <Section title="Default" contentClass="">
+      <Section title="Default" contentClass="grid grid-cols-2 gap-2">
         <Button color="primary" size="sm" onTap={onOpen}>
-          Open Default
+          Open
+        </Button>
+        <Button
+          color="primary"
+          size="sm"
+          onTap={() =>
+            modalRef.current?.open()}
+        >
+          Ref Open
         </Button>
       </Section>
       <Section title="Backdrops" contentClass="flex gap-2">
@@ -65,16 +75,18 @@ export default function Modals() {
           Non-dismissible
         </Button>
       </Section>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop={backdrop} isDismissable={isDismissable}>
-        <ModalHeader className="p-3">
-          <View className="text-center text-lg font-semibold">Modal Title</View>
-        </ModalHeader>
-        <ModalBody className="px-4 py-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
-        </ModalBody>
-        <ModalFooter className="p-3">
-          <Button color="primary" isBlock onTap={handleClose}>Confirm</Button>
-        </ModalFooter>
+      <Modal ref={modalRef} isOpen={isOpen} onOpenChange={onOpenChange} backdrop={backdrop} isDismissable={isDismissable}>
+        <ModalContent>
+          <ModalHeader className="p-3">
+            <View className="text-center text-lg font-semibold">Modal Title</View>
+          </ModalHeader>
+          <ModalBody className="px-4 py-3">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
+          </ModalBody>
+          <ModalFooter className="p-3">
+            <Button color="primary" isBlock onTap={handleClose}>Confirm</Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </Page>
   )

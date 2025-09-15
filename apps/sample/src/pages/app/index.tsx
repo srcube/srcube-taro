@@ -1,15 +1,22 @@
+import type {
+  ToastProps,
+} from '@srcube-taro/ui'
 import {
   Button,
   DialogBody,
+  DialogContent,
   DrawerBody,
+  DrawerContent,
   DrawerFooter,
   ModalBody,
+  ModalContent,
   ModalFooter,
   ModalHeader,
   openDialog,
   openDrawer,
   openModal,
   SrcubeUI,
+  // toast,
   usePageScrollLock,
 } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
@@ -23,7 +30,7 @@ export default function App() {
   const handleOpenModal = useCallback(() => {
     const modal = openModal({
       content: (
-        <>
+        <ModalContent>
           <ModalHeader className="flex items-center justify-center p-4 text-lg font-medium">
             Modal
           </ModalHeader>
@@ -35,7 +42,7 @@ export default function App() {
               Close Call
             </Button>
           </ModalFooter>
-        </>
+        </ModalContent>
       ),
     })
   }, [])
@@ -44,14 +51,14 @@ export default function App() {
     const dialog = openDialog({
       title: 'Dialog Title',
       content: (
-        <>
+        <DialogContent>
           <DialogBody className="flex flex-col items-center justify-center gap-4">
             This is an `openDialog` call. Can be closed by calling the `close` field of the returned object.
             <Button color="danger" isBlock onTap={() => dialog.close()}>
               Close Call
             </Button>
           </DialogBody>
-        </>
+        </DialogContent>
       ),
     })
   }, [])
@@ -60,7 +67,7 @@ export default function App() {
     const drawer = openDrawer({
       title: 'Drawer Title',
       content: (
-        <>
+        <DrawerContent>
           <DrawerBody className="flex flex-col items-center justify-center gap-4">
             This is an `openDrawer` call. Can be closed by calling the `close` field of the returned object.
           </DrawerBody>
@@ -69,7 +76,7 @@ export default function App() {
               Close Call
             </Button>
           </DrawerFooter>
-        </>
+        </DrawerContent>
       ),
     })
   }, [])
@@ -82,7 +89,7 @@ export default function App() {
           title: 'Drawer Title',
           placement: 'bottom',
           content: (
-            <>
+            <DrawerContent>
               <DrawerBody>This is an `openDrawer` call with dialog confirm.</DrawerBody>
               <DrawerFooter>
                 <Button
@@ -96,18 +103,48 @@ export default function App() {
                   Close Both
                 </Button>
               </DrawerFooter>
-            </>
+            </DrawerContent>
           ),
         })
         return false
       },
       content: (
-        <>
+        <DialogContent>
           This is an `openDialog` call. Confirm need to return `false` to prevent default close.
-        </>
+        </DialogContent>
       ),
     })
   }, [])
+
+  // const colors: ToastProps['color'][] = ['primary', 'success', 'warning', 'danger']
+
+  // const handleOpenToast = useCallback(({ color }: { color: ToastProps['color'] }) => {
+  //   toast({
+  //     content: `This is a toast message!${new Date().getTime()}`,
+  //     duration: 300000,
+  //     color,
+  //   })
+  // }, [])
+
+  // const handleOpenToastWithAction = useCallback(() => {
+  //   const toastInstance = toast({
+  //     content: 'Toast with action button',
+  //     duration: 5000,
+  //     color: 'warning',
+  //     endContent: (
+  //       <Button
+  //         size="sm"
+  //         color="primary"
+  //         onTap={() => {
+  //           toast({ content: 'Action clicked!', duration: 2000, color: 'primary' })
+  //           toastInstance.close()
+  //         }}
+  //       >
+  //         Action
+  //       </Button>
+  //     ),
+  //   })
+  // }, [])
 
   return (
     <SrcubeUI>
@@ -126,7 +163,18 @@ export default function App() {
           <Button color="primary" size="sm" onTap={handleOpenComposed}>
             Composed
           </Button>
+
         </Section>
+        {/* <Section title="Toasts" contentClass="grid grid-cols-3 gap-2">
+          {colors.map(color => (
+            <Button key={color} color={color as ToastProps['color']} size="sm" onTap={() => handleOpenToast({ color })}>
+              {color}
+            </Button>
+          ))}
+          <Button color="warning" size="sm" onTap={handleOpenToastWithAction}>
+            Toast Action
+          </Button>
+        </Section> */}
       </Page>
     </SrcubeUI>
   )

@@ -1,5 +1,5 @@
 import type { DrawerProps } from '@srcube-taro/ui'
-import { Box, Button, Drawer, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import { Box, Button, Drawer, DrawerContent, ModalBackdrop, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
@@ -34,13 +34,15 @@ export default function Drawers() {
           placement={placement}
           title="Top Drawer"
         >
-          This drawer slides down from the top/bottom of the screen.
+          <DrawerContent>
+            This drawer slides down from the top/bottom of the screen.
+          </DrawerContent>
         </Drawer>
       </Section>
 
       <Box className="mb-4">This page set custom navigation style to display top drawer with top/bottom safe area.</Box>
 
-      <Button color="danger" isBlock onTap={() => Taro.navigateBack()}>Back</Button>
+      <Button color="danger" isBlock onTap={() => { Taro.navigateBack() }}>Back</Button>
     </Page>
   )
 }

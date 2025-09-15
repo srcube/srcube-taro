@@ -32,10 +32,10 @@ export default defineConfig<'webpack5'>(async (merge) => {
       type: 'webpack5',
       prebundle: {
         enable: false,
-        // exclude: [
-        //   // @ts-expect-error regex can be used
-        //   /^@srcube-taro\/*/,
-        // ],
+        exclude: [
+          // @ts-expect-error regex can be used
+          /^@srcube-taro\/*/,
+        ],
       },
     },
     cache: {

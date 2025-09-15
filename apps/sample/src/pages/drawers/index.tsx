@@ -1,5 +1,5 @@
 import type { DrawerProps } from '@srcube-taro/ui'
-import { Button, Drawer, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import { Button, Drawer, DrawerContent, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { capitalize } from 'lodash-es'
@@ -38,7 +38,9 @@ export default function Drawers() {
           placement={placement}
           title={`${capitalize(placement)} Drawer`}
         >
-          This drawer slides up from the {placement} of the screen.
+          <DrawerContent>
+            This drawer slides up from the {placement} of the screen.
+          </DrawerContent>
         </Drawer>
       </Section>
 
@@ -47,8 +49,9 @@ export default function Drawers() {
         <Button
           color="primary"
           size="sm"
-          onTap={() =>
-            Taro.navigateTo({ url: '/packages/drawers/pages/auto-safe-area/index' })}
+          onTap={() => {
+            Taro.navigateTo({ url: '/packages/drawers/pages/auto-safe-area/index' })
+          }}
         >
           To Page
         </Button>

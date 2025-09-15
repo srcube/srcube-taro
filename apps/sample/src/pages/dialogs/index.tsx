@@ -1,8 +1,8 @@
-import type { ButtonProps, DialogProps } from '@srcube-taro/ui'
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import type { ButtonProps, DialogProps, DialogRef } from '@srcube-taro/ui'
+import { Button, Dialog, DialogBody, DialogContent, DialogFooter, DialogHeader, ModalBackdrop, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
@@ -21,6 +21,8 @@ export default function Dialogs() {
   const CUSTOM_CONTENT = useDisclosure()
   const CUSTOM_ACTION_STRING = useDisclosure()
   const CUSTOM_ACTION_FUNC = useDisclosure()
+
+  const dialogRef = useRef<DialogRef>(null)
 
   const { isLocked } = usePageScrollLock()
 
@@ -51,16 +53,28 @@ export default function Dialogs() {
         pageStyle={isLocked ? 'overflow: hidden' : ''}
       />
       {/* Default */}
-      <Section title="Default" contentClass="">
+      <Section title="Default" contentClass="grid grid-cols-2 gap-2">
         <Button color="primary" size="sm" onTap={DEFAULT.onOpen}>
           Open
         </Button>
+        <Button
+          color="primary"
+          size="sm"
+          onTap={() =>
+            dialogRef.current?.open()}
+        >
+          Ref Open
+        </Button>
         <Dialog
+          ref={dialogRef}
           isOpen={DEFAULT.isOpen}
           onOpenChange={DEFAULT.onOpenChange}
           title="Dialog Title"
         >
-          This is a dialog with default preset.
+          {/* <ModalBackdrop onTap={() => { console.log('HELLO WORLD') }} /> */}
+          <DialogContent>
+            This is a dialog with default preset.
+          </DialogContent>
         </Dialog>
       </Section>
       {/* Colors */}
@@ -82,7 +96,9 @@ export default function Dialogs() {
           title="Color Dialog"
           color={color}
         >
-          This dialog is assigned the `color` prop with `{color}` preset.
+          <DialogContent>
+            This dialog is assigned the `color` prop with `{color}` preset.
+          </DialogContent>
         </Dialog>
       </Section>
       {/* Async Action */}
@@ -97,7 +113,9 @@ export default function Dialogs() {
           onCancel={handleAsyncAction}
           onConfirm={handleAsyncAction}
         >
-          This dialog is assigned the `onCancel` and `onConfirm` props with async function.
+          <DialogContent>
+            This dialog is assigned the `onCancel` and `onConfirm` props with async function.
+          </DialogContent>
         </Dialog>
       </Section>
       {/* Confirm Only */}
@@ -111,7 +129,9 @@ export default function Dialogs() {
           title="Confirm Only"
           isConfirmOnly
         >
-          This dialog is assigned the `isConfirmOnly` props with `true` to control display confirm action only.
+          <DialogContent>
+            This dialog is assigned the `isConfirmOnly` props with `true` to control display confirm action only.
+          </DialogContent>
         </Dialog>
       </Section>
       <Section title="Custom Action" contentClass="grid grid-cols-3 gap-2">
@@ -128,7 +148,9 @@ export default function Dialogs() {
           cancelContent="Close"
           confirmContent="Ok"
         >
-          This dialog is assigned the `cancelContent` and `confirmContent` props with strings.
+          <DialogContent>
+            This dialog is assigned the `cancelContent` and `confirmContent` props with strings.
+          </DialogContent>
         </Dialog>
         <Dialog
           isOpen={CUSTOM_ACTION_FUNC.isOpen}
@@ -137,7 +159,9 @@ export default function Dialogs() {
           cancelContent={props => <Button {...props} variant="solid" color="warning">No</Button>}
           confirmContent={props => <Button {...props} color="success">Sure</Button>}
         >
-          This dialog is assigned the `cancelContent` and `confirmContent` props with functions that have preset button props or plain React components.
+          <DialogContent>
+            This dialog is assigned the `cancelContent` and `confirmContent` props with functions that have preset button props or plain React components.
+          </DialogContent>
         </Dialog>
       </Section>
       {/* i18n */}
@@ -154,7 +178,9 @@ export default function Dialogs() {
           title="i18n"
           lang={lang}
         >
-          This dialog is assigned the `lang` prop with `{lang}`.
+          <DialogContent>
+            This dialog is assigned the `lang` prop with `{lang}`.
+          </DialogContent>
         </Dialog>
       </Section>
       {/* Custom Header/Body/Footer */}
@@ -166,15 +192,17 @@ export default function Dialogs() {
           isOpen={CUSTOM_CONTENT.isOpen}
           onOpenChange={CUSTOM_CONTENT.onOpenChange}
         >
-          <DialogHeader className="text-base text-primary font-medium">
-            Hola
-          </DialogHeader>
-          <DialogBody className="text-xs text-zinc-500 font-medium">
-            This dialog with `DialogHeader`, `DialogBody` and `DialogFooter` slots to display user custom contents.
-          </DialogBody>
-          <DialogFooter className="flex justify-end">
-            <Button color="primary" onTap={CUSTOM_CONTENT.onClose}>I'm sure</Button>
-          </DialogFooter>
+          <DialogContent>
+            <DialogHeader className="text-base text-primary font-medium">
+              Hola
+            </DialogHeader>
+            <DialogBody className="text-xs text-zinc-500 font-medium">
+              This dialog with `DialogHeader`, `DialogBody` and `DialogFooter` slots to display user custom contents.
+            </DialogBody>
+            <DialogFooter className="flex justify-end">
+              <Button color="primary" onTap={CUSTOM_CONTENT.onClose}>I'm sure</Button>
+            </DialogFooter>
+          </DialogContent>
         </Dialog>
       </Section>
     </Page>

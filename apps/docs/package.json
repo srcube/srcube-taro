@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^2.20.0",
+    "@codesandbox/sandpack-react": "catalog:",
     "@heroui/react": "catalog:",
     "@mdx-js/loader": "catalog:",
     "@mdx-js/mdx": "catalog:",
@@ -24,10 +24,10 @@
     "nanoid": "catalog:",
     "next": "catalog:",
     "next-themes": "catalog:",
-    "raw-loader": "^4.0.2",
+    "raw-loader": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-live": "^4.1.8",
+    "react-live": "catalog:",
     "rehype-slug": "catalog:",
     "remark-extract-frontmatter": "catalog:",
     "remark-frontmatter": "catalog:",
