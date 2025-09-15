@@ -48,6 +48,12 @@ export function srcubeUI() {
           '.pt-safe': {
             paddingTop: 'env(safe-area-inset-top)',
           },
+          '.scrollbar-none': {
+            scrollbarWidth: 'none',
+          },
+          '.scrollbar-none::-webkit-scrollbar': {
+            display: 'none',
+          },
         })
         matchUtilities(
           {
@@ -134,6 +140,47 @@ export function srcubeUI() {
                 '0%': { opacity: '1' },
                 '100%': { opacity: '0' },
               },
+              // Toast animations
+              'toast-from-top-in': {
+                '0%': { opacity: '0', transform: 'scale(0.85) translateY(-100%)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              'toast-from-top-out': {
+                '0%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                '100%': { opacity: '0', transform: 'scale(0.85) translateY(-100%)' },
+              },
+              'toast-from-bottom-in': {
+                '0%': { opacity: '0', transform: 'scale(0.85) translateY(100%)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              'toast-from-bottom-out': {
+                '0%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                '100%': { opacity: '0', transform: 'scale(0.85) translateY(100%)' },
+              },
+              'toast-from-center-in': {
+                '0%': { opacity: '0', transform: 'scale(0.85)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              'toast-from-center-out': {
+                '0%': { opacity: '1', transform: 'scale(1)' },
+                '100%': { opacity: '0', transform: 'scale(0.85)' },
+              },
+              'slide-in-from-top': {
+                '0%': { opacity: '0', transform: 'scale(0.85) translateY(-100%)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              'slide-out-to-top': {
+                '0%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                '100%': { opacity: '0', transform: 'scale(0.85) translateY(-100%)' },
+              },
+              'slide-in-from-bottom': {
+                '0%': { opacity: '0', transform: 'scale(0.85) translateY(100%)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              'slide-out-to-bottom': {
+                '0%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                '100%': { opacity: '0', transform: 'scale(0.85) translateY(100%)' },
+              },
             },
             animation: {
               'drawer-from-right-in': createAnimation('drawer-from-right-in'),
@@ -150,6 +197,16 @@ export function srcubeUI() {
               'modal-out': createAnimation('modal-out', '0.5s', 'ease'),
               'fade-in': createAnimation('fade-in', '0.5s', 'ease'),
               'fade-out': createAnimation('fade-out', '0.5s', 'ease'),
+              'toast-from-top-in': createAnimation('toast-from-top-in', '0.3s', 'ease-out'),
+              'toast-from-top-out': createAnimation('toast-from-top-out', '0.3s', 'ease-in'),
+              'toast-from-bottom-in': createAnimation('toast-from-bottom-in', '0.3s', 'ease-out'),
+              'toast-from-bottom-out': createAnimation('toast-from-bottom-out', '0.3s', 'ease-in'),
+              'toast-from-center-in': createAnimation('toast-from-center-in', '0.3s', 'ease-out'),
+              'toast-from-center-out': createAnimation('toast-from-center-out', '0.3s', 'ease-in'),
+              'slide-in-from-top': createAnimation('slide-in-from-top', '0.3s', 'ease-out'),
+              'slide-out-to-top': createAnimation('slide-out-to-top', '0.3s', 'ease-in'),
+              'slide-in-from-bottom': createAnimation('slide-in-from-bottom', '0.3s', 'ease-out'),
+              'slide-out-to-bottom': createAnimation('slide-out-to-bottom', '0.3s', 'ease-in'),
             },
           },
         },

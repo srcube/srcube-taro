@@ -30,6 +30,7 @@
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
+    "@srcube-taro/toaster": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
     "@srcube-taro/utils-types": "workspace:^",

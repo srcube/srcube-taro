@@ -105,6 +105,7 @@ export function useDrawer(props: UseDrawerProps) {
     styles,
     classNames,
     title,
+    placement,
     isOpen,
     isDismissable,
     children,

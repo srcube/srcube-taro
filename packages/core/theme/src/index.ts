@@ -7,6 +7,7 @@ export * from './components/drawer'
 export * from './components/input'
 export * from './components/modal'
 export * from './components/spinner'
+export * from './components/toaster'
 
 export * from './layouts/box'
 export * from './layouts/stack'

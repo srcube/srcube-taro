@@ -143,10 +143,20 @@ export function useDialog(props: UseDialogProps) {
       return
     }
 
-    const autoClose = await withLoading(onConfirm, setConfirmLoading, e)
+    try {
+      const autoClose = await withLoading(onConfirm, setConfirmLoading, e)
 
-    if (autoClose !== false)
-      close()
+      if (autoClose !== false)
+        close()
+    }
+    catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[Dialog] Confirm action failed:', error)
+      }
+    }
+    finally {
+      setConfirmLoading(false)
+    }
   }, [close, onConfirm, setConfirmLoading])
 
   const getModalProps = useCallback((): ModalProps => {
@@ -176,6 +186,7 @@ export function useDialog(props: UseDialogProps) {
   const getConfirmProps = useCallback((): ButtonProps => {
     return {
       color,
+      variant: 'flat',
       isDisabled: isAnyLoading,
       isLoading: confirmLoading,
       className: styles.actionButton,

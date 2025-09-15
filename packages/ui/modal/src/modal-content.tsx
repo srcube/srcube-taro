@@ -8,20 +8,16 @@ export interface ModalContentProps {
   children?: React.ReactNode
 }
 
-const ModalContent = forwardRef<ModalRef, ModalContentProps>((props, _ref) => {
-  const { className, children, ...otherProps } = props
-  const modal = useModalContext()
+const ModalContent = forwardRef<ModalRef, ModalContentProps>((props, ref) => {
+  const { className, children, ...rest } = props
 
-  const {
-    styles,
-    getModalProps,
-  } = modal
+  const { styles } = useModalContext()
 
   return (
-    <View 
-      className={className || styles.content} 
-      {...getModalProps()} 
-      {...otherProps}
+    <View
+      ref={ref}
+      className={className || styles.content}
+      {...rest}
     >
       {children}
     </View>

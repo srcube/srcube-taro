@@ -1,15 +1,18 @@
+import type { NativeProps } from '@srcube-taro/utils-types'
+import type { ViewProps } from '@tarojs/components'
 import type { ModalRef } from './use'
 import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useModalContext } from './context'
 
-export interface ModalBackdropProps {
+export interface ModalBackdropProps extends NativeProps<ViewProps> {
   className?: string
   children?: React.ReactNode
 }
 
-const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, _ref) => {
-  const { className, children, ...otherProps } = props
+const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, ref) => {
+  const { className, children, ...rest } = props
+
   const modal = useModalContext()
 
   const {
@@ -23,10 +26,10 @@ const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, _ref) => 
   }
 
   return (
-    <View 
-      className={className || styles.backdrop} 
-      {...getBackdropProps()} 
-      {...otherProps}
+    <View
+      ref={ref}
+      className={className || styles.backdrop}
+      {...getBackdropProps(rest)}
     >
       {children}
     </View>

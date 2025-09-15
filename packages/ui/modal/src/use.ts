@@ -5,6 +5,10 @@ import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
+import type { ReactElement } from 'react'
+import type { ModalBackdropProps } from './modal-backdrop'
+import type { ModalContentProps } from './modal-content'
+import { mergeProps } from '@react-aria/utils'
 import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
 import { modal } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
@@ -18,6 +22,10 @@ interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, OverlayTri
    * Ref to the DOM element
    */
   ref?: ReactRef<ModalRef>
+  /**
+   * The children of the modal.
+   */
+  children?: ReactElement<ModalContentProps | ModalBackdropProps> | (ReactElement<ModalContentProps | ModalBackdropProps>)[]
   /**
    * Whether the modal can be closed by clicking on the backdrop.
    * @default true
@@ -110,13 +118,14 @@ export function useModal(props: UseModalProps) {
   useEffect(() => {
     if (isOpen) {
       addModalRecord(id)
-      return () => {
-        delModalRecord(id)
-      }
+    }
+
+    return () => {
+      delModalRecord(id)
     }
   }, [isOpen, id, addModalRecord, delModalRecord])
 
-  const handleBackdropTap = useCallback(() => {
+  const onBackdropTap = useCallback(() => {
     if (!isDismissable)
       return
 
@@ -130,18 +139,18 @@ export function useModal(props: UseModalProps) {
     }
   }, [isDismissable, close])
 
-  const getModalProps = useCallback((): ViewProps => {
+  const getRootPortalProps = useCallback((): ViewProps => {
     return {
-      ref: domRef,
       ...rest,
+      ref: domRef,
     }
   }, [domRef, rest])
 
-  const getBackdropProps = useCallback((): ViewProps => {
-    return {
-      onTap: handleBackdropTap,
-    }
-  }, [handleBackdropTap])
+  const getBackdropProps = useCallback((props?: ViewProps): ViewProps => {
+    return mergeProps(props, {
+      onTap: onBackdropTap,
+    })
+  }, [onBackdropTap])
 
   return {
     domRef,
@@ -160,7 +169,7 @@ export function useModal(props: UseModalProps) {
     hasBackdrop,
     open,
     close,
-    getModalProps,
+    getRootPortalProps,
     getBackdropProps,
   }
 }

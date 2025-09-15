@@ -4,6 +4,9 @@ export { default as Drawer } from './drawer'
 export type { DrawerBodyProps } from './drawer-body'
 export { default as DrawerBody } from './drawer-body'
 
+export type { DrawerContentProps } from './drawer-content'
+export { default as DrawerContent } from './drawer-content'
+
 export type { DrawerFooterProps } from './drawer-footer'
 export { default as DrawerFooter } from './drawer-footer'
 

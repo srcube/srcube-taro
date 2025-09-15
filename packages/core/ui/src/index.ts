@@ -16,4 +16,4 @@ export * from '@srcube-taro/modal'
 
 export * from '@srcube-taro/spinner'
 
-export * from '@srcube-taro/theme'
+export * from '@srcube-taro/toaster'

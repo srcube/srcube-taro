@@ -19,7 +19,9 @@ export function usePageScrollLock() {
 
   useEffect(() => {
     const unsubscribe = subscribe(() => setRecords(new Set(ids)))
-    return unsubscribe
+    return () => {
+      unsubscribe()
+    }
   }, [])
 
   const addModalRecord = useCallback((id: string) => {

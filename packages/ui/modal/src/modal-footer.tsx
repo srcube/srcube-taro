@@ -15,7 +15,9 @@ const ModalFooter: FC<ModalFooterProps> = (props) => {
   useEffect(() => {
     setFooterMounted(true)
 
-    return () => setFooterMounted(false)
+    return () => {
+      setFooterMounted(false)
+    }
   }, [setFooterMounted])
 
   return (

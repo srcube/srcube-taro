@@ -15,7 +15,9 @@ const ModalBody: FC<ModalBodyProps> = (props) => {
   useEffect(() => {
     setBodyMounted(true)
 
-    return () => setBodyMounted(false)
+    return () => {
+      setBodyMounted(false)
+    }
   }, [setBodyMounted])
 
   return (

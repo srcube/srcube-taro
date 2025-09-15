@@ -25,11 +25,12 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@react-aria/utils": "^3.30.0",
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
-    "@srcube-taro/utils-types": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "@tarojs/shared": "catalog:",

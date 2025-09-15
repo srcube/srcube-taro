@@ -4,6 +4,9 @@ export { default as Dialog } from './dialog'
 export type { DialogBodyProps } from './dialog-body'
 export { default as DialogBody } from './dialog-body'
 
+export type { DialogContentProps } from './dialog-content'
+export { default as DialogContent } from './dialog-content'
+
 export type { DialogFooterProps } from './dialog-footer'
 export { default as DialogFooter } from './dialog-footer'
 

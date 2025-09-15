@@ -15,7 +15,9 @@ const ModalHeader: FC<ModalHeaderProps> = (props) => {
   useEffect(() => {
     setHeaderMounted(true)
 
-    return () => setHeaderMounted(false)
+    return () => {
+      setHeaderMounted(false)
+    }
   }, [setHeaderMounted])
 
   return (

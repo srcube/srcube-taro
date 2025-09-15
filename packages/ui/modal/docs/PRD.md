@@ -2,22 +2,23 @@
 
 ## 简介
 
-Modal 组件是 `@srcube-taro/ui` 设计系统中的核心交互组件，用于在当前页面上方显示临时内容，如确认对话框、表单、详细信息等。该组件需要提供灵活的配置选项、优秀的用户体验和开发者友好的 API。
+Modal 组件是 `@srcube-taro/ui` 设计系统中的核心交互组件，采用 **Headless 设计模式**，用于在当前页面上方显示临时内容，如确认对话框、表单、详细信息等。该组件基于 Portal 渲染机制，提供灵活的配置选项、优秀的用户体验和开发者友好的 API，支持完整的组合模式和智能状态管理。
 
 ## 目标
 
 ### 主要目标
-- **统一的 API 设计**：提供一致且直观的组件接口
-- **简化的主题定制**：支持灵活的样式配置和主题切换
-- **常见用例覆盖**：满足 90% 的模态框使用场景
-- **优秀的开发体验**：提供完整的 TypeScript 支持和清晰的文档
-- **组合模式支持**：支持复杂的模态框布局组合
+- **Headless 设计架构**：逻辑与 UI 完全分离，提供最大的定制灵活性
+- **Portal 渲染机制**：使用 RootPortal 确保正确的层级管理和性能优化
+- **Smart Hook 模式**：通过 `useModal` 提供专业的状态管理和逻辑封装
+- **组合模式支持**：支持 ModalContent、ModalHeader、ModalBody、ModalFooter 的灵活组合
+- **跨端兼容性**：完美支持 H5/小程序等多端环境
+- **优秀的开发体验**：提供完整的 TypeScript 支持和直观的 API 设计
 
 ### 次要目标
-- 无障碍访问支持（ARIA 标准）
-- 动画和过渡效果
-- 移动端适配优化
-- 性能优化（懒加载、虚拟化等）
+- **动画系统集成**：集成 `useAnimatePresence` 提供流畅的进出场动画
+- **滚动锁定机制**：通过 `usePageScrollLock` 防止背景页面滚动
+- **无障碍访问支持**：符合 ARIA 标准的键盘导航和屏幕阅读器支持
+- **性能优化**：Portal 渲染优化、智能重渲染控制、内存管理优化
 
 ## 目标用户
 
@@ -47,43 +48,47 @@ Modal 组件是 `@srcube-taro/ui` 设计系统中的核心交互组件，用于�
 
 ## 功能特性和需求
 
-### 1. 基础模态框功能
+### 1. Headless 架构设计
 
-#### 1.1 核心显示逻辑
-- **显示/隐藏控制**：支持 `open` 属性控制模态框显示状态
-- **内容渲染**：支持任意 React 节点作为内容
-- **层级管理**：自动管理 z-index，支持多层模态框
-- **焦点管理**：打开时自动聚焦，关闭时恢复焦点
+#### 1.1 Smart Hook 模式
+- **逻辑分离**：`useModal` Hook 封装所有状态管理和业务逻辑
+- **状态管理**：集成 `useOverlayTriggerState` 提供专业的覆盖层状态管理
+- **动画集成**：内置 `useAnimatePresence` 管理进出场动画状态
+- **滚动锁定**：集成 `usePageScrollLock` 自动管理页面滚动锁定
 
-#### 1.2 基础交互
-- **关闭触发**：支持 ESC 键、背景点击、关闭按钮等方式关闭
-- **阻止关闭**：支持配置是否允许背景点击关闭
-- **回调事件**：提供 `onOpen`、`onClose`、`onOpenChange` 等回调
+#### 1.2 Portal 渲染机制
+- **层级管理**：使用 `RootPortal` 确保正确的 DOM 层级
+- **性能优化**：Portal 渲染减少不必要的重绘和回流
+- **容器控制**：支持自定义渲染容器
+- **多实例支持**：支持多个模态框同时存在的场景
 
-### 2. 背景和交互控制
+### 2. 组合模式架构
 
-#### 2.1 背景遮罩
-- **遮罩显示**：可配置是否显示背景遮罩
-- **遮罩样式**：支持自定义遮罩颜色和透明度
-- **点击行为**：可配置背景点击是否关闭模态框
+#### 2.1 ModalContent 容器
+- **内容封装**：提供标准的模态框内容容器
+- **样式管理**：通过 tailwind-variants 提供响应式样式
+- **布局控制**：支持自定义宽度、高度和位置
+- **主题集成**：完整的主题系统支持
 
-#### 2.2 滚动锁定
-- **页面滚动锁定**：模态框打开时锁定页面滚动
-- **内容滚动**：模态框内容支持独立滚动
-- **滚动恢复**：关闭时恢复页面滚动位置
+#### 2.2 组合子组件
+- **ModalHeader**：标准化的头部组件，支持标题和关闭按钮
+- **ModalBody**：主体内容区域，支持滚动和内边距控制
+- **ModalFooter**：底部操作区域，支持按钮组合和对齐
+- **Context 共享**：通过 `ModalProvider` 实现组件间状态共享
 
-### 3. 动画和状态管理
+### 3. 智能状态管理
 
-#### 3.1 进入/退出动画
-- **预设动画**：提供淡入淡出、缩放、滑动等预设动画
-- **自定义动画**：支持自定义 CSS 动画和过渡效果
-- **动画时长**：可配置动画持续时间
-- **动画禁用**：支持禁用动画以提升性能
+#### 3.1 专业状态管理
+- **useOverlayTriggerState**：专业的覆盖层状态管理 Hook
+- **受控/非受控模式**：支持完全受控和非受控两种使用模式
+- **状态同步**：自动同步内部状态与外部 props
+- **事件回调**：提供完整的生命周期回调事件
 
-#### 3.2 状态管理
-- **加载状态**：支持显示加载中状态
-- **错误状态**：支持显示错误信息
-- **异步操作**：支持异步内容加载
+#### 3.2 动画状态管理
+- **useAnimatePresence**：专业的动画状态管理
+- **进出场控制**：智能控制组件的挂载和卸载时机
+- **动画同步**：确保动画与状态变化的完美同步
+- **性能优化**：避免不必要的动画计算和渲染
 
 ### 4. 组合组件
 
@@ -133,72 +138,89 @@ Modal 组件是 `@srcube-taro/ui` 设计系统中的核心交互组件，用于�
 ## 技术规格
 
 ### 架构设计
-- **Smart Hook 模式**：使用 `useModal` hook 管理状态和逻辑
-- **组合式组件**：支持 `Modal.Header`、`Modal.Body`、`Modal.Footer` 组合
-- **Portal 渲染**：使用 Portal 渲染到 body 或指定容器
+- **Headless 设计模式**：逻辑与 UI 完全分离，提供最大的定制灵活性
+- **Smart Hook 模式**：`useModal` Hook 封装所有状态管理和业务逻辑
+- **Portal 渲染机制**：使用 `RootPortal` 确保正确的层级管理和性能优化
+- **组合模式**：通过 `ModalProvider` Context 实现组件间状态共享
+- **专业状态管理**：集成 `useOverlayTriggerState` 和 `useAnimatePresence`
 - **TypeScript 支持**：完整的类型定义和类型安全
 
 ### 文件结构
 
+```
 packages/ui/modal/
 ├── src/
-│   ├── modal.tsx              # 主组件
-│   ├── modal-content.tsx      # 内容容器
-│   ├── modal-backdrop.tsx     # 背景遮罩
+│   ├── modal.tsx              # 主组件 (Headless 容器)
+│   ├── modal-content.tsx      # 内容容器组件
+│   ├── modal-backdrop.tsx     # 背景遮罩组件
 │   ├── modal-header.tsx       # 头部组件
 │   ├── modal-body.tsx         # 主体组件
 │   ├── modal-footer.tsx       # 底部组件
-│   ├── use.ts                 # Smart Hook
-│   └── index.ts               # 导出
+│   ├── use.ts                 # Smart Hook (状态管理)
+│   ├── context.ts             # Context Provider
+│   └── index.ts               # 统一导出
 ├── docs/
 │   ├── PRD.md                 # 产品需求文档
-│   └── SUMMARY.md             # 组件总结
+│   └── SUMMARY.md             # 组件设计评分总结
 └── package.json
+```
 
 ### 核心属性
 
-#### Modal 主组件
+#### Modal 主组件 (Headless 容器)
 ```typescript
-interface ModalProps {
-  open: boolean // 是否显示
-  onOpenChange?: (open: boolean) => void // 状态变化回调
-  size?: 'small' | 'medium' | 'large' | 'full' // 预设尺寸
-  width?: string | number // 自定义宽度
-  height?: string | number // 自定义高度
-  closable?: boolean // 是否可关闭
-  maskClosable?: boolean // 点击遮罩是否关闭
-  keyboard?: boolean // ESC 键是否关闭
-  mask?: boolean // 是否显示遮罩
-  animation?: string // 动画类型
-  destroyOnClose?: boolean // 关闭时是否销毁内容
-  getContainer?: () => HTMLElement // 渲染容器
-  className?: string // 自定义样式类
-  style?: React.CSSProperties // 自定义样式
-  children: React.ReactNode // 内容
+interface ModalProps extends UseModalProps {
+  children: React.ReactNode // 内容 (通常是 ModalContent)
+}
+
+interface UseModalProps {
+  isOpen?: boolean // 受控模式：是否显示
+  defaultOpen?: boolean // 非受控模式：默认是否显示
+  onOpenChange?: (isOpen: boolean) => void // 状态变化回调
+  isDismissable?: boolean // 是否可通过背景点击关闭
+  hasBackdrop?: boolean // 是否显示背景遮罩
+  classNames?: SlotsToClasses<ModalSlots> // 样式类名映射
 }
 ```
 
-#### useModal Hook
+#### useModal Hook (Smart Hook)
 ```typescript
-interface UseModalOptions {
-  defaultOpen?: boolean
-  onOpenChange?: (open: boolean) => void
-}
-
 interface UseModalReturn {
-  open: boolean
-  setOpen: (open: boolean) => void
-  toggle: () => void
-  close: () => void
-  modalProps: ModalProps
+  isOpen: boolean // 当前显示状态
+  open: () => void // 打开模态框
+  close: () => void // 关闭模态框
+  toggle: () => void // 切换显示状态
+  isVisible: boolean // 动画可见状态
+  styles: Record<string, string> // 计算后的样式
+  getModalProps: () => ModalProps // 获取 Modal 组件 props
+  getBackdropProps: () => ModalBackdropProps // 获取背景遮罩 props
+  // Context 相关
+  ModalProvider: React.ComponentType<{ value: UseModalReturn; children: React.ReactNode }>
+}
+```
+
+#### ModalContent 组件
+```typescript
+interface ModalContentProps {
+  className?: string // 自定义样式类
+  children?: React.ReactNode // 内容
+  // 继承所有 HTML div 属性
 }
 ```
 
 ## 待解决问题
 
-1. **动画性能**：在低端设备上如何保证动画流畅性？
-2. **内存管理**：多个模态框同时存在时的内存优化策略？
-3. **无障碍访问**：如何确保完整的键盘导航和屏幕阅读器支持？
-4. **移动端适配**：在不同尺寸的移动设备上如何提供最佳体验？
-5. **嵌套模态框**：是否需要支持模态框嵌套，如何处理层级关系？
-6. **服务端渲染**：SSR 环境下的兼容性处理？
+### 高优先级
+1. **移动端手势支持**：滑动关闭和触摸反馈优化
+2. **动画性能优化**：复杂动画在低端设备上的流畅度提升
+3. **嵌套模态框管理**：多层模态框的 z-index 自动管理和焦点链
+
+### 中优先级
+4. **无障碍访问增强**：完善的 ARIA 属性、键盘导航和屏幕阅读器支持
+5. **主题系统集成**：与设计系统的深度集成和动态主题切换
+6. **内存泄漏防护**：大量实例的自动清理和性能监控
+
+### 低优先级
+7. **服务端渲染优化**：SSR 环境下的 Portal 渲染和水合优化
+8. **开发者工具**：调试面板和性能分析工具
+9. **国际化支持**：多语言环境下的布局和文本适配

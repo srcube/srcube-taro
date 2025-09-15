@@ -1,0 +1,46 @@
+{
+  "name": "@srcube-taro/toaster",
+  "version": "0.0.0",
+  "author": "chioio <srcube.chioio@gmail.com>",
+  "keywords": [
+    "taro.js",
+    "ui",
+    "toaster"
+  ],
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup --dts",
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@srcube-taro/hooks": "workspace:^",
+    "@srcube-taro/modal": "workspace:^",
+    "@srcube-taro/theme": "workspace:^",
+    "@srcube-taro/utils-func": "workspace:^",
+    "@srcube-taro/utils-react": "workspace:^",
+    "@srcube-taro/utils-taro": "workspace:^",
+    "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
+    "@tarojs/components": "catalog:",
+    "@tarojs/runtime": "catalog:",
+    "classnames": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@srcube-taro/ts-config": "workspace:^",
+    "@types/react": "catalog:"
+  }
+}

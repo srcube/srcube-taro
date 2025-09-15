@@ -1,6 +1,7 @@
 import type { DialogProps } from '@srcube-taro/dialog'
 import type { DrawerProps } from '@srcube-taro/drawer'
 import type { ModalProps, ModalRef } from '@srcube-taro/modal'
+// import type { ToastProps } from '@srcube-taro/toaster'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
@@ -21,12 +22,12 @@ export interface ModalItem {
   key: string
   type: ModalType
   ref: (ref: ModalRef) => void
-  props: ModalProps | DialogProps | DrawerProps
+  props: ModalProps | DialogProps | DrawerProps | ToastProps
 }
 
 export type Modals = Array<ModalItem>
 
-export type UseSrcubeUIProps = MergeVariantProps<Props, ''>
+export type UseSrcubeUIProps = MergeVariantProps<Props, unknown>
 
 export function useSrcubeUI(props: UseSrcubeUIProps) {
   const { ref, children, ...rest } = props
@@ -70,12 +71,14 @@ export function useSrcubeUI(props: UseSrcubeUIProps) {
   const openModal = useCallback((props: OpenModalProps) => open('Modal', props), [open])
   const openDialog = useCallback((props: OpenModalProps<DialogProps>) => open('Dialog', props), [open])
   const openDrawer = useCallback((props: OpenModalProps<DrawerProps>) => open('Drawer', props), [open])
+  // const toast = useCallback((props: OpenModalProps<ToastProps, 'content'>) => open('Toast', props), [open])
 
   useEffect(() => {
     registerSrcubeUI({
       openModal,
       openDialog,
       openDrawer,
+      // toast,
     })
 
     return () => {
