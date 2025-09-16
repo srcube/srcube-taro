@@ -11,7 +11,8 @@ export default defineAppConfig({
     'pages/inputs/index',
     'pages/modals/index',
     'pages/spinners/index',
-    'pages/toasters/index',
+    'pages/switchs/index',
+    'pages/toasts/index',
   ],
   subpackages: [
     {

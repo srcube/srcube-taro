@@ -30,6 +30,7 @@
     "@srcube-taro/layout": "workspace:^",
     "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
+    "@srcube-taro/switch": "workspace:^",
     "@srcube-taro/toaster": "workspace:^"
   },
   "devDependencies": {

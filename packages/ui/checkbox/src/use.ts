@@ -31,7 +31,7 @@ export interface Props extends NativeProps<Omit<CheckboxProps, OmitNativeKeys>>,
   /**
    * Whether the checkbox is in loading state
    */
-  isLoading?: boolean
+  isLoading?: boolean | 'auto'
   /**
    * The icon to be displayed when the checkbox is checked/loading/indeterminate.
    */
