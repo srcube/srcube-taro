@@ -12,7 +12,7 @@ export const toggle = tv({
       'absolute bg-white rounded-full shadow-md transition-transform duration-200 ease-in-out',
       'transform translate-x-0 flex items-center justify-center',
     ],
-    spinner: 'opacity-50',
+    spinner: 'opacity-25',
     startContent: 'z-0 absolute left-1.5 text-tiny text-default-600 transition-opacity duration-200 ease-in-out',
     endContent: 'z-0 absolute right-1.5 text-tiny text-default-600 transition-opacity duration-200 ease-in-out',
     content: 'relative ml-2',
@@ -96,7 +96,7 @@ export const toggle = tv({
     },
     isLoading: {
       true: {
-        wrapper: 'opacity-50 cursor-wait',
+        wrapper: 'cursor-wait',
       },
       false: {},
     },
