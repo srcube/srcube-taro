@@ -1,5 +1,6 @@
-import { CheckboxGroupState, useToggleState } from '@srcube-taro/hooks'
+import type { CheckboxGroupState } from '@srcube-taro/hooks'
 import type { CheckboxProps } from '../checkbox'
+import { useToggleState } from '@srcube-taro/hooks'
 
 export interface CheckboxItemResult {
   isSelected?: boolean
@@ -20,15 +21,15 @@ export function useCheckboxItem(props: CheckboxProps, groupState?: CheckboxGroup
 
   const isSelected = isInGroup
     ? groupState.isSelected(value)
-    : props.isSelected
+    : props?.isSelected
 
   const isDisabled = isInGroup
-    ? groupState.isDisabled
-    : props.isDisabled
+    ? props?.isDisabled ?? groupState.isDisabled
+    : props?.isDisabled
 
   const isReadOnly = isInGroup
-    ? groupState.isReadOnly
-    : props.isReadOnly
+    ? props?.isReadOnly ?? groupState.isReadOnly
+    : props?.isReadOnly
 
   const onChange = isInGroup
     ? (isSelected: boolean) => {

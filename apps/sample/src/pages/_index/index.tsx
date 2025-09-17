@@ -19,15 +19,16 @@ export default function Index() {
   ]
 
   const components = [
-    { title: 'Buttons', to: () => Taro.navigateTo({ url: '/pages/buttons/index' }) },
-    { title: 'Checkboxs', to: () => Taro.navigateTo({ url: '/pages/checkboxs/index' }) },
-    { title: 'Dialogs', to: () => Taro.navigateTo({ url: '/pages/dialogs/index' }) },
+    { title: 'Button', to: () => Taro.navigateTo({ url: '/pages/buttons/index' }) },
+    { title: 'Checkbox', to: () => Taro.navigateTo({ url: '/pages/checkboxs/index' }) },
+    { title: 'Dialog', to: () => Taro.navigateTo({ url: '/pages/dialogs/index' }) },
     { title: 'Drawer', to: () => Taro.navigateTo({ url: '/pages/drawers/index' }) },
-    { title: 'Inputs', to: () => Taro.navigateTo({ url: '/pages/inputs/index' }) },
-    { title: 'Modals', to: () => Taro.navigateTo({ url: '/pages/modals/index' }) },
-    { title: 'Spinners', to: () => Taro.navigateTo({ url: '/pages/spinners/index' }) },
-    { title: 'Switchs', to: () => Taro.navigateTo({ url: '/pages/switchs/index' }) },
-    { title: 'Toasts', to: () => Taro.navigateTo({ url: '/pages/toasters/index' }) },
+    { title: 'Input', to: () => Taro.navigateTo({ url: '/pages/inputs/index' }) },
+    { title: 'Modal', to: () => Taro.navigateTo({ url: '/pages/modals/index' }) },
+    { title: 'Spinner', to: () => Taro.navigateTo({ url: '/pages/spinners/index' }) },
+    { title: 'Switch', to: () => Taro.navigateTo({ url: '/pages/switchs/index' }) },
+    { title: 'Radio', to: () => Taro.navigateTo({ url: '/pages/radios/index' }) },
+    { title: 'Toast', to: () => Taro.navigateTo({ url: '/pages/toasts/index' }) },
   ]
 
   return (

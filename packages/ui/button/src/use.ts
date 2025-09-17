@@ -38,7 +38,7 @@ interface Props extends Omit<NativeProps<NativeButtonProps>, OmitNativeKeys> {
    * @param e Touch event
    * @returns void | boolean | Promise<void | boolean>
    */
-  onTap: (e: ITouchEvent) => void | Promise<void>
+  onTap?: (e: ITouchEvent) => void | Promise<void>
 }
 
 export type UseButtonProps = MergeVariantProps<Props, ButtonVariantProps, 'isInGroup'>

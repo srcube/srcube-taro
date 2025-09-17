@@ -18,4 +18,6 @@ export * from '@srcube-taro/spinner'
 
 export * from '@srcube-taro/switch'
 
+export * from '@srcube-taro/radio'
+
 export * from '@srcube-taro/toaster'

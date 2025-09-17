@@ -1,0 +1,6 @@
+type: library
+
+id: ui-radio
+
+tags:
+  - pkg

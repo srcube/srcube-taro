@@ -86,7 +86,7 @@ export default function Checkboxs() {
       <Section title="Checkbox Group" contentClass="flex flex-col gap-4">
         <CheckboxGroup defaultValue={['1', '2']} color="default">
           <Checkbox value="1">Vertical 1</Checkbox>
-          <Checkbox value="2">Vertical 2</Checkbox>
+          <Checkbox value="2" isDisabled>Vertical 2</Checkbox>
           <Checkbox value="3">Vertical 3</Checkbox>
         </CheckboxGroup>
         <CheckboxGroup defaultValue={['1', '2']} orientation="horizontal">

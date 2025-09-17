@@ -12,6 +12,7 @@ export default defineAppConfig({
     'pages/modals/index',
     'pages/spinners/index',
     'pages/switchs/index',
+    'pages/radios/index',
     'pages/toasts/index',
   ],
   subpackages: [

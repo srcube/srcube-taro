@@ -1,3 +1,4 @@
+import type { TaroElement } from '@tarojs/runtime'
 import type { UseButtonProps } from './use'
 import { Spinner } from '@srcube-taro/spinner'
 import { forwardRef } from 'react'
@@ -5,7 +6,7 @@ import { useButton } from './use'
 
 export interface ButtonProps extends UseButtonProps {}
 
-const Button = forwardRef<any, ButtonProps>((props, ref) => {
+const Button = forwardRef<TaroElement, ButtonProps>((props, ref) => {
   const {
     Component,
     domRef,
