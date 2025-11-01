@@ -50,9 +50,10 @@ export function useButton(props: UseButtonProps) {
 
   const {
     ref,
-    variant = groupCtx?.variant,
-    color = groupCtx?.color,
-    size = groupCtx?.size,
+    variant = groupCtx?.variant ?? 'solid',
+    color = groupCtx?.color ?? 'default',
+    size = groupCtx?.size ?? 'md',
+    round = groupCtx?.round ?? 'md',
     isDisabled = groupCtx?.isDisabled,
     isIcon = groupCtx?.isIcon,
     isBlock = groupCtx?.isBlock,
@@ -83,6 +84,7 @@ export function useButton(props: UseButtonProps) {
         variant,
         color,
         size,
+        round,
         isDisabled: isDisabled || isLoading,
         isLoading,
         isIcon,
@@ -96,7 +98,7 @@ export function useButton(props: UseButtonProps) {
         className: hoverClass,
       }),
     }),
-    [variant, color, size, isDisabled, isLoading, isIcon, isBlock, isInGroup, className, hoverClass],
+    [variant, color, size, round, isDisabled, isLoading, isIcon, isBlock, isInGroup, className, hoverClass],
   )
 
   const renderPlacedContent = useMemo(

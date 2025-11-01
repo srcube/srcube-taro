@@ -25,7 +25,7 @@ interface Props {
   children?: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
 }
 
-export type PickButtonProps = Pick<ButtonProps, 'size' | 'color' | 'variant' | 'isDisabled' | 'isIcon' | 'isBlock' | 'isLoading'>
+export type PickButtonProps = Pick<ButtonProps, 'size' | 'round' | 'color' | 'variant' | 'isDisabled' | 'isIcon' | 'isBlock' | 'isLoading'>
 
 export type ContextType = PickButtonProps
 
@@ -39,6 +39,7 @@ export function useButtonGroup(props: UseButtonGroupProps) {
     color = 'default',
     variant = 'solid',
     size = 'md',
+    round = 'md',
     isLoading = false,
     isDisabled = false,
     isIcon = false,
@@ -60,13 +61,14 @@ export function useButtonGroup(props: UseButtonGroupProps) {
 
   const context = useMemo<ContextType>(() => ({
     size,
+    round,
     color,
     variant,
     isDisabled,
     isIcon,
     isBlock,
     isLoading,
-  }), [size, color, variant, isDisabled, isIcon, isBlock, isLoading])
+  }), [size, round, color, variant, isDisabled, isIcon, isBlock, isLoading])
 
   const getGroupProps = useCallback((): ViewProps => ({
     role: 'group',
