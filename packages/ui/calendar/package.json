@@ -21,14 +21,14 @@
     "postpack": "rm -rf ./package"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "^6.18.2",
-    "@internationalized/date": "^3.9.0",
-    "@react-stately/calendar": "^3.8.4",
-    "@react-types/calendar": "^3.7.4",
+    "@formatjs/intl-datetimeformat": "catalog:",
+    "@internationalized/date": "catalog:",
+    "@react-stately/calendar": "catalog:",
+    "@react-types/calendar": "catalog:",
     "@srcube-taro/button": "workspace:^",
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
@@ -38,8 +38,7 @@
     "@srcube-taro/utils-tv": "workspace:^",
     "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
-    "@tarojs/components-advanced": "^4.1.7",
-    "@tarojs/extend": "^4.1.8",
+    "@tarojs/extend": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",
     "i18next": "catalog:",

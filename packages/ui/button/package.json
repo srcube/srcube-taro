@@ -21,8 +21,8 @@
     "postpack": "rm -rf ./package"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "dependencies": {
     "@srcube-taro/spinner": "workspace:^",

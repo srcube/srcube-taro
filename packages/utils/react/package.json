@@ -21,9 +21,9 @@
     "postpack": "rm -rf ./package"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "react-is": ">=18"
+    "react": "^18",
+    "react-dom": "^18",
+    "react-is": "^18"
   },
   "dependencies": {
     "@tarojs/runtime": "catalog:",

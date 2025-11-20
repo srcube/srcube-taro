@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@babel/runtime": "catalog:",
-    "@internationalized/date": "^3.9.0",
+    "@internationalized/date": "catalog:",
     "@srcube-taro/ui": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/helper": "catalog:",
@@ -80,7 +80,7 @@
     "@egoist/tailwindcss-icons": "catalog:",
     "@iconify/json": "catalog:",
     "@pmmmwh/react-refresh-webpack-plugin": "catalog:",
-    "@react-types/shared": "^3.32.1",
+    "@react-types/shared": "catalog:",
     "@tarojs/cli": "catalog:",
     "@tarojs/taro-loader": "catalog:",
     "@tarojs/webpack5-runner": "catalog:",
@@ -91,7 +91,7 @@
     "@weapp-core/escape": "catalog:",
     "@weapp-tailwindcss/merge": "catalog:",
     "babel-preset-taro": "catalog:",
-    "eslint": "^8.57.0",
+    "eslint": "catalog:",
     "eslint-config-taro": "catalog:",
     "eslint-plugin-react": "catalog:",
     "eslint-plugin-react-hooks": "catalog:",
@@ -102,7 +102,7 @@
     "tailwindcss-animated": "catalog:",
     "terser-webpack-plugin": "catalog:",
     "tsconfig-paths-webpack-plugin": "catalog:",
-    "typescript": "^5.4.5",
+    "typescript": "catalog:",
     "weapp-tailwindcss": "catalog:",
     "webpack": "catalog:"
   }

@@ -2,7 +2,6 @@
   "name": "srcube-taro",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.0.0",
   "description": "A UI library for Taro.js",
   "author": "chioio <srcube.chioio@gmail.com>",
   "license": "MIT",
