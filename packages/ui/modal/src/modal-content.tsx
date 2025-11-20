@@ -11,12 +11,12 @@ export interface ModalContentProps {
 const ModalContent = forwardRef<ModalRef, ModalContentProps>((props, ref) => {
   const { className, children, ...rest } = props
 
-  const { styles } = useModalContext()
+  const { slots, classNames } = useModalContext()
 
   return (
     <View
       ref={ref}
-      className={className || styles.content}
+      className={slots.content({ class: className || classNames?.content })}
       {...rest}
     >
       {children}

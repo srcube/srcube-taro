@@ -14,9 +14,10 @@ const Dialog = forwardRef<DialogRef, DialogProps>((props, ref) => {
 
   const { children, getModalProps } = dialog
 
-  // if (!isValidElement(children) || children.type !== DialogContent) {
-  //   throw new Error('Dialog children must be DialogContent')
-  // }
+  // Check if children contains DialogContent
+  if (!isValidElement(children) || children.type !== DialogContent) {
+    throw new Error('Dialog children must be DialogContent')
+  }
 
   return (
     <DialogProvider value={dialog}>

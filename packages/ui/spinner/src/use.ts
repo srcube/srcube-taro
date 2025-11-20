@@ -1,7 +1,7 @@
 import type { SpinnerSlots, SpinnerVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-types'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
+import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { spinner } from '@srcube-taro/theme'
@@ -21,7 +21,7 @@ interface Props extends NativeProps<ViewProps> {
   /**
    * Class names for slots
    */
-  classNames?: SlotsToClasses<SpinnerSlots>
+  classNames?: SlotsToClasses<Exclude<SpinnerSlots, 'iSpinner'>>
 }
 
 export type UseSpinnerProps = Omit<Props, keyof SpinnerVariantProps> &
@@ -37,8 +37,8 @@ export function useSpinner(props: UseSpinnerProps) {
   const styles = useMemo(
     () => ({
       wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
-      icon: slots.icon({ class: classNames?.icon }),
       label: slots.label({ class: classNames?.label }),
+      iSpinner: slots.iSpinner(),
     }),
     [className, classNames, slots],
   )

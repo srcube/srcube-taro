@@ -1,8 +1,7 @@
 const warningStack: { [key: string]: boolean } = {}
 
-export function warn(message: string, component?: string, ...args: any[]) {
-  const tag = component ? ` [${component}]` : ' '
-  const log = `[Srcube UI]${tag}: ${message}`
+export function warn(message: string, component: string, ...args: any[]) {
+  const log = `[Srcube UI] ${component}: ${message}`
 
   if (typeof console === 'undefined')
     return

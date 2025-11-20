@@ -39,13 +39,13 @@ const Checkbox = forwardRef<TaroElement, CheckboxProps>((props, ref) => {
     if (isIndeterminate) {
       return (
         <View className={styles.iconWrapper}>
-          <View className={styles.iconIndeterminate} />
+          <View className={styles.iIndeterminate} />
         </View>
       )
     }
     return (
       <View className={styles.iconWrapper}>
-        {icon || <View className={styles.iconDefault} />}
+        {icon || <View className={styles.iDefault} />}
       </View>
     )
   }

@@ -25,13 +25,15 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@react-stately/checkbox": "catalog:",
+    "@react-stately/toggle": "catalog:",
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-func": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
-    "@srcube-taro/utils-types": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",

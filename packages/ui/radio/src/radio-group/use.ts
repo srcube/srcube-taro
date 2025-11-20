@@ -1,17 +1,17 @@
-import type { RadioGroupState } from '@srcube-taro/hooks'
+import type { RadioGroupState } from '@react-stately/radio'
 import type { RadioGroupVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { RadioProps } from '../radio'
-import { useRadioGroupState } from '@srcube-taro/hooks'
+import { useRadioGroupState } from '@react-stately/radio'
 import { radioGroup } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo } from 'react'
 
-type PickRadioProps = Pick<RadioProps, 'color' | 'size' | 'orientation' | 'isDisabled' | 'isReadOnly'>
+type PickRadioProps = Pick<RadioProps, 'color' | 'size' | 'orientation' | 'isDisabled' | 'isReadOnly' | 'onValueChange'>
 
-interface Props extends NativeProps<ViewProps>, PickRadioProps {
+interface Props extends NativeProps<ViewProps>, Omit<PickRadioProps, 'onValueChange'> {
   /**
    * Ref to the DOM element
    */

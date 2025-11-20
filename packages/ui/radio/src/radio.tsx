@@ -13,39 +13,47 @@ const Radio = forwardRef<TaroElement, RadioProps>((props, ref) => {
     domRef,
     styles,
     children,
-    icon,
+    iconContent,
     isLoading,
     isDisabled,
+    isSelected,
     getWrapperProps,
-    getIconProps,
     getNRadioProps,
   } = useRadio({
     ...props,
     ref,
   })
 
-  const renderIcon = () => {
-    if (isFunction(icon)) {
-      return icon({
-        isLoading,
-        isDisabled,
-        className: styles.iconWrapper,
-      })
-    }
+  const renderIconContent = () => {
     if (isLoading) {
       return <Spinner className={styles.spinner} />
     }
-    return (
-      <View {...getIconProps()}>
-        {icon || <View className={styles.iconDefault} />}
-      </View>
-    )
+
+    if (!isSelected)
+      return
+
+    if (!iconContent) {
+      return <View className={styles.iDefault} />
+    }
+
+    if (isFunction(iconContent)) {
+      return iconContent({
+        isLoading,
+        isDisabled,
+      })
+    }
+
+    return iconContent
   }
 
   return (
     <View {...getWrapperProps()}>
       <NRadio ref={domRef} {...getNRadioProps()} />
-      <View className={styles.radio}>{renderIcon()}</View>
+      <View className={styles.radio}>
+        <View className={styles.iconWrapper}>
+          {renderIconContent()}
+        </View>
+      </View>
       {children && <View className={styles.content}>{children}</View>}
     </View>
   )

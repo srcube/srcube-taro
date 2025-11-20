@@ -110,13 +110,6 @@ export function useInput(props: UseInputProps) {
 
   const handleWrapperTap = useCallback((e: CommonEvent) => {
     e.stopPropagation()
-
-    // if (isDisabled)
-    //   return
-
-    // if (domRef.current) {
-    //   domRef.current.focus()
-    // }
   }, [])
 
   const handleInput = useCallback((e: CommonEvent) => {

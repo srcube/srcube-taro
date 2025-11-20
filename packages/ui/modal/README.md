@@ -14,6 +14,10 @@ yarn add @srcube-taro/modal
 npm i @srcube-taro/modal
 ```
 
+#### Tip
+
+- The modal `z-index` is `1000` by default.
+
 ## License
 
 [MIT](https://github.com/srcube/srcube-taro/blob/main/LICENSE.md)

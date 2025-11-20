@@ -80,6 +80,10 @@ export function srcubeUI() {
               danger: withDefaultColor('rose'),
             },
             keyframes: {
+              'blink-caret': {
+                '0%,50%': { opacity: '1' },
+                '50.01%,100%': { opacity: '0' },
+              },
               // Drawer from right
               'drawer-from-right-in': {
                 '0%': { opacity: '0', transform: 'translateX(100%)' },
@@ -183,6 +187,7 @@ export function srcubeUI() {
               },
             },
             animation: {
+              'blink-caret': 'blink-caret var(--default-animation-duration, 1s) var(--default-animation-timing-function, steps(1,start)) var(--default-animation-dely, 0s) infinite both',
               'drawer-from-right-in': createAnimation('drawer-from-right-in'),
               'drawer-from-right-out': createAnimation('drawer-from-right-out'),
               'drawer-from-left-in': createAnimation('drawer-from-left-in'),

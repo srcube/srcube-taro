@@ -10,10 +10,10 @@ export const checkbox = tv({
       'after:absolute after:inset-0 after:z-0 after:size-full after:transition after:duration-300',
     ],
     spinner: 'z-10',
-    iconWrapper: 'flex items-center justify-center z-10 transition duration-300',
-    iconDefault: 'icon-check w-[inherit] h-[inherit]',
-    iconIndeterminate: 'icon-indeterminate w-[inherit] h-[inherit]',
     content: 'relative',
+    iconWrapper: 'flex items-center justify-center z-10 transition duration-300',
+    iDefault: 'icon-check w-[inherit] h-[inherit]',
+    iIndeterminate: 'icon-indeterminate w-[inherit] h-[inherit]',
     nCheckbox: 'absolute invisible w-full',
   },
   variants: {

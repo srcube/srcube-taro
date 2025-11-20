@@ -3,9 +3,9 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const modal = tv({
   slots: {
-    wrapper: ['absolute inset-0 h-full w-full'],
-    backdrop: ['absolute inset-0'],
-    content: ['absolute inset-0 overflow-hidden h-fit bg-white'],
+    wrapper: ['fixed inset-0 h-full w-full'],
+    backdrop: ['absolute inset-0 z-[1000]'],
+    content: ['absolute inset-0 z-[1000] overflow-hidden h-fit bg-white'],
     header: [''],
     body: [''],
     footer: [''],

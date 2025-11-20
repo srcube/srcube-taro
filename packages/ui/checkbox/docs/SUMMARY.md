@@ -128,7 +128,7 @@ const { isIndeterminate } = useCheckboxItem(props, groupCtx?.groupState)
 ### 4. 专业状态管理
 ```tsx
 // 集成 React Stately 提供企业级状态管理
-import { useCheckboxGroupState } from '@srcube-taro/hooks'
+import { useCheckboxGroupState } from '@react-stately/checkbox'
 ```
 
 ## 📊 对比分析

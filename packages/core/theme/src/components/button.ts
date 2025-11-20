@@ -25,10 +25,10 @@ export const button = tv({
       text: 'bg-transparent active:bg-transparent border-none active:border-none',
     },
     size: {
-      xs: 'h-6 px-2 text-xs rounded-md',
-      sm: 'h-8 px-3 text-sm rounded-lg',
-      md: 'h-10 px-4 text-base rounded-xl',
-      lg: 'h-12 px-6 text-lg rounded-2xl',
+      xs: 'h-6 px-2 text-xs',
+      sm: 'h-8 px-3 text-sm',
+      md: 'h-10 px-4 text-base',
+      lg: 'h-12 px-6 text-lg',
     },
     isLoading: {
       true: 'opacity-50',
@@ -47,6 +47,13 @@ export const button = tv({
     },
     isIcon: {
       true: 'p-0',
+    },
+    round: {
+      xs: 'rounded-md',
+      sm: 'rounded-lg',
+      md: 'rounded-xl',
+      lg: 'rounded-2xl',
+      full: 'rounded-full',
     },
   },
   compoundVariants: [
@@ -143,6 +150,27 @@ export const button = tv({
       size: 'lg',
       class: 'first:rounded-l-2xl last:rounded-r-2xl',
     },
+    // isInGroup state
+    {
+      isInGroup: true,
+      round: 'xs',
+      class: 'rounded-none first:rounded-l-md last:rounded-r-md',
+    },
+    {
+      isInGroup: true,
+      round: 'md',
+      class: 'rounded-none first:rounded-l-xl last:rounded-r-xl',
+    },
+    {
+      isInGroup: true,
+      round: 'lg',
+      class: 'rounded-none first:rounded-l-2xl last:rounded-r-2xl',
+    },
+    {
+      isInGroup: true,
+      round: 'full',
+      class: 'rounded-none first:rounded-l-full last:rounded-r-full',
+    },
     // ? Important because native inject color in disabled state
     {
       isDisabled: true,
@@ -234,6 +262,8 @@ export const buttonHover = tv({
   ],
   defaultVariants: {
     color: 'default',
+    size: 'md',
+    round: 'md',
     variant: 'solid',
     isLoading: 'auto',
   },

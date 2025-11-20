@@ -1,4 +1,4 @@
-import type { RadioGroupState } from '@srcube-taro/hooks'
+import type { RadioGroupState } from '@react-stately/radio'
 import type { ITouchEvent } from '@tarojs/components'
 import type { RadioProps } from '../radio'
 

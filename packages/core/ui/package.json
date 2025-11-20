@@ -23,15 +23,18 @@
   "dependencies": {
     "@srcube-taro/app": "workspace:^",
     "@srcube-taro/button": "workspace:^",
+    "@srcube-taro/calendar": "workspace:^",
     "@srcube-taro/checkbox": "workspace:^",
     "@srcube-taro/dialog": "workspace:^",
     "@srcube-taro/drawer": "workspace:^",
     "@srcube-taro/input": "workspace:^",
+    "@srcube-taro/input-otp": "workspace:^",
     "@srcube-taro/layout": "workspace:^",
     "@srcube-taro/modal": "workspace:^",
+    "@srcube-taro/radio": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/switch": "workspace:^",
-    "@srcube-taro/radio": "workspace:^",
+    "@srcube-taro/textarea": "workspace:^",
     "@srcube-taro/toaster": "workspace:^"
   },
   "devDependencies": {

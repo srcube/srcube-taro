@@ -16,7 +16,8 @@ const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, ref) => {
   const modal = useModalContext()
 
   const {
-    styles,
+    slots,
+    classNames,
     hasBackdrop,
     getBackdropProps,
   } = modal
@@ -28,7 +29,7 @@ const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, ref) => {
   return (
     <View
       ref={ref}
-      className={className || styles.backdrop}
+      className={slots.backdrop({ class: className || classNames?.backdrop })}
       {...getBackdropProps(rest)}
     >
       {children}

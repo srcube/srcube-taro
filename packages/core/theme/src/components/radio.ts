@@ -7,57 +7,55 @@ export const radio = tv({
     radio: [
       'relative flex-shrink-0 flex items-center justify-center size-6 bg-transparent cursor-pointer',
       'before:absolute before:inset-0 before:border-4 before:border-gray-300 before:rounded-full',
-      'after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:z-0 after:size-4 after:rounded-full after:transition after:duration-300',
     ],
     spinner: 'z-10',
-    iconWrapper: 'flex items-center justify-center z-10 transition duration-300',
-    iconDefault: 'size-4 rounded-full',
     content: 'relative',
+    iconWrapper: 'flex items-center justify-center z-10 transition duration-300',
+    iDefault: 'size-3 rounded-full',
     nRadio: 'absolute invisible w-full',
   },
   variants: {
     color: {
       default: {
-        radio: 'after:bg-gray-300',
         iconWrapper: 'text-gray-300',
       },
       primary: {
-        radio: 'after:bg-primary',
         iconWrapper: 'text-primary',
       },
       success: {
-        radio: 'after:bg-success',
         iconWrapper: 'text-success',
       },
       warning: {
-        radio: 'after:bg-warning',
         iconWrapper: 'text-warning',
       },
       danger: {
-        radio: 'after:bg-danger',
         iconWrapper: 'text-danger',
       },
     },
     size: {
       xs: {
-        radio: ['size-4', 'after:size-1.5'],
+        radio: ['size-4'],
         iconWrapper: 'size-2',
         content: 'text-xs',
+        iDefault: 'size-2',
       },
       sm: {
-        radio: ['size-5', 'after:size-2'],
+        radio: ['size-5'],
         iconWrapper: 'size-2.5',
         content: 'text-sm',
+        iDefault: 'size-2.5',
       },
       md: {
-        radio: ['size-6', 'after:size-2.5'],
+        radio: ['size-6'],
         iconWrapper: 'size-3',
         content: 'text-base',
+        iDefault: 'size-3',
       },
       lg: {
-        radio: ['size-7', 'after:size-3.5'],
+        radio: ['size-7'],
         iconWrapper: 'size-4',
         content: 'text-lg',
+        iDefault: 'size-4',
       },
     },
     orientation: {
@@ -70,12 +68,10 @@ export const radio = tv({
     },
     isSelected: {
       true: {
-        iconWrapper: 'display-block opacity-100 delay-200',
-        radio: ['', 'after:opacity-100 after:scale-100'],
+        // iconWrapper: 'display-block opacity-100 scale-100 delay-200',
       },
       false: {
-        iconWrapper: 'display-none opacity-0 duration-0',
-        radio: ['', 'after:opacity-0 after:scale-0'],
+        // iconWrapper: 'display-none opacity-0 scale-0 duration-0',
       },
     },
     isReadOnly: {
@@ -93,15 +89,11 @@ export const radio = tv({
     },
     isLoading: {
       true: {
-        wrapper: 'cursor-wait',
+        // iconWrapper: 'display-block opacity-100 scale-100 delay-200',
       },
-      false: {},
-    },
-    hasIcon: {
-      true: {
-        radio: 'after:bg-transparent',
+      false: {
+        // iconWrapper: 'display-none opacity-0 scale-0 duration-0',
       },
-      false: {},
     },
   },
   compoundVariants: [
@@ -113,12 +105,25 @@ export const radio = tv({
       },
     },
     {
+      isSelected: true,
+      isLoading: true,
+      class: {
+        iconWrapper: 'display-block opacity-100 scale-100 delay-200',
+      },
+    },
+    {
+      isSelected: false,
+      isLoading: false,
+      class: {
+        iconWrapper: 'display-none opacity-0 scale-0 duration-0',
+      },
+    },
+    {
       isLoading: true,
       isSelected: false,
       class: {
         radio: 'before:border-gray-500',
         spinner: 'opacity-20 text-black',
-        iconWrapper: 'display-none opacity-20 text-black',
       },
     },
     {
@@ -126,6 +131,7 @@ export const radio = tv({
       color: 'default',
       class: {
         radio: 'before:border-gray-300',
+        iDefault: 'bg-gray-300',
       },
     },
     {
@@ -133,6 +139,7 @@ export const radio = tv({
       color: 'primary',
       class: {
         radio: 'before:border-primary',
+        iDefault: 'bg-primary',
       },
     },
     {
@@ -140,6 +147,7 @@ export const radio = tv({
       color: 'success',
       class: {
         radio: 'before:border-success',
+        iDefault: 'bg-success',
       },
     },
     {
@@ -147,6 +155,7 @@ export const radio = tv({
       color: 'warning',
       class: {
         radio: 'before:border-warning',
+        iDefault: 'bg-warning',
       },
     },
     {
@@ -154,6 +163,7 @@ export const radio = tv({
       color: 'danger',
       class: {
         radio: 'before:border-danger',
+        iDefault: 'bg-danger',
       },
     },
   ],

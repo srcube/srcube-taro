@@ -26,9 +26,7 @@
     "react-is": ">=18"
   },
   "dependencies": {
-    "@react-stately/checkbox": "catalog:",
     "@react-stately/overlays": "catalog:",
-    "@react-stately/radio": "^3.11.1",
     "@react-stately/toggle": "catalog:",
     "@react-stately/utils": "catalog:",
     "@srcube-taro/utils-react": "workspace:^",

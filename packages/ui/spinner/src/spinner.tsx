@@ -11,7 +11,7 @@ const Spinner = forwardRef<TaroElement, SpinnerProps>((props, ref) => {
 
   return (
     <View {...getSpinnerProps()}>
-      <View className={styles.icon} />
+      <View className={styles.iSpinner} />
       {label && <View className={styles.label}>{label}</View>}
     </View>
   )

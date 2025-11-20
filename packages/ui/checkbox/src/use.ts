@@ -1,4 +1,4 @@
-import type { ToggleStateOptions } from '@srcube-taro/hooks'
+import type { ToggleStateOptions } from '@react-stately/toggle'
 import type { CheckboxSlots, CheckboxVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
@@ -8,7 +8,6 @@ import type { ReactNode } from 'react'
 import { checkbox } from '@srcube-taro/theme'
 import { __DEV__, warn, withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 import { useCheckboxGroupContext } from './checkbox-group/context'
 import { useCheckboxItem } from './hooks/use-checkbox-item'
@@ -68,6 +67,7 @@ export function useCheckbox(props: UseCheckboxProps) {
     size = groupCtx?.size,
     radius = groupCtx?.radius ?? size,
     icon,
+    classNames,
     onTap,
     onChange,
     onValueChange,
@@ -107,15 +107,15 @@ export function useCheckbox(props: UseCheckboxProps) {
   )
 
   const styles = useMemo(() => ({
-    wrapper: cn(slots.wrapper()),
-    checkbox: cn(slots.checkbox()),
-    spinner: cn(slots.spinner()),
-    iconWrapper: cn(slots.iconWrapper()),
-    iconDefault: cn(slots.iconDefault()),
-    iconIndeterminate: cn(slots.iconIndeterminate()),
-    content: cn(slots.content()),
-    nCheckbox: cn(slots.nCheckbox()),
-  }), [slots])
+    wrapper: slots.wrapper({ class: classNames?.wrapper }),
+    checkbox: slots.checkbox({ class: classNames?.checkbox }),
+    spinner: slots.spinner({ class: classNames?.spinner }),
+    content: slots.content({ class: classNames?.content }),
+    iconWrapper: slots.iconWrapper({ class: classNames?.iconWrapper }),
+    iDefault: slots.iDefault(),
+    iIndeterminate: slots.iIndeterminate(),
+    nCheckbox: slots.nCheckbox(),
+  }), [slots, classNames])
 
   const handleWrapperTap = useCallback(async (e: ITouchEvent) => {
     if (isReadOnlyProp || isDisabledProp || isLoading) {

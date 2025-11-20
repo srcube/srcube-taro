@@ -1,4 +1,4 @@
-import type { ToggleStateOptions } from '@srcube-taro/hooks'
+import type { ToggleStateOptions } from '@react-stately/toggle'
 import type { RadioSlots, RadioVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
@@ -31,11 +31,11 @@ export interface Props extends NativeProps<Omit<RadioProps, OmitNativeKeys>>, To
   /**
    * Custom icon to display
    */
-  icon?: ReactNode | ((props: Pick<Props, 'isLoading' | 'isDisabled' | 'className'>) => NonNullable<ReactNode>)
+  iconContent?: ReactNode | ((props: Pick<Props, 'isLoading' | 'isDisabled'>) => NonNullable<ReactNode>)
   /**
    * Class names to apply to the radio slots
    */
-  classNames?: SlotsToClasses<RadioSlots>
+  classNames?: SlotsToClasses<Exclude<RadioSlots, 'iDefault'>>
   /**
    * React aria onChange event
    */
@@ -62,10 +62,10 @@ export function useRadio(props: UseRadioProps) {
     isLoading: isLoadingProp = 'auto',
     color = groupCtx?.color || 'default',
     size = groupCtx?.size || 'md',
-    icon,
+    iconContent,
     onTap,
     onChange: onChangeProp,
-    onValueChange = groupCtx?.onValueChange,
+    // onValueChange = groupCtx?.onValueChange,
     ...rest
   } = props
 
@@ -92,22 +92,20 @@ export function useRadio(props: UseRadioProps) {
 
   const isLoading = isAutoLoading ? autoLoading : Boolean(isLoadingProp)
 
-  const hasIcon = Boolean(icon)
-
   const { isSelected, isDisabled, isReadOnly, onChange } = useRadioItem(props, groupCtx?.groupState)
 
   const slots = useMemo(
-    () => radio({ isSelected, color, size, isDisabled, isLoading, isReadOnly, hasIcon }),
-    [isSelected, color, size, isDisabled, isLoading, isReadOnly, hasIcon],
+    () => radio({ color, size, isSelected, isDisabled, isLoading, isReadOnly }),
+    [color, size, isSelected, isDisabled, isLoading, isReadOnly],
   )
 
   const styles = useMemo(() => ({
     wrapper: cn(slots.wrapper()),
     radio: cn(slots.radio()),
     spinner: cn(slots.spinner()),
-    iconWrapper: cn(slots.iconWrapper()),
-    iconDefault: cn(slots.iconDefault()),
     content: cn(slots.content()),
+    iconWrapper: cn(slots.iconWrapper()),
+    iDefault: cn(slots.iDefault()),
     nRadio: cn(slots.nRadio()),
   }), [slots])
 
@@ -134,16 +132,12 @@ export function useRadio(props: UseRadioProps) {
         setAutoLoading(false)
       }
     }
-  }, [value, isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onValueChange, onTap])
+  }, [isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onTap, onChange])
 
   const getWrapperProps = useCallback((): ViewProps => ({
     className: styles.wrapper,
     onClick: handleWrapperTap,
   }), [styles, handleWrapperTap])
-
-  const getIconProps = useCallback((): ViewProps => ({
-    className: styles.iconWrapper,
-  }), [styles])
 
   const getNRadioProps = useCallback((): RadioProps => ({
     ...rest,
@@ -162,9 +156,8 @@ export function useRadio(props: UseRadioProps) {
     isLoading,
     color,
     size,
-    icon,
+    iconContent,
     getWrapperProps,
-    getIconProps,
     getNRadioProps,
   }
 }

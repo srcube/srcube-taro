@@ -1,11 +1,11 @@
-import type { ToggleStateOptions } from '@srcube-taro/hooks'
+import type { ToggleStateOptions } from '@react-stately/toggle'
 import type { SwitchSlots, SwitchVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ITouchEvent, SwitchProps, ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
-import { useToggleState } from '@srcube-taro/hooks'
+import { useToggleState } from '@react-stately/toggle'
 import { toggle } from '@srcube-taro/theme'
 import { __DEV__, warn, withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
@@ -42,7 +42,7 @@ export interface Props extends NativeProps<Omit<SwitchProps, OmitNativeKeys>>, T
   /**
    * Class names to apply to the switch slots
    */
-  classNames?: SlotsToClasses<SwitchSlots>
+  classNames?: SlotsToClasses<Exclude<SwitchSlots, | 'nSwitch'>>
   /**
    * React aria onChange event
    */

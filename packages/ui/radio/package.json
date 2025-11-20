@@ -25,6 +25,8 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@react-stately/toggle": "catalog:",
+    "@react-stately/radio": "catalog:",
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",

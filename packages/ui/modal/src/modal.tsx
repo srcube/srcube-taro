@@ -1,5 +1,5 @@
 import type { ModalRef, UseModalProps } from './use'
-import { RootPortal } from '@tarojs/components'
+import { RootPortal, View } from '@tarojs/components'
 import { Children, forwardRef, isValidElement } from 'react'
 import { ModalProvider } from './context'
 import ModalBackdrop from './modal-backdrop'
@@ -24,9 +24,12 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
   return (
     <ModalProvider value={modal}>
       {isVisible && (
-        <RootPortal className={styles.wrapper} {...getRootPortalProps()}>
+        // RootPortal need to be absolute position to avoid effect layout display
+        <RootPortal style={{ position: 'absolute' }} {...getRootPortalProps()}>
+          <View className={styles.wrapper}>
           {!hasCustomBackdrop && <ModalBackdrop />}
           {children}
+          </View>
         </RootPortal>
       )}
     </ModalProvider>

@@ -1,0 +1,54 @@
+{
+  "name": "@srcube-taro/calendar",
+  "version": "0.0.0",
+  "author": "chioio <srcube.chioio@gmail.com>",
+  "keywords": [
+    "taro.js",
+    "ui",
+    "calendar"
+  ],
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup --dts",
+    "prepack": "rm -rf ./package && clean-publish",
+    "postpack": "rm -rf ./package"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@formatjs/intl-datetimeformat": "^6.18.2",
+    "@internationalized/date": "^3.9.0",
+    "@react-stately/calendar": "^3.8.4",
+    "@react-types/calendar": "^3.7.4",
+    "@srcube-taro/button": "workspace:^",
+    "@srcube-taro/hooks": "workspace:^",
+    "@srcube-taro/theme": "workspace:^",
+    "@srcube-taro/utils-func": "workspace:^",
+    "@srcube-taro/utils-react": "workspace:^",
+    "@srcube-taro/utils-taro": "workspace:^",
+    "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
+    "@tarojs/components": "catalog:",
+    "@tarojs/components-advanced": "^4.1.7",
+    "@tarojs/extend": "^4.1.8",
+    "@tarojs/runtime": "catalog:",
+    "classnames": "catalog:",
+    "i18next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-i18next": "catalog:"
+  },
+  "devDependencies": {
+    "@srcube-taro/ts-config": "workspace:^",
+    "@types/react": "catalog:"
+  }
+}

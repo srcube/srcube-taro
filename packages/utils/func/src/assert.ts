@@ -70,7 +70,7 @@ export function isObject(value: unknown): value is object {
  * @param value The value to check
  * @returns true if the value is a function
  */
-export function isFunction(value: unknown): value is Function {
+export function isFunction(value: unknown): value is (...args: any[]) => any {
   return typeof value === 'function'
 }
 
@@ -126,7 +126,7 @@ export function isNumberInRange(
  * @returns true if the value is a Date instance
  */
 export function isDate(value: unknown): value is Date {
-  return value instanceof Date && !isNaN(value.getTime())
+  return value instanceof Date && !Number.isNaN(value.getTime())
 }
 
 /**

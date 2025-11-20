@@ -4,7 +4,7 @@ import { tv } from '@srcube-taro/utils-tv'
 export const spinner = tv({
   slots: {
     wrapper: 'relative flex flex-col items-center justify-center gap-2',
-    icon: 'icon-spinner size-4',
+    iSpinner: 'icon-spinner size-4',
     label: 'text-base',
   },
   variants: {

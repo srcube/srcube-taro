@@ -2,9 +2,7 @@ import type { ToastSlots, ToastVariantProps } from '@srcube-taro/theme'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { ReactNode } from 'react'
-import { useOverlayTriggerState } from '@srcube-taro/hooks'
 import { toast } from '@srcube-taro/theme'
-import { isVoid0 } from '@srcube-taro/utils-func'
 import { useMemo } from 'react'
 
 export interface Props {
