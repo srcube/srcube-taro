@@ -22,6 +22,9 @@ export const radio = tv({
       primary: {
         iconWrapper: 'text-primary',
       },
+      secondary: {
+        iconWrapper: 'text-secondary',
+      },
       success: {
         iconWrapper: 'text-success',
       },
@@ -98,7 +101,7 @@ export const radio = tv({
   },
   compoundVariants: [
     {
-      color: ['primary', 'success', 'warning', 'danger'],
+      color: ['primary', 'secondary', 'success', 'warning', 'danger'],
       class: {
         spinner: 'text-white',
         iconWrapper: '',
@@ -140,6 +143,14 @@ export const radio = tv({
       class: {
         radio: 'before:border-primary',
         iDefault: 'bg-primary',
+      },
+    },
+    {
+      isSelected: true,
+      color: 'secondary',
+      class: {
+        radio: 'before:border-secondary',
+        iDefault: 'bg-secondary',
       },
     },
     {

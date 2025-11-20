@@ -4,7 +4,7 @@ import { capitalize } from 'lodash-es'
 import { Page, Section } from '@/components'
 
 export default function Inputs() {
-  const colors: Array<InputProps['color']> = ['default', 'primary', 'success', 'warning', 'danger']
+  const colors: Array<InputProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const variants: Array<InputProps['variant']> = ['default', 'outline', 'twotone', 'underline']
   const sizes: Array<InputProps['size']> = ['xs', 'sm', 'md', 'lg']
 

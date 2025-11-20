@@ -104,6 +104,9 @@ export const calendar = tv({
       primary: {
         day: 'text-gray-900',
       },
+      secondary: {
+        day: 'text-gray-900',
+      },
       success: {
         day: 'text-gray-900',
       },
@@ -204,6 +207,14 @@ export const calendar = tv({
       },
     },
     {
+      isRange: false,
+      isSelected: true,
+      color: 'secondary',
+      class: {
+        day: 'bg-secondary text-white hover:bg-secondary-600',
+      },
+    },
+    {
       isSelected: true,
       color: 'success',
       class: {
@@ -239,6 +250,14 @@ export const calendar = tv({
       color: 'primary',
       class: {
         day: 'bg-primary-100 text-primary-500',
+      },
+    },
+    {
+      isToday: true,
+      isSelected: false,
+      color: 'secondary',
+      class: {
+        day: 'bg-secondary-100 text-secondary-500',
       },
     },
     {
@@ -311,6 +330,16 @@ export const calendar = tv({
       color: 'primary',
       class: {
         day: 'rounded-none bg-primary-50 text-primary-500',
+      },
+    },
+    {
+      isRange: true,
+      isRangeSelection: true,
+      isSelectionStart: false,
+      isSelectionEnd: false,
+      color: 'primary',
+      class: {
+        day: 'rounded-none bg-secondary-50 text-secondary-500',
       },
     },
     {

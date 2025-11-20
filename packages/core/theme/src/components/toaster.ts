@@ -48,6 +48,12 @@ export const toast = tv({
         icon: 'text-primary-500',
         title: 'text-primary-600',
       },
+      secondary: {
+        wrapper: 'bg-secondary-50/80',
+        icon: 'text-secondary-500',
+        title: 'text-secondary-600',
+        _icon: 'icon-toast-secondary',
+      },
       success: {
         wrapper: 'bg-success-50/80',
         icon: 'text-success-500',

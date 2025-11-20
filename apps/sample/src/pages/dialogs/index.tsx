@@ -79,7 +79,7 @@ export default function Dialogs() {
       </Section>
       {/* Colors */}
       <Section title="Colors" contentClass="grid grid-cols-4 gap-2">
-        {(['primary', 'success', 'warning', 'danger'] as ButtonProps['color'][]).map(c => (
+        {(['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as ButtonProps['color'][]).map(c => (
           <Button
             key={c}
             color={c}

@@ -4,7 +4,7 @@ import { capitalize } from 'lodash-es'
 import { useState } from 'react'
 import { Page, Section } from '@/components'
 
-const colors = ['default', 'primary', 'success', 'warning', 'danger'] as const
+const colors = ['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as const
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
 
 export default function Textareas() {

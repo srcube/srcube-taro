@@ -41,6 +41,11 @@ export const input = tv({
         // input: 'text-primary',
         // clearButton: 'text-primary'
       },
+      secondary: {
+        wrapper: 'bg-secondary-50 text-secondary',
+        // input: 'text-secondary',
+        // clearButton: 'text-secondary'
+      },
       success: {
         wrapper: 'bg-success-50 text-success',
         // input: 'text-success',

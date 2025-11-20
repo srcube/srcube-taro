@@ -52,6 +52,9 @@ export const textarea = tv({
       primary: {
         wrapper: 'bg-primary-50 text-primary',
       },
+      secondary: {
+        wrapper: 'bg-secondary-50 text-secondary',
+      },
       success: {
         wrapper: 'bg-success-50 text-success',
       },

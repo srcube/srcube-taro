@@ -14,6 +14,7 @@ export const button = tv({
     color: {
       default: 'bg-gray-100 active:bg-gray-200 border-gray-200 text-black',
       primary: 'bg-primary active:bg-primary-600 border-primary text-white',
+      secondary: 'bg-secondary active:bg-secondary-600 border-secondary text-white',
       success: 'bg-success active:bg-success-600 border-success text-white',
       warning: 'bg-warning active:bg-warning-600 border-warning text-white',
       danger: 'bg-danger active:bg-danger-600 border-danger text-white',
@@ -21,7 +22,7 @@ export const button = tv({
     variant: {
       solid: 'border-transparent',
       outline: 'bg-transparent active:bg-transparent border-4',
-      flat: 'border-none active:border-none bg-slate-50',
+      flat: 'border-none active:border-none',
       text: 'bg-transparent active:bg-transparent border-none active:border-none',
     },
     size: {
@@ -64,6 +65,11 @@ export const button = tv({
     },
     {
       variant: ['outline', 'flat', 'text'],
+      color: 'secondary',
+      class: 'text-secondary-500 active:text-secondary-600',
+    },
+    {
+      variant: ['outline', 'flat', 'text'],
       color: 'success',
       class: 'text-success-500 active:text-success-600',
     },
@@ -86,6 +92,11 @@ export const button = tv({
       variant: 'flat',
       color: 'primary',
       class: 'bg-primary-50 active:bg-primary-100',
+    },
+    {
+      variant: 'flat',
+      color: 'secondary',
+      class: 'bg-secondary-50 active:bg-secondary-100',
     },
     {
       variant: 'flat',
@@ -174,7 +185,7 @@ export const button = tv({
     // ? Important because native inject color in disabled state
     {
       isDisabled: true,
-      color: ['primary', 'success', 'warning', 'danger'],
+      color: ['primary', 'secondary', 'success', 'warning', 'danger'],
       variant: 'solid',
       class: '!text-white',
     },
@@ -202,6 +213,7 @@ export const buttonHover = tv({
     color: {
       default: 'bg-gray-200',
       primary: 'bg-primary-600',
+      secondary: 'bg-secondary-600',
       success: 'bg-success-600',
       warning: 'bg-warning-600',
       danger: 'bg-danger-600',
@@ -218,6 +230,11 @@ export const buttonHover = tv({
       variant: ['outline', 'flat', 'text'],
       color: 'primary',
       class: 'text-primary-600',
+    },
+    {
+      variant: ['outline', 'flat', 'text'],
+      color: 'secondary',
+      class: 'text-secondary-600',
     },
     {
       variant: ['outline', 'flat', 'text'],
@@ -243,6 +260,11 @@ export const buttonHover = tv({
       variant: 'flat',
       color: 'primary',
       class: 'bg-primary-100',
+    },
+    {
+      variant: 'flat',
+      color: 'secondary',
+      class: 'bg-secondary-100',
     },
     {
       variant: 'flat',

@@ -5,7 +5,7 @@ import { capitalize } from 'lodash-es'
 import { Page, Section } from '@/components'
 
 export default function Buttons() {
-  const colors: Array<ButtonProps['color']> = ['default', 'primary', 'success', 'warning', 'danger']
+  const colors: Array<ButtonProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const variants: Array<ButtonProps['variant']> = ['solid', 'outline', 'flat', 'text']
   const sizes: Array<ButtonProps['size']> = ['xs', 'sm', 'md', 'lg']
   const rounds: Array<ButtonProps['round']> = ['xs', 'md', 'lg', 'full']

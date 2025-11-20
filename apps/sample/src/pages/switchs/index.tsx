@@ -22,7 +22,7 @@ function XIcon({ className }: { className?: string }) {
 }
 
 export default function Switchs() {
-  const colors: Array<SwitchProps['color']> = ['default', 'primary', 'success', 'warning', 'danger']
+  const colors: Array<SwitchProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const sizes: Array<SwitchProps['size']> = ['xs', 'sm', 'md', 'lg']
   const radius: Array<SwitchProps['radius']> = ['none', 'xs', 'sm', 'md', 'lg', 'full']
 

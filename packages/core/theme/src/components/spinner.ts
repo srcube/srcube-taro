@@ -10,45 +10,49 @@ export const spinner = tv({
   variants: {
     size: {
       xs: {
-        icon: 'size-2',
+        iSpinner: 'size-2',
         label: 'text-xs',
       },
       sm: {
-        icon: 'size-3',
+        iSpinner: 'size-3',
         label: 'text-sm',
       },
       md: {
-        icon: 'size-4',
+        iSpinner: 'size-4',
         label: 'text-base',
       },
       lg: {
-        icon: 'size-6',
+        iSpinner: 'size-6',
         label: 'text-lg',
       },
     },
     color: {
       current: {
-        icon: 'text-current',
+        iSpinner: 'text-current',
         label: 'text-current',
       },
       default: {
-        icon: 'text-gray-400',
+        iSpinner: 'text-gray-400',
         label: 'text-gray-400',
       },
       primary: {
-        icon: 'text-primary-500',
+        iSpinner: 'text-primary-500',
         label: 'text-primary-500',
       },
+      secondary: {
+        iSpinner: 'text-secondary-500',
+        label: 'text-secondary-500',
+      },
       success: {
-        icon: 'text-success-500',
+        iSpinner: 'text-success-500',
         label: 'text-success-500',
       },
       warning: {
-        icon: 'text-warning-500',
+        iSpinner: 'text-warning-500',
         label: 'text-warning-500',
       },
       danger: {
-        icon: 'text-danger-500',
+        iSpinner: 'text-danger-500',
         label: 'text-danger-500',
       },
     },

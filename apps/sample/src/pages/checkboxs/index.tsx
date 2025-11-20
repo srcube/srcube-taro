@@ -6,7 +6,7 @@ import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
 export default function Checkboxs() {
-  const colors: Array<CheckboxProps['color']> = ['default', 'primary', 'success', 'warning', 'danger']
+  const colors: Array<CheckboxProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const sizes: Array<CheckboxProps['size']> = ['xs', 'sm', 'md', 'lg']
   const radius: Array<CheckboxProps['radius']> = ['none', 'xs', 'sm', 'md', 'lg', 'full']
 

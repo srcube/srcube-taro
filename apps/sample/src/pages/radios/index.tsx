@@ -6,7 +6,7 @@ import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
 export default function Radios() {
-  const colors: Array<NonNullable<RadioProps['color']>> = ['default', 'primary', 'success', 'warning', 'danger']
+  const colors: Array<NonNullable<RadioProps['color']>> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const sizes: Array<NonNullable<RadioProps['size']>> = ['xs', 'sm', 'md', 'lg']
 
   const handleAuto = async (e) => {

@@ -24,6 +24,9 @@ export const checkbox = tv({
       primary: {
         checkbox: 'after:bg-primary',
       },
+      secondary: {
+        checkbox: 'after:bg-secondary',
+      },
       success: {
         checkbox: 'after:bg-success',
       },
@@ -118,7 +121,7 @@ export const checkbox = tv({
   },
   compoundVariants: [
     {
-      color: ['primary', 'success', 'warning', 'danger'],
+      color: ['primary', 'secondary', 'success', 'warning', 'danger'],
       class: {
         spinner: 'text-white',
         iconWrapper: 'text-white',

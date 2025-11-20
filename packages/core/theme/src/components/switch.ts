@@ -22,6 +22,7 @@ export const toggle = tv({
     color: {
       default: {},
       primary: {},
+      secondary: {},
       success: {},
       warning: {},
       danger: {},
@@ -163,6 +164,13 @@ export const toggle = tv({
       isSelected: true,
       class: {
         track: 'bg-primary',
+      },
+    },
+    {
+      color: 'secondary',
+      isSelected: true,
+      class: {
+        track: 'bg-secondary',
       },
     },
     {
