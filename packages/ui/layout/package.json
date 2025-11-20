@@ -27,8 +27,8 @@
   "dependencies": {
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
-    "@srcube-taro/utils-types": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",
+    "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",

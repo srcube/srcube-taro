@@ -6,7 +6,7 @@ export default antfu(
     react: true,
     typescript: true,
     // apps are independent lints
-    ignores: ['apps/docs', '**/*.md'],
+    ignores: ['apps/docs', '**/*.md', '.bmad-core'],
   },
   {
     languageOptions: { globals: globals.browser },

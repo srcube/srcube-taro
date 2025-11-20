@@ -14,10 +14,10 @@
  * ```
  */
 
-import { useCallback, useId } from 'react'
-import { useCallbackRef } from '../use-callback-ref'
 // import {chain} from "@react-aria/utils";
 import { useControlledState } from '@react-stately/utils'
+import { useCallback, useId } from 'react'
+import { useCallbackRef } from '../use-callback-ref'
 
 export interface UseDisclosureProps {
   /** Whether the disclosure is open (controlled mode) */

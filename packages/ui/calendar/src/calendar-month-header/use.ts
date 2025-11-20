@@ -1,5 +1,4 @@
 import type { CalendarDate } from '@internationalized/date'
-import { useMemo } from 'react'
 import { useCalendarContext } from '../context'
 import '@formatjs/intl-datetimeformat/polyfill'
 

@@ -1,5 +1,5 @@
 import type { DrawerProps } from '@srcube-taro/ui'
-import { Box, Button, Drawer, DrawerContent, ModalBackdrop, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import { Box, Button, Drawer, DrawerContent, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'

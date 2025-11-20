@@ -1,16 +1,16 @@
 import type { InputOtpProps } from '@srcube-taro/ui'
 import { Button, Dialog, DialogBody, DialogContent, DialogHeader, InputOtp, usePageScrollLock } from '@srcube-taro/ui'
-import { Page, Section } from '@/components'
-import { useState } from 'react'
 import { PageMeta } from '@tarojs/components'
+import { useState } from 'react'
+import { Page, Section } from '@/components'
 
 export default function InputOtpPage() {
   const { isLocked } = usePageScrollLock()
-  
+
   const [isPassward, setIsPassward] = useState(false)
   const [completeValue, setCompleteValue] = useState('')
   const [isCompleteOpen, setIsCompleteOpen] = useState(false)
-  
+
   const colors: Array<InputOtpProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const sizes: Array<InputOtpProps['size']> = ['xs', 'sm', 'md', 'lg']
 
@@ -37,7 +37,7 @@ export default function InputOtpPage() {
         <InputOtp isDisabled />
       </Section>
       <Section title="ReadOnly" contentClass="flex flex-col gap-4">
-        <InputOtp isReadOnly value='2025' />
+        <InputOtp isReadOnly value="2025" />
       </Section>
       <Section title="Length" contentClass="flex flex-col gap-4">
         <InputOtp length={6} />
@@ -47,19 +47,20 @@ export default function InputOtpPage() {
         <InputOtp keyboardType="text" />
       </Section>
       <Section title="Complete Show Value" contentClass="flex flex-col gap-4">
-        <InputOtp onComplete={value => {
+        <InputOtp onComplete={(value) => {
           setCompleteValue(value)
           setIsCompleteOpen(true)
-        }} />
+        }}
+        />
         <Dialog isOpen={isCompleteOpen} isConfirmOnly onClose={() => setIsCompleteOpen(false)}>
           <DialogContent>
-          <DialogHeader>
-            Complete Show Value
-          </DialogHeader>
-          <DialogBody>
-            Value: {completeValue}
-          </DialogBody>
-            </DialogContent>
+            <DialogHeader>
+              Complete Show Value
+            </DialogHeader>
+            <DialogBody>
+              Value: {completeValue}
+            </DialogBody>
+          </DialogContent>
         </Dialog>
       </Section>
     </Page>

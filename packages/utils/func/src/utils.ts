@@ -19,18 +19,18 @@ export function debounce<F extends (...args: any[]) => void>(
   func: F,
   waitMilliseconds: number = 0,
 ) {
-  let timeout: ReturnType<typeof setTimeout> | undefined;
+  let timeout: ReturnType<typeof setTimeout> | undefined
 
   return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
     const later = () => {
-      timeout = undefined;
-      func.apply(this, args);
-    };
-
-    if (timeout !== undefined) {
-      clearTimeout(timeout);
+      timeout = undefined
+      func.apply(this, args)
     }
 
-    timeout = setTimeout(later, waitMilliseconds);
-  };
+    if (timeout !== undefined) {
+      clearTimeout(timeout)
+    }
+
+    timeout = setTimeout(later, waitMilliseconds)
+  }
 }

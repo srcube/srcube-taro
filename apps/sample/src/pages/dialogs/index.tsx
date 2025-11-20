@@ -1,5 +1,5 @@
 import type { ButtonProps, DialogProps, DialogRef } from '@srcube-taro/ui'
-import { Button, Dialog, DialogBody, DialogContent, DialogFooter, DialogHeader, ModalBackdrop, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
+import { Button, Dialog, DialogBody, DialogContent, DialogFooter, DialogHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
 import { useCallback, useRef, useState } from 'react'

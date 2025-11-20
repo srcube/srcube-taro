@@ -136,7 +136,7 @@ export function useInputOtp(props: UseInputOtpProps) {
       onBlur: () => setIsFocused(false),
       ...rest,
     } as unknown as NativeInputProps
-  }, [inputValue, length, isDisabled, handleInput, keyboardType, rest])
+  }, [inputValue, length, isDisabled, isPassword, handleInput, keyboardType, rest])
 
   const activeIndex = Math.min((inputValue || '').length, Math.max(length - 1, 0))
   const chars = (inputValue || '').split('').slice(0, length)

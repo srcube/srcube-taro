@@ -1,6 +1,5 @@
 import type { UseToastProps } from './use'
-import { Text, View } from '@tarojs/components'
-import cn from 'classnames'
+import { View } from '@tarojs/components'
 import { useToast } from './use'
 
 export interface ToastProps extends UseToastProps {
