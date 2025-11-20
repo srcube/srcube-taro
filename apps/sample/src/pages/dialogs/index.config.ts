@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Dialogs',
+  navigationBarTitleText: 'Dialog',
   enablePageMeta: true,
 })

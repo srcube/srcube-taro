@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Switchs',
+  navigationBarTitleText: 'Switch',
   enablePageMeta: true,
 })

@@ -34,35 +34,35 @@ export default function Radios() {
         <RadioGroup defaultValue="circle">
           <Radio
             value="circle"
-            icon={<View className="i-[ic--twotone-circle] w-inherit h-inherit" />}
+            iconContent={<View className="i-[ic--twotone-circle] w-inherit h-inherit" />}
           >
             Circle
           </Radio>
           <Radio
             value="star"
             color="primary"
-            icon={<View className="i-[ph--star-fill] w-inherit h-inherit" />}
+            iconContent={<View className="i-[ph--star-fill]" />}
           >
             Star
           </Radio>
           <Radio
             value="heart"
             color="success"
-            icon={<View className="i-[mingcute--heart-fill] w-inherit h-inherit" />}
+            iconContent={<View className="i-[mingcute--heart-fill] w-inherit h-inherit" />}
           >
             Heart
           </Radio>
           <Radio
             value="flower"
             color="warning"
-            icon={<View className="i-[streamline--flower-solid] w-inherit h-inherit" />}
+            iconContent={<View className="i-[streamline--flower-solid] w-inherit h-inherit" />}
           >
             Flower
           </Radio>
           <Radio
             value="diamond"
             color="danger"
-            icon={<View className="i-[mdi--diamond] w-inherit h-inherit" />}
+            iconContent={<View className="i-[mdi--diamond] w-inherit h-inherit" />}
           >
             Diamond
           </Radio>

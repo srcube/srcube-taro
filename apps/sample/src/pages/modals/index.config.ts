@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Modals',
+  navigationBarTitleText: 'Modal',
   enablePageMeta: true,
 })

@@ -21,13 +21,17 @@ export default function Index() {
   const components = [
     { title: 'Button', to: () => Taro.navigateTo({ url: '/pages/buttons/index' }) },
     { title: 'Checkbox', to: () => Taro.navigateTo({ url: '/pages/checkboxs/index' }) },
+    { title: 'Date Calendar', to: () => Taro.navigateTo({ url: '/pages/date-calendars/index' }) },
     { title: 'Dialog', to: () => Taro.navigateTo({ url: '/pages/dialogs/index' }) },
     { title: 'Drawer', to: () => Taro.navigateTo({ url: '/pages/drawers/index' }) },
+    { title: 'Input OTP', to: () => Taro.navigateTo({ url: '/pages/input-otps/index' }) },
     { title: 'Input', to: () => Taro.navigateTo({ url: '/pages/inputs/index' }) },
     { title: 'Modal', to: () => Taro.navigateTo({ url: '/pages/modals/index' }) },
     { title: 'Spinner', to: () => Taro.navigateTo({ url: '/pages/spinners/index' }) },
     { title: 'Switch', to: () => Taro.navigateTo({ url: '/pages/switchs/index' }) },
     { title: 'Radio', to: () => Taro.navigateTo({ url: '/pages/radios/index' }) },
+    { title: 'Range Calendar', to: () => Taro.navigateTo({ url: '/pages/range-calendars/index' }) },
+    { title: 'Textarea', to: () => Taro.navigateTo({ url: '/pages/textareas/index' }) },
     { title: 'Toast', to: () => Taro.navigateTo({ url: '/pages/toasts/index' }) },
   ]
 

@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Drawers',
+  navigationBarTitleText: 'Drawer',
   enablePageMeta: true,
 })

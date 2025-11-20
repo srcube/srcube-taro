@@ -1,6 +1,3 @@
-import type {
-  ToastProps,
-} from '@srcube-taro/ui'
 import {
   Button,
   DialogBody,
@@ -16,7 +13,6 @@ import {
   openDrawer,
   openModal,
   SrcubeUI,
-  // toast,
   usePageScrollLock,
 } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'

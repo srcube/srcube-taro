@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Checkboxs',
+  navigationBarTitleText: 'Checkbox',
   enablePageMeta: true,
 })

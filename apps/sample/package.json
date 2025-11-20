@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@babel/runtime": "catalog:",
+    "@internationalized/date": "^3.9.0",
     "@srcube-taro/ui": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/helper": "catalog:",
@@ -79,6 +80,7 @@
     "@egoist/tailwindcss-icons": "catalog:",
     "@iconify/json": "catalog:",
     "@pmmmwh/react-refresh-webpack-plugin": "catalog:",
+    "@react-types/shared": "^3.32.1",
     "@tarojs/cli": "catalog:",
     "@tarojs/taro-loader": "catalog:",
     "@tarojs/webpack5-runner": "catalog:",

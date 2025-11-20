@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Radio',
+  navigationBarTitleText: 'Input OTP',
   enablePageMeta: true,
 })

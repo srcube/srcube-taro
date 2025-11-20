@@ -1,4 +1,4 @@
 export default definePageConfig({
-  navigationBarTitleText: 'Toasts',
+  navigationBarTitleText: 'Toast',
   enablePageMeta: true,
 })

@@ -17,6 +17,8 @@ export default antfu(
       'react/no-forward-ref': 'off',
       'react/no-use-context': 'off',
       'react/no-children-to-array': 'off',
+      'react/no-array-index-key': 'off',
+      'react/no-nested-component-definitions': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
     },
   },

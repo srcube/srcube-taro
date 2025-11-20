@@ -31,7 +31,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
     compiler: {
       type: 'webpack5',
       prebundle: {
-        enable: false,
+        enable: true,
         exclude: [
           // @ts-expect-error regex can be used
           /^@srcube-taro\/*/,
