@@ -25,7 +25,10 @@
     "react-dom": "^18"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "catalog:",
+    "@formatjs/intl-datetimeformat": "^6.18.2",
+    "@formatjs/intl-getcanonicallocales": "^2.5.6",
+    "@formatjs/intl-locale": "^4.2.13",
+    "@formatjs/intl-numberformat": "^8.15.5",
     "@internationalized/date": "catalog:",
     "@react-stately/calendar": "catalog:",
     "@react-types/calendar": "catalog:",
@@ -41,6 +44,7 @@
     "@tarojs/extend": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",
+    "dayjs": "catalog:",
     "i18next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

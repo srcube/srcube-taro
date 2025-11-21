@@ -5,7 +5,6 @@ import type { ReactNode } from 'react'
 import { isToday as isDateToday, isSameDay, isSameMonth } from '@internationalized/date'
 import { useCallback, useMemo } from 'react'
 import { useCalendarContext } from '../context'
-import '@formatjs/intl-datetimeformat/polyfill'
 
 export interface CalendarDay {
   date: CalendarDate
@@ -26,11 +25,7 @@ export interface UseCalendarCellProps {
 export function useCalendarCell(props: UseCalendarCellProps) {
   const { date, start, content, isDateUnavailable } = props
 
-  const { state, locale, slots, isRange, classNames } = useCalendarContext()
-
-  const label = new Intl.DateTimeFormat(locale, { dateStyle: 'full' }).format(
-    date.toDate(state.timeZone),
-  )
+  const { state, slots, isRange, classNames } = useCalendarContext()
 
   const selectableRange = state.minValue && state.maxValue ? [state.minValue, state.maxValue] : undefined
 
@@ -115,7 +110,6 @@ export function useCalendarCell(props: UseCalendarCellProps) {
   }, [slots, classNames?.day, isRange, isOutsideMonth, isToday, isSelected, isSelectionStart, isSelectionEnd, isRangeSelection, isDisabled, handleCellTap])
 
   return {
-    label,
     cellContent,
     isRange,
     isToday,

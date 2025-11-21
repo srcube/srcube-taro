@@ -6,7 +6,6 @@ export interface CalendarCellProps extends UseCalendarCellProps {}
 
 function CalendarCell(props: CalendarCellProps) {
   const {
-    label,
     cellContent,
     isToday,
     isOutsideMonth,
@@ -27,7 +26,6 @@ function CalendarCell(props: CalendarCellProps) {
       aria-selected={isSelected ? 'true' : 'false'}
       aria-disabled={isDisabled ? 'true' : 'false'}
       aria-current={isToday ? 'date' : undefined}
-      aria-label={label}
     >
       <View {...getDayProps()}>{cellContent}</View>
     </View>

@@ -6,6 +6,7 @@ import { CalendarHeader } from '../calendar-header'
 import { CalendarMonth } from '../calendar-month'
 import { CalendarYMPicker } from '../calendar-y-m-picker'
 import { useCalendarContext } from '../context'
+// import '../polyfill'
 
 export interface CalendarBaseProps extends UseCalendarBaseProps {}
 

@@ -39,9 +39,6 @@ catalogs:
     '@eslint/eslintrc':
       specifier: ^3
       version: 3.3.1
-    '@formatjs/intl-datetimeformat':
-      specifier: ^6.18.2
-      version: 6.18.2
     '@iconify/json':
       specifier: ^2.2.329
       version: 2.2.341
@@ -165,6 +162,9 @@ catalogs:
     clean-publish:
       specifier: ^5.1.0
       version: 5.2.0
+    dayjs:
+      specifier: ^1.11.13
+      version: 1.11.19
     eslint:
       specifier: ^8.57.0
       version: 8.57.1
@@ -680,8 +680,17 @@ importers:
   packages/ui/calendar:
     dependencies:
       '@formatjs/intl-datetimeformat':
-        specifier: 'catalog:'
+        specifier: ^6.18.2
         version: 6.18.2
+      '@formatjs/intl-getcanonicallocales':
+        specifier: ^2.5.6
+        version: 2.5.6
+      '@formatjs/intl-locale':
+        specifier: ^4.2.13
+        version: 4.2.13
+      '@formatjs/intl-numberformat':
+        specifier: ^8.15.5
+        version: 8.15.5
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.9.0
@@ -727,6 +736,9 @@ importers:
       classnames:
         specifier: 'catalog:'
         version: 2.5.1
+      dayjs:
+        specifier: 'catalog:'
+        version: 1.11.19
       i18next:
         specifier: 'catalog:'
         version: 25.2.1(typescript@5.8.3)
@@ -2781,6 +2793,9 @@ packages:
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@formatjs/ecma402-abstract@2.3.5':
+    resolution: {integrity: sha512-1HTESOq1IUa23g1lFZEGIXsfZKZOwWmB9RROwGn+xariiQnd++wwTMvlRAbZ8wtXRHFUamJPxsKcxpSzeCvFWQ==}
+
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
 
@@ -2790,8 +2805,20 @@ packages:
   '@formatjs/intl-datetimeformat@6.18.2':
     resolution: {integrity: sha512-XXGJVOi/vmB+eLtYDs+ggDIvba/+VNmNrDZOtMyol5D0zl+zzuPps6W3TgDflpKfzg4memAEbLnA1wC6/TBSjQ==}
 
+  '@formatjs/intl-enumerator@1.8.12':
+    resolution: {integrity: sha512-rT2hnyQ0q6RDG1jISMH+MP6wlHQLUC81C0BeYEzabJb48S4tU2HGCPUxsOqMa3vDAUmpnz9Kw5vYTD5hTkOVgg==}
+
+  '@formatjs/intl-getcanonicallocales@2.5.6':
+    resolution: {integrity: sha512-CnBbc4St61RL06gDXlCZG08Gt41uiySgsdZNBExh8/c0FBONJCrAlQ9FsyalUdq9ze0nCeknJtMmO8JnB9xHgQ==}
+
+  '@formatjs/intl-locale@4.2.13':
+    resolution: {integrity: sha512-Qcs0mP9JhEPCinPfpZ5JKzOa+VYDg94TQSFZozYuqG8R+hEGUTKyoyMqB5xi5QZT/hlB0CSgeNc/0fWMGtTFXA==}
+
   '@formatjs/intl-localematcher@0.6.2':
     resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
+
+  '@formatjs/intl-numberformat@8.15.5':
+    resolution: {integrity: sha512-n/yHJViwzB0RR+x4FpGFkT+T5hgrTiBJLh8ksB03sSFvkmVOCeZg4ninUKCJ3Yi2/Ki9bVyIi8or02HTxmz4GQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -5074,6 +5101,9 @@ packages:
   data-view-byte-offset@1.0.1:
     resolution: {integrity: sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ==}
     engines: {node: '>= 0.4'}
+
+  dayjs@1.11.19:
+    resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -11416,6 +11446,13 @@ snapshots:
       '@eslint/core': 0.13.0
       levn: 0.4.1
 
+  '@formatjs/ecma402-abstract@2.3.5':
+    dependencies:
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/intl-localematcher': 0.6.2
+      decimal.js: 10.6.0
+      tslib: 2.8.1
+
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:
       '@formatjs/fast-memoize': 2.2.7
@@ -11434,8 +11471,31 @@ snapshots:
       decimal.js: 10.6.0
       tslib: 2.8.1
 
+  '@formatjs/intl-enumerator@1.8.12':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.6
+      tslib: 2.8.1
+
+  '@formatjs/intl-getcanonicallocales@2.5.6':
+    dependencies:
+      tslib: 2.8.1
+
+  '@formatjs/intl-locale@4.2.13':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.6
+      '@formatjs/intl-enumerator': 1.8.12
+      '@formatjs/intl-getcanonicallocales': 2.5.6
+      tslib: 2.8.1
+
   '@formatjs/intl-localematcher@0.6.2':
     dependencies:
+      tslib: 2.8.1
+
+  '@formatjs/intl-numberformat@8.15.5':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.5
+      '@formatjs/intl-localematcher': 0.6.2
+      decimal.js: 10.6.0
       tslib: 2.8.1
 
   '@hapi/hoek@9.3.0': {}
@@ -14117,6 +14177,8 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       is-data-view: 1.0.2
+
+  dayjs@1.11.19: {}
 
   debug@2.6.9:
     dependencies:

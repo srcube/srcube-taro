@@ -32,16 +32,16 @@ export function useCalendarMonth(props: UseCalendarMonthProps) {
 
   const { state, locale, styles, isRange, isYMPickerExpanded } = useCalendarContext()
 
-  const dayFormatter = useDateFormatter(locale, { weekday: weekdayStyle, timeZone: state.timeZone })
+  const weekdayFormatter = useDateFormatter(locale, { weekday: weekdayStyle, timeZone: state.timeZone })
 
   const weekDays = useMemo(() => {
     const weekStart = startOfWeek(today(state.timeZone), locale, firstDayOfWeek)
     return [...Array.from({ length: 7 }).keys()].map((index) => {
       const date = weekStart.add({ days: index })
       const dateDay = date.toDate(state.timeZone)
-      return dayFormatter.format(dateDay)
+      return weekdayFormatter.format(dateDay)
     })
-  }, [locale, state.timeZone, dayFormatter, firstDayOfWeek])
+  }, [locale, state.timeZone, weekdayFormatter, firstDayOfWeek])
 
   const weeksInMonth = getWeeksInMonth(startDate ?? today(state.timeZone), locale, firstDayOfWeek)
 

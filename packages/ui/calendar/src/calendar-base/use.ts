@@ -25,7 +25,7 @@ interface Props extends Exclude<NativeProps<ViewProps>, ''>, CalendarPropsBase {
    * [BCP47](https://www.ietf.org/rfc/bcp/bcp47.txt) language code for the locale.
    * @default en
    */
-  locale?: 'en' | 'zh-CN' | 'zh-TW' | string
+  locale?: 'en' | 'zh-CN' | 'zh-TW'
   /**
    * The calendar system used by the date picker
    */
