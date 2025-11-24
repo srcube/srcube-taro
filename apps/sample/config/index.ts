@@ -34,7 +34,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
         enable: true,
         exclude: [
           // @ts-expect-error regex can be used
-          /^@srcube-taro\/*/,
+          // /^@srcube-taro\/*/,
         ],
       },
     },
@@ -42,6 +42,9 @@ export default defineConfig<'webpack5'>(async (merge) => {
       enable: false, // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
     },
     mini: {
+      optimizeMainPackage: {
+        enable: true,
+      },
       compile: {
         include: [() => '@srcube-taro/*'],
       },

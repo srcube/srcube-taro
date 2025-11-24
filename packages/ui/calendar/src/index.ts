@@ -1,5 +1,4 @@
-import './polyfill'
-
+import './intl-polyfill'
 export * from './date-calendar'
 export * from './range-calendar'
 

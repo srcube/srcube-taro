@@ -6,7 +6,7 @@ import { useCallback, useRef, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
-const LANG_MAP: Record<NonNullable<DialogProps['lang']>, string> = {
+const LANG_MAP: Record<NonNullable<DialogProps['locale']>, string> = {
   'en': 'English',
   'zh-CN': '简体中文',
   'zh-TW': '繁体中文',
@@ -27,14 +27,14 @@ export default function DialogPage() {
   const { isLocked } = usePageScrollLock()
 
   const [color, setColor] = useState<ButtonProps['color']>('primary')
-  const [lang, setLang] = useState<DialogProps['lang']>('en')
+  const [lang, setLang] = useState<DialogProps['locale']>('en')
 
   const handleOpenColors = useCallback((c: ButtonProps['color']) => {
     setColor(c)
     COLORS.onOpen()
   }, [COLORS])
 
-  const handleOpenLangs = useCallback((l: DialogProps['lang']) => {
+  const handleOpenLangs = useCallback((l: DialogProps['locale']) => {
     setLang(l)
     I18N.onOpen()
   }, [I18N])
@@ -166,8 +166,8 @@ export default function DialogPage() {
       </Section>
       {/* i18n */}
       <Section title="i18n" contentClass="grid grid-cols-3 gap-2">
-        {(['en', 'zh-CN', 'zh-TW'] as DialogProps['lang'][])
-          .map((l: NonNullable<DialogProps['lang']>) => (
+        {(['en', 'zh-CN', 'zh-TW'] as DialogProps['locale'][])
+          .map((l: NonNullable<DialogProps['locale']>) => (
             <Button key={l} color="primary" size="sm" onTap={() => handleOpenLangs(l)}>
               {`${LANG_MAP[l]}`}
             </Button>
@@ -176,7 +176,7 @@ export default function DialogPage() {
           isOpen={I18N.isOpen}
           onOpenChange={I18N.onOpenChange}
           title="i18n"
-          lang={lang}
+          locale={lang}
         >
           <DialogContent>
             This dialog is assigned the `lang` prop with `{lang}`.

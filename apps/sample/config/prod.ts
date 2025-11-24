@@ -2,6 +2,9 @@ import type { UserConfigExport } from '@tarojs/cli'
 
 export default {
   mini: {},
+  terser: {
+    enable: true,
+  },
   h5: {
     compile: {
       include: [

@@ -10,7 +10,7 @@ export default function Index() {
   })
 
   const app = [
-    { title: 'SrcubeUI Provider', to: () => Taro.navigateTo({ url: '/packages/app/pages/app/index' }) },
+    { title: 'SrcubeUI Provider', to: () => Taro.navigateTo({ url: '/packages/app/pages/index/index' }) },
   ]
 
   const layouts = [

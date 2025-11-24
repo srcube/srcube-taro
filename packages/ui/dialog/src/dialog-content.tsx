@@ -73,8 +73,8 @@ const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => 
     return content
   }
 
-  const cancelAction = renderAction(cancelContent, t('dialog.action.cancel'), getCancelProps)
-  const confirmAction = renderAction(confirmContent, t('dialog.action.confirm'), getConfirmProps)
+  const cancelAction = renderAction(cancelContent, t.cancel, getCancelProps)
+  const confirmAction = renderAction(confirmContent, t.confirm, getConfirmProps)
 
   return (
     <ModalContent ref={ref} className={className || styles.content} {...rest}>

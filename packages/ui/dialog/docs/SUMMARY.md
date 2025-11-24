@@ -158,13 +158,6 @@ function renderAction(content: ((props: ButtonProps) => ReactNode) | ReactNode |
 </DialogProvider>
 ```
 
-### 5. 专业的国际化支持
-```typescript
-// 集成 react-i18next 的多语言支持和本地化
-const { t } = useTranslation(void 0, { lng: lang })
-const cancelAction = renderAction(cancelContent, t('dialog.action.cancel'), getCancelProps)
-```
-
 ## 📊 对比分析
 
 | 维度 | Dialog 组件 | 行业平均 | 优势 |

@@ -37,13 +37,12 @@
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
     "classnames": "catalog:",
-    "i18next": "catalog:",
     "react": "catalog:",
-    "react-dom": "catalog:",
-    "react-i18next": "catalog:"
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",
+    "@types/node": "catalog:",
     "@types/react": "catalog:"
   }
 }
