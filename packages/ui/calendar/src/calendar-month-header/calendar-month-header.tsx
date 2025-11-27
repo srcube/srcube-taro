@@ -5,10 +5,15 @@ import { useCalendarMonthHeader } from './use'
 export interface CalendarMonthHeaderProps extends UseCalendarMonthHeaderProps {}
 
 function CalendarMonthHeader(props: CalendarMonthHeaderProps) {
-  const { styles, content } = useCalendarMonthHeader(props)
+  const { styles, content, monthDate } = useCalendarMonthHeader(props)
 
   return (
-    <View className={styles.monthHeader} role="heading" aria-level={2}>
+    <View
+      id={`calendar-month-header-${monthDate?.year}-${monthDate?.month}`}
+      className={styles.monthHeader}
+      role="heading"
+      aria-level={2}
+    >
       <Text>{content.month}</Text>
       <Text>{content.year}</Text>
     </View>

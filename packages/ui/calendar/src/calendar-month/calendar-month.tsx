@@ -5,7 +5,7 @@ import { View } from '@tarojs/components'
 import { Fragment, useCallback, useMemo } from 'react'
 import { CalendarCell } from '../calendar-cell'
 import { CalendarMonthHeader } from '../calendar-month-header'
-import { VirtualList } from '../virtual-list'
+import { CalendarMonthList } from '../calendar-month-list'
 import { useCalendarMonth } from './use'
 
 export interface CalendarMonthProps extends UseCalendarMonthProps {}
@@ -56,7 +56,12 @@ function CalendarMonth(props: CalendarMonthProps) {
   const weeksDaysForMonthContent = useCallback((monthStart: CalendarDate) => {
     const count = getWeeksInMonth(monthStart, locale, firstDayOfWeek)
     const rows = [...Array.from({ length: count }).keys()].map(weekIndex => (
-      <View key={`${monthStart.year}-${monthStart.month}-w${weekIndex}`} className={styles.days} role="row">
+      <View
+        key={`${monthStart.year}-${monthStart.month}-w${weekIndex}`}
+        id={`calendar-month-week-${monthStart.year}-${monthStart.month}-w${weekIndex}`}
+        className={styles.days}
+        role="row"
+      >
         {state.getDatesInWeek(weekIndex, monthStart).map((date, i) => (
           date ? <CalendarCell key={i} date={date} start={monthStart} content={cellContent} /> : <View key={i} />
         ))}
@@ -82,20 +87,17 @@ function CalendarMonth(props: CalendarMonthProps) {
         {weekDaysContent}
       </View>
       <View className={styles.months}>
-        <VirtualList
-          data={monthsStartDates}
-          itemContent={m => monthContent(m)}
-          scrollToIndex={activeIndex}
-          onScrollEnd={({ startIndex }) => {
-            const target = monthsStartDates[startIndex]
-            if (!target)
-              return
-            const fd = state.focusedDate
-            if (fd.year !== target.year || fd.month !== target.month) {
-              state.setFocusedDate(target)
-            }
-          }}
-        />
+        {isRange
+          ? (
+              <CalendarMonthList
+                data={monthsStartDates}
+                itemContent={m => monthContent(m)}
+                scrollToIndex={activeIndex}
+              />
+            )
+          : (
+              monthContent(monthsStartDates[0])
+            )}
       </View>
     </View>
   )

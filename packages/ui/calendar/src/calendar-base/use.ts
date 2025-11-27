@@ -39,6 +39,9 @@ interface Props extends Exclude<NativeProps<ViewProps>, ''>, CalendarPropsBase {
    * Whether the MMYYYY picker is expanded
    */
   isMYPickerExpanded?: boolean
+  /**
+   * Whether the MMYYYY picker is expanded by default
+   */
   isMYPickerDefaultExpanded?: boolean
   /**
    * Custom class names for the calendar slots
@@ -48,6 +51,10 @@ interface Props extends Exclude<NativeProps<ViewProps>, ''>, CalendarPropsBase {
    * Callback when the MMYYYY picker is expanded or collapsed
    */
   onMYPickerExpandedChange?: (isExpanded: boolean) => void
+  /**
+   * The current month to display
+   */
+  currentMonth?: CalendarDate
 }
 
 /**
@@ -81,6 +88,7 @@ export function useCalendarBase(props: UseCalendarBaseProps) {
     minValue = parseDate('1900-01-01'),
     maxValue = parseDate('2099-12-31'),
     weekdayStyle = 'narrow',
+    firstDayOfWeek,
     isRange,
     isDisabled,
     isReadOnly,
@@ -136,12 +144,14 @@ export function useCalendarBase(props: UseCalendarBaseProps) {
     minValue,
     maxValue,
     weekdayStyle,
+    firstDayOfWeek,
     classNames,
     isRange,
     isDisabled,
     isReadOnly,
     isYMPickerExpanded,
     setIsYMPickerExpanded,
+    currentMonth: props.currentMonth,
   }
 }
 

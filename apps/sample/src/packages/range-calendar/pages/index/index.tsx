@@ -18,7 +18,7 @@ export default function RangeCalendarPage() {
   const maxValue = parseDate('2026-12-31')
 
   const [size, setSize] = useState<DateCalendarProps['size']>('md')
-  const [color, setColor] = useState<DateCalendarProps['color']>('primary')
+  const [color, setColor] = useState<DateCalendarProps['color']>('default')
   const [locale, setLocale] = useState<DateCalendarProps['locale']>('en')
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false)
@@ -67,7 +67,7 @@ export default function RangeCalendarPage() {
       </Section>
 
       <Box className="fixed bottom-0 inset-x-0 pb-safe-4 px-4 pt-4">
-        <Button color="primary" isBlock className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
+        <Button color={color} isBlock className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
       </Box>
 
       <Drawer isOpen={isSetsOpen} onClose={() => setIsSetsOpen(false)}>

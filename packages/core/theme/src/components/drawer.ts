@@ -3,10 +3,10 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const drawer = tv({
   slots: {
-    wrapper: ['fixed inset-0'],
-    backdrop: ['absolute inset-0'],
+    wrapper: ['fixed inset-0 z-[1000]'],
+    backdrop: ['fixed inset-0 z-[1000]'],
     content: [
-      'absolute bg-white shadow-lg flex flex-col',
+      'fixed z-[1000] bg-white shadow-lg flex flex-col',
     ],
     header: ['p-3 text-center text-lg font-semibold'],
     body: ['px-4 py-3 flex-1'],

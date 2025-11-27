@@ -32,5 +32,6 @@ export function useCalendarMonthHeader(props: UseCalendarMonthHeaderProps = {}) 
   return {
     styles,
     content,
+    monthDate,
   }
 }

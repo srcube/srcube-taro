@@ -104,7 +104,7 @@ export function useCalendarYMPicker() {
       monthsScrollTopRef.current = scrollTop
     setTimeout(() => {
       isProgrammaticRef.current[type] = false
-    }, 50)
+    }, 100)
   }, [itemHeight])
 
   // init indicator height and scrollTop offset
@@ -180,8 +180,12 @@ export function useCalendarYMPicker() {
       scrollTo(type, value)
       const yv = type === 'years' ? value : currentMonth.year
       const mv = type === 'months' ? value : currentMonth.month
-      const date = state.focusedDate.set({ year: yv, month: mv })
-      state.setFocusedDate(date)
+
+      // Only update if the value actually changed to avoid unnecessary re-renders/jumps
+      if (yv !== currentMonth.year || mv !== currentMonth.month) {
+        const date = state.focusedDate.set({ year: yv, month: mv })
+        state.setFocusedDate(date)
+      }
     }, 200)
   }, [itemHeight, scrollTo, state, currentMonth, years, months])
 

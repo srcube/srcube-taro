@@ -1,11 +1,12 @@
 import type { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import type { CalendarReturnType, CalendarSlots } from '@srcube-taro/theme'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { UseCalendarBaseProps } from './calendar-base'
+import type { CalendarBaseProps, UseCalendarBaseProps } from './calendar-base'
 import { createContext } from '@srcube-taro/utils-react'
 
 export type CalendarContextType<T extends CalendarState | RangeCalendarState> = {
   state: T
+  firstDayOfWeek: CalendarBaseProps['firstDayOfWeek']
   slots: CalendarReturnType
   styles: Partial<Record<CalendarSlots, string>>
   isYMPickerExpanded: boolean

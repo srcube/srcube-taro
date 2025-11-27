@@ -21,7 +21,7 @@ export const calendar = tv({
     weekdays: 'grid grid-cols-7 px-4 pb-2 border-b border-gray-100 bg-white',
     weekday: 'flex items-center justify-center h-8 text-xs font-semibold text-gray-500',
     months: 'relative flex-grow h-full shadow-inner',
-    monthHeader: 'sticky top-0 z-10 flex justify-between py-1 px-4 bg-gray-200 text-base text-gray-900',
+    monthHeader: 'sticky top-0 z-10 flex justify-between py-1 px-4 bg-gray-200 text-base text-black font-medium',
     weeks: 'z-0 pt-1',
     days: 'grid grid-cols-7',
     cell: 'py-0.5',
@@ -100,21 +100,27 @@ export const calendar = tv({
     color: {
       default: {
         day: 'text-gray-900',
+        monthHeader: 'text-black bg-gray-300',
       },
       primary: {
         day: 'text-gray-900',
+        monthHeader: 'text-primary-500 bg-primary-200',
       },
       secondary: {
         day: 'text-gray-900',
+        monthHeader: 'text-secondary-500 bg-secondary-200',
       },
       success: {
         day: 'text-gray-900',
+        monthHeader: 'text-success-500 bg-success-200',
       },
       warning: {
         day: 'text-gray-900',
+        monthHeader: 'text-warning-500 bg-warning-200',
       },
       danger: {
         day: 'text-gray-900',
+        monthHeader: 'text-danger-500 bg-danger-200',
       },
     },
     isRange: {
@@ -199,7 +205,6 @@ export const calendar = tv({
       },
     },
     {
-      isRange: false,
       isSelected: true,
       color: 'primary',
       class: {
@@ -207,7 +212,6 @@ export const calendar = tv({
       },
     },
     {
-      isRange: false,
       isSelected: true,
       color: 'secondary',
       class: {
@@ -319,7 +323,7 @@ export const calendar = tv({
       isSelectionEnd: false,
       color: 'default',
       class: {
-        day: 'rounded-none bg-gray-50 text-black',
+        day: 'rounded-none bg-gray-200 text-black',
       },
     },
     {
@@ -329,7 +333,7 @@ export const calendar = tv({
       isSelectionEnd: false,
       color: 'primary',
       class: {
-        day: 'rounded-none bg-primary-50 text-primary-500',
+        day: 'rounded-none bg-primary-100 text-primary-500',
       },
     },
     {
@@ -337,9 +341,9 @@ export const calendar = tv({
       isRangeSelection: true,
       isSelectionStart: false,
       isSelectionEnd: false,
-      color: 'primary',
+      color: 'secondary',
       class: {
-        day: 'rounded-none bg-secondary-50 text-secondary-500',
+        day: 'rounded-none bg-secondary-100 text-secondary-500',
       },
     },
     {
@@ -349,7 +353,7 @@ export const calendar = tv({
       isSelectionEnd: false,
       color: 'success',
       class: {
-        day: 'rounded-none bg-success-50 text-success-500',
+        day: 'rounded-none bg-success-100 text-success-500',
       },
     },
     {
@@ -359,7 +363,7 @@ export const calendar = tv({
       isSelectionEnd: false,
       color: 'warning',
       class: {
-        day: 'rounded-none bg-warning-50 text-warning-500',
+        day: 'rounded-none bg-warning-100 text-warning-500',
       },
     },
     {
@@ -369,7 +373,24 @@ export const calendar = tv({
       isSelectionEnd: false,
       color: 'danger',
       class: {
-        day: 'rounded-none bg-danger-50 text-danger-500',
+        day: 'rounded-none bg-danger-100 text-danger-500',
+      },
+    },
+    // Selection start/end
+    {
+      isRange: true,
+      isSelectionStart: true,
+      isSelectionEnd: false,
+      class: {
+        day: 'rounded-r-none',
+      },
+    },
+    {
+      isRange: true,
+      isSelectionStart: false,
+      isSelectionEnd: true,
+      class: {
+        day: 'rounded-l-none',
       },
     },
     // Y/M picker expanded with size

@@ -2,7 +2,7 @@ import type { RangeCalendarState } from '@react-stately/calendar'
 import type { DateValue, RangeCalendarProps } from '@react-types/calendar'
 import type { UseCalendarBaseProps } from '../calendar-base'
 import type { CalendarContextType } from '../context'
-import { createCalendar } from '@internationalized/date'
+import { createCalendar, getLocalTimeZone, today } from '@internationalized/date'
 import { useRangeCalendarState } from '@react-stately/calendar'
 import { useCallback, useMemo } from 'react'
 import { useCalendarBase } from '../calendar-base'
@@ -35,6 +35,7 @@ export function useRangeCalendar(props: UseRangeCalendarProps) {
     maxValue,
     isDisabled,
     isReadOnly,
+    defaultFocusedValue: props.currentMonth ?? today(getLocalTimeZone()),
     createCalendar: id => createCalendar(id),
   })
 
