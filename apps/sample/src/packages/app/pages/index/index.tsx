@@ -34,7 +34,7 @@ export default function AppPage() {
             This is an `openModal` call. Can be closed by calling the `close` field of the returned object.
           </ModalBody>
           <ModalFooter className="p-4">
-            <Button color="primary" isBlock onTap={() => modal.close()}>
+            <Button color="primary" fullWidth onTap={() => modal.close()}>
               Close Call
             </Button>
           </ModalFooter>
@@ -50,7 +50,7 @@ export default function AppPage() {
         <DialogContent>
           <DialogBody className="flex flex-col items-center justify-center gap-4">
             This is an `openDialog` call. Can be closed by calling the `close` field of the returned object.
-            <Button color="danger" isBlock onTap={() => dialog.close()}>
+            <Button color="danger" fullWidth onTap={() => dialog.close()}>
               Close Call
             </Button>
           </DialogBody>
@@ -68,7 +68,7 @@ export default function AppPage() {
             This is an `openDrawer` call. Can be closed by calling the `close` field of the returned object.
           </DrawerBody>
           <DrawerFooter>
-            <Button color="danger" isBlock onTap={() => drawer.close()}>
+            <Button color="danger" fullWidth onTap={() => drawer.close()}>
               Close Call
             </Button>
           </DrawerFooter>
@@ -90,7 +90,7 @@ export default function AppPage() {
               <DrawerFooter>
                 <Button
                   color="danger"
-                  isBlock
+                  fullWidth
                   onTap={() => {
                     dialog.close()
                     drawer.close()

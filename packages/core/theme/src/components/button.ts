@@ -199,7 +199,7 @@ export const button = tv({
     size: 'md',
     color: 'default',
     variant: 'solid',
-    isBlock: false,
+    fullWidth: false,
     isDisabled: false,
     isInGroup: false,
     isLoading: false,

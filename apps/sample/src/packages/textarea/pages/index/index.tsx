@@ -31,7 +31,7 @@ export default function TextareaPage() {
           <View className="text-sm text-gray-800">Textarea supports controlled state with `value` and `onValueChange`.</View>
         </Box>
         <Textarea value={value} onValueChange={setValue} placeholder="Please input" />
-        <Button size="sm" isBlock className="mt-2" onTap={() => setValue('Updated value')}>Set Value</Button>
+        <Button size="sm" fullWidth className="mt-2" onTap={() => setValue('Updated value')}>Set Value</Button>
       </Section>
       <Section title="Slots" contentClass="space-y-2">
         <Textarea

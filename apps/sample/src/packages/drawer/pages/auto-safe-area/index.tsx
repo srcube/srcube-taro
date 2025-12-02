@@ -42,7 +42,7 @@ export default function Drawers() {
 
       <Box className="mb-4">This page set custom navigation style to display top drawer with top/bottom safe area.</Box>
 
-      <Button color="danger" isBlock onTap={() => { Taro.navigateBack() }}>Back</Button>
+      <Button color="danger" fullWidth onTap={() => { Taro.navigateBack() }}>Back</Button>
     </Page>
   )
 }

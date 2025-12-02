@@ -1258,6 +1258,9 @@ importers:
       '@srcube-taro/hooks':
         specifier: workspace:^
         version: link:../../core/hooks
+      '@srcube-taro/skeleton':
+        specifier: workspace:^
+        version: link:../skeleton
       '@srcube-taro/theme':
         specifier: workspace:^
         version: link:../../core/theme

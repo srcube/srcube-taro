@@ -26,7 +26,7 @@ export default function InputOtpPage() {
         {sizes.map(s => (
           <InputOtp key={s} isPassword={isPassward} size={s} />
         ))}
-        <Button isBlock className="mt-2" onTap={() => setIsPassward(!isPassward)}>
+        <Button fullWidth className="mt-2" onTap={() => setIsPassward(!isPassward)}>
           {isPassward ? 'Show' : 'Hide'} Code
         </Button>
       </Section>

@@ -4,7 +4,7 @@ import { tv } from '@srcube-taro/utils-tv'
 export const radioGroup = tv({
   base: 'flex gap-2',
   variants: {
-    isBlock: {
+    fullWidth: {
       true: 'w-full',
     },
     orientation: {
@@ -22,7 +22,7 @@ export const radioGroup = tv({
   },
   defaultVariants: {
     orientation: 'vertical',
-    isBlock: false,
+    fullWidth: false,
     isDisabled: false,
     isReadOnly: false,
   },

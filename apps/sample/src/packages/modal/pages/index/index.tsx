@@ -84,7 +84,7 @@ export default function ModalPage() {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, voluptatum aspernatur. Eius, odio! Aliquid neque expedita libero ex sunt cupiditate repellendus esse, magni obcaecati officiis recusandae veritatis! Reprehenderit, totam ipsa.
           </ModalBody>
           <ModalFooter className="p-3">
-            <Button color="primary" isBlock onTap={handleClose}>Confirm</Button>
+            <Button color="primary" fullWidth onTap={handleClose}>Confirm</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

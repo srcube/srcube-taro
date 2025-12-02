@@ -90,7 +90,7 @@ const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => 
       )}
       {customFooter || (
         <ModalFooter className={styles.footer}>
-          <ButtonGroup size="lg" isBlock className={styles.actionGroup}>
+          <ButtonGroup size="lg" fullWidth className={styles.actionGroup}>
             {[!isConfirmOnly && cancelAction, confirmAction].filter(Boolean) as React.ReactElement<ButtonProps>[]}
           </ButtonGroup>
         </ModalFooter>

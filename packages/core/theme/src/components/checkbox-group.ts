@@ -4,7 +4,7 @@ import { tv } from '@srcube-taro/utils-tv'
 export const checkboxGroup = tv({
   base: 'flex gap-2',
   variants: {
-    isBlock: {
+    fullWidth: {
       true: 'w-full',
     },
     orientation: {
@@ -14,7 +14,7 @@ export const checkboxGroup = tv({
   },
   defaultVariants: {
     orientation: 'vertical',
-    isBlock: false,
+    fullWidth: false,
   },
 })
 
