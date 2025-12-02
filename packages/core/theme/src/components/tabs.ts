@@ -5,7 +5,7 @@ export const tabs = tv({
   slots: {
     base: 'flex w-full',
     tabsWrapper: 'inline-flex relative p-1 w-fit max-w-full overflow-hidden bg-gray-100',
-    tabs: 'flex-grow relative w-full h-fit box-border',
+    tabs: 'flex flex-grow relative w-full h-fit box-border',
     tab: 'relative inline-flex z-0 px-3 py-1 justify-center items-center box-border cursor-pointer transition-opacity tap-highlight-transparent outline-none',
     tabContent: 'relative z-10 whitespace-nowrap transition-colors text-default-500',
     cursor: 'absolute z-0 bg-white ',
@@ -116,16 +116,12 @@ export const tabs = tv({
     },
     isVertical: {
       true: {
-        base: '',
-        tabs: 'h-full',
-        tab: 'flex',
-        cursor: '',
+        tabs: 'flex-col h-full',
         maskStart: 'top-0 left-0 w-full h-6 bg-gradient-to-b from-white to-transparent',
         maskEnd: 'bottom-0 left-0 w-full h-6 bg-gradient-to-t from-white to-transparent',
       },
       false: {
-        tabs: 'flex items-center',
-        cursor: '',
+        tabs: 'flex-row items-center',
         maskStart: 'left-0 top-0 h-full w-6 bg-gradient-to-r from-white to-transparent',
         maskEnd: 'right-0 top-0 h-full w-6 bg-gradient-to-l from-white to-transparent',
       },

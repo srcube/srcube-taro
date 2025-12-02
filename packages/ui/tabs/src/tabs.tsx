@@ -1,5 +1,6 @@
 import type { TaroElement } from '@tarojs/runtime'
 import type { UseTabsProps } from './use'
+import { Skeleton } from '@srcube-taro/ui'
 import { mergeProps } from '@srcube-taro/utils-func'
 import { ScrollView, View } from '@tarojs/components'
 import { forwardRef } from 'react'
@@ -16,6 +17,7 @@ const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: Re
     state,
     values,
     masks,
+    isMeasuring,
     getBaseProps,
     getScrollViewProps,
   } = useTabs<T>({
@@ -24,16 +26,21 @@ const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: Re
   })
 
   const tabsItems = [...state.collection].map((item, i) => (
-    <Tab
-      {...mergeProps(item.props, { style:
-        // Fix the scrollview horizontal offset issue
-        { position: 'relative', top: props.isVertical ? 0 : 10 } })
-      }
+    <Skeleton
       key={item.key}
-      item={item}
-      values={values}
-      index={i}
-    />
+      isLoaded={!isMeasuring}
+      // To solve the scrollview horizontal offset issue
+      style={{ position: 'relative', top: props.isVertical ? 0 : 10 }}
+    >
+      <Tab
+        {...item.props}
+        key={item.key}
+        index={i}
+        item={item}
+        values={values}
+        isMeasuring={isMeasuring}
+      />
+    </Skeleton>
   ))
 
   const hasPanels = [...state.collection].some(p => !!p?.props?.children)

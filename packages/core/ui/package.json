@@ -32,6 +32,7 @@
     "@srcube-taro/layout": "workspace:^",
     "@srcube-taro/modal": "workspace:^",
     "@srcube-taro/radio": "workspace:^",
+    "@srcube-taro/skeleton": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/switch": "workspace:^",
     "@srcube-taro/tabs": "workspace:^",

@@ -14,12 +14,13 @@ interface Props<T extends object = object> extends Omit<NativeProps<ViewProps>, 
   values: ValuesType<T>
   index?: number
   className?: string
+  isMeasuring?: boolean
 }
 
 export type UseTabProps<T extends object = object> = Props<T>
 
 export function useTab<T extends object = object>(props: UseTabProps<T>) {
-  const { ref, item, values, className, index, onTap, ...rest } = props
+  const { ref, item, values, className, index, isMeasuring, onTap, ...rest } = props
 
   const domRef = useDOMRef(ref)
   const key = item.key
@@ -30,21 +31,21 @@ export function useTab<T extends object = object>(props: UseTabProps<T>) {
 
   const handleTap = useCallback(
     (e: any) => {
-      if (isDisabled)
+      if (isDisabled || isMeasuring)
         return
       values.state.setSelectedKey(key)
       onTap?.(e)
     },
-    [isDisabled, key, onTap, values.state],
+    [isDisabled, isMeasuring, key, values.state, onTap],
   )
 
   const getTabProps = useCallback(() => ({
-    id: `${values.ids.item}-${key}`,
+    'id': `${values.ids.item}-${key}`,
     'data-index': index,
-    className: values.slots.tab({ isSelected, isDisabled, class: [values.classNames?.tab, className] }),
-    onClick: handleTap,
+    'className': values.slots.tab({ isSelected, isDisabled, class: [values.classNames?.tab, className] }),
+    'onClick': handleTap,
     ...rest,
-  }), [values.slots, values.classNames, className, isSelected, isDisabled, handleTap, rest, values.ids, index])
+  }), [values.slots, values.classNames, key, className, isSelected, isDisabled, rest, values.ids, index, handleTap])
 
   const getTabContentProps = useCallback(() => ({
     className: values.slots.tabContent({ isSelected, class: values.classNames?.tabContent }),

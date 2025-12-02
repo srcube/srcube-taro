@@ -117,6 +117,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     panel: slots.panel({ class: classNames?.panel }),
   }), [slots, classNames, className])
 
+  const [isMeasuring, setIsMeasuring] = useState(true)
   const [scrollPos, setScrollPos] = useState<{ left?: number, top?: number }>({})
 
   const tapSideRef = useRef<'start' | 'end' | 'top' | 'bottom' | null>(null)
@@ -138,8 +139,9 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     }), [state, slots, domRef, classNames, originalProps.isDisabled, ids])
 
   // Calculate container width/height and items offsets
-  useEffect(() => {
-    // FIXME: due to the async nature of the calculation, the scroll position may be incorrect on the first render, maybe render skeleton first
+  useLayoutEffect(() => {
+    setIsMeasuring(true);
+
     (async () => {
       try {
         const container = $(`#${values.ids.container}`)
@@ -188,6 +190,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
 
         scrollRef.current.maxLeft = Math.max(0, totalW - containerRef.current.width)
         scrollRef.current.maxTop = Math.max(0, totalH - containerRef.current.height)
+        setIsMeasuring(false)
       }
       catch {}
     })()
@@ -337,6 +340,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     slots,
     styles,
     masks,
+    isMeasuring,
     getBaseProps,
     getScrollViewProps,
   }
