@@ -33,6 +33,7 @@ packages/
 └── utils/          # 工具函数库
     ├── func/       # 通用函数工具
     ├── react/      # React 相关工具
+    ├── taro/       # Taro.js 相关工具
     ├── tv/         # Tailwind Variants 工具
     └── types/      # TypeScript 类型定义
 ```
@@ -141,7 +142,8 @@ packages/
 ### 5.2 代码标准
 - **UI/逻辑分离**: UI 代码在 `.tsx` 文件中；逻辑在 `use.ts` 文件中
 - **导出**: 对组件使用默认导出。`index.ts` 文件是包的公共 API
-- **Props**: 布尔类型的 props 必须使用语义化的前缀：`is` (状态), `has` (功能存在), `should` (条件动作), 或 `can` (能力)
+- **Props**: 布尔类型的 props 必须使用语义化的前缀：`is` (状态), `has` (功能存在), `should` (条件动作), 或 `can` (能力)，`on` (事件处理)
+- **Logic**: 组件的逻辑和状态管理都在 `use.ts` 文件中实现, 合理使用 `useState`, `useEffect`, `useMemo`, `useCallback` 等 hooks, 事件定义以 `handle` 开头
 - **类型安全**: 提供完整的 TypeScript 类型定义
 
 #### 5.2.1 统一错误处理标准
