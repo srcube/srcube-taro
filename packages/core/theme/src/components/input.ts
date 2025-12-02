@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const input = tv({
   slots: {
-    wrapper: [
+    base: [
       'relative inline-flex items-center gap-3',
       'px-3',
       'w-full min-w-0',
@@ -19,73 +19,73 @@ export const input = tv({
   variants: {
     variant: {
       default: {
-        wrapper: 'bg-slate-50',
+        base: 'bg-slate-50',
       },
       twotone: {
-        wrapper: 'border-2',
+        base: 'border-2',
       },
       outline: {
-        wrapper: 'border-2 border-gray-200 bg-transparent',
+        base: 'border-2 border-gray-200 bg-transparent',
       },
       underline: {
-        wrapper: 'border-b-2 border-gray-200 rounded-none',
+        base: 'border-b-2 border-gray-200 rounded-none',
       },
     },
     color: {
       default: {
-        wrapper: 'bg-slate-50',
+        base: 'bg-slate-50',
         clearButton: '',
       },
       primary: {
-        wrapper: 'bg-primary-50 text-primary',
+        base: 'bg-primary-50 text-primary',
         // input: 'text-primary',
         // clearButton: 'text-primary'
       },
       secondary: {
-        wrapper: 'bg-secondary-50 text-secondary',
+        base: 'bg-secondary-50 text-secondary',
         // input: 'text-secondary',
         // clearButton: 'text-secondary'
       },
       success: {
-        wrapper: 'bg-success-50 text-success',
+        base: 'bg-success-50 text-success',
         // input: 'text-success',
         // clearButton: 'text-success'
       },
       warning: {
-        wrapper: 'bg-warning-50 text-warning',
+        base: 'bg-warning-50 text-warning',
         // input: 'text-warning',
         // clearButton: 'text-warning'
       },
       danger: {
-        wrapper: 'bg-danger-50 text-danger',
+        base: 'bg-danger-50 text-danger',
         // input: 'text-danger',
         // clearButton: 'text-danger'
       },
     },
     size: {
       xs: {
-        wrapper: 'px-2 h-6 rounded-md',
+        base: 'px-2 h-6 rounded-md',
         input: 'text-xs',
         clearButton: 'text-xs',
         startContent: 'text-xs',
         endContent: 'text-xs',
       },
       sm: {
-        wrapper: 'px-3 h-8 rounded-lg',
+        base: 'px-3 h-8 rounded-lg',
         input: 'text-sm',
         clearButton: 'text-sm',
         startContent: 'text-sm',
         endContent: 'text-sm',
       },
       md: {
-        wrapper: 'px-4 h-10 rounded-xl',
+        base: 'px-4 h-10 rounded-xl',
         input: 'text-base',
         clearButton: 'text-base',
         startContent: 'text-base',
         endContent: 'text-base',
       },
       lg: {
-        wrapper: 'px-5 h-12 rounded-2xl',
+        base: 'px-5 h-12 rounded-2xl',
         input: 'text-lg',
         clearButton: 'text-lg',
         startContent: 'text-lg',
@@ -94,7 +94,7 @@ export const input = tv({
     },
     isDisabled: {
       true: {
-        wrapper: ['relative cursor-not-allowed overflow-hidden', 'before:content-[\'\'] before:absolute before:inset-0 before:bg-black/[0.02] before:z-0'],
+        base: ['relative cursor-not-allowed overflow-hidden', 'before:content-[\'\'] before:absolute before:inset-0 before:bg-black/[0.02] before:z-0'],
         input: 'cursor-not-allowed',
       },
     },
@@ -114,77 +114,77 @@ export const input = tv({
     {
       variant: 'underline',
       class: {
-        wrapper: 'rounded-none',
+        base: 'rounded-none',
       },
     },
     {
       variant: ['outline', 'underline'],
       color: ['default', 'primary', 'success', 'warning', 'danger'],
       class: {
-        wrapper: 'bg-transparent',
+        base: 'bg-transparent',
       },
     },
     {
       variant: ['outline', 'twotone', 'underline'],
       color: 'primary',
       class: {
-        wrapper: 'border-primary-500',
+        base: 'border-primary-500',
       },
     },
     {
       variant: ['outline', 'twotone', 'underline'],
       color: 'success',
       class: {
-        wrapper: 'border-success-500',
+        base: 'border-success-500',
       },
     },
     {
       variant: ['outline', 'twotone', 'underline'],
       color: 'warning',
       class: {
-        wrapper: 'border-warning-500',
+        base: 'border-warning-500',
       },
     },
     {
       variant: ['outline', 'twotone', 'underline'],
       color: 'danger',
       class: {
-        wrapper: 'border-danger-500',
+        base: 'border-danger-500',
       },
     },
     {
       isDisabled: true,
       color: 'default',
       class: {
-        wrapper: 'text-black/40',
+        base: 'text-black/40',
       },
     },
     {
       isDisabled: true,
       color: 'primary',
       class: {
-        wrapper: 'text-primary/40',
+        base: 'text-primary/40',
       },
     },
     {
       isDisabled: true,
       color: 'success',
       class: {
-        wrapper: 'text-success/40',
+        base: 'text-success/40',
       },
     },
     {
       isDisabled: true,
       color: 'warning',
       class: {
-        wrapper: 'text-warning/40',
+        base: 'text-warning/40',
       },
     },
     {
       isDisabled: true,
       color: 'danger',
       class: {
-        wrapper: 'text-danger/40',
+        base: 'text-danger/40',
       },
     },
   ],

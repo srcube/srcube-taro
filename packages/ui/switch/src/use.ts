@@ -9,7 +9,6 @@ import { useToggleState } from '@react-stately/toggle'
 import { toggle } from '@srcube-taro/theme'
 import { __DEV__, warn, withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 
 type OmitNativeKeys = 'checked' | 'disabled' | 'onChange'
@@ -101,14 +100,14 @@ export function useSwitch(props: UseSwitchProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
-      track: cn(slots.track({ class: classNames?.track })),
-      thumb: cn(slots.thumb({ class: classNames?.thumb })),
-      spinner: cn(slots.spinner({ class: classNames?.spinner })),
-      startContent: cn(slots.startContent({ class: classNames?.startContent })),
-      endContent: cn(slots.endContent({ class: classNames?.endContent })),
-      content: cn(slots.content({ class: classNames?.content })),
-      nSwitch: cn(slots.nSwitch()),
+      base: slots.base({ class: [classNames?.base, className] }),
+      track: slots.track({ class: classNames?.track }),
+      thumb: slots.thumb({ class: classNames?.thumb }),
+      spinner: slots.spinner({ class: classNames?.spinner }),
+      startContent: slots.startContent({ class: classNames?.startContent }),
+      endContent: slots.endContent({ class: classNames?.endContent }),
+      content: slots.content({ class: classNames?.content }),
+      nSwitch: slots.nSwitch(),
     }),
     [slots, classNames, className],
   )
@@ -139,9 +138,9 @@ export function useSwitch(props: UseSwitchProps) {
   }, [props.isDisabled, props.isReadOnly, isLoading, isAutoLoading, onTap, state])
 
   const getWrapperProps = useCallback((): ViewProps => ({
-    className: styles.wrapper,
+    className: styles.base,
     onClick: handleWrapperTap,
-  }), [styles.wrapper, handleWrapperTap])
+  }), [styles.base, handleWrapperTap])
 
   const getTrackProps = useCallback(
     () => ({
@@ -168,7 +167,6 @@ export function useSwitch(props: UseSwitchProps) {
   )
 
   return {
-    Component: 'View' as const,
     domRef,
     children,
     styles,

@@ -36,7 +36,7 @@ export function useToaster(_props: UseToasterProps) {
   }), [])
 
   const styles = useMemo(() => ({
-    wrapper: slots.wrapper(),
+    wrapper: slots.base(),
   }), [slots])
 
   return {

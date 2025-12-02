@@ -2,7 +2,7 @@ import type { OverlayTriggerProps } from '@react-stately/overlays'
 import type { ModalSlots, ModalVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { NativeProps } from '@srcube-taro/utils-types'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import type { ReactElement } from 'react'
@@ -13,7 +13,6 @@ import { useOverlayTriggerState } from '@react-stately/overlays'
 import { useAnimatePresence, usePageScrollLock } from '@srcube-taro/hooks'
 import { modal } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from 'react'
 
 type OmitNativeKeys = ''
@@ -54,8 +53,7 @@ export interface ModalRef {
   close: () => void
 }
 
-export type UseModalProps = Omit<Props, keyof ModalVariantProps> &
-  ModalVariantProps
+export type UseModalProps = MergeVariantProps<Props, ModalVariantProps>
 
 export function useModal(props: UseModalProps) {
   const {
@@ -99,7 +97,7 @@ export function useModal(props: UseModalProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: slots.wrapper({ class: cn([classNames?.wrapper, className]) }),
+      base: slots.base({ class: [classNames?.base, className] }),
       backdrop: slots.backdrop({ class: classNames?.backdrop }),
       content: slots.content({ class: classNames?.content }),
       header: slots.header({ class: classNames?.header }),
@@ -134,6 +132,7 @@ export function useModal(props: UseModalProps) {
       close()
     }
     catch (error) {
+      // @ts-expect-error process env
       if (process.env.NODE_ENV === 'development') {
         console.error('[Modal] Backdrop tap failed:', error)
       }

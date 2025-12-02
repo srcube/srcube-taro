@@ -5,8 +5,7 @@ import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ITouchEvent, TextareaProps as NativeTextareaProps, TextareaProps, ViewProps } from '@tarojs/components'
 import { textarea } from '@srcube-taro/theme'
 import { useControlledState, useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 type OmitNativeKeys = 'disabled' | 'onInput' | 'maxlength'
 
@@ -35,7 +34,7 @@ interface Props extends Omit<NativeProps<TextareaProps>, OmitNativeKeys> {
   /**
    * Class names to apply to slots
    */
-  classNames?: SlotsToClasses<TextareaSlots>
+  classNames?: SlotsToClasses<Exclude<TextareaSlots, 'iInputClear'>>
   /**
    * Clear button click event
    */
@@ -75,13 +74,14 @@ export function useTextarea(props: UseTextareaProps) {
 
   const domRef = useDOMRef(ref)
 
-  const slots = textarea({ size, color, isDisabled, isClearable })
-  const styles = {
-    wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
-    textarea: cn(slots.textarea({ class: classNames?.textarea })),
-    clearButton: cn(slots.clearButton({ class: classNames?.clearButton })),
-    iInputClear: cn(slots.iInputClear()),
-  }
+  const slots = useMemo(() => textarea({ size, color, isDisabled, isClearable }), [size, color, isDisabled, isClearable])
+
+  const styles = useMemo(() => ({
+    wrapper: slots.base({ class: [classNames?.base, className] }),
+    textarea: slots.textarea({ class: classNames?.textarea }),
+    clearButton: slots.clearButton({ class: classNames?.clearButton }),
+    iInputClear: slots.iInputClear(),
+  }), [slots, classNames, className])
 
   const [textareaValue, setTextareaValue] = useControlledState<string | undefined>(value, defaultValue, onValueChange)
 
@@ -113,9 +113,9 @@ export function useTextarea(props: UseTextareaProps) {
       maxlength: maxLength,
       disabled: isDisabled,
       disableDefaultPadding,
+      className: styles.textarea,
       onInput: onTextareaInput,
       onClick: onTextareaTap,
-      className: styles.textarea,
       ...rest,
     }
   }, [textareaValue, maxLength, isDisabled, disableDefaultPadding, onTextareaInput, onTextareaTap, styles.textarea, rest])

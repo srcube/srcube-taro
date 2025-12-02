@@ -8,7 +8,6 @@ import type { ReactNode } from 'react'
 import { radio } from '@srcube-taro/theme'
 import { __DEV__, warn, withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 import { useRadioItem } from './hooks/use-radio-item'
 import { useRadioGroupContext } from './radio-group/context'
@@ -35,7 +34,7 @@ export interface Props extends NativeProps<Omit<RadioProps, OmitNativeKeys>>, To
   /**
    * Class names to apply to the radio slots
    */
-  classNames?: SlotsToClasses<Exclude<RadioSlots, 'iDefault'>>
+  classNames?: SlotsToClasses<Exclude<RadioSlots, 'nRadio' | 'iDefault'>>
   /**
    * React aria onChange event
    */
@@ -63,6 +62,8 @@ export function useRadio(props: UseRadioProps) {
     color = groupCtx?.color || 'default',
     size = groupCtx?.size || 'md',
     iconContent,
+    className,
+    classNames,
     onTap,
     onChange: onChangeProp,
     // onValueChange = groupCtx?.onValueChange,
@@ -100,16 +101,16 @@ export function useRadio(props: UseRadioProps) {
   )
 
   const styles = useMemo(() => ({
-    wrapper: cn(slots.wrapper()),
-    radio: cn(slots.radio()),
-    spinner: cn(slots.spinner()),
-    content: cn(slots.content()),
-    iconWrapper: cn(slots.iconWrapper()),
-    iDefault: cn(slots.iDefault()),
-    nRadio: cn(slots.nRadio()),
-  }), [slots])
+    base: slots.base({ class: [classNames?.base, className] }),
+    radio: slots.radio({ class: classNames?.radio }),
+    spinner: slots.spinner({ class: classNames?.spinner }),
+    content: slots.content({ class: classNames?.content }),
+    iconWrapper: slots.iconWrapper({ class: classNames?.iconWrapper }),
+    iDefault: slots.iDefault(),
+    nRadio: slots.nRadio(),
+  }), [slots, classNames, className])
 
-  const handleWrapperTap = useCallback(async (e: ITouchEvent) => {
+  const handleBaseTap = useCallback(async (e: ITouchEvent) => {
     if (isReadOnlyProp || isDisabledProp || isLoading) {
       e.preventDefault()
       return
@@ -134,10 +135,10 @@ export function useRadio(props: UseRadioProps) {
     }
   }, [isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onTap, onChange])
 
-  const getWrapperProps = useCallback((): ViewProps => ({
-    className: styles.wrapper,
-    onClick: handleWrapperTap,
-  }), [styles, handleWrapperTap])
+  const getBaseProps = useCallback((): ViewProps => ({
+    className: styles.base,
+    onClick: handleBaseTap,
+  }), [styles, handleBaseTap])
 
   const getNRadioProps = useCallback((): RadioProps => ({
     ...rest,
@@ -157,7 +158,7 @@ export function useRadio(props: UseRadioProps) {
     color,
     size,
     iconContent,
-    getWrapperProps,
+    getBaseProps,
     getNRadioProps,
   }
 }

@@ -31,7 +31,6 @@
     "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
     "@tarojs/runtime": "catalog:",
-    "classnames": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

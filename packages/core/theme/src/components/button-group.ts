@@ -4,12 +4,12 @@ import { tv } from '@srcube-taro/utils-tv'
 export const buttonGroup = tv({
   base: 'inline-flex items-center justify-center h-auto',
   variants: {
-    isBlock: {
+    fullWidth: {
       true: 'w-full',
     },
   },
   defaultVariants: {
-    isBlock: false,
+    fullWidth: false,
   },
 })
 

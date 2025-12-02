@@ -14,7 +14,7 @@ import { useCheckboxItem } from './hooks/use-checkbox-item'
 
 type OmitNativeKeys = 'value' | 'checked' | 'disabled' | 'onChange'
 
-export interface Props extends NativeProps<Omit<CheckboxProps, OmitNativeKeys>>, ToggleStateOptions {
+export interface Props extends Omit<NativeProps<CheckboxProps>, OmitNativeKeys>, ToggleStateOptions {
   /**
    * Ref to the DOM element
    */
@@ -107,7 +107,7 @@ export function useCheckbox(props: UseCheckboxProps) {
   )
 
   const styles = useMemo(() => ({
-    wrapper: slots.wrapper({ class: classNames?.wrapper }),
+    base: slots.base({ class: classNames?.base }),
     checkbox: slots.checkbox({ class: classNames?.checkbox }),
     spinner: slots.spinner({ class: classNames?.spinner }),
     content: slots.content({ class: classNames?.content }),
@@ -144,7 +144,7 @@ export function useCheckbox(props: UseCheckboxProps) {
   }, [isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onTap, toggle])
 
   const getWrapperProps = useCallback((): ViewProps => ({
-    className: styles.wrapper,
+    className: styles.base,
     onClick: handleWrapperTap,
   }), [styles, handleWrapperTap])
 

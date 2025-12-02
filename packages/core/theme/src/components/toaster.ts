@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const toaster = tv({
   slots: {
-    wrapper: [
+    base: [
       'absolute inset-0 flex items-center justify-center m-auto w-fit h-fit',
     ],
     stack: [],
@@ -18,7 +18,7 @@ export const toaster = tv({
 
 export const toast = tv({
   slots: {
-    wrapper: [
+    base: [
       'absolute',
       'flex flex-col items-center justify-center gap-1',
       'm-2 p-4 w-40 min-h-40 border-box',

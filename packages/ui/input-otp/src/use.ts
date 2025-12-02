@@ -5,7 +5,6 @@ import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { CommonEvent, InputProps as NativeInputProps } from '@tarojs/components'
 import { inputOtp } from '@srcube-taro/theme'
 import { useControlledState, useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 
 type OmitNativeKeys = 'onInput' | 'password' | 'type'
@@ -87,11 +86,11 @@ export function useInputOtp(props: UseInputOtpProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
-      hiddenInput: cn(slots.hiddenInput()),
-      box: cn(slots.box({ class: classNames?.box })),
-      cursor: cn(slots.cursor()),
-      dot: cn(slots.dot()),
+      base: slots.base({ class: [classNames?.base, className] }),
+      hiddenInput: slots.hiddenInput(),
+      box: slots.box({ class: classNames?.box }),
+      cursor: slots.cursor(),
+      dot: slots.dot(),
     }),
     [className, classNames, slots],
   )
@@ -119,10 +118,10 @@ export function useInputOtp(props: UseInputOtpProps) {
 
   const getWrapperProps = useCallback(() => {
     return {
-      className: styles.wrapper,
+      className: styles.base,
       onTap: handleWrapperTap,
     }
-  }, [styles.wrapper, handleWrapperTap])
+  }, [styles.base, handleWrapperTap])
 
   const getHiddenInputProps = useCallback((): NativeInputProps => {
     return {
@@ -142,7 +141,7 @@ export function useInputOtp(props: UseInputOtpProps) {
   const chars = (inputValue || '').split('').slice(0, length)
   const boxes = Array.from({ length }, (_, i) => ({
     char: chars[i] || '',
-    className: cn(styles.box, i === activeIndex ? 'bg-black/10' : ''),
+    className: styles.box,
     showCursor: isFocused && i === activeIndex && !chars[i],
   }))
 

@@ -53,10 +53,10 @@ export function useButton(props: UseButtonProps) {
     variant = groupCtx?.variant ?? 'solid',
     color = groupCtx?.color ?? 'default',
     size = groupCtx?.size ?? 'md',
-    round = groupCtx?.round ?? 'md',
+    radius = groupCtx?.radius ?? 'md',
+    fullWidth = groupCtx?.fullWidth,
     isDisabled = groupCtx?.isDisabled,
     isIcon = groupCtx?.isIcon,
-    isBlock = groupCtx?.isBlock,
     className,
     hoverClass,
     startContent,
@@ -84,11 +84,11 @@ export function useButton(props: UseButtonProps) {
         variant,
         color,
         size,
-        round,
+        radius,
+        fullWidth,
         isDisabled: isDisabled || isLoading,
         isLoading,
         isIcon,
-        isBlock,
         isInGroup,
         className,
       }),
@@ -98,10 +98,10 @@ export function useButton(props: UseButtonProps) {
         className: hoverClass,
       }),
     }),
-    [variant, color, size, round, isDisabled, isLoading, isIcon, isBlock, isInGroup, className, hoverClass],
+    [variant, color, size, radius, fullWidth, isDisabled, isLoading, isIcon, isInGroup, className, hoverClass],
   )
 
-  const renderPlacedContent = useMemo(
+  const placedContent = useMemo(
     () => (placement: 'start' | 'end') => {
       if (isLoading && spinner && spinnerPlacement === placement) {
         return spinner
@@ -144,8 +144,8 @@ export function useButton(props: UseButtonProps) {
     Component,
     domRef: ref,
     styles,
-    startContent: renderPlacedContent('start'),
-    endContent: renderPlacedContent('end'),
+    startContent: placedContent('start'),
+    endContent: placedContent('end'),
     spinner,
     spinnerPlacement,
     children,

@@ -1,5 +1,5 @@
 import type { CalendarDate } from '@internationalized/date'
-import type { BaseEventOrigFunction, ScrollViewProps } from '@tarojs/components'
+import type { BaseEventOrig, ScrollViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import { getWeeksInMonth } from '@internationalized/date'
 import { $ } from '@tarojs/extend'
@@ -115,7 +115,8 @@ export function useCalendarMonthList(props: UseCalendarMonthListProps) {
     }))
   }, [data, renderStartIndex, renderEndIndex, measured])
 
-  const handleScroll = useCallback<BaseEventOrigFunction<ScrollViewProps.onScrollDetail>>((e) => {
+  // FIXME: miniprogram real environment on phone scroll may not be smooth, when view re-render, the scroll position may be incorrect
+  const handleScroll = useCallback((e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => {
     const top = e.detail.scrollTop
     isScrollingRef.current = true
     requestAnimationFrame(() => {

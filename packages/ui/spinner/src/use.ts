@@ -6,7 +6,6 @@ import type { ViewProps } from '@tarojs/components'
 import type { ReactNode } from 'react'
 import { spinner } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo } from 'react'
 
 interface Props extends NativeProps<ViewProps> {
@@ -36,7 +35,7 @@ export function useSpinner(props: UseSpinnerProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
+      base: slots.base({ class: [classNames?.base, className] }),
       label: slots.label({ class: classNames?.label }),
       iSpinner: slots.iSpinner(),
     }),
@@ -45,7 +44,7 @@ export function useSpinner(props: UseSpinnerProps) {
 
   const getSpinnerProps = useCallback((): ViewProps => ({
     ref: domRef,
-    className: styles.wrapper,
+    className: styles.base,
     ...rest,
   }), [domRef, styles, rest])
 

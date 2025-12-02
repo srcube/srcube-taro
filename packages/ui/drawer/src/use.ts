@@ -7,8 +7,7 @@ import type { ReactNode } from 'react'
 import { useOverlayTriggerState } from '@react-stately/overlays'
 import { drawer } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import Taro from '@tarojs/taro'
-import cn from 'classnames'
+import { getCurrentPages } from '@tarojs/taro'
 import { useCallback, useMemo } from 'react'
 
 interface Props extends ModalProps {
@@ -51,7 +50,7 @@ export function useDrawer(props: UseDrawerProps) {
     ...rest
   } = props
 
-  const pages = Taro.getCurrentPages()
+  const pages = getCurrentPages()
 
   const domRef = useDOMRef(ref)
 
@@ -76,7 +75,7 @@ export function useDrawer(props: UseDrawerProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: slots.wrapper({ class: cn([classNames?.wrapper, className]) }),
+      base: slots.base({ class: [classNames?.base, className] }),
       backdrop: slots.backdrop({ class: classNames?.backdrop }),
       content: slots.content({ class: classNames?.content }),
       header: slots.header({ class: classNames?.header }),

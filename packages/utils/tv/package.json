@@ -23,7 +23,6 @@
   "dependencies": {
     "@weapp-core/escape": "catalog:",
     "@weapp-tailwindcss/merge": "catalog:",
-    "classnames": "catalog:",
     "tailwind-merge": "catalog:",
     "tailwind-variants": "catalog:"
   },

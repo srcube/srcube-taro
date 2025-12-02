@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const calendar = tv({
   slots: {
-    wrapper: 'flex flex-col w-full bg-white',
+    base: 'flex flex-col w-full bg-white',
     header: 'flex items-center justify-between p-4 gap-4',
     content: 'relative flex-grow flex flex-col bg-gray-50 overflow-hidden',
     jumpTrigger: '',

@@ -1,6 +1,6 @@
 import type { ButtonGroupVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { NativeProps } from '@srcube-taro/utils-types'
+import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { ReactElement } from 'react'
 import type { ButtonProps } from '../button'
@@ -8,7 +8,9 @@ import { buttonGroup } from '@srcube-taro/theme'
 import { View } from '@tarojs/components'
 import { useCallback, useMemo } from 'react'
 
-interface Props {
+type OmitNativeKeys = ''
+
+interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys> {
   /**
    * Ref to the DOM element
    */
@@ -25,13 +27,11 @@ interface Props {
   children?: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
 }
 
-export type PickButtonProps = Pick<ButtonProps, 'size' | 'round' | 'color' | 'variant' | 'isDisabled' | 'isIcon' | 'isBlock' | 'isLoading'>
+export type PickButtonProps = Pick<ButtonProps, 'size' | 'radius' | 'color' | 'variant' | 'fullWidth' | 'isDisabled' | 'isIcon' | 'isLoading'>
 
 export type ContextType = PickButtonProps
 
-export type OmittedVariantProps = Omit<NativeProps<ViewProps>, keyof ButtonGroupVariantProps>
-
-export type UseButtonGroupProps = Props & OmittedVariantProps & ButtonGroupVariantProps & Partial<PickButtonProps>
+export type UseButtonGroupProps = MergeVariantProps<Props, ButtonGroupVariantProps> & Partial<PickButtonProps>
 
 export function useButtonGroup(props: UseButtonGroupProps) {
   const {
@@ -39,11 +39,11 @@ export function useButtonGroup(props: UseButtonGroupProps) {
     color = 'default',
     variant = 'solid',
     size = 'md',
-    round = 'md',
+    radius = 'md',
     isLoading = false,
     isDisabled = false,
     isIcon = false,
-    isBlock,
+    fullWidth,
     className,
     children,
     ...rest
@@ -53,22 +53,22 @@ export function useButtonGroup(props: UseButtonGroupProps) {
 
   const styles = useMemo(
     () => buttonGroup({
-      isBlock,
+      fullWidth,
       className,
     }),
-    [className, isBlock],
+    [className, fullWidth],
   )
 
   const context = useMemo<ContextType>(() => ({
     size,
-    round,
+    radius,
     color,
     variant,
+    fullWidth,
     isDisabled,
     isIcon,
-    isBlock,
     isLoading,
-  }), [size, round, color, variant, isDisabled, isIcon, isBlock, isLoading])
+  }), [size, radius, color, variant, fullWidth, isDisabled, isIcon, isLoading])
 
   const getGroupProps = useCallback((): ViewProps => ({
     role: 'group',

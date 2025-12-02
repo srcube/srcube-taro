@@ -68,7 +68,7 @@ export function useToast(props: UseToastProps) {
   }), [color])
 
   const styles = useMemo(() => ({
-    wrapper: slots.wrapper(),
+    wrapper: slots.base(),
     icon: slots.icon(),
     content: slots.content(),
     title: slots.title(),

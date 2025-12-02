@@ -3,8 +3,8 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const dialog = tv({
   slots: {
-    wrapper: [],
-    backdrop: [],
+    base: '',
+    backdrop: '',
     content: ['absolute inset-0 overflow-hidden m-auto w-full max-w-[90%] h-fit rounded-3xl bg-white shadow-sm'],
     header: ['p-3 text-center text-lg font-semibold'],
     body: ['px-4 pt-2 pb-4 text-zinc-500'],

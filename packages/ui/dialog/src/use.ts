@@ -10,7 +10,6 @@ import { useAnimatePresence } from '@srcube-taro/hooks'
 import { dialog } from '@srcube-taro/theme'
 import { withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo, useState } from 'react'
 import i18n from './i18n'
 
@@ -113,7 +112,7 @@ export function useDialog(props: UseDialogProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: slots.wrapper({ class: cn([classNames?.wrapper, className]) }),
+      base: slots.base({ class: [classNames?.base, className] }),
       backdrop: slots.backdrop({ class: classNames?.backdrop }),
       content: slots.content({ class: classNames?.content }),
       header: slots.header({ class: classNames?.header }),

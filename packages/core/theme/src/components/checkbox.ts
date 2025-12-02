@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const checkbox = tv({
   slots: {
-    wrapper: 'relative inline-flex items-center cursor-pointer select-none',
+    base: 'relative inline-flex items-center cursor-pointer select-none',
     checkbox: [
       'relative flex-shrink-0 flex items-center justify-center mr-2 size-6 bg-transparent',
       'before:absolute before:inset-0 before:border-4 before:border-gray-300',
@@ -81,19 +81,19 @@ export const checkbox = tv({
     },
     isSelected: {
       true: {
-        wrapper: '',
+        base: '',
         iconWrapper: 'display-block opacity-100 delay-200',
         checkbox: ['', 'after:opacity-1 after:scale-100'],
       },
       false: {
-        wrapper: '',
+        base: '',
         iconWrapper: 'display-none opacity-0 duration-0',
         checkbox: ['', 'after:opacity-0 after:scale-50'],
       },
     },
     isIndeterminate: {
       true: {
-        wrapper: '',
+        base: '',
         iconWrapper: 'display-block opacity-100 delay-200',
         checkbox: ['', 'after:opacity-1 after:scale-100'],
       },
@@ -106,7 +106,7 @@ export const checkbox = tv({
     },
     isDisabled: {
       true: {
-        wrapper: 'opacity-50 cursor-not-allowed',
+        base: 'opacity-50 cursor-not-allowed',
       },
     },
     isLoading: {

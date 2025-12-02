@@ -112,7 +112,7 @@ export function useCalendarBase(props: UseCalendarBaseProps) {
 
   const styles = useMemo(() => {
     return {
-      wrapper: slots.wrapper({ class: className ?? classNames?.wrapper }),
+      base: slots.base({ class: className ?? classNames?.base }),
       content: slots.content({ class: classNames?.content }),
       pickerWrapper: slots.pickerWrapper({ class: classNames?.pickerWrapper }),
       pickerContent: slots.pickerContent({ class: classNames?.pickerContent }),

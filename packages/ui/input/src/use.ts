@@ -6,7 +6,6 @@ import type { CommonEvent, InputProps, InputProps as NativeInputProps } from '@t
 import type { ReactNode } from 'react'
 import { input } from '@srcube-taro/theme'
 import { useControlledState, useDOMRef } from '@srcube-taro/utils-react'
-import cn from 'classnames'
 import { useCallback, useMemo } from 'react'
 
 type OmitNativeKeys = 'disabled' | 'password' | 'onInput'
@@ -96,12 +95,12 @@ export function useInput(props: UseInputProps) {
 
   const styles = useMemo(
     () => ({
-      wrapper: cn(slots.wrapper({ class: classNames?.wrapper }), className),
-      input: cn(slots.input({ class: classNames?.input })),
-      clearButton: cn(slots.clearButton({ class: classNames?.clearButton })),
-      startContent: cn(slots.startContent({ class: classNames?.startContent })),
-      endContent: cn(slots.endContent({ class: classNames?.endContent })),
-      iInputClear: cn(slots.iInputClear()),
+      base: slots.base({ class: [classNames?.base, className] }),
+      input: slots.input({ class: classNames?.input }),
+      clearButton: slots.clearButton({ class: classNames?.clearButton }),
+      startContent: slots.startContent({ class: classNames?.startContent }),
+      endContent: slots.endContent({ class: classNames?.endContent }),
+      iInputClear: slots.iInputClear(),
     }),
     [className, classNames, slots],
   )
@@ -138,10 +137,10 @@ export function useInput(props: UseInputProps) {
 
   const getWrapperProps = useCallback(() => {
     return {
-      className: styles.wrapper,
+      className: styles.base,
       onTap: handleWrapperTap,
     }
-  }, [styles.wrapper, handleWrapperTap])
+  }, [styles.base, handleWrapperTap])
 
   const getInputProps = useCallback((): NativeInputProps => {
     return {

@@ -34,6 +34,7 @@
     "@srcube-taro/radio": "workspace:^",
     "@srcube-taro/spinner": "workspace:^",
     "@srcube-taro/switch": "workspace:^",
+    "@srcube-taro/tabs": "workspace:^",
     "@srcube-taro/textarea": "workspace:^",
     "@srcube-taro/toaster": "workspace:^"
   },

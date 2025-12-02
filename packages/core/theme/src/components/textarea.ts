@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const textarea = tv({
   slots: {
-    wrapper: [
+    base: [
       'relative inline-flex items-start gap-3',
       'px-3',
       'w-full min-w-0',
@@ -17,28 +17,28 @@ export const textarea = tv({
   variants: {
     size: {
       xs: {
-        wrapper: 'px-2 py-1 rounded-md',
+        base: 'px-2 py-1 rounded-md',
         textarea: 'max-h-16 text-xs',
         clearButton: 'text-xs',
         startContent: 'text-xs',
         endContent: 'text-xs',
       },
       sm: {
-        wrapper: 'px-3 py-1.5 rounded-lg',
+        base: 'px-3 py-1.5 rounded-lg',
         textarea: 'max-h-20 text-sm',
         clearButton: 'text-sm',
         startContent: 'text-sm',
         endContent: 'text-sm',
       },
       md: {
-        wrapper: 'px-4 py-2 rounded-xl',
+        base: 'px-4 py-2 rounded-xl',
         textarea: 'max-h-24 text-base',
         clearButton: 'text-base',
         startContent: 'text-base',
         endContent: 'text-base',
       },
       lg: {
-        wrapper: 'px-5 py-3 rounded-2xl',
+        base: 'px-5 py-3 rounded-2xl',
         textarea: 'max-h-28 text-lg',
         clearButton: 'text-lg',
         startContent: 'text-lg',
@@ -47,27 +47,27 @@ export const textarea = tv({
     },
     color: {
       default: {
-        wrapper: 'bg-slate-50',
+        base: 'bg-slate-50',
       },
       primary: {
-        wrapper: 'bg-primary-50 text-primary',
+        base: 'bg-primary-50 text-primary',
       },
       secondary: {
-        wrapper: 'bg-secondary-50 text-secondary',
+        base: 'bg-secondary-50 text-secondary',
       },
       success: {
-        wrapper: 'bg-success-50 text-success',
+        base: 'bg-success-50 text-success',
       },
       warning: {
-        wrapper: 'bg-warning-50 text-warning',
+        base: 'bg-warning-50 text-warning',
       },
       danger: {
-        wrapper: 'bg-danger-50 text-danger',
+        base: 'bg-danger-50 text-danger',
       },
     },
     isDisabled: {
       true: {
-        wrapper: ['relative cursor-not-allowed overflow-hidden', 'before:content-[""] before:absolute before:inset-0 before:bg-black/[0.02] before:z-0'],
+        base: ['relative cursor-not-allowed overflow-hidden', 'before:content-[""] before:absolute before:inset-0 before:bg-black/[0.02] before:z-0'],
         textarea: 'cursor-not-allowed',
       },
       false: {},

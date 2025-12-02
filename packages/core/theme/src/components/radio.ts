@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const radio = tv({
   slots: {
-    wrapper: 'relative flex gap-2',
+    base: 'relative flex gap-2',
     radio: [
       'relative flex-shrink-0 flex items-center justify-center size-6 bg-transparent cursor-pointer',
       'before:absolute before:inset-0 before:border-4 before:border-gray-300 before:rounded-full',
@@ -63,10 +63,10 @@ export const radio = tv({
     },
     orientation: {
       horizontal: {
-        wrapper: '',
+        base: '',
       },
       vertical: {
-        wrapper: '',
+        base: '',
       },
     },
     isSelected: {
@@ -79,13 +79,13 @@ export const radio = tv({
     },
     isReadOnly: {
       true: {
-        wrapper: 'cursor-default',
+        base: 'cursor-default',
       },
       false: {},
     },
     isDisabled: {
       true: {
-        wrapper: 'opacity-50 cursor-not-allowed',
+        base: 'opacity-50 cursor-not-allowed',
         radio: 'cursor-not-allowed',
       },
       false: {},

@@ -31,6 +31,16 @@ export const button = tv({
       md: 'h-10 px-4 text-base',
       lg: 'h-12 px-6 text-lg',
     },
+    radius: {
+      none: 'rounded-none',
+      sm: 'rounded-lg',
+      md: 'rounded-xl',
+      lg: 'rounded-2xl',
+      full: 'rounded-full',
+    },
+    fullWidth: {
+      true: 'w-full',
+    },
     isLoading: {
       true: 'opacity-50',
       false: '',
@@ -40,21 +50,11 @@ export const button = tv({
       true: 'opacity-50',
       false: '',
     },
-    isBlock: {
-      true: 'w-full',
-    },
     isInGroup: {
       true: 'rounded-none',
     },
     isIcon: {
       true: 'p-0',
-    },
-    round: {
-      xs: 'rounded-md',
-      sm: 'rounded-lg',
-      md: 'rounded-xl',
-      lg: 'rounded-2xl',
-      full: 'rounded-full',
     },
   },
   compoundVariants: [
@@ -164,22 +164,27 @@ export const button = tv({
     // isInGroup state
     {
       isInGroup: true,
-      round: 'xs',
-      class: 'rounded-none first:rounded-l-md last:rounded-r-md',
+      radius: 'none',
+      class: 'rounded-none first:rounded-none last:rounded-none',
     },
     {
       isInGroup: true,
-      round: 'md',
+      size: 'sm',
+      class: 'rounded-none first:rounded-l-lg last:rounded-r-lg',
+    },
+    {
+      isInGroup: true,
+      radius: 'md',
       class: 'rounded-none first:rounded-l-xl last:rounded-r-xl',
     },
     {
       isInGroup: true,
-      round: 'lg',
+      radius: 'lg',
       class: 'rounded-none first:rounded-l-2xl last:rounded-r-2xl',
     },
     {
       isInGroup: true,
-      round: 'full',
+      radius: 'full',
       class: 'rounded-none first:rounded-l-full last:rounded-r-full',
     },
     // ? Important because native inject color in disabled state
@@ -285,7 +290,7 @@ export const buttonHover = tv({
   defaultVariants: {
     color: 'default',
     size: 'md',
-    round: 'md',
+    radius: 'md',
     variant: 'solid',
     isLoading: 'auto',
   },

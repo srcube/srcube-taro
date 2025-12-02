@@ -1,4 +1,5 @@
 import type { StandardProps } from '@tarojs/components'
+import type { Key, ReactElement, ReactNode, Ref, RefAttributes } from 'react'
 
 /**
  * Component base props definition
@@ -11,6 +12,21 @@ export type NativeProps<T extends StandardProps = StandardProps> = Omit<
 > & {
   onTap?: T['onClick']
   onLongTap?: T['onLongClick']
+}
+
+export interface CollectionProps<T> {
+  /**
+   * The items in the collection.
+   */
+  items?: T[]
+  /**
+   * The contents of the collection.
+   */
+  children?: ReactNode | ((item: T) => ReactElement)
+  /**
+   * The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with.
+   */
+  disabledKeys?: Iterable<Key>
 }
 
 /**

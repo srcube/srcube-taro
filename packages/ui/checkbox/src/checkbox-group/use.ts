@@ -9,9 +9,11 @@ import { checkboxGroup } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo } from 'react'
 
+type OmitNativeKeys = ''
+
 type PickCheckboxProps = Pick<CheckboxProps, 'color' | 'size' | 'radius' | 'isDisabled' | 'isReadOnly' | 'isLineThrough'>
 
-interface Props extends NativeProps<ViewProps>, PickCheckboxProps {
+interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, PickCheckboxProps {
   /**
    * Ref to the DOM element
    */

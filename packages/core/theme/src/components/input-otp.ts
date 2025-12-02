@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const inputOtp = tv({
   slots: {
-    wrapper: [
+    base: [
       'relative inline-flex items-center gap-1',
       'w-full min-w-0',
       'transition-all duration-200 ease-out',

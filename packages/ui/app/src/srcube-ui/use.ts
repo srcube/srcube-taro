@@ -1,6 +1,7 @@
 import type { DialogProps } from '@srcube-taro/dialog'
 import type { DrawerProps } from '@srcube-taro/drawer'
 import type { ModalProps, ModalRef } from '@srcube-taro/modal'
+import type { ToastProps } from '@srcube-taro/toaster'
 // import type { ToastProps } from '@srcube-taro/toaster'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
@@ -86,7 +87,7 @@ export function useSrcubeUI(props: UseSrcubeUIProps) {
     }
   }, [openModal, openDialog, openDrawer])
 
-  const getWrapperProps = useCallback((): ViewProps => ({
+  const getBaseProps = useCallback((): ViewProps => ({
     ...rest,
     ref: domRef,
   }), [rest, domRef])
@@ -96,7 +97,7 @@ export function useSrcubeUI(props: UseSrcubeUIProps) {
     children,
     modalRefs,
     modals,
-    getWrapperProps,
+    getBaseProps,
   }
 }
 

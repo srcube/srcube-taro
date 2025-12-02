@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const spinner = tv({
   slots: {
-    wrapper: 'relative flex flex-col items-center justify-center gap-2',
+    base: 'relative flex flex-col items-center justify-center gap-2',
     iSpinner: 'icon-spinner size-4',
     label: 'text-base',
   },

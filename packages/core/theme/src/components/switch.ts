@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const toggle = tv({
   slots: {
-    wrapper: 'relative inline-flex items-center cursor-pointer select-none',
+    base: 'relative inline-flex items-center cursor-pointer select-none',
     track: [
       'relative flex-shrink-0 flex items-center p-1 rounded-full transition-colors duration-200 ease-in-out',
       'bg-gray-200 border-2 border-transparent',
@@ -85,19 +85,19 @@ export const toggle = tv({
     },
     isReadOnly: {
       true: {
-        wrapper: 'cursor-default',
+        base: 'cursor-default',
       },
       false: {},
     },
     isDisabled: {
       true: {
-        wrapper: 'opacity-50 cursor-not-allowed',
+        base: 'opacity-50 cursor-not-allowed',
       },
       false: {},
     },
     isLoading: {
       true: {
-        wrapper: 'cursor-wait',
+        base: 'cursor-wait',
       },
       false: {},
     },

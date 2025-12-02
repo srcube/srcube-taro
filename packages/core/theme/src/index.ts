@@ -14,6 +14,7 @@ export * from './components/spinner'
 export * from './components/switch'
 export * from './components/textarea'
 export * from './components/toaster'
+export * from './components/tabs'
 
 export * from './layouts/box'
 export * from './layouts/stack'

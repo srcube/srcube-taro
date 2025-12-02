@@ -26,7 +26,7 @@ const Modal = forwardRef<ModalRef, ModalProps>((props, ref) => {
       {isVisible && (
         // RootPortal need to be absolute position to avoid effect layout display
         <RootPortal style={{ position: 'absolute' }} {...getRootPortalProps()}>
-          <View className={styles.wrapper}>
+          <View className={styles.base}>
             {!hasCustomBackdrop && <ModalBackdrop />}
             {children}
           </View>

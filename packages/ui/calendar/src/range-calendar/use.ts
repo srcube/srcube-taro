@@ -43,8 +43,8 @@ export function useRangeCalendar(props: UseRangeCalendarProps) {
   const getBaseCalendarProps = useCallback(() => ({
     ...props,
     ref: domRef,
-    className: styles.wrapper,
-  }), [props, domRef, styles.wrapper])
+    className: styles.base,
+  }), [props, domRef, styles.base])
 
   const context = useMemo<CalendarContextType<RangeCalendarState>>(() => ({
     state,
@@ -58,7 +58,7 @@ export function useRangeCalendar(props: UseRangeCalendarProps) {
     classNames,
     isYMPickerExpanded,
     setIsYMPickerExpanded,
-  }), [state, slots, styles, locale, weekdayStyle, size, isRange, classNames, isYMPickerExpanded, setIsYMPickerExpanded])
+  }), [state, slots, styles, locale, weekdayStyle, firstDayOfWeek, size, isRange, classNames, isYMPickerExpanded, setIsYMPickerExpanded])
 
   return {
     context,

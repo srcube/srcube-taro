@@ -14,7 +14,7 @@ const SrcubeUI = forwardRef<TaroElement, SrcubeUIProps>((props, ref) => {
   const {
     children,
     modals,
-    getWrapperProps,
+    getBaseProps,
   } = useSrcubeUI({
     ...props,
     ref,
@@ -60,7 +60,7 @@ const SrcubeUI = forwardRef<TaroElement, SrcubeUIProps>((props, ref) => {
   const nonToastModals = modals.filter(modal => modal.type !== 'Toast')
 
   return (
-    <View {...getWrapperProps()}>
+    <View {...getBaseProps()}>
       {nonToastModals.map(renderModal)}
       {renderToasts()}
       {children}

@@ -9,9 +9,11 @@ import { radioGroup } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo } from 'react'
 
-type PickRadioProps = Pick<RadioProps, 'color' | 'size' | 'orientation' | 'isDisabled' | 'isReadOnly' | 'onValueChange'>
+type OmitNativeKey = ''
 
-interface Props extends NativeProps<ViewProps>, Omit<PickRadioProps, 'onValueChange'> {
+type PickRadioProps = Pick<RadioProps, 'color' | 'size' | 'orientation' | 'isDisabled' | 'isReadOnly'>
+
+interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKey>, PickRadioProps {
   /**
    * Ref to the DOM element
    */

@@ -13,7 +13,7 @@ const CalendarBase = forwardRef<TaroElement, CalendarBaseProps>((_, ref) => {
   const { styles } = useCalendarContext()
 
   return (
-    <View ref={ref} className={styles.wrapper}>
+    <View ref={ref} className={styles.base}>
       <CalendarHeader />
       <View className={styles.content}>
         <CalendarYMPicker />
