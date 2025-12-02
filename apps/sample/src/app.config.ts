@@ -8,6 +8,10 @@ export default defineAppConfig({
       pages: ['pages/index/index'],
     },
     {
+      root: 'packages/layouts',
+      pages: ['pages/box/index', 'pages/stack/index'],
+    },
+    {
       root: 'packages/button',
       pages: ['pages/index/index'],
     },
@@ -36,14 +40,6 @@ export default defineAppConfig({
       pages: ['pages/index/index'],
     },
     {
-      root: 'packages/layout-box',
-      pages: ['pages/index/index'],
-    },
-    {
-      root: 'packages/layout-stack',
-      pages: ['pages/index/index'],
-    },
-    {
       root: 'packages/modal',
       pages: ['pages/index/index'],
     },
@@ -64,6 +60,10 @@ export default defineAppConfig({
       pages: ['pages/index/index'],
     },
     {
+      root: 'packages/tabs',
+      pages: ['pages/index/index'],
+    },
+    {
       root: 'packages/textarea',
       pages: ['pages/index/index'],
     },
@@ -79,4 +79,3 @@ export default defineAppConfig({
     navigationBarTextStyle: 'black',
   },
 })
-

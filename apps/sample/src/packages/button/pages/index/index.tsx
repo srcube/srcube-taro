@@ -8,7 +8,7 @@ export default function Buttons() {
   const colors: Array<ButtonProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const variants: Array<ButtonProps['variant']> = ['solid', 'outline', 'flat', 'text']
   const sizes: Array<ButtonProps['size']> = ['xs', 'sm', 'md', 'lg']
-  const rounds: Array<ButtonProps['round']> = ['xs', 'md', 'lg', 'full']
+  const rounds: Array<ButtonProps['radius']> = ['none', 'sm', 'md', 'lg', 'full']
 
   const handleTap = async (e) => {
     await new Promise((res) => {
@@ -28,7 +28,7 @@ export default function Buttons() {
         {sizes.map(s => <Button key={s} size={s}>{s?.toUpperCase()}</Button>)}
       </Section>
       <Section title="Rounds" contentClass="grid grid-cols-4 gap-2">
-        {rounds.map(r => <Button key={r} round={r}>{r?.toUpperCase()}</Button>)}
+        {rounds.map(r => <Button key={r} radius={r}>{r?.toUpperCase()}</Button>)}
       </Section>
       <Section title="Variants" contentClass="grid grid-cols-4 gap-2">
         {colors.map(c => variants.map(v => (
@@ -70,19 +70,19 @@ export default function Buttons() {
             End Content
           </Button>
         </Box>
-        <Button isBlock>
+        <Button fullWidth>
           Block
         </Button>
       </Section>
       <Section title="Button Group" contentClass="flex flex-col gap-2">
-        <ButtonGroup color="default" isBlock>
+        <ButtonGroup color="default" fullWidth>
           <Button>Button 1</Button>
           <Button>Button 2</Button>
           <Button isIcon>
             <View className="i-[teenyicons--button-solid]" />
           </Button>
         </ButtonGroup>
-        <ButtonGroup color="default" round="full" isBlock>
+        <ButtonGroup color="default" radius="full" fullWidth>
           <Button>Button 1</Button>
           <Button>Button 2</Button>
           <Button isIcon>

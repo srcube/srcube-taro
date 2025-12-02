@@ -11,6 +11,9 @@ export default function InputPage() {
   return (
     <Page>
       <Section title="Colors" contentClass="flex flex-col gap-2">
+        <Input defaultValue="ABCD" color="success" className="bg-white" classNames={{ base: ['bg-blue font-bold', 'bg-red'] }} />
+      </Section>
+      <Section title="Colors" contentClass="flex flex-col gap-2">
         {colors.map(c => <Input key={c} color={c} defaultValue={capitalize(c)} />)}
       </Section>
       <Section title="Sizes" contentClass="flex flex-col gap-2">

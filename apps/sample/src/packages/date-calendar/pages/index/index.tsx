@@ -70,7 +70,7 @@ export default function DateCalendarPage() {
       </Section>
 
       <Box className="fixed bottom-0 inset-x-0 pb-safe-4 px-4 pt-4">
-        <Button color={color} isBlock className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
+        <Button color={color} fullWidth className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
       </Box>
 
       <Drawer isOpen={isSetsOpen} onClose={() => setIsSetsOpen(false)}>
@@ -94,7 +94,7 @@ export default function DateCalendarPage() {
             <Box className="flex flex-wrap gap-2 items-center">
               <Button
                 size="sm"
-                isBlock
+                fullWidth
                 onTap={() => {
                   setIsDisabled(d => !d)
                   setIsReadOnly(false)
@@ -104,7 +104,7 @@ export default function DateCalendarPage() {
               </Button>
               <Button
                 size="sm"
-                isBlock
+                fullWidth
                 onTap={() => {
                   setIsReadOnly(r => !r)
                   setIsDisabled(false)
@@ -112,16 +112,16 @@ export default function DateCalendarPage() {
               >
                 {`isReadOnly: ${isReadOnly ? 'On' : 'Off'}`}
               </Button>
-              <Button size="sm" isBlock onTap={() => setLimitRange(v => !v)}>
+              <Button size="sm" fullWidth onTap={() => setLimitRange(v => !v)}>
                 {`min/maxValue: ${minValue.toString()}-${maxValue.toString()} ${limitRange ? 'On' : 'Off'}`}
               </Button>
-              <Button size="sm" isBlock onTap={() => setDisableWeekend(v => !v)}>
+              <Button size="sm" fullWidth onTap={() => setDisableWeekend(v => !v)}>
                 {`isDateUnavailable: Disabled weekends ${disableWeekend ? 'On' : 'Off'}`}
               </Button>
             </Box>
           </Section>
           <DrawerFooter>
-            <Button color="danger" variant="text" isBlock onTap={() => setIsSetsOpen(false)}>Close</Button>
+            <Button color="danger" variant="text" fullWidth onTap={() => setIsSetsOpen(false)}>Close</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

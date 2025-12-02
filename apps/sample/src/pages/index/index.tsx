@@ -14,8 +14,8 @@ export default function Index() {
   ]
 
   const layouts = [
-    { title: 'Box', to: () => Taro.navigateTo({ url: '/packages/box/pages/index/index' }) },
-    { title: 'Stack', to: () => Taro.navigateTo({ url: '/packages/stack/pages/index/index' }) },
+    { title: 'Box', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/box/index' }) },
+    { title: 'Stack', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/stack/index' }) },
   ]
 
   const components = [
@@ -27,10 +27,11 @@ export default function Index() {
     { title: 'Input OTP', to: () => Taro.navigateTo({ url: '/packages/input-otp/pages/index/index' }) },
     { title: 'Input', to: () => Taro.navigateTo({ url: '/packages/input/pages/index/index' }) },
     { title: 'Modal', to: () => Taro.navigateTo({ url: '/packages/modal/pages/index/index' }) },
-    { title: 'Spinner', to: () => Taro.navigateTo({ url: '/packages/spinner/pages/index/index' }) },
-    { title: 'Switch', to: () => Taro.navigateTo({ url: '/packages/switch/pages/index/index' }) },
     { title: 'Radio', to: () => Taro.navigateTo({ url: '/packages/radio/pages/index/index' }) },
     { title: 'Range Calendar', to: () => Taro.navigateTo({ url: '/packages/range-calendar/pages/index/index' }) },
+    { title: 'Spinner', to: () => Taro.navigateTo({ url: '/packages/spinner/pages/index/index' }) },
+    { title: 'Switch', to: () => Taro.navigateTo({ url: '/packages/switch/pages/index/index' }) },
+    { title: 'Tabs', to: () => Taro.navigateTo({ url: '/packages/tabs/pages/index/index' }) },
     { title: 'Textarea', to: () => Taro.navigateTo({ url: '/packages/textarea/pages/index/index' }) },
     { title: 'Toast', to: () => Taro.navigateTo({ url: '/packages/toast/pages/index/index' }) },
   ]
@@ -52,7 +53,7 @@ export default function Index() {
         ))}
       </Stack>
       <Box className="text-xs font-bold uppercase">Layouts</Box>
-      <Stack direction="vertical">
+      <Box className="grid grid-cols-2 gap-4">
         {layouts.map(link => (
           <Box
             className="flex justify-center py-2 rounded-lg bg-white font-medium"
@@ -63,9 +64,9 @@ export default function Index() {
             {link.title}
           </Box>
         ))}
-      </Stack>
+      </Box>
       <Box className="text-xs font-bold uppercase">Components</Box>
-      <Stack direction="vertical">
+      <Box className="grid grid-cols-2 gap-4">
         {components.map(link => (
           <Box
             className="flex justify-center py-2 rounded-lg bg-white font-medium"
@@ -76,7 +77,7 @@ export default function Index() {
             {link.title}
           </Box>
         ))}
-      </Stack>
+      </Box>
       <Box className="fixed bottom-8 left-0 right-0 flex justify-center items-center">
         <Image src={Logo} className="size-8" />
       </Box>

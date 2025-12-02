@@ -6,7 +6,7 @@ export default {
     stats: true,
   },
   terser: {
-    enable: true,
+    enable: false,
   },
   mini: {},
   h5: {},
