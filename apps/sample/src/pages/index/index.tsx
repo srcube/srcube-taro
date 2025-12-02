@@ -29,6 +29,7 @@ export default function Index() {
     { title: 'Modal', to: () => Taro.navigateTo({ url: '/packages/modal/pages/index/index' }) },
     { title: 'Radio', to: () => Taro.navigateTo({ url: '/packages/radio/pages/index/index' }) },
     { title: 'Range Calendar', to: () => Taro.navigateTo({ url: '/packages/range-calendar/pages/index/index' }) },
+    { title: 'Skeleton', to: () => Taro.navigateTo({ url: '/packages/skeleton/pages/index/index' }) },
     { title: 'Spinner', to: () => Taro.navigateTo({ url: '/packages/spinner/pages/index/index' }) },
     { title: 'Switch', to: () => Taro.navigateTo({ url: '/packages/switch/pages/index/index' }) },
     { title: 'Tabs', to: () => Taro.navigateTo({ url: '/packages/tabs/pages/index/index' }) },

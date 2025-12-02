@@ -56,6 +56,10 @@ export default defineAppConfig({
       pages: ['pages/index/index'],
     },
     {
+      root: 'packages/skeleton',
+      pages: ['pages/index/index'],
+    },
+    {
       root: 'packages/switch',
       pages: ['pages/index/index'],
     },
