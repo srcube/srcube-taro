@@ -72,7 +72,7 @@ export default defineAppConfig({
       pages: ['pages/index/index'],
     },
     {
-      root: 'packages/toast',
+      root: 'packages/toaster',
       pages: ['pages/index/index'],
     },
   ],

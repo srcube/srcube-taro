@@ -34,7 +34,7 @@ export default function Index() {
     { title: 'Switch', to: () => Taro.navigateTo({ url: '/packages/switch/pages/index/index' }) },
     { title: 'Tabs', to: () => Taro.navigateTo({ url: '/packages/tabs/pages/index/index' }) },
     { title: 'Textarea', to: () => Taro.navigateTo({ url: '/packages/textarea/pages/index/index' }) },
-    { title: 'Toast', to: () => Taro.navigateTo({ url: '/packages/toast/pages/index/index' }) },
+    { title: 'Toaster', to: () => Taro.navigateTo({ url: '/packages/toaster/pages/index/index' }) },
   ]
 
   return (

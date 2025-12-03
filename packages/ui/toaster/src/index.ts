@@ -3,8 +3,8 @@ export { ToastProvider, useToastContext } from './context'
 export {
   addToast,
   clearToasts,
+  closeToast,
   getToasts,
-  removeToast,
   subscribeToasts,
 } from './registry'
 export type { ToastItem } from './registry'

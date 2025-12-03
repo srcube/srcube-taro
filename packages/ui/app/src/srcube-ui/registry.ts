@@ -1,7 +1,7 @@
 import type { DialogProps } from '@srcube-taro/dialog'
 import type { DrawerProps } from '@srcube-taro/drawer'
 import type { ModalProps } from '@srcube-taro/modal'
-// import type { ToastProps } from '@srcube-taro/toast'
+import type { ToastProps } from '@srcube-taro/toaster'
 import type { ReactNode } from 'react'
 
 export type ModalType = 'Modal' | 'Dialog' | 'Drawer' | 'Toast'

@@ -1,5 +1,5 @@
 import { RootPortal, View } from '@tarojs/components'
-import { removeToast } from './registry'
+import { closeToast } from './registry'
 import { Toast } from './toast'
 import { useToaster } from './use'
 
@@ -25,7 +25,7 @@ export function Toaster(props: ToasterProps) {
             endContent={t.endContent}
             duration={t.duration}
             autoDismiss={t.autoDismiss}
-            onClose={() => removeToast(t.id)}
+            onClose={() => closeToast(t.id)}
           />
         ))}
       </View>

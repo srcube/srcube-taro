@@ -1,4 +1,8 @@
+import type {
+  ToastProps,
+} from '@srcube-taro/ui'
 import {
+  addToast,
   Button,
   DialogBody,
   DialogContent,
@@ -112,35 +116,35 @@ export default function AppPage() {
     })
   }, [])
 
-  // const colors: ToastProps['color'][] = ['primary', 'success', 'warning', 'danger']
+  const colors: ToastProps['color'][] = ['primary', 'secondary', 'success', 'warning', 'danger']
 
-  // const handleOpenToast = useCallback(({ color }: { color: ToastProps['color'] }) => {
-  //   toast({
-  //     content: `This is a toast message!${new Date().getTime()}`,
-  //     duration: 300000,
-  //     color,
-  //   })
-  // }, [])
+  const handleOpenToast = useCallback(({ color }: { color: ToastProps['color'] }) => {
+    addToast({
+      content: `This is a toast message!${new Date().getTime()}`,
+      // duration: 300000,
+      color,
+    })
+  }, [])
 
-  // const handleOpenToastWithAction = useCallback(() => {
-  //   const toastInstance = toast({
-  //     content: 'Toast with action button',
-  //     duration: 5000,
-  //     color: 'warning',
-  //     endContent: (
-  //       <Button
-  //         size="sm"
-  //         color="primary"
-  //         onTap={() => {
-  //           toast({ content: 'Action clicked!', duration: 2000, color: 'primary' })
-  //           toastInstance.close()
-  //         }}
-  //       >
-  //         Action
-  //       </Button>
-  //     ),
-  //   })
-  // }, [])
+  const handleOpenToastWithAction = useCallback(() => {
+    const toastInstance = addToast({
+      content: 'Toast with action button',
+      duration: 5000,
+      color: 'warning',
+      endContent: (
+        <Button
+          size="sm"
+          color="primary"
+          onTap={() => {
+            addToast({ content: 'Action clicked!', duration: 2000, color: 'primary' })
+            toastInstance.close()
+          }}
+        >
+          Action
+        </Button>
+      ),
+    })
+  }, [])
 
   return (
     <SrcubeUI>
@@ -161,16 +165,26 @@ export default function AppPage() {
           </Button>
 
         </Section>
-        {/* <Section title="Toasts" contentClass="grid grid-cols-3 gap-2">
+        <Section title="Toaster" contentClass="grid grid-cols-3 gap-2">
           {colors.map(color => (
-            <Button key={color} color={color as ToastProps['color']} size="sm" onTap={() => handleOpenToast({ color })}>
+            <Button
+              key={color}
+              color={color === 'light' || color === 'dark' ? 'default' : color}
+              size="sm"
+              onTap={() => handleOpenToast({ color })}
+            >
               {color}
             </Button>
           ))}
-          <Button color="warning" size="sm" onTap={handleOpenToastWithAction}>
+          <Button
+            size="sm"
+            className="col-span-3"
+            fullWidth
+            onTap={handleOpenToastWithAction}
+          >
             Toast Action
           </Button>
-        </Section> */}
+        </Section>
       </Page>
     </SrcubeUI>
   )

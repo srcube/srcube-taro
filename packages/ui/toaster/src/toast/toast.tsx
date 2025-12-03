@@ -10,16 +10,6 @@ export interface ToastProps extends UseToastProps {
 export function Toast(props: ToastProps) {
   const { styles, icon, title, content, endContent } = useToast(props)
 
-  // 自动关闭
-  // useEffect(() => {
-  //   if (autoDismiss && duration > 0) {
-  //     const timer = setTimeout(() => {
-  //       onClose?.()
-  //     }, duration)
-  //     return () => clearTimeout(timer)
-  //   }
-  // }, [duration, autoDismiss, onClose])
-
   return (
     <View
       className={styles.wrapper}

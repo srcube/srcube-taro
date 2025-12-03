@@ -1,7 +1,7 @@
-import type { UseToastReturn } from './use'
+import type { UseToasterReturn } from './use'
 import { createContext } from '@srcube-taro/utils-react'
 
-interface ContextType extends UseToastReturn {}
+interface ContextType extends UseToasterReturn {}
 
 export const [ToastProvider, useToastContext] = createContext<ContextType>({
   name: 'ToastContext',

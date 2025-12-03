@@ -11,8 +11,6 @@ interface Props {
 
 export interface ToastRef extends ModalRef {}
 
-// type OmitVariantKey = 'iSuccess' | 'iInfo' | 'iWarning' | 'iDanger'
-
 export type UseToasterProps = MergeVariantProps<Props, ToasterVariantProps>
 
 export function useToaster(_props: UseToasterProps) {
@@ -29,11 +27,7 @@ export function useToaster(_props: UseToasterProps) {
     }
   }, [])
 
-  const slots = useMemo(() => toaster({
-    // color,
-    // hasIcon: icon !== undefined,
-    // hasEndContent: endContent !== undefined,
-  }), [])
+  const slots = useMemo(() => toaster({}), [])
 
   const styles = useMemo(() => ({
     wrapper: slots.base(),

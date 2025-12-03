@@ -12,7 +12,7 @@ function generateId(): string {
   return `SrcubeUI.Toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 }
 
-export function addToast(toast: Omit<ToastItem, 'id' | 'timestamp'>): string {
+export function addToast(toast: Omit<ToastItem, 'id' | 'timestamp'>): { id: string, close: () => void } {
   const id = generateId()
   const newToast: ToastItem = {
     ...toast,
@@ -27,14 +27,17 @@ export function addToast(toast: Omit<ToastItem, 'id' | 'timestamp'>): string {
   const duration = toast.duration ?? 1500
   if (toast.autoDismiss !== false && duration > 0) {
     setTimeout(() => {
-      removeToast(id)
+      closeToast(id)
     }, duration)
   }
 
-  return id
+  return {
+    id,
+    close: () => closeToast(id),
+  }
 }
 
-export function removeToast(id: string): void {
+export function closeToast(id: string): void {
   toastRegistry = toastRegistry.filter(toast => toast.id !== id)
   toastListeners.forEach(listener => listener(toastRegistry))
 }
