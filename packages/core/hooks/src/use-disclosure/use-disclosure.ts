@@ -16,7 +16,7 @@
 
 // import {chain} from "@react-aria/utils";
 import { useControlledState } from '@react-stately/utils'
-import { useCallback, useId } from 'react'
+import { useCallback } from 'react'
 import { useCallbackRef } from '../use-callback-ref'
 
 export interface UseDisclosureProps {
@@ -30,15 +30,12 @@ export interface UseDisclosureProps {
   onOpen?: () => void
   /** Callback fired when the disclosure state changes */
   onChange?: (isOpen: boolean | undefined) => void
-  /** The id of the disclosure element */
-  id?: string
 }
 
 export function useDisclosure(props: UseDisclosureProps = {}) {
   const {
-    id: idProp,
-    defaultOpen,
     isOpen: isOpenProp,
+    defaultOpen,
     onClose: onCloseProp,
     onOpen: onOpenProp,
     onChange = () => {},
@@ -53,16 +50,7 @@ export function useDisclosure(props: UseDisclosureProps = {}) {
     onChange,
   )
 
-  const reactId = useId()
-  const id = idProp || reactId
   const isControlled = isOpenProp !== undefined
-
-  const onClose = useCallback(() => {
-    if (!isControlled) {
-      setIsOpen(false)
-    }
-    onClosePropCallbackRef?.()
-  }, [isControlled, onClosePropCallbackRef, setIsOpen])
 
   const onOpen = useCallback(() => {
     if (!isControlled) {
@@ -71,28 +59,24 @@ export function useDisclosure(props: UseDisclosureProps = {}) {
     onOpenPropCallbackRef?.()
   }, [isControlled, onOpenPropCallbackRef, setIsOpen])
 
+  const onClose = useCallback(() => {
+    if (!isControlled) {
+      setIsOpen(false)
+    }
+    onClosePropCallbackRef?.()
+  }, [isControlled, onClosePropCallbackRef, setIsOpen])
+
   const onOpenChange = useCallback(() => {
     const action = isOpen ? onClose : onOpen
     action()
   }, [isOpen, onOpen, onClose])
 
   return {
-    isOpen: !!isOpen,
+    isOpen,
     onOpen,
     onClose,
     onOpenChange,
     isControlled,
-    // getButtonProps: (props: any = {}) => ({
-    //   ...props,
-    //   'aria-expanded': isOpen,
-    //   'aria-controls': id,
-    //   'onClick': chain(props.onClick, onOpenChange),
-    // }),
-    getDisclosureProps: (props: any = {}) => ({
-      ...props,
-      hidden: !isOpen,
-      id,
-    }),
   }
 }
 

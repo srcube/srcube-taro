@@ -42,7 +42,7 @@ export function useDateCalendar(props: UseDateCalendarProps) {
     return {
       ...props,
       ref: domRef,
-      className: styles.wrapper,
+      className: styles.base,
     }
   }, [props, domRef, styles])
 
@@ -57,7 +57,7 @@ export function useDateCalendar(props: UseDateCalendarProps) {
     isRange,
     isYMPickerExpanded,
     setIsYMPickerExpanded,
-  }), [state, slots, styles, locale, weekdayStyle, size, isRange, isYMPickerExpanded, setIsYMPickerExpanded])
+  }), [state, slots, styles, locale, weekdayStyle, firstDayOfWeek, size, isRange, isYMPickerExpanded, setIsYMPickerExpanded])
 
   return {
     domRef,

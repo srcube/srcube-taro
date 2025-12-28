@@ -1,13 +1,13 @@
 import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
-import type { FC } from 'react'
+import type { TaroElement } from '@tarojs/runtime'
 import { View } from '@tarojs/components'
-import { useEffect } from 'react'
+import { forwardRef, useEffect } from 'react'
 import { useModalContext } from './context'
 
 export interface ModalBodyProps extends NativeProps<ViewProps> {}
 
-const ModalBody: FC<ModalBodyProps> = (props) => {
+const ModalBody = forwardRef<TaroElement, ModalBodyProps>((props, ref) => {
   const { children, className, ...rest } = props
 
   const { slots, classNames, setBodyMounted } = useModalContext()
@@ -22,13 +22,14 @@ const ModalBody: FC<ModalBodyProps> = (props) => {
 
   return (
     <View
-      className={slots.body({ class: className || classNames?.body })}
+      ref={ref}
+      className={slots.body({ class: [classNames?.body, className] })}
       {...rest}
     >
       {children}
     </View>
   )
-}
+})
 
 ModalBody.displayName = 'Srcube.ModalBody'
 

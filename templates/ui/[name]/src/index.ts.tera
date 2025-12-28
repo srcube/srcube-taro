@@ -2,5 +2,5 @@
 to: '{{ name }}/src/index.ts'
 ---
 
-export type { {{ name | capitalize }}Props } from './{{ name }}'
-export { default as {{ name | capitalize }} } from './{{ name }}'
+export type { {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props } from './{{ name }}'
+export { default as {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }} } from './{{ name }}'

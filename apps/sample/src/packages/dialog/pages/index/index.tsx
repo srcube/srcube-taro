@@ -1,15 +1,16 @@
 import type { ButtonProps, DialogProps, DialogRef } from '@srcube-taro/ui'
+import type { TaroElement } from '@tarojs/runtime'
 import { Button, Dialog, DialogBody, DialogContent, DialogFooter, DialogHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
 const LANG_MAP: Record<NonNullable<DialogProps['locale']>, string> = {
   'en': 'English',
   'zh-CN': '简体中文',
-  'zh-TW': '繁体中文',
+  'zh-TW': '繁體中文',
 }
 
 export default function DialogPage() {
@@ -23,11 +24,19 @@ export default function DialogPage() {
   const CUSTOM_ACTION_FUNC = useDisclosure()
 
   const dialogRef = useRef<DialogRef>(null)
+  const contentRef = useRef<TaroElement>(null)
 
   const { isLocked } = usePageScrollLock()
 
   const [color, setColor] = useState<ButtonProps['color']>('primary')
   const [lang, setLang] = useState<DialogProps['locale']>('en')
+
+  useEffect(() => {
+    if (!contentRef.current)
+      return
+
+    console.log('Content Ref: ', contentRef.current)
+  }, [DEFAULT.isOpen])
 
   const handleOpenColors = useCallback((c: ButtonProps['color']) => {
     setColor(c)
@@ -72,7 +81,7 @@ export default function DialogPage() {
           title="Dialog Title"
         >
           {/* <ModalBackdrop onTap={() => { console.log('HELLO WORLD') }} /> */}
-          <DialogContent>
+          <DialogContent ref={contentRef}>
             This is a dialog with default preset.
           </DialogContent>
         </Dialog>
@@ -199,7 +208,7 @@ export default function DialogPage() {
             <DialogBody className="text-xs text-zinc-500 font-medium">
               This dialog with `DialogHeader`, `DialogBody` and `DialogFooter` slots to display user custom contents.
             </DialogBody>
-            <DialogFooter className="flex justify-end">
+            <DialogFooter className="flex justify-end px-4">
               <Button color="primary" onTap={CUSTOM_CONTENT.onClose}>I'm sure</Button>
             </DialogFooter>
           </DialogContent>

@@ -13,7 +13,6 @@
 - **样式变体:** `tailwind-variants` 用于管理组件样式
 - **状态管理:** React Context + 自定义 Hooks
 - **类型系统:** 完整的 TypeScript 支持
-- **国际化:** react-i18next 用于多语言支持
 
 ### 2.2 Workspace 结构
 

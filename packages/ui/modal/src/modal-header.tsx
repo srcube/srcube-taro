@@ -1,13 +1,13 @@
 import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
-import type { FC } from 'react'
+import type { TaroElement } from '@tarojs/runtime'
 import { View } from '@tarojs/components'
-import { useEffect } from 'react'
+import { forwardRef, useEffect } from 'react'
 import { useModalContext } from './context'
 
 export interface ModalHeaderProps extends NativeProps<ViewProps> {}
 
-const ModalHeader: FC<ModalHeaderProps> = (props) => {
+const ModalHeader = forwardRef<TaroElement, ModalHeaderProps>((props, ref) => {
   const { children, className, ...rest } = props
 
   const { slots, classNames, setHeaderMounted } = useModalContext()
@@ -22,13 +22,14 @@ const ModalHeader: FC<ModalHeaderProps> = (props) => {
 
   return (
     <View
-      className={slots.header({ class: className || classNames?.header })}
+      ref={ref}
+      className={slots.header({ class: [classNames?.header, className] })}
       {...rest}
     >
       {children}
     </View>
   )
-}
+})
 
 ModalHeader.displayName = 'Srcube.ModalContent'
 

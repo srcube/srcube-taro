@@ -8,9 +8,7 @@ import type { TaroElement } from '@tarojs/runtime'
 import type { ReactElement } from 'react'
 import type { ModalBackdropProps } from './modal-backdrop'
 import type { ModalContentProps } from './modal-content'
-import { mergeProps } from '@react-aria/utils'
-import { useOverlayTriggerState } from '@react-stately/overlays'
-import { useAnimatePresence, usePageScrollLock } from '@srcube-taro/hooks'
+import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
 import { modal } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from 'react'
@@ -91,21 +89,10 @@ export function useModal(props: UseModalProps) {
       }
     },
   })
+
   const { isVisible } = useAnimatePresence({ isOpen })
 
   const slots = useMemo(() => modal({ isOpen, backdrop }), [isOpen, backdrop])
-
-  const styles = useMemo(
-    () => ({
-      base: slots.base({ class: [classNames?.base, className] }),
-      backdrop: slots.backdrop({ class: classNames?.backdrop }),
-      content: slots.content({ class: classNames?.content }),
-      header: slots.header({ class: classNames?.header }),
-      body: slots.body({ class: classNames?.body }),
-      footer: slots.footer({ class: classNames?.footer }),
-    }),
-    [slots, className, classNames],
-  )
 
   useImperativeHandle(ref, () => ({
     el: domRef.current,
@@ -124,40 +111,20 @@ export function useModal(props: UseModalProps) {
     }
   }, [isOpen, id, addModalRecord, delModalRecord])
 
-  const onBackdropTap = useCallback(() => {
-    if (!isDismissable)
-      return
-
-    try {
-      close()
-    }
-    catch (error) {
-      // @ts-expect-error process env
-      if (process.env.NODE_ENV === 'development') {
-        console.error('[Modal] Backdrop tap failed:', error)
-      }
-    }
-  }, [isDismissable, close])
-
   const getRootPortalProps = useCallback((): ViewProps => {
     return {
-      ...rest,
       ref: domRef,
+      className: slots['root-portal']({ class: [classNames?.['root-portal'], className] }),
+      ...rest,
     }
-  }, [domRef, rest])
-
-  const getBackdropProps = useCallback((props?: ViewProps): ViewProps => {
-    return mergeProps(props, {
-      onTap: onBackdropTap,
-    })
-  }, [onBackdropTap])
+  }, [domRef, rest, slots, className, classNames])
 
   return {
     domRef,
     classNames,
     slots,
-    styles,
     children,
+    isDismissable,
     headerMounted,
     setHeaderMounted,
     bodyMounted,
@@ -170,7 +137,6 @@ export function useModal(props: UseModalProps) {
     open,
     close,
     getRootPortalProps,
-    getBackdropProps,
   }
 }
 

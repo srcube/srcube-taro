@@ -8,31 +8,25 @@ export interface ToastProps extends UseToastProps {
 }
 
 export function Toast(props: ToastProps) {
-  const { styles, icon, title, content, endContent } = useToast(props)
+  const { slots, icon, title, content } = useToast(props)
 
   return (
     <View
-      className={styles.wrapper}
+      className={slots.wrapper()}
     >
-      <View className={styles.icon}>
-        {icon || <View className={styles._icon} />}
+      <View className={slots.icon()}>
+        {icon || <View className={slots._icon()} />}
       </View>
 
       {title && (
-        <View className={styles.title}>
+        <View className={slots.title()}>
           {title}
         </View>
       )}
 
       {content && (
-        <View className={styles.content}>
+        <View className={slots.content()}>
           {content}
-        </View>
-      )}
-
-      {endContent && (
-        <View className="ml-auto">
-          {endContent}
         </View>
       )}
     </View>

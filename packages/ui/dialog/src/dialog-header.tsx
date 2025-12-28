@@ -10,7 +10,10 @@ function DialogHeader(props: DialogHeaderProps) {
   const { slots, classNames } = useDialogContext()
 
   return (
-    <ModalHeader className={slots.header({ class: className || classNames?.header })} {...rest}>
+    <ModalHeader
+      className={slots.header({ className: [classNames?.header, className] })}
+      {...rest}
+    >
       {children}
     </ModalHeader>
   )

@@ -1,34 +1,139 @@
 import type { CheckboxProps } from '@srcube-taro/ui'
-import { Checkbox, CheckboxGroup } from '@srcube-taro/ui'
-import { Checkbox as NCheckbox, View } from '@tarojs/components'
+import { ButtonGroup } from '@srcube-taro/button'
+import { Button, Checkbox, CheckboxGroup } from '@srcube-taro/ui'
+import { View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { Page } from '@/components/page'
-import { Section } from '@/components/section'
+import { useMutative } from 'use-mutative'
+import { Page, Section, StateAction, StateDemo } from '@/components'
 
 export default function CheckboxPage() {
   const colors: Array<CheckboxProps['color']> = ['default', 'primary', 'secondary', 'success', 'warning', 'danger']
   const sizes: Array<CheckboxProps['size']> = ['xs', 'sm', 'md', 'lg']
   const radius: Array<CheckboxProps['radius']> = ['none', 'xs', 'sm', 'md', 'lg', 'full']
 
-  const handleAuto = async (e) => {
-    await new Promise((res) => {
-      setTimeout(() => {
-        console.log('E: ', e)
-        res(true)
-      }, 3000)
+  const [state, setState] = useMutative<CheckboxProps>({
+    color: 'default',
+    size: 'md',
+    radius: 'md',
+    isDisabled: false,
+    isLoading: false,
+    isReadOnly: false,
+    isIndeterminate: false,
+    isLineThrough: false,
+  })
+
+  const handleStateActionTap = (key: string, value: (typeof state)[keyof typeof state]) => {
+    setState((draft) => {
+      draft[key] = value
     })
   }
 
   return (
     <Page>
-      <Section title="Colors" contentClass="grid grid-cols-3 gap-2">
-        {colors.map(c => <Checkbox key={c} defaultSelected color={c}>{capitalize(c)}</Checkbox>)}
-      </Section>
-      <Section title="Sizes" contentClass="grid grid-cols-4 gap-2">
-        {sizes.map(s => <Checkbox key={s} size={s}>{s?.toUpperCase()}</Checkbox>)}
-      </Section>
-      <Section title="Radius" contentClass="grid grid-cols-3 gap-2">
-        {radius.map(r => <Checkbox key={r} radius={r}>{r?.toUpperCase()}</Checkbox>)}
+      <Section title="Usage" contentClass="">
+        <StateDemo className="h-20">
+          <Checkbox defaultSelected {...state}>Checkbox</Checkbox>
+        </StateDemo>
+        <StateAction title="Colors" contentClass="flex flex-col gap-2">
+          <ButtonGroup size="sm">
+            {colors.slice(0, 3).map(c => (
+              <Button
+                key={c}
+                color={c === state.color ? 'primary' : void 0}
+                className="flex-1"
+                onTap={() => handleStateActionTap('color', c)}
+              >
+                {capitalize(c)}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <ButtonGroup size="sm">
+            {colors.slice(3, 6).map(c => (
+              <Button
+                key={c}
+                color={c === state.color ? 'primary' : void 0}
+                className="flex-1"
+                onTap={() => handleStateActionTap('color', c)}
+              >
+                {capitalize(c)}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </StateAction>
+        <StateAction title="Sizes" contentClass="flex flex-col gap-2">
+          <ButtonGroup size="sm">
+            {sizes.map(s => (
+              <Button
+                key={s}
+                color={s === state.size ? 'primary' : void 0}
+                className="flex-1"
+                onTap={() => handleStateActionTap('size', s)}
+              >
+                {s?.toUpperCase()}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </StateAction>
+        <StateAction title="Radius" contentClass="flex flex-col gap-2">
+          <ButtonGroup size="sm">
+            {radius.map(r => (
+              <Button
+                key={r}
+                color={r === state.radius ? 'primary' : void 0}
+                className="flex-1"
+                onTap={() => handleStateActionTap('radius', r)}
+              >
+                {r?.toUpperCase()}
+              </Button>
+            ))}
+          </ButtonGroup>
+        </StateAction>
+        {/* isLoading, isDisabled, isReadOnly */}
+        <StateAction title="State" contentClass="flex flex-col gap-2">
+          <ButtonGroup size="sm">
+            <Button
+              color={state.isLoading ? 'primary' : void 0}
+              className="flex-1"
+              onTap={() => handleStateActionTap('isLoading', !state.isLoading)}
+            >
+              Loading
+            </Button>
+            <Button
+              color={state.isDisabled ? 'primary' : void 0}
+              className="flex-1"
+              onTap={() => handleStateActionTap('isDisabled', !state.isDisabled)}
+            >
+              Disabled
+            </Button>
+            <Button
+              color={state.isReadOnly ? 'primary' : void 0}
+              className="flex-1"
+              onTap={() => handleStateActionTap('isReadOnly', !state.isReadOnly)}
+            >
+              Read Only
+            </Button>
+          </ButtonGroup>
+          <View className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
+            <View className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
+            <View className="text-sm text-gray-800">Button will be auto loading when `onTap` is async function.</View>
+          </View>
+          <ButtonGroup size="sm">
+            <Button
+              color={state.isIndeterminate ? 'primary' : void 0}
+              className="flex-1"
+              onTap={() => handleStateActionTap('isIndeterminate', !state.isIndeterminate)}
+            >
+              Indeterminate
+            </Button>
+            <Button
+              color={state.isLineThrough ? 'primary' : void 0}
+              className="flex-1"
+              onTap={() => handleStateActionTap('isLineThrough', !state.isLineThrough)}
+            >
+              Line Through
+            </Button>
+          </ButtonGroup>
+        </StateAction>
       </Section>
       <Section title="Icon" contentClass="grid grid-cols-3 gap-2">
         <Checkbox
@@ -66,23 +171,6 @@ export default function CheckboxPage() {
           Heart
         </Checkbox>
       </Section>
-      <Section title="Line Through" contentClass="">
-        <Checkbox defaultSelected isLineThrough>Line through</Checkbox>
-      </Section>
-      <Section title="Read Only" contentClass="grid grid-cols-2 gap-2">
-        <Checkbox isReadOnly>Read only</Checkbox>
-        <Checkbox defaultSelected isReadOnly>Read only</Checkbox>
-      </Section>
-      <Section title="Indeterminate" contentClass="grid grid-cols-3 gap-2">
-        {colors.map(c => <Checkbox key={c} isIndeterminate color={c}>{capitalize(c)}</Checkbox>)}
-      </Section>
-      <Section title="Disabled" contentClass="grid grid-cols-3 gap-2">
-        {colors.map(c => <Checkbox key={c} defaultSelected isDisabled color={c}>{capitalize(c)}</Checkbox>)}
-      </Section>
-      <Section title="Loading" contentClass="grid grid-cols-3 gap-2">
-        {colors.map(c => <Checkbox key={c} defaultSelected isLoading color={c}>{capitalize(c)}</Checkbox>)}
-        <Checkbox color="primary" onTap={handleAuto}>Auto</Checkbox>
-      </Section>
       <Section title="Checkbox Group" contentClass="flex flex-col gap-4">
         <CheckboxGroup defaultValue={['1', '2']} color="default">
           <Checkbox value="1">Vertical 1</Checkbox>
@@ -97,14 +185,6 @@ export default function CheckboxPage() {
           <View className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
           <View className="text-sm text-gray-800">Group support checkboxs `color`, `size`, `radius`, `isDisabled` and `isReadOnly` properties.</View>
         </View>
-      </Section>
-      <Section title="Native">
-        <NCheckbox
-          value="1"
-          onClick={(e) => { console.log('CLICK: ', e) }}
-          onChange={(e) => { console.log('CHANGE: ', e) }}
-        >Native Checkbox
-        </NCheckbox>
       </Section>
     </Page>
   )

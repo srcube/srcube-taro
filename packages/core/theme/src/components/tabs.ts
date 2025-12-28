@@ -6,8 +6,9 @@ export const tabs = tv({
     base: 'flex w-full',
     tabsWrapper: 'inline-flex relative p-1 w-fit max-w-full overflow-hidden bg-gray-100',
     tabs: 'flex flex-grow relative w-full h-fit box-border',
-    tab: 'relative inline-flex z-0 px-3 py-1 justify-center items-center box-border cursor-pointer transition-opacity tap-highlight-transparent outline-none',
-    tabContent: 'relative z-10 whitespace-nowrap transition-colors text-default-500',
+    skeleton: 'first:rounded-l-md last:rounded-r-md',
+    tab: 'relative inline-flex z-0 px-3 py-1 w-full justify-center items-center box-border cursor-pointer transition-opacity tap-highlight-transparent outline-none',
+    tabContent: 'relative w-full z-10 whitespace-nowrap transition-colors text-default-500',
     cursor: 'absolute z-0 bg-white ',
     panel: 'py-3 px-1',
     maskStart: 'pointer-events-none absolute z-10',
@@ -72,26 +73,31 @@ export const tabs = tv({
     radius: {
       none: {
         tabsWrapper: 'rounded-none',
+        skeleton: 'rounded-none',
         tab: 'rounded-none',
         cursor: 'rounded-none',
       },
       sm: {
         tabsWrapper: 'rounded-lg',
+        skeleton: 'first:rounded-lg last:rounded-lg',
         tab: 'rounded-md',
         cursor: 'rounded-md',
       },
       md: {
         tabsWrapper: 'rounded-xl',
+        skeleton: 'first:rounded-lg last:rounded-lg',
         tab: 'rounded-lg',
         cursor: 'rounded-lg',
       },
       lg: {
         tabsWrapper: 'rounded-2xl',
+        skeleton: 'first:rounded-xl last:rounded-xl',
         tab: 'rounded-xl',
         cursor: 'rounded-xl',
       },
       full: {
         tabsWrapper: 'rounded-full',
+        skeleton: 'rounded-full',
         tab: 'rounded-full',
         cursor: 'rounded-full',
       },

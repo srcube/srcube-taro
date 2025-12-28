@@ -4,7 +4,7 @@ import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { ReactNode } from 'react'
-import { useOverlayTriggerState } from '@react-stately/overlays'
+import { useOverlayTriggerState } from '@srcube-taro/hooks'
 import { drawer } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { getCurrentPages } from '@tarojs/taro'
@@ -73,18 +73,6 @@ export function useDrawer(props: UseDrawerProps) {
 
   const slots = useMemo(() => drawer({ isOpen, placement, hasCustomNavigation }), [isOpen, placement, hasCustomNavigation])
 
-  const styles = useMemo(
-    () => ({
-      base: slots.base({ class: [classNames?.base, className] }),
-      backdrop: slots.backdrop({ class: classNames?.backdrop }),
-      content: slots.content({ class: classNames?.content }),
-      header: slots.header({ class: classNames?.header }),
-      body: slots.body({ class: classNames?.body }),
-      footer: slots.footer({ class: classNames?.footer }),
-    }),
-    [slots, className, classNames],
-  )
-
   const getModalProps = useCallback((): ModalProps => {
     return {
       ref: domRef,
@@ -93,15 +81,21 @@ export function useDrawer(props: UseDrawerProps) {
       isDismissable,
       onOpenChange,
       onClose: close,
-      classNames: styles,
+      classNames: {
+        'root-portal': slots['root-portal']({ className: classNames?.['root-portal'] }),
+        'backdrop': slots.backdrop({ className: classNames?.backdrop }),
+        'content': slots.content({ className: [classNames?.content, className] }),
+        'header': slots.header({ className: classNames?.header }),
+        'body': slots.body({ className: classNames?.body }),
+        'footer': slots.footer({ className: classNames?.footer }),
+      },
       ...rest,
     }
-  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, styles, rest])
+  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, slots, classNames, className, rest])
 
   return {
     domRef,
     slots,
-    styles,
     classNames,
     title,
     placement,

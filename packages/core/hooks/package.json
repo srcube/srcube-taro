@@ -21,22 +21,26 @@
     "postpack": "rm -rf ./package"
   },
   "peerDependencies": {
+    "@tarojs/components": "4",
+    "@tarojs/taro": "4",
     "react": "^18",
     "react-dom": "^18",
     "react-is": "^18"
   },
   "dependencies": {
-    "@react-stately/overlays": "catalog:",
     "@react-stately/toggle": "catalog:",
     "@react-stately/utils": "catalog:",
+    "@react-types/overlays": "^3.9.2",
     "@srcube-taro/utils-react": "workspace:^",
+    "@tanstack/react-virtual": "^3.13.13",
+    "@tanstack/virtual-core": "^3.13.13",
+    "@tarojs/runtime": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-is": "catalog:"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",
-    "@types/node": "catalog:",
     "@types/react": "catalog:"
   }
 }

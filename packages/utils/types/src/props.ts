@@ -1,12 +1,12 @@
-import type { StandardProps } from '@tarojs/components'
-import type { Key, ReactElement, ReactNode, Ref, RefAttributes } from 'react'
+import type { StandardProps, ViewProps } from '@tarojs/components'
+import type { Key, ReactElement, ReactNode } from 'react'
 
 /**
  * Component base props definition
  *
  * @param T Native component props
  */
-export type NativeProps<T extends StandardProps = StandardProps> = Omit<
+export type NativeProps<T extends StandardProps<any> = StandardProps<ViewProps>> = Omit<
   T,
 'onClick' | 'onLongClick'
 > & {
@@ -37,3 +37,10 @@ export interface CollectionProps<T> {
  * @param E Exclude keys
  */
 export type MergeVariantProps<P, V, E extends keyof V = never> = Omit<P, keyof V> & Omit<V, E>
+
+/**
+ * Omit the `children` prop from the component props
+ *
+ * @param T Component props
+ */
+export type PropsWithoutChildren<T> = Omit<T, 'children'>

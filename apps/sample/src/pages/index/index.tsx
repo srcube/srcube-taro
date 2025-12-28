@@ -16,6 +16,8 @@ export default function Index() {
   const layouts = [
     { title: 'Box', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/box/index' }) },
     { title: 'Stack', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/stack/index' }) },
+    { title: 'Scrollbox', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/scrollbox/index' }) },
+    { title: 'Listbox', to: () => Taro.navigateTo({ url: '/packages/layouts/pages/listbox/index' }) },
   ]
 
   const components = [
@@ -26,6 +28,8 @@ export default function Index() {
     { title: 'Drawer', to: () => Taro.navigateTo({ url: '/packages/drawer/pages/index/index' }) },
     { title: 'Input OTP', to: () => Taro.navigateTo({ url: '/packages/input-otp/pages/index/index' }) },
     { title: 'Input', to: () => Taro.navigateTo({ url: '/packages/input/pages/index/index' }) },
+    { title: 'Form', to: () => Taro.navigateTo({ url: '/packages/form/pages/index/index' }) },
+    { title: 'Picker', to: () => Taro.navigateTo({ url: '/packages/picker/pages/index/index' }) },
     { title: 'Modal', to: () => Taro.navigateTo({ url: '/packages/modal/pages/index/index' }) },
     { title: 'Radio', to: () => Taro.navigateTo({ url: '/packages/radio/pages/index/index' }) },
     { title: 'Range Calendar', to: () => Taro.navigateTo({ url: '/packages/range-calendar/pages/index/index' }) },

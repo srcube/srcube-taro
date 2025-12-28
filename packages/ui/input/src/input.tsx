@@ -1,6 +1,7 @@
 import type { TaroElement } from '@tarojs/runtime'
 import type { UseInputProps } from './use'
-import { Input as NativeInput, View } from '@tarojs/components'
+import { Field } from '@srcube-taro/form'
+import { Input as NativeInput } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useInput } from './use'
 
@@ -9,30 +10,19 @@ export interface InputProps extends UseInputProps { }
 const Input = forwardRef<TaroElement, InputProps>((props, ref) => {
   const {
     domRef,
-    styles,
-    startContent,
-    endContent,
-    clearButton,
-    isClearable,
-    getWrapperProps,
+    getFieldProps,
     getInputProps,
-    getClearButtonProps,
   } = useInput({
     ...props,
     ref,
   })
 
   return (
-    <View {...getWrapperProps()}>
-      {startContent && <View className={styles.startContent}>{startContent}</View>}
-      <NativeInput ref={domRef} className={styles.input} {...getInputProps()} />
-      {isClearable && (
-        <View {...getClearButtonProps()} className={styles.clearButton}>
-          {clearButton || <View className={styles.iInputClear} />}
-        </View>
+    <Field {...getFieldProps()}>
+      {({ id, inputClass }) => (
+        <NativeInput ref={domRef} id={id} {...getInputProps({ className: inputClass })} />
       )}
-      {endContent && <View className={styles.endContent}>{endContent}</View>}
-    </View>
+    </Field>
   )
 })
 

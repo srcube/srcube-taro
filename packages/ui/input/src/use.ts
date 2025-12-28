@@ -1,176 +1,124 @@
-import type { InputSlots, InputVariantProps } from '@srcube-taro/theme'
+import type { FieldProps } from '@srcube-taro/form'
+import type { InputVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
-import type { SlotsToClasses } from '@srcube-taro/utils-tv'
-import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
-import type { CommonEvent, InputProps, InputProps as NativeInputProps } from '@tarojs/components'
-import type { ReactNode } from 'react'
+import type { MergeVariantProps, PropsWithoutChildren } from '@srcube-taro/utils-types'
+import type { CommonEvent, ITouchEvent, InputProps as NativeInputProps } from '@tarojs/components'
 import { input } from '@srcube-taro/theme'
 import { useControlledState, useDOMRef } from '@srcube-taro/utils-react'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useState } from 'react'
 
-type OmitNativeKeys = 'disabled' | 'password' | 'onInput'
+type OmitNativeKeys = 'value' | 'defaultValue' | 'children' | 'disabled' | 'password' | 'onInput'
 
-interface Props extends Omit<NativeProps<InputProps>, OmitNativeKeys> {
+interface Props extends FieldProps<Omit<NativeInputProps, OmitNativeKeys>> {
   /**
-   * Ref to the DOM element
+   * Ref for the input control element (e.g., input, select).
    */
   ref?: ReactRef
   /**
-   * Ref to the wrapper DOM element
+   * Ref for the field control element (e.g., input, select).
    */
-  wrapperRef?: ReactRef
+  fieldRef?: ReactRef
   /**
-   * Content to render before the input
+   * Field value
    */
-  startContent?: ReactNode
+  value?: string
   /**
-   * Content to render after the input
+   * Default value for uncontrolled usage.
    */
-  endContent?: ReactNode
+  defaultValue?: string
   /**
-   * Content to render clear button
-   */
-  clearButton?: ReactNode
-  /**
-   * Whether the input is password
+   * Whether the input is a password field; maps to native `password`.
    */
   isPassword?: boolean
   /**
-   * Whether the input is disabled
-   */
-  isDisabled?: boolean
-  /**
-   * Whether the input is clearable
-   */
-  isClearable?: boolean
-  /**
-   * Class names to apply to the input
-   */
-  classNames?: SlotsToClasses<Exclude<InputSlots, 'iInputClear'>>
-  /**
-   * Callback fired when the value is cleared
-   */
-  onClear?: () => void
-  /**
-   * Native `onInput` event
+   * Native input event callback, equivalent to Taro `onInput`.
    */
   onChange?: NativeInputProps['onInput']
   /**
-   * React aria onChange event
+   * Controlled value change callback; receives the current string value only.
    */
   onValueChange?: (value?: string) => void
 }
 
 export type UseInputProps = MergeVariantProps<Props, InputVariantProps>
 
-export function useInput(props: UseInputProps) {
+export function useInput(originalProps: UseInputProps) {
   const {
     ref,
+    fieldRef,
     value,
     defaultValue = '',
-    variant,
-    color,
-    size,
-    children,
-    startContent,
-    endContent,
-    clearButton,
     isPassword = false,
     isDisabled,
-    isClearable = !!clearButton,
     className,
-    classNames,
     onClear,
     onChange,
     onValueChange = () => {},
+    controlProps,
     ...rest
-  } = props
+  } = originalProps
 
   const domRef = useDOMRef(ref)
 
-  const slots = useMemo(
-    () => input({ variant, color, size, isDisabled, className }),
-    [variant, color, size, isDisabled, className],
-  )
-
-  const styles = useMemo(
-    () => ({
-      base: slots.base({ class: [classNames?.base, className] }),
-      input: slots.input({ class: classNames?.input }),
-      clearButton: slots.clearButton({ class: classNames?.clearButton }),
-      startContent: slots.startContent({ class: classNames?.startContent }),
-      endContent: slots.endContent({ class: classNames?.endContent }),
-      iInputClear: slots.iInputClear(),
-    }),
-    [className, classNames, slots],
-  )
-
   const [inputValue, setInputValue] = useControlledState<string | undefined>(value, defaultValue, onValueChange)
-
-  const handleWrapperTap = useCallback((e: CommonEvent) => {
-    e.stopPropagation()
-  }, [])
+  const [isFocused, setIsFocused] = useState<boolean>(controlProps?.focus ?? false)
 
   const handleInput = useCallback((e: CommonEvent) => {
     setInputValue(e.detail.value)
     onChange?.(e)
   }, [setInputValue, onChange])
 
-  const handleInputTap = useCallback((e: CommonEvent) => {
-    e.stopPropagation()
-  }, [])
-
-  const handleClear = useCallback((e: CommonEvent) => {
+  const handleInputTap = useCallback((e: ITouchEvent) => {
     e.stopPropagation()
 
+    controlProps?.onTap?.(e)
+  }, [controlProps])
+
+  const handleClear = useCallback(() => {
     if (isDisabled) {
       return
     }
-
     setInputValue('')
     onClear?.()
-
     if (domRef.current) {
       domRef.current.focus()
     }
   }, [domRef, isDisabled, onClear, setInputValue])
 
-  const getWrapperProps = useCallback(() => {
+  const getFieldProps = useCallback((props?: PropsWithoutChildren<FieldProps>): PropsWithoutChildren<FieldProps> => {
     return {
-      className: styles.base,
-      onTap: handleWrapperTap,
+      ref: fieldRef,
+      onClear: handleClear,
+      controlProps,
+      isDisabled,
+      isFocused,
+      ...props,
+      ...rest,
     }
-  }, [styles.base, handleWrapperTap])
+  }, [fieldRef, rest, isDisabled, isFocused, controlProps, handleClear])
 
-  const getInputProps = useCallback((): NativeInputProps => {
+  const getInputProps = useCallback((props: NativeInputProps): NativeInputProps => {
     return {
       value: inputValue,
       defaultValue,
       password: isPassword,
       disabled: isDisabled,
+      className: input({ className: controlProps?.className }),
       onInput: handleInput,
       onClick: handleInputTap,
-      ...rest,
+      onFocus: () => setIsFocused(true),
+      onBlur: () => setIsFocused(false),
+      ...props,
+      ...controlProps,
     }
-  }, [inputValue, defaultValue, isPassword, isDisabled, handleInputTap, handleInput, rest])
-
-  const getClearButtonProps = useCallback(() => {
-    return {
-      onTap: handleClear,
-    }
-  }, [handleClear])
+  }, [inputValue, defaultValue, isPassword, isDisabled, controlProps, handleInputTap, handleInput])
 
   return {
     domRef,
-    styles,
-    children,
-    startContent,
-    endContent,
-    clearButton,
-    isClearable,
-    getWrapperProps,
+    isDisabled,
+    getFieldProps,
     getInputProps,
-    getClearButtonProps,
+    handleClear,
   }
 }
 

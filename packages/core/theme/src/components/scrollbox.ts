@@ -1,0 +1,62 @@
+import type { VariantProps } from '@srcube-taro/utils-tv'
+import { tv } from '@srcube-taro/utils-tv'
+
+export const scrollbox = tv({
+  slots: {
+    wrapper: 'relative',
+    scrollview: 'w-full h-full',
+    content: 'overflow-auto',
+    maskTop: 'absolute top-0 left-0 right-0 z-10 w-full h-6 pointer-events-none transition-opacity duration-300 bg-gradient-to-b from-white to-transparent',
+    maskBottom: 'absolute bottom-0 left-0 right-0 z-10 w-full h-6 pointer-events-none transition-opacity duration-300 bg-gradient-to-t from-white to-transparent',
+    maskLeft: 'absolute top-0 left-0 bottom-0 z-10 w-6 h-full pointer-events-none transition-opacity duration-300 bg-gradient-to-r from-white to-transparent',
+    maskRight: 'absolute top-0 right-0 bottom-0 z-10 w-6 h-full pointer-events-none transition-opacity duration-300 bg-gradient-to-l from-white to-transparent',
+  },
+  variants: {
+    hideMask: {
+      true: { maskTop: 'hidden', maskBottom: 'hidden', maskLeft: 'hidden', maskRight: 'hidden' },
+      false: {},
+    },
+    orientation: {
+      y: {
+        content: 'flex flex-col',
+        maskLeft: 'hidden',
+        maskRight: 'hidden',
+      },
+      x: {
+        content: 'inline-flex flex-row whitespace-nowrap',
+        maskTop: 'hidden',
+        maskBottom: 'hidden',
+      },
+      xy: {
+        content: 'w-max h-max',
+      },
+    },
+    showMaskTop: {
+      true: { maskTop: 'opacity-100' },
+      false: { maskTop: 'opacity-0' },
+    },
+    showMaskBottom: {
+      true: { maskBottom: 'opacity-100' },
+      false: { maskBottom: 'opacity-0' },
+    },
+    showMaskLeft: {
+      true: { maskLeft: 'opacity-100' },
+      false: { maskLeft: 'opacity-0' },
+    },
+    showMaskRight: {
+      true: { maskRight: 'opacity-100' },
+      false: { maskRight: 'opacity-0' },
+    },
+  },
+  defaultVariants: {
+    orientation: 'y',
+    showMaskTop: false,
+    showMaskBottom: false,
+    showMaskLeft: false,
+    showMaskRight: false,
+  },
+})
+
+export type ScrollboxVariantProps = VariantProps<typeof scrollbox>
+export type ScrollboxSlots = keyof ReturnType<typeof scrollbox>
+export type ScrollboxReturnType = ReturnType<typeof scrollbox>

@@ -4,7 +4,7 @@ to: '{{ name }}/README.md'
 
 # @srcube-taro/{{ name }}
 
-{{ name | capitalize }} component.
+{{ name | replace(from="-", to=" ") | title }} component.
 
 Refer the [docs](https://srcube-taro.vercel.app/docs/components/{{ name }})
 

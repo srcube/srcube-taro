@@ -3,14 +3,12 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const drawer = tv({
   slots: {
-    base: 'fixed inset-0 z-[1000]',
-    backdrop: 'fixed inset-0 z-[1000]',
-    content: [
-      'fixed z-[1000] bg-white shadow-lg flex flex-col',
-    ],
-    header: ['p-3 text-center text-lg font-semibold'],
-    body: ['px-4 py-3 flex-1'],
-    footer: ['px-3 pt-2 pb-safe'],
+    'root-portal': '',
+    'backdrop': '',
+    'content': ['bg-white shadow-lg flex flex-col'],
+    'header': ['p-3 text-center text-lg font-semibold'],
+    'body': ['px-4 py-3 flex-1'],
+    'footer': ['px-3 pt-2 pb-safe'],
   },
   variants: {
     isOpen: {
@@ -19,21 +17,21 @@ export const drawer = tv({
     },
     placement: {
       left: {
-        header: 'text-right',
-        content: 'inset-y-0 left-0 right-auto h-full max-w-[90%] w-fit rounded-r-3xl',
+        header: 'text-right px-8',
+        content: 'inset-y-0 left-0 right-auto h-full max-w-[90%] w-fit rounded-r-[2.5rem]',
         footer: '',
       },
       right: {
-        header: 'text-left',
-        content: 'inset-y-0 right-0 left-auto h-full max-w-[90%] w-fit rounded-l-3xl',
+        header: 'text-left px-8',
+        content: 'inset-y-0 right-0 left-auto h-full max-w-[90%] w-fit rounded-l-[2.5rem]',
         footer: '',
       },
       top: {
-        content: 'inset-x-0 top-0 bottom-autow-full h-fit rounded-b-3xl',
-        footer: '',
+        content: 'inset-x-0 top-0 bottom-autow-full h-fit rounded-b-[3rem]',
+        footer: 'pb-0',
       },
       bottom: {
-        content: 'inset-x-0 bottom-0 top-auto w-full h-fit rounded-t-3xl',
+        content: 'inset-x-0 bottom-0 top-auto w-full h-fit rounded-t-[3rem]',
         footer: '',
       },
     },

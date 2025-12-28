@@ -1,14 +1,13 @@
-import type { ModalRef } from './use'
+import type { NativeProps } from '@srcube-taro/utils-types'
+import type { ViewProps } from '@tarojs/components'
+import type { TaroElement } from '@tarojs/runtime'
 import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useModalContext } from './context'
 
-export interface ModalContentProps {
-  className?: string
-  children?: React.ReactNode
-}
+export interface ModalContentProps extends NativeProps<ViewProps> {}
 
-const ModalContent = forwardRef<ModalRef, ModalContentProps>((props, ref) => {
+const ModalContent = forwardRef<TaroElement, ModalContentProps>((props, ref) => {
   const { className, children, ...rest } = props
 
   const { slots, classNames } = useModalContext()
@@ -16,7 +15,7 @@ const ModalContent = forwardRef<ModalRef, ModalContentProps>((props, ref) => {
   return (
     <View
       ref={ref}
-      className={slots.content({ class: className || classNames?.content })}
+      className={slots.content({ class: [classNames?.content, className] })}
       {...rest}
     >
       {children}

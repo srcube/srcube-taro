@@ -1,6 +1,7 @@
 import type { ButtonProps } from '@srcube-taro/button'
+import type { ModalContentProps } from '@srcube-taro/modal'
+import type { TaroElement } from '@tarojs/runtime'
 import type { ReactNode } from 'react'
-import type { DialogRef } from './use'
 import { Button, ButtonGroup } from '@srcube-taro/button'
 import { ModalBody, ModalContent, ModalFooter, ModalHeader } from '@srcube-taro/modal'
 import { isFunction, isString, isVoid0 } from '@srcube-taro/utils-func'
@@ -10,17 +11,15 @@ import DialogBody from './dialog-body'
 import DialogFooter from './dialog-footer'
 import DialogHeader from './dialog-header'
 
-export interface DialogContentProps {
-  className?: string
-  children?: React.ReactNode
-}
+export interface DialogContentProps extends ModalContentProps {}
 
-const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => {
-  const { className, children, ...rest } = props
+const DialogContent = forwardRef<TaroElement, DialogContentProps>((props, ref) => {
+  const { children, ...rest } = props
 
   const {
     t,
-    styles,
+    slots,
+    classNames,
     title,
     isConfirmOnly,
     cancelContent,
@@ -48,6 +47,7 @@ const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => 
   )
 
   const renderAction = (
+    key: string,
     content: ((props: ButtonProps) => ReactNode) | ReactNode | string | undefined,
     defaultText: ReactNode,
     getProps: () => ButtonProps,
@@ -55,17 +55,17 @@ const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => 
     const props = getProps()
 
     if (isVoid0(content)) {
-      return <Button {...props}>{defaultText}</Button>
+      return <Button {...props} key={key}>{defaultText}</Button>
     }
     if (isFunction(content)) {
       return content(props)
     }
     if (isString(content)) {
-      return <Button {...props}>{content}</Button>
+      return <Button {...props} key={key}>{content}</Button>
     }
     if (isValidElement(content)) {
       return (
-        <content.type {...props} {...(content.props as any)}>
+        <content.type {...props} {...(content.props as any)} key={key}>
           {(content.props as any).children}
         </content.type>
       )
@@ -73,24 +73,24 @@ const DialogContent = forwardRef<DialogRef, DialogContentProps>((props, ref) => 
     return content
   }
 
-  const cancelAction = renderAction(cancelContent, t.cancel, getCancelProps)
-  const confirmAction = renderAction(confirmContent, t.confirm, getConfirmProps)
+  const cancelAction = renderAction('dialog-cancel', cancelContent, t.cancel, getCancelProps)
+  const confirmAction = renderAction('dialog-confirm', confirmContent, t.confirm, getConfirmProps)
 
   return (
-    <ModalContent ref={ref} className={className || styles.content} {...rest}>
+    <ModalContent ref={ref} {...rest}>
       {customHeader || (
-        <ModalHeader className={styles.header}>
+        <ModalHeader>
           {title}
         </ModalHeader>
       )}
       {customBody || (
-        <ModalBody className={styles.body}>
+        <ModalBody>
           {content}
         </ModalBody>
       )}
       {customFooter || (
-        <ModalFooter className={styles.footer}>
-          <ButtonGroup size="lg" fullWidth className={styles.actionGroup}>
+        <ModalFooter>
+          <ButtonGroup size="lg" fullWidth className={slots.actionGroup({ className: classNames?.actionGroup })}>
             {[!isConfirmOnly && cancelAction, confirmAction].filter(Boolean) as React.ReactElement<ButtonProps>[]}
           </ButtonGroup>
         </ModalFooter>

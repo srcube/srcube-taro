@@ -19,8 +19,6 @@ export function useDateFormatter(locale: string, options?: DateFormatterOptions)
   return useMemo(() => new DateFormatter(locale, options), [locale, options])
 }
 
-
-
 function isEqual(a: DateFormatterOptions, b: DateFormatterOptions) {
   if (a === b) {
     return true

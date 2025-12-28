@@ -25,6 +25,7 @@
     "react-dom": "^18"
   },
   "dependencies": {
+    "@srcube-taro/form": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
     "@srcube-taro/utils-tv": "workspace:^",

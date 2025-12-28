@@ -20,11 +20,11 @@ interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys> {
 export type UseSkeletonProps = MergeVariantProps<Props, SkeletonVariantProps>
 
 export function useSkeleton(props: UseSkeletonProps) {
-  const { ref, isLoaded, rounded, className, classNames, children, ...rest } = props
+  const { ref, isLoaded, radius, className, classNames, children, ...rest } = props
 
   const domRef = useDOMRef(ref)
 
-  const slots = useMemo(() => skeleton({ rounded, className }), [rounded, className])
+  const slots = useMemo(() => skeleton({ radius, className }), [radius, className])
 
   const styles = useMemo(() => ({
     base: slots.base({ class: [classNames?.base, className] }),

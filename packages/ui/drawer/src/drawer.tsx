@@ -1,6 +1,6 @@
 import type { DrawerRef, UseDrawerProps } from './use'
 import { Modal } from '@srcube-taro/modal'
-import { Children, forwardRef, isValidElement } from 'react'
+import { forwardRef, isValidElement } from 'react'
 import { DrawerProvider } from './context'
 import DrawerContent from './drawer-content'
 import { useDrawer } from './use'
@@ -16,12 +16,8 @@ const Drawer = forwardRef<DrawerRef, DrawerProps>((props, ref) => {
   } = drawer
 
   // Check if children contains DrawerContent
-  const hasDrawerContent = Children.toArray(children).some(
-    child => isValidElement(child) && child.type === DrawerContent,
-  )
-
-  if (!hasDrawerContent) {
-    throw new Error('Drawer must contain a DrawerContent component')
+  if (!isValidElement(children) || children.type !== DrawerContent) {
+    throw new Error('Drawer children must be DrawerContent')
   }
 
   return (

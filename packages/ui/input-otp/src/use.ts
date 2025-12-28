@@ -67,8 +67,9 @@ export function useInputOtp(props: UseInputOtpProps) {
     length = 4,
     keyboardType = 'number',
     color,
+    variant,
     size,
-    round,
+    radius,
     isDisabled,
     isReadOnly,
     isPassword,
@@ -82,7 +83,15 @@ export function useInputOtp(props: UseInputOtpProps) {
 
   const domRef = useDOMRef(ref)
 
-  const slots = useMemo(() => inputOtp({ color, size, round, isDisabled, isReadOnly, isPassword }), [color, size, round, isDisabled, isReadOnly, isPassword])
+  const slots = useMemo(() => inputOtp({
+    color,
+    variant,
+    size,
+    radius,
+    isDisabled,
+    isReadOnly,
+    isPassword,
+  }), [color, variant, size, radius, isDisabled, isReadOnly, isPassword])
 
   const styles = useMemo(
     () => ({

@@ -5,7 +5,7 @@ import type { ITouchEvent, ButtonProps as NativeButtonProps } from '@tarojs/comp
 import type { ReactNode } from 'react'
 import { button, buttonHover } from '@srcube-taro/theme'
 import { withLoading } from '@srcube-taro/utils-func'
-import { Button as NativeButton } from '@tarojs/components'
+import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo, useState } from 'react'
 import { useButtonGroupContext } from './button-group/context'
 
@@ -68,7 +68,7 @@ export function useButton(props: UseButtonProps) {
     ...rest
   } = props
 
-  const Component = NativeButton
+  const domRef = useDOMRef(ref)
 
   const isLoadingProps = rest?.isLoading || groupCtx?.isLoading || 'auto'
 
@@ -78,9 +78,9 @@ export function useButton(props: UseButtonProps) {
 
   const isLoading = isAutoLoading ? autoLoading : Boolean(isLoadingProps)
 
-  const styles = useMemo(
-    () => ({
-      normal: button({
+  const style = useMemo(
+    () => {
+      const variants = {
         variant,
         color,
         size,
@@ -90,14 +90,12 @@ export function useButton(props: UseButtonProps) {
         isLoading,
         isIcon,
         isInGroup,
-        className,
-      }),
-      hover: buttonHover({
-        variant,
-        color,
-        className: hoverClass,
-      }),
-    }),
+      }
+      return ({
+        normal: button({ ...variants, className }),
+        hover: buttonHover({ ...variants, className: hoverClass }),
+      })
+    },
     [variant, color, size, radius, fullWidth, isDisabled, isLoading, isIcon, isInGroup, className, hoverClass],
   )
 
@@ -134,16 +132,18 @@ export function useButton(props: UseButtonProps) {
 
   const getButtonProps = useCallback((): NativeButtonProps => {
     return {
+      ref: domRef,
+      className: style.normal,
+      hoverClass: style.hover,
       disabled: isDisabled || isLoading,
       onClick: handleTap,
       ...rest,
     }
-  }, [isDisabled, isLoading, rest, handleTap])
+  }, [domRef, style.normal, style.hover, isDisabled, isLoading, rest, handleTap])
 
   return {
-    Component,
-    domRef: ref,
-    styles,
+    domRef,
+    style,
     startContent: placedContent('start'),
     endContent: placedContent('end'),
     spinner,

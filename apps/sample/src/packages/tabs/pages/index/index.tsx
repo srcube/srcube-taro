@@ -1,7 +1,14 @@
-import { Box, Tab, Tabs } from '@srcube-taro/ui'
+import { Tab, Tabs } from '@srcube-taro/ui'
 import { Page, Section } from '@/components'
 
+export interface TabItem {
+  key: string
+  value: string
+}
+
 const tabs = ['Photos', 'Music', 'Videos', 'Files', 'Settings', 'Profile', 'About', 'Contact', 'Privacy']
+
+const dynamicTabs: TabItem[] = tabs.map(row => ({ key: row, value: row }))
 
 const colors = ['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as const
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
@@ -59,6 +66,16 @@ export default function TabsPage() {
             <Tab key="videos" title="Videos" />
           </Tabs>
         ))}
+      </Section>
+
+      <Section title="Dynamic" contentClass="flex flex-col gap-2">
+        <Tabs items={dynamicTabs} aria-label="Tabs dynamic">
+          {item => (
+            <Tab key={item.value} title={item.value}>
+              {item.value} panel content
+            </Tab>
+          )}
+        </Tabs>
       </Section>
 
       <Section title="Full width">

@@ -9,7 +9,12 @@ export default defineAppConfig({
     },
     {
       root: 'packages/layouts',
-      pages: ['pages/box/index', 'pages/stack/index'],
+      pages: [
+        'pages/box/index',
+        'pages/stack/index',
+        'pages/scrollbox/index',
+        'pages/listbox/index',
+      ],
     },
     {
       root: 'packages/button',
@@ -32,6 +37,10 @@ export default defineAppConfig({
       pages: ['pages/index/index', 'pages/auto-safe-area/index'],
     },
     {
+      root: 'packages/form',
+      pages: ['pages/index/index'],
+    },
+    {
       root: 'packages/input-otp',
       pages: ['pages/index/index'],
     },
@@ -41,6 +50,10 @@ export default defineAppConfig({
     },
     {
       root: 'packages/modal',
+      pages: ['pages/index/index'],
+    },
+    {
+      root: 'packages/picker',
       pages: ['pages/index/index'],
     },
     {

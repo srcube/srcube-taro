@@ -14,7 +14,7 @@ import { useDOMRef } from '@srcube-taro/utils-react'
 import { mapPropsVariants } from '@srcube-taro/utils-tv'
 import { $ } from '@tarojs/extend'
 import { nextTick } from '@tarojs/taro'
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 type OmitNativeKeys = 'children'
 
@@ -58,7 +58,7 @@ export interface ValuesType<T = object> {
 
 type Placement = 'top' | 'bottom' | 'start' | 'end'
 
-export type UseTabsProps<T> = MergeVariantProps<Props, TabsVariantProps> & Omit<TabListStateOptions<T>, ''> & CollectionProps<T>
+export type UseTabsProps<T> = MergeVariantProps<Props, TabsVariantProps> & Omit<TabListStateOptions<T>, 'children'> & CollectionProps<T>
 
 export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
   const [props, variantProps] = mapPropsVariants(originalProps, tabs.variantKeys)
@@ -99,11 +99,11 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     return rawPlacement === 'end' ? 'end' : 'start'
   })()
 
-  const [masks, setMasks] = useState<{ start: boolean, end: boolean }>({ start: false, end: false })
+  const [masks, setMasks] = useState<{ start: boolean, end: boolean }>({ start: true, end: true })
 
   const state = useTabListState<T>({
     children: children as CollectionChildren<T>,
-    ...props,
+    ...rest,
   })
 
   const slots = useMemo(() => tabs({ ...variantProps, placement }), [variantProps, placement])
@@ -117,7 +117,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     panel: slots.panel({ class: classNames?.panel }),
   }), [slots, classNames, className])
 
-  const [isMeasuring, setIsMeasuring] = useState(true)
+  const [isMeasured, setIsMeasured] = useState(false)
   const [scrollPos, setScrollPos] = useState<{ left?: number, top?: number }>({})
 
   const tapSideRef = useRef<'start' | 'end' | 'top' | 'bottom' | null>(null)
@@ -140,7 +140,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
 
   // Calculate container width/height and items offsets
   useLayoutEffect(() => {
-    setIsMeasuring(true);
+    setIsMeasured(false);
 
     (async () => {
       try {
@@ -190,7 +190,9 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
 
         scrollRef.current.maxLeft = Math.max(0, totalW - containerRef.current.width)
         scrollRef.current.maxTop = Math.max(0, totalH - containerRef.current.height)
-        setIsMeasuring(false)
+
+        setMasks({ start: false, end: totalW > containerRef.current.width })
+        setIsMeasured(true)
       }
       catch {}
     })()
@@ -243,18 +245,19 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
 
   // Because scroll end event not support in miniprogram webview
   const applyScroll = useCallback((axis: 'left' | 'top', target: number) => {
-    const current = axis === 'left' ? scrollPos.left : scrollPos.top
-    if (current === target) {
-      setScrollPos(prev => ({ ...prev, [axis]: undefined }))
-
-      nextTick(() => {
-        setScrollPos(prev => ({ ...prev, [axis]: target }))
-      })
-    }
-    else {
-      setScrollPos(prev => ({ ...prev, [axis]: target }))
-    }
-  }, [scrollPos.left, scrollPos.top])
+    setScrollPos((prev) => {
+      const current = axis === 'left' ? prev.left : prev.top
+      if (current === target) {
+        const max = axis === 'left' ? scrollRef.current.maxLeft : scrollRef.current.maxTop
+        const temp = target > 0 ? Math.max(0, Math.min(max, target - 1)) : Math.min(max, target + 1)
+        nextTick(() => {
+          setScrollPos(p => ({ ...p, [axis]: target }))
+        })
+        return { ...prev, [axis]: temp }
+      }
+      return { ...prev, [axis]: target }
+    })
+  }, [])
 
   // Auto scroll when selected item is out of view
   useLayoutEffect(() => {
@@ -330,7 +333,7 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
         applyScroll('top', target)
       }
     }
-  }, [state.selectedKey, state.collection, rawSize, isVertical])
+  }, [state.selectedKey, state.collection, rawSize, isVertical, applyScroll])
 
   return {
     domRef,
@@ -340,7 +343,8 @@ export function useTabs<T extends object>(originalProps: UseTabsProps<T>) {
     slots,
     styles,
     masks,
-    isMeasuring,
+    isMeasured,
+    classNames,
     getBaseProps,
     getScrollViewProps,
   }

@@ -50,7 +50,7 @@ export default function Drawers() {
           color="primary"
           size="sm"
           onTap={() => {
-            Taro.navigateTo({ url: '/packages/drawers/pages/auto-safe-area/index' })
+            Taro.navigateTo({ url: '/packages/drawer/pages/auto-safe-area/index' })
           }}
         >
           To Page

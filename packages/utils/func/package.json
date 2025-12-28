@@ -25,7 +25,6 @@
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",
-    "@types/node": "catalog:",
     "@types/react": "catalog:"
   }
 }

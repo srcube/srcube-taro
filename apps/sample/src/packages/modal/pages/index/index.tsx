@@ -1,8 +1,9 @@
 import type { ModalProps, ModalRef } from '@srcube-taro/ui'
+import type { TaroElement } from '@tarojs/runtime'
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, usePageScrollLock } from '@srcube-taro/ui'
 import { PageMeta, View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { Page } from '@/components/page'
 import { Section } from '@/components/section'
 
@@ -10,6 +11,7 @@ export default function ModalPage() {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
 
   const modalRef = useRef<ModalRef>(null)
+  const headerRef = useRef<TaroElement>(null)
 
   const { isLocked } = usePageScrollLock()
 
@@ -17,6 +19,13 @@ export default function ModalPage() {
 
   const [backdrop, setBackdrop] = useState<ModalProps['backdrop']>()
   const [isDismissable, setIsDismissable] = useState<boolean>()
+
+  useLayoutEffect(() => {
+    if (!headerRef.current)
+      return
+
+    console.log('Header Ref: ', headerRef.current)
+  }, [isOpen])
 
   const handleOpenWithBackdrop = useCallback((type: ModalProps['backdrop']) => {
     setBackdrop(type)
@@ -75,9 +84,15 @@ export default function ModalPage() {
           Non-dismissible
         </Button>
       </Section>
-      <Modal ref={modalRef} isOpen={isOpen} onOpenChange={onOpenChange} backdrop={backdrop} isDismissable={isDismissable}>
+      <Modal
+        ref={modalRef}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        backdrop={backdrop}
+        isDismissable={isDismissable}
+      >
         <ModalContent>
-          <ModalHeader className="p-3">
+          <ModalHeader ref={headerRef} className="p-3">
             <View className="text-center text-lg font-semibold">Modal Title</View>
           </ModalHeader>
           <ModalBody className="px-4 py-3">

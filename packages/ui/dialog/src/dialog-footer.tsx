@@ -10,7 +10,10 @@ function DialogFooter(props: DialogFooterProps) {
   const { slots, classNames } = useDialogContext()
 
   return (
-    <ModalFooter className={slots.footer({ class: className || classNames?.footer })} {...rest}>
+    <ModalFooter
+      className={slots.footer({ className: [classNames?.footer, className] })}
+      {...rest}
+    >
       {children}
     </ModalFooter>
   )

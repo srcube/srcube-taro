@@ -7,14 +7,6 @@ import { useMemo } from 'react'
 
 export interface Props {
   /**
-   * Whether the toast is open
-   */
-  // isOpen?: boolean
-  /**
-   *
-   */
-  // defaultOpen?: boolean
-  /**
    * The title of the toast
    */
   title?: string
@@ -30,10 +22,6 @@ export interface Props {
    * The icon to display in the toast
    */
   icon?: ReactNode
-  /**
-   * The end content to display in the toast
-   */
-  endContent?: ReactNode
   /**
    * The duration of the toast in milliseconds
    * @default 1500
@@ -58,7 +46,6 @@ export function useToast(props: UseToastProps) {
     content,
     color,
     icon,
-    endContent,
     duration,
     autoDismiss = true,
   } = props
@@ -67,21 +54,11 @@ export function useToast(props: UseToastProps) {
     color,
   }), [color])
 
-  const styles = useMemo(() => ({
-    wrapper: slots.base(),
-    icon: slots.icon(),
-    content: slots.content(),
-    title: slots.title(),
-    _icon: slots._icon(),
-  }
-  ), [slots])
-
   return {
-    styles,
+    slots,
     title,
     content,
     icon,
-    endContent,
     duration,
     autoDismiss,
   }

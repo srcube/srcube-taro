@@ -4,11 +4,11 @@ import { tv } from '@srcube-taro/utils-tv'
 export const skeleton = tv({
   slots: {
     base: 'relative inline-flex items-center',
-    content: 'transition-opacity duration-300',
+    content: 'w-full transition-opacity duration-300',
     placeholder: 'absolute inset-0 rounded-md bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse',
   },
   variants: {
-    rounded: {
+    radius: {
       none: { placeholder: 'rounded-none' },
       sm: { placeholder: 'rounded-lg' },
       md: { placeholder: 'rounded-xl' },
@@ -17,7 +17,7 @@ export const skeleton = tv({
     },
   },
   defaultVariants: {
-    rounded: 'md',
+    radius: 'md',
   },
 })
 

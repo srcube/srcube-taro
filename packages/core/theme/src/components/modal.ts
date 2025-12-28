@@ -3,12 +3,12 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const modal = tv({
   slots: {
-    base: 'fixed inset-0 z-[1000] h-full w-full',
-    backdrop: 'fixed inset-0 z-[1000]',
-    content: ['fixed inset-0 z-[1000] overflow-hidden h-fit bg-white'],
-    header: [''],
-    body: [''],
-    footer: [''],
+    'root-portal': '',
+    'backdrop': 'fixed inset-0 z-[1000]',
+    'content': ['fixed inset-0 z-[1000] overflow-hidden flex flex-col h-fit bg-white'],
+    'header': [''],
+    'body': [''],
+    'footer': [''],
   },
   variants: {
     isOpen: {

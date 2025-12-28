@@ -1,28 +1,30 @@
-import type { TaroElement } from '@tarojs/runtime'
-import type { UseTabProps } from './use'
-import { View } from '@tarojs/components'
-import { forwardRef } from 'react'
-import { useTab } from './use'
+import type { ItemProps } from '@react-types/shared'
+import type { NativeProps } from '@srcube-taro/utils-types'
+import type { ViewProps } from '@tarojs/components'
+import type { ReactNode, RefObject } from 'react'
+import { Item } from '@react-stately/collections'
 
-export interface TabProps<T extends object = object> extends UseTabProps<T> {}
+interface Props<T extends object = {}> extends Omit<ItemProps<T> & NativeProps<ViewProps>, 'children' | 'title'> {
+  /**
+   * Tab title
+   */
+  title?: ReactNode
+  /**
+   * Tab children
+   */
+  children?: ReactNode
+  /**
+   * Whether the tab is disabled
+   */
+  isDisabled?: boolean
+  /**
+   * Ref to the tab element
+   */
+  tabRef?: RefObject<ViewProps>
+}
 
-const Tab = forwardRef<TaroElement, TabProps>((props, ref) => {
-  const {
-    domRef,
-    isSelected,
-    getTabProps,
-    getTabContentProps,
-    getCursorProps,
-  } = useTab({ ...props, ref })
+export type TabProps<T extends object = {}> = Props<T>
 
-  return (
-    <View ref={domRef} {...getTabProps()}>
-      {isSelected && <View {...getCursorProps()} />}
-      <View {...getTabContentProps()}>{props.item.rendered}</View>
-    </View>
-  )
-})
-
-Tab.displayName = 'Srcube.Tab'
+const Tab = Item as <T extends object>(props: TabProps<T>) => JSX.Element
 
 export default Tab

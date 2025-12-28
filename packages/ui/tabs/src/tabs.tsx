@@ -1,23 +1,29 @@
 import type { TaroElement } from '@tarojs/runtime'
+import type { ForwardedRef, ReactElement, Ref } from 'react'
 import type { UseTabsProps } from './use'
+
 import { Skeleton } from '@srcube-taro/ui'
-import { mergeProps } from '@srcube-taro/utils-func'
 import { ScrollView, View } from '@tarojs/components'
 import { forwardRef } from 'react'
-import { Tab } from './tab'
+import { Tab } from './_tab'
 import { TabPanel } from './tab-panel'
 import { useTabs } from './use'
 
-export interface TabsProps<T> extends UseTabsProps<T> {}
+export interface TabsProps<T extends object = object> extends UseTabsProps<T> {}
 
-const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: React.Ref<TaroElement>) => {
+const Tabs = forwardRef(<T extends object>(
+  props: TabsProps<T>,
+  ref: ForwardedRef<TaroElement>,
+) => {
   const {
     domRef,
+    slots,
     styles,
     state,
     values,
     masks,
-    isMeasuring,
+    isMeasured,
+    classNames,
     getBaseProps,
     getScrollViewProps,
   } = useTabs<T>({
@@ -28,7 +34,9 @@ const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: Re
   const tabsItems = [...state.collection].map((item, i) => (
     <Skeleton
       key={item.key}
-      isLoaded={!isMeasuring}
+      isLoaded={isMeasured}
+      radius="none"
+      className={slots.skeleton({ class: classNames?.skeleton })}
       // To solve the scrollview horizontal offset issue
       style={{ position: 'relative', top: props.isVertical ? 0 : 10 }}
     >
@@ -38,7 +46,7 @@ const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: Re
         index={i}
         item={item}
         values={values}
-        isMeasuring={isMeasuring}
+        isMeasured={isMeasured}
       />
     </Skeleton>
   ))
@@ -74,8 +82,6 @@ const Tabs = forwardRef(<T extends object = object>(props: TabsProps<T>, ref: Re
       )}
     </View>
   )
-})
-
-Tabs.displayName = 'Srcube.Tabs'
+}) as <T extends object = object>(props: TabsProps<T> & { ref?: Ref<TaroElement> }) => ReactElement
 
 export default Tabs

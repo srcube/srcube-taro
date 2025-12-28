@@ -5,8 +5,7 @@ import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { ITouchEvent } from '@tarojs/components'
 import type { ReactNode } from 'react'
-import { useOverlayTriggerState } from '@react-stately/overlays'
-import { useAnimatePresence } from '@srcube-taro/hooks'
+import { useAnimatePresence, useOverlayTriggerState } from '@srcube-taro/hooks'
 import { dialog } from '@srcube-taro/theme'
 import { withLoading } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
@@ -110,20 +109,6 @@ export function useDialog(props: UseDialogProps) {
 
   const slots = useMemo(() => dialog({ isOpen, isConfirmOnly }), [isOpen, isConfirmOnly])
 
-  const styles = useMemo(
-    () => ({
-      base: slots.base({ class: [classNames?.base, className] }),
-      backdrop: slots.backdrop({ class: classNames?.backdrop }),
-      content: slots.content({ class: classNames?.content }),
-      header: slots.header({ class: classNames?.header }),
-      body: slots.body({ class: classNames?.body }),
-      footer: slots.footer({ class: classNames?.footer }),
-      actionGroup: slots.actionGroup({ class: classNames?.actionGroup }),
-      actionButton: slots.actionButton({}),
-    }),
-    [slots, className, classNames],
-  )
-
   const handleCancel = useCallback(async (e: ITouchEvent) => {
     if (!onCancel) {
       close()
@@ -149,6 +134,7 @@ export function useDialog(props: UseDialogProps) {
         close()
     }
     catch (error) {
+      // @ts-expect-error ignore process type error
       if (process.env.NODE_ENV === 'development') {
         console.error('[Dialog] Confirm action failed:', error)
       }
@@ -166,10 +152,17 @@ export function useDialog(props: UseDialogProps) {
       isDismissable,
       onOpenChange,
       onClose: close,
-      classNames: styles,
+      classNames: {
+        'root-portal': slots['root-portal']({ className: classNames?.['root-portal'] }),
+        'backdrop': slots.backdrop({ className: classNames?.backdrop }),
+        'content': slots.content({ className: [classNames?.content, className] }),
+        'header': slots.header({ className: classNames?.header }),
+        'body': slots.body({ className: classNames?.body }),
+        'footer': slots.footer({ className: classNames?.footer }),
+      },
       ...rest,
     }
-  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, styles, rest])
+  }, [domRef, isOpen, defaultOpen, isDismissable, onOpenChange, close, slots, classNames, className, rest])
 
   const getCancelProps = useCallback((): ButtonProps => {
     return {
@@ -177,10 +170,10 @@ export function useDialog(props: UseDialogProps) {
       variant: 'flat',
       isDisabled: isAnyLoading,
       isLoading: cancelLoading,
-      className: styles.actionButton,
+      className: slots.actionButton({ className: classNames?.actionButton }),
       onTap: handleCancel,
     }
-  }, [isAnyLoading, cancelLoading, styles, handleCancel])
+  }, [isAnyLoading, cancelLoading, slots, classNames, handleCancel])
 
   const getConfirmProps = useCallback((): ButtonProps => {
     return {
@@ -188,15 +181,14 @@ export function useDialog(props: UseDialogProps) {
       variant: 'flat',
       isDisabled: isAnyLoading,
       isLoading: confirmLoading,
-      className: styles.actionButton,
+      className: slots.actionButton({ className: classNames?.actionButton }),
       onTap: handleConfirm,
     }
-  }, [color, isAnyLoading, confirmLoading, styles, handleConfirm])
+  }, [color, isAnyLoading, confirmLoading, slots, classNames, handleConfirm])
 
   return {
     domRef,
     slots,
-    styles,
     classNames,
     t,
     title,

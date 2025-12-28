@@ -59,6 +59,16 @@ export const button = tv({
   },
   compoundVariants: [
     {
+      isDisabled: false,
+      isLoading: false,
+      class: 'active:scale-95',
+    },
+    {
+      isDisabled: false,
+      isLoading: 'auto',
+      class: 'active:scale-95',
+    },
+    {
       variant: ['outline', 'flat', 'text'],
       color: 'primary',
       class: 'text-primary-500 active:text-primary-600',
@@ -112,12 +122,6 @@ export const button = tv({
       variant: 'flat',
       color: 'danger',
       class: 'bg-danger-50 active:bg-danger-100',
-    },
-    // States
-    {
-      isDisabled: true,
-      isLoading: true,
-      class: 'active:scale-95',
     },
     // isIcon state
     {
@@ -213,7 +217,7 @@ export type ButtonVariantProps = VariantProps<typeof button>
  * Button hover class equals to button active class
  */
 export const buttonHover = tv({
-  base: 'scale-95',
+  base: '',
   variants: {
     color: {
       default: 'bg-gray-200',
@@ -229,8 +233,27 @@ export const buttonHover = tv({
       flat: 'border-none',
       text: 'border-none bg-transparent',
     },
+    isDisabled: {
+      true: 'scale-100',
+      false: '',
+    },
+    isLoading: {
+      true: 'scale-100',
+      false: '',
+      auto: '',
+    },
   },
   compoundVariants: [
+    {
+      isDisabled: false,
+      isLoading: false,
+      class: 'scale-95',
+    },
+    {
+      isDisabled: false,
+      isLoading: 'auto',
+      class: 'scale-95',
+    },
     {
       variant: ['outline', 'flat', 'text'],
       color: 'primary',

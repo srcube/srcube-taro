@@ -1,6 +1,7 @@
 import type { TaroElement } from '@tarojs/runtime'
 import type { UseTextareaProps } from './use'
-import { Textarea as NativeTextarea, View } from '@tarojs/components'
+import { Field } from '@srcube-taro/form'
+import { Textarea as NativeTextarea } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { useTextarea } from './use'
 
@@ -9,26 +10,20 @@ export interface TextareaProps extends UseTextareaProps {}
 const Textarea = forwardRef<TaroElement, TextareaProps>((props, ref) => {
   const {
     domRef,
-    styles,
-    clearButton,
-    isClearable,
-    getWrapperProps,
+    getFieldProps,
     getTextareaProps,
-    getClearButtonProps,
+    fieldRef,
   } = useTextarea({
     ...props,
     ref,
   })
 
   return (
-    <View {...getWrapperProps()}>
-      <NativeTextarea ref={domRef} {...getTextareaProps()} />
-      {isClearable && (
-        <View {...getClearButtonProps()} className={styles.clearButton}>
-          {clearButton || <View className={styles.iInputClear} />}
-        </View>
+    <Field ref={fieldRef as any} {...getFieldProps()}>
+      {({ id, inputClass }) => (
+        <NativeTextarea id={id} ref={domRef} {...getTextareaProps({ className: inputClass })} />
       )}
-    </View>
+    </Field>
   )
 })
 

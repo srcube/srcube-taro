@@ -10,7 +10,10 @@ function DrawerFooter(props: DrawerFooterProps) {
   const { slots, classNames } = useDrawerContext()
 
   return (
-    <ModalFooter className={slots.footer({ class: className || classNames?.footer })} {...rest}>
+    <ModalFooter
+      className={slots.footer({ className: [classNames?.footer, className] })}
+      {...rest}
+    >
       {children}
     </ModalFooter>
   )

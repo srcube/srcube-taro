@@ -32,8 +32,8 @@
     "react-is": "catalog:"
   },
   "devDependencies": {
+    "@react-types/shared": "catalog:",
     "@srcube-taro/ts-config": "workspace:^",
-    "@types/node": "catalog:",
     "@types/react": "catalog:"
   }
 }

@@ -30,12 +30,6 @@ export function useComponent(props: UseComponentProps) {
     [/* deps */]
   )
 
-  const styles = useMemo(() => {
-    return {
-      /* styles */
-    }
-  }), [/* deps */])
-
   return {
     // props & states
   }

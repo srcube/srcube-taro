@@ -14,7 +14,7 @@ export default function TextareaPage() {
     <Page>
       <Section title="Basic" contentClass="space-y-2">
         {colors.map(color => (
-          <Textarea key={color} defaultValue={capitalize(color)} color={color} autoHeight placeholder="Please input" />
+          <Textarea key={color} label={capitalize(color)} defaultValue={capitalize(color)} color={color} autoHeight placeholder="Please input" />
         ))}
       </Section>
       <Section title="Sizes" contentClass="space-y-2">
@@ -37,6 +37,20 @@ export default function TextareaPage() {
         <Textarea
           isClearable
           defaultValue="With start/end content and clear"
+          placeholder="Please input"
+          label="With Clear Button"
+          clearButton={<View className="i-[tdesign--clear-formatting-1-filled]" />}
+        />
+        <Textarea
+          label="Inside Label"
+          labelPlacement="inside"
+          defaultValue="Label inside the control"
+          placeholder="Please input"
+        />
+        <Textarea
+          label="Outside Left Label"
+          labelPlacement="outside-left"
+          defaultValue="Label placed on the left"
           placeholder="Please input"
         />
       </Section>

@@ -18,11 +18,11 @@ export const toaster = tv({
 
 export const toast = tv({
   slots: {
-    base: [
+    wrapper: [
       'absolute',
       'flex flex-col items-center justify-center gap-1',
       'm-2 p-4 w-40 min-h-40 border-box',
-      'border-box rounded-2xl shadow-lg',
+      'border-box rounded-[2.5rem] shadow-lg',
       'backdrop-blur-md',
       'animate-toast-from-center-in',
     ],

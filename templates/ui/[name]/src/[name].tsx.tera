@@ -3,19 +3,19 @@ to: '{{ name }}/src/{{ name }}.tsx'
 ---
 
 import type { TaroElement } from '@tarojs/runtime'
-import type { Use{{ name | capitalize }}Props } from './use'
+import type { Use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props } from './use'
 import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
-import { use{{ name | capitalize }} } from './use'
+import { use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }} } from './use'
 
-export interface {{ name | capitalize }}Props extends Use{{ name | capitalize }}Props {}
+export interface {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props extends Use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props {}
 
-const {{ name | capitalize }} = forwardRef<TaroElement, {{ name | capitalize }}Props>((props, ref) => {
+const {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }} = forwardRef<TaroElement, {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props>((props, ref) => {
   const {
     domRef,
     children,
-    get{{ name | capitalize }}Props,
-  } = use{{ name | capitalize }}({
+    get{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props,
+  } = use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}({
     ...props,
     ref,
   })
@@ -23,13 +23,13 @@ const {{ name | capitalize }} = forwardRef<TaroElement, {{ name | capitalize }}P
   return (
     <View
       ref={domRef}
-      {...get{{ name | capitalize }}Props()}
+      {...get{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props()}
     >
       {children}
     </View>
   )
 })
 
-{{ name | capitalize }}.displayName = 'Srcube.{{ name | capitalize }}'
+{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}.displayName = 'Srcube.{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}'
 
-export default {{ name | capitalize }}
+export default {{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}

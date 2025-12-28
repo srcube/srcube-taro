@@ -10,7 +10,10 @@ function DrawerHeader(props: DrawerHeaderProps) {
   const { slots, classNames } = useDrawerContext()
 
   return (
-    <ModalHeader className={slots.header({ class: className || classNames?.header })} {...rest}>
+    <ModalHeader
+      className={slots.header({ className: [classNames?.header, className] })}
+      {...rest}
+    >
       {children}
     </ModalHeader>
   )

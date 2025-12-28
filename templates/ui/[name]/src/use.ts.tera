@@ -15,26 +15,25 @@ interface Props {
   ref?: ReactRef
 }
 
-export type Use{{ name | capitalize }}Props = Props &
+export type Use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props = Props &
   Omit<NativeProps<ViewProps>, ''>
 
-export function use{{ name | capitalize }}(props: Use{{ name | capitalize }}Props) {
+export function use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}(props: Use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props) {
   const { ref, children, className, ...rest } = props
 
   const domRef = useDOMRef(ref)
 
-  const get{{ name | capitalize }}Props = useCallback(() => {
+  const get{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props = useCallback(() => {
     return {
       ...rest
     }
   }, [rest])
 
   return {
-    Component,
     domRef,
     children,
-    get{{ name | capitalize }}Props,
+    get{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Props,
   }
 }
 
-export type Use{{ name | capitalize }}Return = ReturnType<typeof use{{ name | capitalize }}>
+export type Use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}Return = ReturnType<typeof use{{ name | replace(from="-", to=" ") | title | replace(from=" ", to="") }}>

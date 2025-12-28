@@ -1,4 +1,5 @@
-import type { DrawerRef } from './use'
+import type { ModalContentProps } from '@srcube-taro/modal'
+import type { TaroElement } from '@tarojs/runtime'
 import { ModalBody, ModalContent, ModalFooter, ModalHeader } from '@srcube-taro/modal'
 import { Children, forwardRef, isValidElement } from 'react'
 import { useDrawerContext } from './context'
@@ -6,18 +7,14 @@ import DrawerBody from './drawer-body'
 import DrawerFooter from './drawer-footer'
 import DrawerHeader from './drawer-header'
 
-export interface DrawerContentProps {
-  className?: string
-  children?: React.ReactNode
-}
+export interface DrawerContentProps extends ModalContentProps {}
 
-const DrawerContent = forwardRef<DrawerRef, DrawerContentProps>((props, ref) => {
-  const { className, children, ...rest } = props
+const DrawerContent = forwardRef<TaroElement, DrawerContentProps>((props, ref) => {
+  const { children, ...rest } = props
 
   const {
-    styles,
     title,
-    placement,
+    // placement,
   } = useDrawerContext()
 
   const childrens = Children.toArray(children)
@@ -39,20 +36,20 @@ const DrawerContent = forwardRef<DrawerRef, DrawerContentProps>((props, ref) => 
   )
 
   return (
-    <ModalContent ref={ref} className={className || styles.content} {...rest}>
+    <ModalContent ref={ref} {...rest}>
       {customHeader || (title && (
-        <ModalHeader className={styles.header}>
+        <ModalHeader>
           {title}
         </ModalHeader>
       ))}
       {customBody || (
-        <ModalBody className={styles.body}>
+        <ModalBody>
           {content}
         </ModalBody>
       )}
-      {customFooter || (placement !== 'top' && (
-        <ModalFooter className={styles.footer} />
-      ))}
+      {customFooter || (
+        <ModalFooter />
+      )}
     </ModalContent>
   )
 })

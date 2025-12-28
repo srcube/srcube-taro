@@ -135,7 +135,7 @@ export function useRadio(props: UseRadioProps) {
     }
   }, [isReadOnlyProp, isDisabledProp, isLoading, isAutoLoading, onTap, onChange])
 
-  const getBaseProps = useCallback((): ViewProps => ({
+  const getWrapperProps = useCallback((): ViewProps => ({
     className: styles.base,
     onClick: handleBaseTap,
   }), [styles, handleBaseTap])
@@ -158,7 +158,7 @@ export function useRadio(props: UseRadioProps) {
     color,
     size,
     iconContent,
-    getBaseProps,
+    getWrapperProps,
     getNRadioProps,
   }
 }

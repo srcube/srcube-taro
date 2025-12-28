@@ -1,0 +1,25 @@
+LLMs README Index for packages/
+
+This file lists README files for packages under `packages/`.
+
+packages/core/theme/README.md
+packages/core/ui/README.md
+packages/ui/app/README.md
+packages/ui/button/README.md
+packages/ui/calendar/README.md
+packages/ui/checkbox/README.md
+packages/ui/dialog/README.md
+packages/ui/drawer/README.md
+packages/ui/form/README.md
+packages/ui/input/README.md
+packages/ui/input-otp/README.md
+packages/ui/layout/README.md
+packages/ui/modal/README.md
+packages/ui/picker/README.md
+packages/ui/radio/README.md
+packages/ui/skeleton/README.md
+packages/ui/spinner/README.md
+packages/ui/switch/README.md
+packages/ui/tabs/README.md
+packages/ui/textarea/README.md
+packages/ui/toaster/README.md
