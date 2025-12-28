@@ -54,13 +54,13 @@ packages/ui/[component]/
 
 ## Preview
 
-<img src="./meta/weapp-qr-code.jpg" alt="Srcube Taro UI" width="150" />
+<img src="https://github.com/srcube/srcube-taro/blob/main/meta/weapp-qr-code.jpg" alt="Srcube Taro UI" width="150" />
 
 ## Contribution
 
 We welcome contributions from the community! Please refer to the
-[CONTRIBUTING.md](./CONTRIBUTING.md) file for more information.
+[CONTRIBUTING.md](https://github.com/srcube/srcube-taro/blob/main/CONTRIBUTING.md) file for more information.
 
 ## License
 
-[MIT](./LICENSE.md)
+[MIT](https://github.com/srcube/srcube-taro/blob/main/LICENSE.md)
