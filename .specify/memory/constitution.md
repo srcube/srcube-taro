@@ -1,50 +1,92 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: template -> 1.0.0
+- List of modified principles:
+  - Defined [PRINCIPLE_1] as "Cross-Platform & Headless Architecture"
+  - Defined [PRINCIPLE_2] as "Styling Strategy (Tailwind + Variants)"
+  - Defined [PRINCIPLE_3] as "Accessibility & I18n First"
+  - Defined [PRINCIPLE_4] as "Strict Typing & Engineering Quality"
+  - Defined [PRINCIPLE_5] as "Layered Architecture & No Cyclic Deps"
+- Added sections: "Coding Standards", "Directory & File Conventions"
+- Removed sections: None
+- Templates requiring updates:
+  - .specify/templates/plan-template.md (✅ aligned via delegation)
+  - .specify/templates/spec-template.md (✅ aligned via delegation)
+  - .specify/templates/tasks-template.md (✅ aligned via delegation)
+- Follow-up TODOs: Ensure existing components comply with new governance.
+-->
+# Srcube Taro Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Cross-Platform & Headless Architecture
+Build headless, cross-platform components using React Hooks and Taro components. Components must support Mini-programs, H5, and React Native.
+- Keep APIs consistent: naming, events, ref forwarding, defaults.
+- Logic must be separated into custom hooks (`use.ts`).
+- UI must be declarative and composed of Taro components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Styling Strategy (Tailwind + Variants)
+Use `weapp-tailwindcss` for compiling Tailwind utilities to mini-programs and `tailwind-variants` (tv) for component states.
+- Define variants (size/color/isDisabled/isLoading) via `tv` in `@srcube-taro/theme`.
+- Replace unsupported selectors (like group/peer) with variant-driven logic.
+- Ensure static, predictable class generation.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Accessibility & I18n First
+Components must be accessible and internationalizable by default.
+- **Accessibility**: Support aria attributes, keyboard interactions, and focus management (WCAG 2.1 AA).
+- **I18n**: Expose copy via props; support external translators; use stable namespaced keys (e.g., `dialog.ok`).
+- **Formatting**: Date/number formatting must respect the active locale.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Strict Typing & Engineering Quality
+Maintain compile-time safety and runtime robustness.
+- **TypeScript**: Strict mode enabled; exhaustive types required; `any` is strictly prohibited.
+- **Linting**: Use `eslint-antfu` and `lint-staged`.
+- **Commits**: Follow Conventional Commits (feat, fix, docs, etc.).
+- **Error Handling**: Use the defensive async pattern in handlers (try/catch/finally with loading states).
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Layered Architecture & No Cyclic Deps
+Follow the strict layering model: Core (infra) → UI (components) → Utils (tools).
+- Circular dependencies are forbidden.
+- Use React Context per component granularity.
+- Create new contexts via `@srcube-taro/utils-react`.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Coding Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Naming & Files
+- **Folders**: kebab-case (e.g., `copy-button`).
+- **Files**: `index.ts` (exports), `<component>.tsx` (UI), `use.ts` (logic).
+- **Props**: Boolean prefixes (`is/has/should/can`), events (`on*`), handlers (`handle*`).
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Error Handling Pattern
+Handlers must follow the defensive async pattern:
+```ts
+const handleAction = useCallback(async (event: unknown) => {
+  if (isLoading || isDisabled) return
+  setIsLoading(true)
+  try { await onAction?.(event as any) }
+  catch (error) { if (process.env.NODE_ENV === 'development') console.error('[Component] Action failed:', error) }
+  finally { setIsLoading(false) }
+}, [isLoading, isDisabled, onAction])
+```
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Directory & File Conventions
+
+### Package Structure (packages/ui/*)
+- One package per component.
+- **Standard Files**:
+  - `src/index.ts`: Exports types and components.
+  - `src/<component>.tsx`: Presentation layer (`forwardRef`).
+  - `src/use.ts`: Logic hook.
+  - `README.md`: Usage, Variants, Accessibility.
+  - `CHANGELOG.md`: Version history.
+- **Theme**: Variants live in `packages/core/theme/src/components/*`.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes all other practices. Amendments require documentation, approval, and a migration plan.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+- **Compliance**: All PRs must verify compliance with these principles.
+- **Documentation**: Each package must maintain up-to-date `README.md` with runnable snippets.
+- **Versioning**: Follow Semantic Versioning.
+
+**Version**: 1.0.0 | **Ratified**: 2025-12-28 | **Last Amended**: 2025-12-28
