@@ -6,3 +6,10 @@ import type { ClassValue } from '@srcube-taro/utils-tv'
 export type SlotsToClasses<S extends string> = {
   [key in S]?: ClassValue
 }
+
+/**
+ * Exclude the private slots from the slots list
+ *
+ * @param T Slots list
+ */
+export type ExcludePrivateSlotKey<T extends string> = T extends `_${string}` ? never : T

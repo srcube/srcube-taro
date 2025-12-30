@@ -25,6 +25,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@react-aria/utils": "catalog:",
     "@react-stately/collections": "catalog:",
     "@react-stately/list": "^3.13.2",
     "@srcube-taro/hooks": "workspace:^",

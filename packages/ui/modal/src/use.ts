@@ -114,7 +114,7 @@ export function useModal(props: UseModalProps) {
   const getRootPortalProps = useCallback((): ViewProps => {
     return {
       ref: domRef,
-      className: slots['root-portal']({ class: [classNames?.['root-portal'], className] }),
+      className: slots.rootPortal({ class: [classNames?.rootPortal, className] }),
       ...rest,
     }
   }, [domRef, rest, slots, className, classNames])

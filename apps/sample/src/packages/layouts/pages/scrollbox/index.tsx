@@ -40,7 +40,7 @@ export default function ScrollboxPage() {
       <Section title="Vertical & Horizontal" contentClass="flex flex-col gap-2">
         <Scrollbox
           orientation="xy"
-          hideMask={hideMask}
+          hideMasks={hideMask}
           className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
           classNames={{ content: 'grid grid-cols-10 gap-2 p-2' }}
         >
@@ -52,7 +52,7 @@ export default function ScrollboxPage() {
         </Scrollbox>
         <Button
           color={hideMask ? 'primary' : 'default'}
-          onTap={() => setHideMask(!hideMask)}
+          onTap={() => setHideMask(v => !v)}
         >
           Hide Mask
         </Button>

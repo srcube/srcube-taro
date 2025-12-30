@@ -36,7 +36,7 @@ const ModalBackdrop = forwardRef<ModalRef, ModalBackdropProps>((props, ref) => {
   return (
     <View
       ref={ref}
-      className={slots.backdrop({ class: className || classNames?.backdrop })}
+      className={slots.backdrop({ class: [classNames?.backdrop, className] })}
       onClick={handleTap}
       {...rest}
     >

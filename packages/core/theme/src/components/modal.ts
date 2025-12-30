@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const modal = tv({
   slots: {
-    'root-portal': '',
+    'rootPortal': '',
     'backdrop': 'fixed inset-0 z-[1000]',
     'content': ['fixed inset-0 z-[1000] overflow-hidden flex flex-col h-fit bg-white'],
     'header': [''],

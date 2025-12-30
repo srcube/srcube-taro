@@ -153,12 +153,12 @@ export function useDialog(props: UseDialogProps) {
       onOpenChange,
       onClose: close,
       classNames: {
-        'root-portal': slots['root-portal']({ className: classNames?.['root-portal'] }),
-        'backdrop': slots.backdrop({ className: classNames?.backdrop }),
-        'content': slots.content({ className: [classNames?.content, className] }),
-        'header': slots.header({ className: classNames?.header }),
-        'body': slots.body({ className: classNames?.body }),
-        'footer': slots.footer({ className: classNames?.footer }),
+        rootPortal: slots.rootPortal({ className: classNames?.rootPortal }),
+        backdrop: slots.backdrop({ className: classNames?.backdrop }),
+        content: slots.content({ className: [classNames?.content, className] }),
+        header: slots.header({ className: classNames?.header }),
+        body: slots.body({ className: classNames?.body }),
+        footer: slots.footer({ className: classNames?.footer }),
       },
       ...rest,
     }

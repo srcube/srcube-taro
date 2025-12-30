@@ -2,17 +2,19 @@ import type { ListState } from '@react-stately/list'
 import type { CollectionBase, MultipleSelection, Node } from '@react-types/shared'
 import type { VirtualizerOptions } from '@srcube-taro/hooks'
 import type { ScrollboxProps } from '@srcube-taro/scrollbox'
-import type { ListboxSlots } from '@srcube-taro/theme'
+import type { ListboxSlots, ListboxVariantProps } from '@srcube-taro/theme'
 import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
+import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { BaseEventOrig, ScrollViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import type { CSSProperties, ReactNode } from 'react'
 import { useListState } from '@react-stately/list'
-import { useVirtualizer } from '@srcube-taro/hooks'
+import { defaultRangeExtractor, useVirtualizer } from '@srcube-taro/hooks'
 import { listbox } from '@srcube-taro/theme'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { useCallback, useMemo, useRef } from 'react'
+import i18n from './i18n'
 
 type OmitNativeKeys = 'children'
 
@@ -57,16 +59,26 @@ interface Props<T> extends Omit<ScrollboxProps, OmitNativeKeys> {
    */
   hideEmptyContent?: boolean
   /**
+   * The locale to use for the empty content.
+   * @default 'en'
+   */
+  locale?: 'en' | 'zh-CN' | 'zh-TW'
+  /**
    * Class names to apply to the listbox slots.
    */
   classNames?: SlotsToClasses<ListboxSlots> & ScrollboxProps['classNames']
   /**
    * Virtualizer options
+   * @reference https://tanstack.com/virtual/latest/docs/api/virtualizer#virtualizeroptions
    */
-  virtualizerOptions?: Partial<VirtualizerOptions<any, any>> & { }
+  virtualizerOptions?: Partial<VirtualizerOptions<any, any>>
+  /**
+   * The indices of the sticky items.
+   */
+  stickyIndices?: number[]
 }
 
-export type UseListboxProps<T> = Props<T> & CollectionBase<T> & MultipleSelection
+export type UseListboxProps<T> = MergeVariantProps<Props<T> & CollectionBase<T>, ListboxVariantProps>
 
 export function useListbox<T extends object>(props: UseListboxProps<T>) {
   const {
@@ -79,15 +91,23 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     emptyContent,
     hideEmptyContent = false,
     classNames,
+    locale = 'en',
     id: idProp,
     virtualizerOptions,
+    stickyIndices,
     ...rest
   } = props
 
   const domRef = useDOMRef(ref)
 
+  const t = i18n[locale]
+
   const innerState = useListState<T>(props)
   const state = stateProp ?? innerState
+
+  const slots = useMemo(() => listbox({ orientation }), [orientation])
+
+  const activeStickyIndexRef = useRef<number>(0)
 
   // @ts-expect-error ignore process type check
   if (process.env.NODE_ENV === 'development' && orientation === 'xy' && virtualizerOptions?.horizontal === undefined) {
@@ -104,7 +124,25 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
   const defaultEstimateSize = isHorizontal ? 100 : 50
   const estimateSize = virtualizerOptions?.estimateSize ?? (() => defaultEstimateSize)
 
-  const slots = useMemo(() => listbox(), [])
+  const rangeExtractor = useCallback(
+    (range: { startIndex: number, endIndex: number, overscan: number, count: number }) => {
+      if (!stickyIndices?.length)
+        return []
+
+      activeStickyIndexRef.current
+          = [...stickyIndices]
+          .reverse()
+          .find(index => range.startIndex >= index) ?? 0
+
+      const next = new Set([
+        activeStickyIndexRef.current,
+        ...defaultRangeExtractor(range),
+      ])
+
+      return [...next].sort((a, b) => a - b)
+    },
+    [stickyIndices],
+  )
 
   // We always run the hook
   const virtualizer = useVirtualizer<TaroElement, TaroElement>({
@@ -113,15 +151,21 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     getScrollElement: () => domRef.current,
     overscan,
     horizontal: isHorizontal,
+    rangeExtractor: stickyIndices?.length ? rangeExtractor : void 0,
     ...virtualizerOptions, // Pass options to virtualizer
   })
 
   const virtualItems = virtualizer.getVirtualItems()
   const totalSize = virtualizer.getTotalSize()
 
+  const isSticky = useCallback((index: number) =>
+    stickyIndices?.length && stickyIndices?.includes(index), [stickyIndices])
+  const isActiveSticky = useCallback((index: number) =>
+    stickyIndices?.length && index === activeStickyIndexRef.current, [stickyIndices?.length, activeStickyIndexRef])
+
   const handleScroll = useCallback((e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => {
-    virtualizer.handleScroll(e)
     onScroll?.(e)
+    virtualizer.handleScroll(e)
   }, [virtualizer, onScroll])
 
   const idBaseRef = useRef(`srcube-${Math.random().toString(36).slice(2, 10)}`)
@@ -132,11 +176,14 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
   const getItemId = useCallback((index: number) => `${idBaseRef.current}-listbox-item-${index}`, [])
 
   const contentRect = useMemo(() => {
+    if (items.length === 0)
+      return { width: '100%', height: '100%' }
+
     const width = isHorizontal ? totalSize : orientation === 'xy' ? 'max-content' : '100%'
     const height = !isHorizontal ? totalSize : orientation === 'xy' ? 'max-content' : '100%'
 
     return { width, height }
-  }, [isHorizontal, orientation, totalSize])
+  }, [isHorizontal, orientation, totalSize, items.length])
 
   const getContentProps = useCallback(() => {
     const style: CSSProperties = {
@@ -149,13 +196,15 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     return { style, className: slots.list({ class: [classNames?.content] }) }
   }, [isHorizontal, contentRect, slots, classNames])
 
-  const getScrollboxProps = useCallback((): Partial<Omit<ScrollboxProps, OmitNativeKeys>> => ({
-    id,
-    orientation,
-    onScroll: handleScroll,
-    contentProps: getContentProps(),
-    ...rest,
-  }), [id, orientation, handleScroll, getContentProps, rest])
+  const getScrollboxProps = useCallback((): Partial<Omit<ScrollboxProps, OmitNativeKeys>> => {
+    return {
+      id,
+      orientation,
+      onScroll: handleScroll,
+      contentProps: getContentProps(),
+      ...rest,
+    }
+  }, [id, orientation, handleScroll, getContentProps, rest])
 
   const getEmptyContentProps = useCallback(() => ({
     className: slots.emptyContent({ class: [classNames?.emptyContent] }),
@@ -172,10 +221,13 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     hideEmptyContent,
     virtualItems,
     virtualizer,
+    isSticky,
+    isActiveSticky,
     getItemId,
     getScrollboxProps,
     getEmptyContentProps,
     getContentProps,
+    t,
   }
 }
 

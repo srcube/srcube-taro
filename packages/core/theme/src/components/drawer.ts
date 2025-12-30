@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const drawer = tv({
   slots: {
-    'root-portal': '',
+    'rootPortal': '',
     'backdrop': '',
     'content': ['bg-white shadow-lg flex flex-col'],
     'header': ['p-3 text-center text-lg font-semibold'],

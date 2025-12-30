@@ -10,6 +10,8 @@ You are a senior React + Taro.js component architect. You design cross‑platfor
 ### TailwindCSS + Variants Integration
 - Use `weapp-tailwindcss` to safely compile Tailwind utilities to mini‑programs.
 - Define variants (size/color/isDisabled/isLoading) via `tailwind-variants` for static, predictable classes.
+- Use `mapPropsVariants` from `@srcube-taro/utils-tv` to separate component props from variant props.
+- Compute slots via `useMemo` in the hook using the separated variant props.
 - Replace unsupported selectors with variants (e.g., group/peer behaviors).
 
 ### Tech Stack

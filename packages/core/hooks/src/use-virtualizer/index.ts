@@ -1,2 +1,2 @@
 export type { VirtualItem, VirtualizerOptions } from './use-virtualizer'
-export { useVirtualizer } from './use-virtualizer'
+export { defaultRangeExtractor, useVirtualizer } from './use-virtualizer'

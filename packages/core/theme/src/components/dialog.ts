@@ -3,7 +3,7 @@ import { tv } from '@srcube-taro/utils-tv'
 
 export const dialog = tv({
   slots: {
-    'root-portal': '',
+    'rootPortal': '',
     'backdrop': '',
     'content': ['overflow-hidden m-auto w-full max-w-[90%] h-fit rounded-[2rem] bg-white shadow-sm'],
     'header': ['p-3 text-center text-lg font-semibold'],

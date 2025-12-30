@@ -1,19 +1,15 @@
 <!--
 Sync Impact Report:
-- Version change: template -> 1.0.0
+- Version change: 1.0.0 -> 1.1.0
 - List of modified principles:
-  - Defined [PRINCIPLE_1] as "Cross-Platform & Headless Architecture"
-  - Defined [PRINCIPLE_2] as "Styling Strategy (Tailwind + Variants)"
-  - Defined [PRINCIPLE_3] as "Accessibility & I18n First"
-  - Defined [PRINCIPLE_4] as "Strict Typing & Engineering Quality"
-  - Defined [PRINCIPLE_5] as "Layered Architecture & No Cyclic Deps"
-- Added sections: "Coding Standards", "Directory & File Conventions"
+  - Updated [PRINCIPLE_2] (Styling Strategy) to mandate `mapPropsVariants` and `useMemo` for slots.
+- Added sections: None
 - Removed sections: None
 - Templates requiring updates:
   - .specify/templates/plan-template.md (✅ aligned via delegation)
   - .specify/templates/spec-template.md (✅ aligned via delegation)
   - .specify/templates/tasks-template.md (✅ aligned via delegation)
-- Follow-up TODOs: Ensure existing components comply with new governance.
+- Follow-up TODOs: Refactor existing components (e.g., listbox-item) to comply.
 -->
 # Srcube Taro Constitution
 
@@ -28,6 +24,8 @@ Build headless, cross-platform components using React Hooks and Taro components.
 ### II. Styling Strategy (Tailwind + Variants)
 Use `weapp-tailwindcss` for compiling Tailwind utilities to mini-programs and `tailwind-variants` (tv) for component states.
 - Define variants (size/color/isDisabled/isLoading) via `tv` in `@srcube-taro/theme`.
+- Use `mapPropsVariants` to separate component props from variant props.
+- Compute slots via `useMemo` in the hook (or component) using the separated variant props.
 - Replace unsupported selectors (like group/peer) with variant-driven logic.
 - Ensure static, predictable class generation.
 
@@ -89,4 +87,4 @@ This Constitution supersedes all other practices. Amendments require documentati
 - **Documentation**: Each package must maintain up-to-date `README.md` with runnable snippets.
 - **Versioning**: Follow Semantic Versioning.
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-28 | **Last Amended**: 2025-12-28
+**Version**: 1.1.0 | **Ratified**: 2025-12-28 | **Last Amended**: 2025-12-28

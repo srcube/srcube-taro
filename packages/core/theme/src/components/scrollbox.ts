@@ -5,14 +5,14 @@ export const scrollbox = tv({
   slots: {
     wrapper: 'relative',
     scrollview: 'w-full h-full',
-    content: 'overflow-auto',
+    content: '',
     maskTop: 'absolute top-0 left-0 right-0 z-10 w-full h-6 pointer-events-none transition-opacity duration-300 bg-gradient-to-b from-white to-transparent',
     maskBottom: 'absolute bottom-0 left-0 right-0 z-10 w-full h-6 pointer-events-none transition-opacity duration-300 bg-gradient-to-t from-white to-transparent',
     maskLeft: 'absolute top-0 left-0 bottom-0 z-10 w-6 h-full pointer-events-none transition-opacity duration-300 bg-gradient-to-r from-white to-transparent',
     maskRight: 'absolute top-0 right-0 bottom-0 z-10 w-6 h-full pointer-events-none transition-opacity duration-300 bg-gradient-to-l from-white to-transparent',
   },
   variants: {
-    hideMask: {
+    hideMasks: {
       true: { maskTop: 'hidden', maskBottom: 'hidden', maskLeft: 'hidden', maskRight: 'hidden' },
       false: {},
     },

@@ -29,7 +29,7 @@ export default function Index() {
     { title: 'Input OTP', to: () => Taro.navigateTo({ url: '/packages/input-otp/pages/index/index' }) },
     { title: 'Input', to: () => Taro.navigateTo({ url: '/packages/input/pages/index/index' }) },
     { title: 'Form', to: () => Taro.navigateTo({ url: '/packages/form/pages/index/index' }) },
-    { title: 'Picker', to: () => Taro.navigateTo({ url: '/packages/picker/pages/index/index' }) },
+    // { title: 'Picker', to: () => Taro.navigateTo({ url: '/packages/picker/pages/index/index' }) },
     { title: 'Modal', to: () => Taro.navigateTo({ url: '/packages/modal/pages/index/index' }) },
     { title: 'Radio', to: () => Taro.navigateTo({ url: '/packages/radio/pages/index/index' }) },
     { title: 'Range Calendar', to: () => Taro.navigateTo({ url: '/packages/range-calendar/pages/index/index' }) },

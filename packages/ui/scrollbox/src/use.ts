@@ -12,6 +12,7 @@ type OmitNativeKeys = 'scrollY' | 'scrollX'
 
 interface Props extends Omit<NativeProps<ScrollViewProps>, OmitNativeKeys> {
   ref?: ReactRef
+  hideMasks?: boolean
   classNames?: SlotsToClasses<ScrollboxSlots>
   wrapperProps?: ViewProps
   contentProps?: ViewProps
@@ -28,8 +29,9 @@ export function useScrollbox(props: UseScrollboxProps) {
     enhanced = true,
     enableFlex = true,
     showScrollbar = false,
+    fastDeceleration = false,
     orientation = 'y',
-    hideMask,
+    hideMasks = false,
     wrapperProps,
     contentProps,
     onScroll,
@@ -43,6 +45,18 @@ export function useScrollbox(props: UseScrollboxProps) {
   const canScrollX = orientation === 'x' || orientation === 'xy'
 
   const [masks, setMasks] = useState({ top: false, bottom: false, left: false, right: false })
+  const masksRef = useRef(masks)
+
+  const updateMasks = useCallback((next: typeof masks) => {
+    const prev = masksRef.current
+    const isChanged = (Object.keys(next) as Array<keyof typeof masks>).some(key => next[key] !== prev[key])
+
+    if (isChanged) {
+      masksRef.current = next
+      console.log('updateMasks', next)
+      setMasks(next)
+    }
+  }, [])
 
   const idRef = useRef(`scrollbox-${Math.random().toString(36).slice(2, 10)}`)
   const containerRef = useRef<{ width: number, height: number }>({ width: 0, height: 0 })
@@ -81,34 +95,37 @@ export function useScrollbox(props: UseScrollboxProps) {
     })()
   }, [canScrollY, canScrollX, ids.container, ids.content])
 
-  const slots = useMemo(() => scrollbox({
-    orientation,
-    hideMask,
-    showMaskTop: masks.top,
-    showMaskBottom: masks.bottom,
-    showMaskLeft: masks.left,
-    showMaskRight: masks.right,
-  }), [orientation, hideMask, masks])
+  const slots = useMemo(() => {
+    return scrollbox({
+      orientation,
+      hideMasks: hideMasks === true,
+      showMaskTop: masks.top,
+      showMaskBottom: masks.bottom,
+      showMaskLeft: masks.left,
+      showMaskRight: masks.right,
+    })
+  }, [orientation, hideMasks, masks])
 
   const handleScroll = useCallback((e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => {
-    const left = e.detail?.scrollLeft ?? 0
-    const top = e.detail?.scrollTop ?? 0
-    const ch = containerRef.current.height
-    const cw = containerRef.current.width
+    const { scrollLeft, scrollTop, scrollHeight, scrollWidth } = e.detail
+    const { width: cw, height: ch } = containerRef.current
 
-    const threshold = 10
-    const maxTop = Math.max(0, contentRef.current.height - ch)
-    const maxLeft = Math.max(0, contentRef.current.width - cw)
+    const THRESHOLD = 10
+    const contentH = scrollHeight || contentRef.current.height
+    const contentW = scrollWidth || contentRef.current.width
 
-    setMasks({
-      top: canScrollY && top > threshold,
-      bottom: canScrollY && top < (maxTop - threshold),
-      left: canScrollX && left > threshold,
-      right: canScrollX && left < (maxLeft - threshold),
+    const maxTop = Math.max(0, contentH - ch)
+    const maxLeft = Math.max(0, contentW - cw)
+
+    updateMasks({
+      top: canScrollY && scrollTop > THRESHOLD,
+      bottom: canScrollY && scrollTop < (maxTop - THRESHOLD),
+      left: canScrollX && scrollLeft > THRESHOLD,
+      right: canScrollX && scrollLeft < (maxLeft - THRESHOLD),
     })
 
     onScroll?.(e)
-  }, [canScrollY, canScrollX, onScroll])
+  }, [canScrollY, canScrollX, onScroll, updateMasks])
 
   const getWrapperProps = useCallback((): ViewProps => ({
     ...wrapperProps,
@@ -123,11 +140,12 @@ export function useScrollbox(props: UseScrollboxProps) {
       enhanced,
       enableFlex,
       showScrollbar,
+      fastDeceleration,
       className: slots.scrollview({ class: [classNames?.scrollview, className] }),
       onScroll: handleScroll,
       ...rest,
     }
-  }, [ids.container, canScrollY, canScrollX, enhanced, enableFlex, showScrollbar, slots, classNames, className, handleScroll, rest])
+  }, [ids.container, canScrollY, canScrollX, enhanced, enableFlex, fastDeceleration, showScrollbar, slots, classNames, className, handleScroll, rest])
 
   const getContentProps = useCallback((): ViewProps => ({
     ...contentProps,

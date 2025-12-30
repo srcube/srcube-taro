@@ -13,6 +13,8 @@ export interface ListboxProps<T> extends UseListboxProps<T> {}
 const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<TaroElement>) => {
   const {
     domRef,
+    t,
+    slots,
     state,
     items,
     orientation,
@@ -20,6 +22,8 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
     virtualizer,
     virtualItems,
     hideEmptyContent,
+    isSticky,
+    isActiveSticky,
     getItemId,
     getScrollboxProps,
     getEmptyContentProps,
@@ -33,7 +37,10 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
     if (!hideEmptyContent) {
       return (
         <Scrollbox ref={domRef} {...getScrollboxProps()}>
-          <View {...getEmptyContentProps()}>No items.</View>
+          <View {...getEmptyContentProps()}>
+            <View className={slots._iEmpty()} />
+            <View>{props.emptyContent ?? t.empty}</View>
+          </View>
         </Scrollbox>
       )
     }
@@ -57,23 +64,14 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
         if (!item)
           return null
 
-        const style: CSSProperties = isHorizontal
-          ? {
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              // width: `${virtualItem.size}px`,
-              transform: `translateX(${virtualItem.start}px)`,
-            }
-          : {
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              // height: `${virtualItem.size}px`,
-              transform: `translateY(${virtualItem.start}px)`,
-            }
+        const style: CSSProperties = {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          ...(isHorizontal ? { bottom: 0, transform: `translateX(${virtualItem.start}px)` } : { right: 0, transform: `translateY(${virtualItem.start}px)` }),
+          ...(isActiveSticky(virtualItem.index) ? { position: 'sticky', transform: `unset` } : {}),
+          ...(isSticky(virtualItem.index) ? { zIndex: 1 } : {}),
+        }
 
         return (
           <ListboxItem
