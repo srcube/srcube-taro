@@ -4,6 +4,7 @@ import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { BaseEventOrig, ScrollViewProps, ViewProps } from '@tarojs/components'
 import { scrollbox } from '@srcube-taro/theme'
+import { isSkyline } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
 import { $ } from '@tarojs/extend'
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
@@ -16,6 +17,7 @@ interface Props extends Omit<NativeProps<ScrollViewProps>, OmitNativeKeys> {
   classNames?: SlotsToClasses<ScrollboxSlots>
   wrapperProps?: ViewProps
   contentProps?: ViewProps
+  onScrollEnd?: (e: BaseEventOrig<ScrollViewProps>) => void
 }
 
 export type UseScrollboxProps = MergeVariantProps<Props, ScrollboxVariantProps, 'showMaskTop' | 'showMaskBottom' | 'showMaskLeft' | 'showMaskRight'>
@@ -26,6 +28,8 @@ export function useScrollbox(props: UseScrollboxProps) {
     children,
     className,
     classNames,
+    scrollTop,
+    scrollLeft,
     enhanced = true,
     enableFlex = true,
     showScrollbar = false,
@@ -35,6 +39,7 @@ export function useScrollbox(props: UseScrollboxProps) {
     wrapperProps,
     contentProps,
     onScroll,
+    onScrollEnd,
     id,
     ...rest
   } = props
@@ -43,6 +48,11 @@ export function useScrollbox(props: UseScrollboxProps) {
 
   const canScrollY = orientation === 'y' || orientation === 'xy'
   const canScrollX = orientation === 'x' || orientation === 'xy'
+
+  const [scrollPos, setScrollPos] = useState({ top: Number(scrollTop ?? 0), left: Number(scrollLeft ?? 0) })
+
+  const scrollPosRef = useRef({ top: 0, left: 0 })
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const [masks, setMasks] = useState({ top: false, bottom: false, left: false, right: false })
   const masksRef = useRef(masks)
@@ -53,7 +63,6 @@ export function useScrollbox(props: UseScrollboxProps) {
 
     if (isChanged) {
       masksRef.current = next
-      console.log('updateMasks', next)
       setMasks(next)
     }
   }, [])
@@ -124,8 +133,20 @@ export function useScrollbox(props: UseScrollboxProps) {
       right: canScrollX && scrollLeft < (maxLeft - THRESHOLD),
     })
 
+    scrollPosRef.current = { top: scrollTop, left: scrollLeft }
+
+    if (scrollTimer.current) {
+      clearTimeout(scrollTimer.current)
+    }
+    scrollTimer.current = setTimeout(() => {
+      setScrollPos({ top: scrollTop, left: scrollLeft })
+
+      // Simulate scroll end event on non-skyline renderer
+      !isSkyline && onScrollEnd?.(e)
+    }, 100)
+
     onScroll?.(e)
-  }, [canScrollY, canScrollX, onScroll, updateMasks])
+  }, [canScrollY, canScrollX, onScroll, onScrollEnd, updateMasks])
 
   const getWrapperProps = useCallback((): ViewProps => ({
     ...wrapperProps,
@@ -141,11 +162,13 @@ export function useScrollbox(props: UseScrollboxProps) {
       enableFlex,
       showScrollbar,
       fastDeceleration,
+      scrollTop: canScrollY ? scrollPos.top : undefined,
+      scrollLeft: canScrollX ? scrollPos.left : undefined,
       className: slots.scrollview({ class: [classNames?.scrollview, className] }),
       onScroll: handleScroll,
       ...rest,
     }
-  }, [ids.container, canScrollY, canScrollX, enhanced, enableFlex, fastDeceleration, showScrollbar, slots, classNames, className, handleScroll, rest])
+  }, [ids.container, canScrollY, canScrollX, enhanced, enableFlex, fastDeceleration, showScrollbar, slots, classNames, className, handleScroll, rest, scrollPos])
 
   const getContentProps = useCallback((): ViewProps => ({
     ...contentProps,

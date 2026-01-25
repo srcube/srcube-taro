@@ -1,8 +1,9 @@
 import './intl-polyfill'
-export * from './date-calendar'
-export * from './range-calendar'
 
-// eslint-disable-next-line perfectionist/sort-exports
-export * from './context'
+export type { DateCalendarProps } from './date-calendar'
+export { DateCalendar } from './date-calendar'
+
+export type { RangeCalendarProps } from './range-calendar'
+export { RangeCalendar } from './range-calendar'
 
 export type { DateRange, DateValue } from '@react-types/calendar'

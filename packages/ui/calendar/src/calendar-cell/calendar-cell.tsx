@@ -1,37 +1,131 @@
-import type { UseCalendarCellProps } from './use'
-import { View } from '@tarojs/components'
-import { useCalendarCell } from './use'
+import type { CalendarDate } from '@internationalized/date'
+import type { CalendarState, RangeCalendarState } from '@react-stately/calendar'
+import type { CalendarReturnType, CalendarSlots } from '@srcube-taro/theme'
+import type { SlotsToClasses } from '@srcube-taro/utils-tv'
+import type { MutableRefObject, ReactNode } from 'react'
+import { Box } from '@srcube-taro/box'
+import { memo, startTransition, useCallback, useMemo } from 'react'
 
-export interface CalendarCellProps extends UseCalendarCellProps {}
+export interface CalendarDay {
+  date: CalendarDate
+  isToday: boolean
+  isSelected: boolean
+  isUnavailable: boolean
+  isDisabled: boolean
+}
+
+export interface CalendarCellProps {
+  stateRef: MutableRefObject<CalendarState | RangeCalendarState>
+  data: CalendarDate
+  slots: CalendarReturnType
+  classNames?: SlotsToClasses<CalendarSlots>
+  content?: (state: CalendarDay) => ReactNode
+  // Derived props to avoid re-calculating and complex memo checks
+  isRange: boolean
+  isSelected: boolean
+  isDisabled: boolean
+  isUnavailable: boolean
+  isRangeSelection: boolean
+  isSelectionStart: boolean
+  isSelectionEnd: boolean
+  isToday: boolean
+}
 
 function CalendarCell(props: CalendarCellProps) {
   const {
-    cellContent,
-    isToday,
-    isOutsideMonth,
+    data,
+    stateRef,
+    slots,
+    classNames,
+    content,
+    isRange,
     isSelected,
     isDisabled,
-    isRange,
-    getCellProps,
-    getDayProps,
-  } = useCalendarCell(props)
+    isUnavailable,
+    isRangeSelection,
+    isSelectionStart,
+    isSelectionEnd,
+    isToday,
+  } = props
 
-  if (isRange && isOutsideMonth)
-    return <View />
+  const cellContent = useMemo(() =>
+    content?.({
+      date: data,
+      isToday,
+      isSelected,
+      isUnavailable,
+      isDisabled,
+    }) || data.day, [content, data, isToday, isSelected, isUnavailable, isDisabled])
+
+  const handleDayTap = useCallback(() => {
+    // Always use the latest state from ref to avoid stale closures without re-rendering
+    const state = stateRef.current
+    if (state.isReadOnly || state.isDisabled || isUnavailable) {
+      return
+    }
+
+    try {
+      startTransition(() => {
+        state.selectDate(data)
+        state.setFocusedDate(data)
+      })
+    }
+    catch (error) {
+      console.error('Srcube UI: Error handling date selection:', error)
+    }
+  }, [data, isUnavailable, stateRef])
 
   return (
-    <View
-      {...getCellProps()}
+    <Box
+      className={slots.cell({
+        className: [classNames?.cell],
+      })}
+      data-date={data.toString()}
+      onTap={handleDayTap}
       role="gridcell"
-      aria-selected={isSelected ? 'true' : 'false'}
-      aria-disabled={isDisabled ? 'true' : 'false'}
-      aria-current={isToday ? 'date' : undefined}
+      aria-selected={isSelected}
+      aria-disabled={isDisabled || isUnavailable}
     >
-      <View {...getDayProps()}>{cellContent}</View>
-    </View>
+      <Box className={slots.day({
+        isRange,
+        isToday,
+        isSelected,
+        isSelectionStart,
+        isSelectionEnd,
+        isRangeSelection,
+        isDisabled,
+        className: [classNames?.day],
+      })}
+      >
+        {cellContent}
+      </Box>
+    </Box>
   )
 }
 
-CalendarCell.displayName = 'Srcube.CalendarCell'
+function arePropsEqual(prev: CalendarCellProps, next: CalendarCellProps) {
+  if (prev.data.toString() !== next.data.toString())
+    return false
 
-export default CalendarCell
+  if (prev.slots !== next.slots)
+    return false
+
+  if (prev.classNames !== next.classNames)
+    return false
+
+  if (prev.content !== next.content)
+    return false
+
+  return prev.isSelected === next.isSelected
+    && prev.isDisabled === next.isDisabled
+    && prev.isUnavailable === next.isUnavailable
+    && prev.isRangeSelection === next.isRangeSelection
+    && prev.isSelectionStart === next.isSelectionStart
+    && prev.isSelectionEnd === next.isSelectionEnd
+    && prev.isToday === next.isToday
+    && prev.isRange === next.isRange
+}
+
+CalendarCell.displayName = 'CalendarCell'
+
+export default memo(CalendarCell, arePropsEqual)

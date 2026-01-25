@@ -21,6 +21,7 @@
     "postpack": "rm -rf ./package"
   },
   "dependencies": {
+    "@tarojs/taro": "catalog:",
     "react": "catalog:"
   },
   "devDependencies": {

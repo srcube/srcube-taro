@@ -1,4 +1,5 @@
 import type { Virtualizer } from '@tanstack/virtual-core'
+import type { ScrollViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
 import { createSelectorQuery } from '@tarojs/taro'
 
@@ -13,7 +14,7 @@ export function observeElementRect(
   if (!element)
     return
 
-  const id = element.id || element.uid
+  const id = element.id || element.props?.id || element.uid
   if (!id)
     return
 
@@ -55,13 +56,45 @@ export function scrollToFn(
   { behavior }: { behavior: ScrollBehavior },
   instance: Virtualizer<any, any>,
 ) {
-  const element = instance.scrollElement as any
-  if (element && typeof element.scrollTo === 'function') {
-    element.scrollTo({
-      [instance.options.horizontal ? 'left' : 'top']: offset,
-      behavior,
-    })
+  const element = instance.scrollElement as Partial<ScrollViewProps>
+
+  const horizontal = !!instance.options.horizontal
+  const cb = (instance as any)._taroMeasureOffset as undefined | ((nextOffset: number, isScrolling: boolean) => void)
+
+  const updateOffset = () => {
+    cb?.(offset, false)
   }
+
+  const id = element?.id
+  if (!id) {
+    throw new Error('[TaroVirtualizer] Could not determine scrollview element id')
+  }
+
+  const query = createSelectorQuery()
+
+  query.select(`#${id}`).node((res) => {
+    const node = res.node as Element
+
+    // Workaround: In some environments (e.g. WeChat MiniProgram), scrolling to 0 with animation might fail.
+    // We use a small epsilon to ensure the scroll triggers if the offset is 0 and smooth scrolling is requested.
+    const safeOffset = (offset === 0 && behavior === 'smooth') ? 0.1 : offset
+
+    const next: Record<string, number | boolean | string> = {
+      animated: behavior === 'smooth',
+      behavior,
+    }
+
+    if (horizontal) {
+      next.left = safeOffset
+    }
+    else {
+      next.top = safeOffset
+    }
+
+    node.scrollTo(next)
+  }).exec()
+
+  updateOffset()
 }
 
 /**
@@ -81,22 +114,20 @@ export function measureElement(element: TaroElement, instance: Virtualizer<any, 
   const id = element.id ?? element.props?.id
   const measure = (retries = 0) => {
     // Small delay to ensure render
-    setTimeout(() => {
-      const query = createSelectorQuery()
-      const actualSelector = id ? `#${id}` : `[data-index="${index}"]`
+    const query = createSelectorQuery()
+    const actualSelector = id ? `#${id}` : `[data-index="${index}"]`
 
-      query.select(actualSelector).boundingClientRect((res) => {
-        const rect = (Array.isArray(res) ? res[0] : res) as any
-        const size = instance.options.horizontal ? rect?.width : rect?.height
+    query.select(actualSelector).boundingClientRect((res) => {
+      const rect = (Array.isArray(res) ? res[0] : res) as any
+      const size = instance.options.horizontal ? rect?.width : rect?.height
 
-        if (size && size > 0) {
-          instance.resizeItem(index, size)
-        }
-        else if (retries < 5) {
-          measure(retries + 1)
-        }
-      }).exec()
-    }, 50 * (retries + 1))
+      if (size && size > 0) {
+        instance.resizeItem(index, size)
+      }
+      else if (retries < 5) {
+        setTimeout(() => measure(retries + 1), 50 * (retries + 1))
+      }
+    }).exec()
   }
 
   measure()

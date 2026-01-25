@@ -1,21 +1,23 @@
-import type { DateCalendarProps, DateValue } from '@srcube-taro/ui'
+import type { DateValue } from '@internationalized/date'
+import type { DateCalendarProps } from '@srcube-taro/ui'
 import { getLocalTimeZone, parseDate } from '@internationalized/date'
 import { Box, Button, DateCalendar, Drawer, DrawerContent, DrawerFooter } from '@srcube-taro/ui'
 import { View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Page, Section } from '@/components'
 
 const colors = ['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as const
 const sizes = ['xs', 'sm', 'md', 'lg'] as const
 const locales = ['en', 'zh-CN', 'zh-TW'] as const
 
+const minValue = parseDate('2026-01-01')
+const maxValue = parseDate('2026-12-31')
+
 export default function DateCalendarPage() {
   const [isSetsOpen, setIsSetsOpen] = useState<boolean>(false)
 
   const [selectedValue, setSelectedValue] = useState<DateValue | null>(null)
-  const minValue = parseDate('2026-01-01')
-  const maxValue = parseDate('2026-12-31')
 
   const [size, setSize] = useState<DateCalendarProps['size']>('md')
   const [color, setColor] = useState<DateCalendarProps['color']>('default')
@@ -29,12 +31,12 @@ export default function DateCalendarPage() {
   //   setSelectedValue(value)
   // }
 
-  const isDateUnavailable = (date: DateValue) => {
+  const isDateUnavailable = useCallback((date: DateValue) => {
     const dayOfWeek = date.toDate(getLocalTimeZone()).getDay()
     return dayOfWeek === 0 || dayOfWeek === 6
-  }
+  }, [])
 
-  const commonProps = {
+  const commonProps = useMemo(() => ({
     size,
     color,
     locale,
@@ -43,7 +45,7 @@ export default function DateCalendarPage() {
     minValue: limitRange ? minValue : undefined,
     maxValue: limitRange ? maxValue : undefined,
     isDateUnavailable: disableWeekend ? isDateUnavailable : undefined,
-  } as const
+  } as const), [size, color, locale, isDisabled, isReadOnly, limitRange, disableWeekend, isDateUnavailable])
 
   return (
     <Page>
@@ -52,6 +54,7 @@ export default function DateCalendarPage() {
           <DateCalendar
             {...commonProps}
             value={selectedValue}
+            className="h-[26rem]"
             onChange={setSelectedValue}
           />
           {selectedValue && (
@@ -73,7 +76,7 @@ export default function DateCalendarPage() {
         <Button color={color} fullWidth className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
       </Box>
 
-      <Drawer isOpen={isSetsOpen} onClose={() => setIsSetsOpen(false)}>
+      <Drawer isOpen={isSetsOpen} title="State Sets" onClose={() => setIsSetsOpen(false)}>
         <DrawerContent>
           <Section title="Colors" className="p-0">
             <Box className="flex flex-wrap gap-2 items-center">

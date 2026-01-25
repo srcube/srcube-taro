@@ -1,11 +1,10 @@
 import type { OverlayTriggerProps } from '@react-stately/overlays'
 import type { ModalSlots, ModalVariantProps } from '@srcube-taro/theme'
-import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps, NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
-import type { ReactElement } from 'react'
+import type { ReactElement, Ref } from 'react'
 import type { ModalBackdropProps } from './modal-backdrop'
 import type { ModalContentProps } from './modal-content'
 import { useAnimatePresence, useOverlayTriggerState, usePageScrollLock } from '@srcube-taro/hooks'
@@ -15,11 +14,11 @@ import { useCallback, useEffect, useId, useImperativeHandle, useMemo, useState }
 
 type OmitNativeKeys = ''
 
-interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, OverlayTriggerProps {
+interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys | 'ref'>, OverlayTriggerProps {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef<ModalRef>
+  ref?: Ref<ModalRef>
   /**
    * The children of the modal.
    */
@@ -44,8 +43,7 @@ interface Props extends Omit<NativeProps<ViewProps>, OmitNativeKeys>, OverlayTri
   onClose?: () => Promise<void> | void
 }
 
-export interface ModalRef {
-  el: TaroElement | null
+export type ModalRef = TaroElement & {
   isOpen: boolean
   open: () => void
   close: () => void
@@ -94,12 +92,13 @@ export function useModal(props: UseModalProps) {
 
   const slots = useMemo(() => modal({ isOpen, backdrop }), [isOpen, backdrop])
 
-  useImperativeHandle(ref, () => ({
-    el: domRef.current,
-    isOpen,
-    open,
-    close,
-  }))
+  useImperativeHandle(ref, () => {
+    return Object.assign(domRef.current || {}, {
+      isOpen,
+      open,
+      close,
+    }) as unknown as ModalRef
+  })
 
   useEffect(() => {
     if (isOpen) {

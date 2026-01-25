@@ -1,21 +1,21 @@
 import type { TaroElement } from '@tarojs/runtime'
 import type { UseDateCalendarProps } from './use'
-import { forwardRef } from 'react'
-import { CalendarBase } from '../calendar-base'
+import { forwardRef, memo } from 'react'
+import { Calendar } from '../_calendar'
 import { CalendarProvider } from '../context'
 import { useDateCalendar } from './use'
 
-export type DateCalendarProps = UseDateCalendarProps
+export type DateCalendarProps = Omit<UseDateCalendarProps, 'isRange'>
 
-const DateCalendar = forwardRef<TaroElement, DateCalendarProps>((props, ref) => {
-  const { context, getBaseCalendarProps } = useDateCalendar({ ...props, ref })
+const DateCalendar = memo(forwardRef<TaroElement, DateCalendarProps>((props, ref) => {
+  const { context, getCalendarProps } = useDateCalendar(props)
 
   return (
     <CalendarProvider value={context}>
-      <CalendarBase {...getBaseCalendarProps()} />
+      <Calendar ref={ref} {...getCalendarProps()} />
     </CalendarProvider>
   )
-})
+}))
 
 DateCalendar.displayName = 'Srcube.DateCalendar'
 

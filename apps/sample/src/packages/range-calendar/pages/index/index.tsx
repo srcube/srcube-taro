@@ -3,7 +3,7 @@ import { getLocalTimeZone, parseDate } from '@internationalized/date'
 import { Box, Button, Drawer, DrawerContent, DrawerFooter, RangeCalendar } from '@srcube-taro/ui'
 import { View } from '@tarojs/components'
 import { capitalize } from 'lodash-es'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Page, Section } from '@/components'
 
 const colors = ['default', 'primary', 'secondary', 'success', 'warning', 'danger'] as const
@@ -41,6 +41,10 @@ export default function RangeCalendarPage() {
     isDateUnavailable: disableWeekend ? isDateUnavailable : undefined,
   } as const
 
+  useEffect(() => {
+    console.log('selectedRange', selectedRange)
+  }, [selectedRange])
+
   return (
     <Page>
       <Section title="Calendar" contentClass="space-y-4">
@@ -70,7 +74,7 @@ export default function RangeCalendarPage() {
         <Button color={color} fullWidth className="mt-4" onTap={() => setIsSetsOpen(true)}>State Sets</Button>
       </Box>
 
-      <Drawer isOpen={isSetsOpen} onClose={() => setIsSetsOpen(false)}>
+      <Drawer isOpen={isSetsOpen} title="State Sets" onClose={() => setIsSetsOpen(false)}>
         <DrawerContent>
           <Section title="Colors" className="p-0">
             <Box className="flex flex-wrap gap-2 items-center">

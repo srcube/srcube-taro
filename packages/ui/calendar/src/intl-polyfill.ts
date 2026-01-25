@@ -1,6 +1,6 @@
-// @ts-nocheck
 if (typeof Intl === 'undefined') {
-  // @ts-ignore
+  // @ts-expect-error no check
+  // eslint-disable-next-line no-restricted-globals
   global.Intl = {}
 }
 
@@ -11,7 +11,8 @@ if (!Intl.DateTimeFormat) {
     format(date?: Date | number): string {
       if (!date) {
         date = new Date()
-      } else if (typeof date === 'number') {
+      }
+      else if (typeof date === 'number') {
         date = new Date(date)
       }
 
@@ -46,15 +47,15 @@ if (!Intl.DateTimeFormat) {
       // Default fallback: YYYY/MM/DD
       return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
     }
-    
+
     resolvedOptions() {
       return {
         locale: this.locale,
-        ...this.options
+        ...this.options,
       }
     }
   }
 
-  // @ts-ignore
+  // @ts-expect-error no check
   Intl.DateTimeFormat = FallbackDateFormatter
 }

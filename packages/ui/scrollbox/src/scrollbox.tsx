@@ -11,6 +11,7 @@ const Scrollbox = forwardRef<TaroElement, ScrollboxProps>((props: ScrollboxProps
     domRef,
     slots,
     children,
+    classNames,
     getWrapperProps,
     getScrollViewProps,
     getContentProps,
@@ -21,10 +22,10 @@ const Scrollbox = forwardRef<TaroElement, ScrollboxProps>((props: ScrollboxProps
 
   return (
     <View {...getWrapperProps()}>
-      <View className={slots.maskTop()} />
-      <View className={slots.maskBottom()} />
-      <View className={slots.maskLeft()} />
-      <View className={slots.maskRight()} />
+      <View className={slots.maskTop({ class: [classNames?.maskTop] })} />
+      <View className={slots.maskBottom({ class: [classNames?.maskBottom] })} />
+      <View className={slots.maskLeft({ class: [classNames?.maskLeft] })} />
+      <View className={slots.maskRight({ class: [classNames?.maskRight] })} />
       <ScrollView ref={domRef} {...getScrollViewProps()}>
         <View {...getContentProps()}>
           {children}

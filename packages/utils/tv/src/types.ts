@@ -12,4 +12,4 @@ export type SlotsToClasses<S extends string> = {
  *
  * @param T Slots list
  */
-export type ExcludePrivateSlotKey<T extends string> = T extends `_${string}` ? never : T
+export type ExcludePrivateSlotKeys<T extends string> = T extends `_${string}` ? never : T

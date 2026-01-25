@@ -18,7 +18,7 @@ export default function ListboxPage() {
       <VirtualizedOrientationSample />
 
       <Section title="Virtualization" contentClass="flex flex-col gap-2">
-        <View className="flex gap-2 p-2 rounded-xl border-4 border-pirmary-500 bg-primary-50">
+        <View className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
           <View className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
           <View className="text-sm text-gray-800">
             Listbox is automatic virtualized and row height is dynamic measured.
@@ -63,6 +63,7 @@ function EmptySample() {
       <Listbox
         items={[] as { key: number, value: number }[]}
         orientation={props.orientation}
+        estimateSize={50}
         locale={props.locale}
         className="relative w-full h-28 overflow-hidden rounded-lg bg-gray-100"
         virtualizerOptions={virtualizerOptions}
@@ -93,9 +94,11 @@ function EmptySample() {
  */
 function StaticDynamicSample() {
   const thousand = useMemo(() => Array.from({ length: 1000 }, (_, i) => ({ key: i, value: i + 1 })), [])
+
   return (
     <Section title="Static & Dynamic" contentClass="flex flex-col gap-2">
       <Listbox
+        estimateSize={50}
         className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
         virtualizerOptions={virtualizerOptions}
       >
@@ -110,6 +113,7 @@ function StaticDynamicSample() {
       </Listbox>
       <Listbox
         items={thousand}
+        estimateSize={50}
         className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
         virtualizerOptions={virtualizerOptions}
       >
@@ -132,7 +136,7 @@ function StickySample() {
     gap: 10,
   }
 
-  const names = Array.from({ length: 200 }, () => faker.person.firstName())
+  const names = useMemo(() => Array.from({ length: 200 }, () => faker.person.firstName()), [])
 
   const groupedNames = useMemo(() => groupBy(
     Array.from({ length: 200 })
@@ -162,6 +166,7 @@ function StickySample() {
     <Section title="Sticky" contentClass="flex flex-col gap-2">
       <Listbox
         items={items}
+        estimateSize={50}
         className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
         stickyIndices={stickyIndexes}
         virtualizerOptions={virtualizerOptions}
@@ -180,6 +185,7 @@ function StickySample() {
       </Listbox>
       <Listbox
         items={items}
+        estimateSize={50}
         orientation="x"
         className="relative w-full h-12 overflow-hidden rounded-lg bg-gray-100"
         stickyIndices={stickyIndexes}
@@ -207,6 +213,7 @@ function OrientationSample() {
     <Section title="Orientation" contentClass="flex flex-col gap-2">
       <Listbox
         items={thousand}
+        estimateSize={50}
         orientation="y"
         className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
         virtualizerOptions={virtualizerOptions}
@@ -219,6 +226,7 @@ function OrientationSample() {
       </Listbox>
       <Listbox
         items={thousand}
+                estimateSize={50}
         orientation="x"
         className="relative w-full h-12 overflow-hidden rounded-lg bg-gray-100"
         virtualizerOptions={virtualizerOptions}
@@ -245,6 +253,7 @@ function VirtualizedOrientationSample() {
         key={isHorizontal ? 'horizontal' : 'vertical'}
         items={[...xyThousand]}
         orientation="xy"
+        estimateSize={50}
         hideMasks={hideMasks}
         virtualizerOptions={{ ...virtualizerOptions, horizontal: isHorizontal }}
         className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"

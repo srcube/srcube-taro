@@ -31,6 +31,8 @@ const Tabs = forwardRef(<T extends object>(
     ref,
   })
 
+  console.log('HELLO TABS')
+
   const tabsItems = [...state.collection].map((item, i) => (
     <Skeleton
       key={item.key}

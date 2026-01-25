@@ -21,19 +21,18 @@
     "postpack": "rm -rf ./package"
   },
   "peerDependencies": {
-    "react": "^18",
-    "react-dom": "^18"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "catalog:",
-    "@formatjs/intl-getcanonicallocales": "catalog:",
-    "@formatjs/intl-locale": "catalog:",
-    "@formatjs/intl-numberformat": "catalog:",
     "@internationalized/date": "catalog:",
+    "@react-aria/utils": "catalog:",
     "@react-stately/calendar": "catalog:",
     "@react-types/calendar": "catalog:",
+    "@srcube-taro/box": "workspace:^",
     "@srcube-taro/button": "workspace:^",
     "@srcube-taro/hooks": "workspace:^",
+    "@srcube-taro/listbox": "workspace:^",
     "@srcube-taro/theme": "workspace:^",
     "@srcube-taro/utils-func": "workspace:^",
     "@srcube-taro/utils-react": "workspace:^",
@@ -41,13 +40,13 @@
     "@srcube-taro/utils-tv": "workspace:^",
     "@srcube-taro/utils-types": "workspace:^",
     "@tarojs/components": "catalog:",
-    "@tarojs/extend": "catalog:",
     "@tarojs/runtime": "catalog:",
+    "@tarojs/taro": "catalog:",
+    "date-holidays": "^3.26.6",
     "dayjs": "catalog:",
-    "i18next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-i18next": "catalog:"
+    "use-debounce": "^10.1.0"
   },
   "devDependencies": {
     "@srcube-taro/ts-config": "workspace:^",

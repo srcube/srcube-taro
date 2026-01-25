@@ -2,15 +2,15 @@
 $schema: 'https://moonrepo.dev/schemas/workspace.json'
 
 # Require a specific version of moon while running commands, otherwise fail.
-versionConstraint: '>=1.0.0'
+versionConstraint: '>=2.0.0-alpha'
 
 vcs:
-  manager: git
+  client: git
   defaultBranch: main
-  syncHooks: true
+  sync: true
   hooks:
     pre-commit:
-      - 'moon :lint --affected --status=staged'
+      - 'moon run :lint --affected --status=staged'
 
 # REQUIRED: A map of all projects found within the workspace, or a list or file system globs.
 # When using a map, each entry requires a unique project ID as the map key, and a file system

@@ -1,16 +1,15 @@
-import type { TaroElement } from '@tarojs/runtime'
 import type { CSSProperties, ReactElement, Ref } from 'react'
-import type { UseListboxProps } from './use'
+import type { ListboxRef, UseListboxProps } from './use'
+import { Box } from '@srcube-taro/box'
 import { Scrollbox } from '@srcube-taro/scrollbox'
 import { mergeStyle } from '@srcube-taro/utils-func'
-import { View } from '@tarojs/components'
 import { forwardRef } from 'react'
 import { ListboxItem } from './_listbox-item'
 import { useListbox } from './use'
 
 export interface ListboxProps<T> extends UseListboxProps<T> {}
 
-const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<TaroElement>) => {
+const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<ListboxRef>) => {
   const {
     domRef,
     t,
@@ -24,6 +23,7 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
     hideEmptyContent,
     isSticky,
     isActiveSticky,
+    measureItem,
     getItemId,
     getScrollboxProps,
     getEmptyContentProps,
@@ -37,10 +37,10 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
     if (!hideEmptyContent) {
       return (
         <Scrollbox ref={domRef} {...getScrollboxProps()}>
-          <View {...getEmptyContentProps()}>
-            <View className={slots._iEmpty()} />
-            <View>{props.emptyContent ?? t.empty}</View>
-          </View>
+          <Box {...getEmptyContentProps()}>
+            <Box className={slots._iEmpty()} />
+            <Box>{props.emptyContent ?? t.empty}</Box>
+          </Box>
         </Scrollbox>
       )
     }
@@ -78,7 +78,7 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
             key={item.key}
             id={getItemId(item.index)}
             item={item}
-            ref={virtualizer.measureElement}
+            ref={measureItem(item, virtualItem.index) ? virtualizer.measureElement : undefined}
             data-index={virtualItem.index}
             data-type={item.type}
             {...item.props}
@@ -90,6 +90,6 @@ const Listbox = forwardRef(<T extends object>(props: ListboxProps<T>, ref: Ref<T
       })}
     </Scrollbox>
   )
-}) as <T extends object = object>(props: ListboxProps<T> & { ref?: Ref<TaroElement> }) => ReactElement
+}) as <T extends object = object>(props: ListboxProps<T> & { ref?: Ref<ListboxRef> }) => ReactElement
 
 export default Listbox

@@ -1,4 +1,4 @@
-import type { ExcludePrivateSlotKey, VariantProps } from '@srcube-taro/utils-tv'
+import type { ExcludePrivateSlotKeys, VariantProps } from '@srcube-taro/utils-tv'
 import { tv } from '@srcube-taro/utils-tv'
 
 export const listbox = tv({
@@ -24,4 +24,4 @@ export const listbox = tv({
 })
 
 export type ListboxVariantProps = VariantProps<typeof listbox>
-export type ListboxSlots = ExcludePrivateSlotKey<keyof ReturnType<typeof listbox>>
+export type ListboxSlots = ExcludePrivateSlotKeys<keyof ReturnType<typeof listbox>>

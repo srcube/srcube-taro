@@ -1,108 +1,166 @@
-import type { CalendarDate } from '@internationalized/date'
-import type { UseCalendarMonthProps } from './use'
-import { getWeeksInMonth } from '@internationalized/date'
-import { View } from '@tarojs/components'
-import { Fragment, useCallback, useMemo } from 'react'
+import type { CalendarDate, DateValue } from '@internationalized/date'
+import type { CalendarState, RangeCalendarState } from '@react-stately/calendar'
+import type { CalendarCellProps } from '../calendar-cell/calendar-cell'
+import { getWeeksInMonth, isToday as isDateToday, isEqualDay, isSameDay, isSameMonth, startOfWeek } from '@internationalized/date'
+import { Box } from '@srcube-taro/box'
+import { useCallback, useMemo, useRef } from 'react'
 import { CalendarCell } from '../calendar-cell'
-import { CalendarMonthHeader } from '../calendar-month-header'
-import { CalendarMonthList } from '../calendar-month-list'
-import { useCalendarMonth } from './use'
+import { useCalendarContext } from '../context'
+import { useDateFormatter } from '../hooks/use-date-formatter'
 
-export interface CalendarMonthProps extends UseCalendarMonthProps {}
+export interface CalendarMonthProps {
+  data: {
+    key: string
+    index: number
+    date: CalendarDate
+    type: 'header' | 'body'
+  }
+}
+
+function resolveCellState(
+  date: CalendarDate,
+  state: CalendarState | RangeCalendarState,
+  effectiveRange: { start: DateValue, end: DateValue } | null | undefined,
+  selectableRange: DateValue[] | undefined,
+  selectedDate: DateValue | null | undefined,
+) {
+  const isSelectionStart = effectiveRange?.start ? isSameDay(date, effectiveRange.start) : false
+  const isSelectionEnd = effectiveRange?.end ? isSameDay(date, effectiveRange.end) : false
+  const isRangeSelection = effectiveRange?.start && effectiveRange?.end
+    ? (date.compare(effectiveRange.start) > 0 && date.compare(effectiveRange.end) < 0)
+    : false
+
+  const isOutOfRange = selectableRange
+    ? (date.compare(selectableRange[0]) < 0 || date.compare(selectableRange[1]) > 0)
+    : false
+
+  const isUnavailable = isOutOfRange || (state.isCellUnavailable ? state.isCellUnavailable(date) : false)
+  const isDisabled = state.isDisabled || isUnavailable
+  const isToday = isDateToday(date, state.timeZone)
+
+  const isRangeMode = 'highlightedRange' in state
+  const isSelected = isRangeMode
+    ? (isSelectionStart || isSelectionEnd)
+    : !!selectedDate && isSameDay(date, selectedDate) && !isDisabled
+
+  return {
+    isSelected,
+    isDisabled,
+    isUnavailable,
+    isRangeSelection,
+    isSelectionStart,
+    isSelectionEnd,
+    isToday,
+  }
+}
 
 function CalendarMonth(props: CalendarMonthProps) {
-  const { firstDayOfWeek } = props
+  const { data } = props
+  const { state, slots, classNames, locale, firstDayOfWeek } = useCalendarContext()
 
-  const {
-    state,
-    styles,
-    locale,
-    isRange,
-    weekDays,
-    startDate,
-    cellContent,
-  } = useCalendarMonth(props)
+  // Use a ref to hold the latest state, allowing CalendarCell to avoid re-rendering
+  // when state changes but the derived props for that cell remain the same.
+  const stateRef = useRef(state)
+  stateRef.current = state
 
-  const weekDaysContent = weekDays.map((d, i) => <View key={i} className={styles.weekday} role="columnheader">{d}</View>)
+  const monthFormatter = useDateFormatter(locale, { month: 'long', timeZone: state.timeZone })
 
-  const monthsStartDates: CalendarDate[] = useMemo(() => {
-    const { minValue, maxValue } = state
+  // Memoize grid structure to avoid recalculating dates on every render
+  // This ensures date objects are stable references across selection changes
+  const grid = useMemo(() => {
+    if (data.type === 'header')
+      return []
+    const date = data.date as CalendarDate
+    const weeksInMonth = getWeeksInMonth(date, locale, firstDayOfWeek)
+    const weekStart = startOfWeek(date.set({ day: 1 }), locale, firstDayOfWeek)
 
-    const months: CalendarDate[] = []
+    return Array.from({ length: weeksInMonth }, (_, weekIndex) => {
+      const startDate = weekStart.add({ weeks: weekIndex })
+      return Array.from({ length: 7 }, (_, dayIndex) => startDate.add({ days: dayIndex }))
+    })
+  }, [data.date, locale, firstDayOfWeek, data.type])
 
-    if (isRange && minValue && maxValue) {
-      let current = (startDate ?? minValue) as CalendarDate
-      while (current.compare(maxValue as CalendarDate) <= 0) {
-        months.push(current)
-        current = current.add({ months: 1 })
-      }
+  // Pre-calculate range info once per render
+  const highlightedRange = 'highlightedRange' in state ? state.highlightedRange : null
+
+  const isRange = highlightedRange !== null
+  const rangeState = isRange ? state as RangeCalendarState : null
+
+  const selectableRange = useMemo(() =>
+    state.minValue && state.maxValue ? [state.minValue, state.maxValue] : undefined, [state.minValue, state.maxValue])
+
+  const getCellProps = useCallback((date: CalendarDate): CalendarCellProps => {
+    const isToday = isDateToday(date, state.timeZone)
+
+
+    const committedRange = rangeState?.value ?? null
+    const effectiveRange = highlightedRange ?? committedRange
+
+    const isSelectionStart = effectiveRange?.start ? isSameDay(effectiveRange.start, date) : false
+    const isSelectionEnd = effectiveRange?.end ? isSameDay(effectiveRange.end, date) : false
+
+    const isSelected = isRange ? (isSelectionStart || isSelectionEnd) : state.isSelected(date)
+
+    const isRangeSelection = effectiveRange?.start && effectiveRange?.end
+    ? (date.compare(effectiveRange.start) > 0 && date.compare(effectiveRange.end) < 0)
+    : false
+    // const isUnavailable = (isDateUnavailable?.(date) ?? false)
+    //   || isOutOfRange
+    //   || (state.isCellUnavailable ? state.isCellUnavailable(date) : false)
+
+    // const isDisabled = state.isDisabled || isUnavailable
+
+    return {
+      stateRef,
+      data: date,
+      slots,
+      classNames,
+      isRange,
+      isToday,
+      isSelected,
+      isRangeSelection,
+      isSelectionStart,
+      isSelectionEnd,
+      isDisabled: false,
+      isUnavailable: false,
+      // ...resolveCellState(date, state, highlightedRange, selectableRange, selectedDate),
     }
-    else {
-      months.push((startDate ?? state.visibleRange.start) as CalendarDate)
-    }
+  }, [state, highlightedRange, stateRef, slots, classNames, isRange])
 
-    return months
-  }, [state, isRange, startDate])
+  if (data.type === 'header') {
+    const month = monthFormatter.format(data.date.toDate(state.timeZone))
 
-  const listStart = monthsStartDates[0]
-  const currentVisibleMonth = state.visibleRange.start
-  const activeIndex = useMemo(() => {
-    if (!isRange || !listStart || !currentVisibleMonth)
-      return 0
-    const diff = (currentVisibleMonth.year - listStart.year) * 12 + (currentVisibleMonth.month - listStart.month)
-    return Math.max(0, Math.min(monthsStartDates.length - 1, diff))
-  }, [isRange, listStart, currentVisibleMonth, monthsStartDates.length])
-
-  const weeksDaysForMonthContent = useCallback((monthStart: CalendarDate) => {
-    const count = getWeeksInMonth(monthStart, locale, firstDayOfWeek)
-    const rows = [...Array.from({ length: count }).keys()].map(weekIndex => (
-      <View
-        key={`${monthStart.year}-${monthStart.month}-w${weekIndex}`}
-        id={`calendar-month-week-${monthStart.year}-${monthStart.month}-w${weekIndex}`}
-        className={styles.days}
-        role="row"
-      >
-        {state.getDatesInWeek(weekIndex, monthStart).map((date, i) => (
-          date ? <CalendarCell key={i} date={date} start={monthStart} content={cellContent} /> : <View key={i} />
-        ))}
-      </View>
-    ))
     return (
-      <View className={styles.weeks}>
-        {rows}
-      </View>
+      <Box className={slots.monthHeader({ className: [classNames?.monthHeader] })}>
+        {month}
+      </Box>
     )
-  }, [styles, state, locale, firstDayOfWeek, cellContent])
+  }
 
-  const monthContent = useCallback((m: CalendarDate) => (
-    <Fragment>
-      {isRange && <CalendarMonthHeader monthDate={m} />}
-      {weeksDaysForMonthContent(m)}
-    </Fragment>
-  ), [isRange, weeksDaysForMonthContent])
+  const weekClassName = slots.week({ className: [classNames?.week] })
+  const weeksClassName = slots.weeks({ className: [classNames?.week] })
 
   return (
-    <View className={styles.monthContent}>
-      <View className={styles.weekdays} role="row">
-        {weekDaysContent}
-      </View>
-      <View className={styles.months}>
-        {isRange
-          ? (
-              <CalendarMonthList
-                data={monthsStartDates}
-                itemContent={m => monthContent(m)}
-                scrollToIndex={activeIndex}
+    <Box className={weeksClassName}>
+      {grid.map((weekDates, weekIndex) => (
+        <Box key={weekIndex} className={weekClassName} role="row">
+          {weekDates.map((date, dayIndex) => {
+            if (!date || !isSameMonth(date, data.date))
+              return <Box key={dayIndex} />
+
+            return (
+              <CalendarCell
+                key={`${date.year}-${date.month}-${date.day}`}
+                {...getCellProps(date)}
               />
             )
-          : (
-              monthContent(monthsStartDates[0])
-            )}
-      </View>
-    </View>
+          })}
+        </Box>
+      ))}
+    </Box>
   )
 }
 
-CalendarMonth.displayName = 'Srcube.CalendarMonth'
+CalendarMonth.displayName = 'CalendarMonth'
 
 export default CalendarMonth

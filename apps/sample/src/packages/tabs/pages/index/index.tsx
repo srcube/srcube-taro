@@ -1,4 +1,5 @@
-import { Tab, Tabs } from '@srcube-taro/ui'
+import { Button, Drawer, DrawerContent, DrawerFooter, Tab, Tabs } from '@srcube-taro/ui'
+import { useState } from 'react'
 import { Page, Section } from '@/components'
 
 export interface TabItem {
@@ -16,8 +17,20 @@ const radius = ['none', 'sm', 'md', 'lg', 'full'] as const
 const variants = ['solid', 'underlined', 'light'] as const
 
 export default function TabsPage() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <Page>
+      <Button onTap={() => setIsOpen(true)}>Open Drawer</Button>
+
+      <Drawer isOpen={isOpen} title="State Sets" onClose={() => setIsOpen(false)}>
+        <DrawerContent>
+          CONTENT
+          <DrawerFooter>
+            <Button color="danger" variant="text" fullWidth onTap={() => setIsOpen(false)}>Close</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
       <Section title="Usage">
         <Tabs aria-label="Tabs usage">
           {tabs.slice(0, 4).map(tab => (

@@ -1,33 +1,34 @@
+import type { DateValue } from '@internationalized/date'
 import type { RangeCalendarState } from '@react-stately/calendar'
-import type { DateValue, RangeCalendarProps } from '@react-types/calendar'
-import type { UseCalendarBaseProps } from '../calendar-base'
-import type { CalendarContextType } from '../context'
+import type { RangeCalendarProps } from '@react-types/calendar'
+import type { CalendarContextType, UseCalendarProps } from '../_calendar/use'
 import { createCalendar, getLocalTimeZone, today } from '@internationalized/date'
 import { useRangeCalendarState } from '@react-stately/calendar'
 import { useCallback, useMemo } from 'react'
-import { useCalendarBase } from '../calendar-base'
+import { useCalendar } from '../_calendar/use'
 
-export type UseRangeCalendarProps = Exclude<UseCalendarBaseProps<RangeCalendarProps<DateValue>>, 'isRange'>
+export type UseRangeCalendarProps = UseCalendarProps<RangeCalendarProps<DateValue>>
 
 export function useRangeCalendar(props: UseRangeCalendarProps) {
   const isRange = true
 
   const {
-    domRef,
     slots,
-    styles,
     locale,
-    size,
-    weekdayStyle,
     firstDayOfWeek,
+    months,
+    currentMonth,
     minValue,
     maxValue,
-    classNames,
+    size,
     isDisabled,
     isReadOnly,
-    isYMPickerExpanded,
-    setIsYMPickerExpanded,
-  } = useCalendarBase({ ...props, isRange })
+  } = useCalendar({ ...props, isRange })
+
+  const defaultFocusedValue = useMemo(
+    () => props.currentMonth ?? today(getLocalTimeZone()),
+    [props.currentMonth],
+  )
 
   const state = useRangeCalendarState({
     ...props,
@@ -36,36 +37,29 @@ export function useRangeCalendar(props: UseRangeCalendarProps) {
     maxValue,
     isDisabled,
     isReadOnly,
-    defaultFocusedValue: props.currentMonth ?? today(getLocalTimeZone()),
+    defaultFocusedValue,
     createCalendar: id => createCalendar(id),
   })
 
-  const getBaseCalendarProps = useCallback(() => ({
+  const getCalendarProps = useCallback(() => ({
     ...props,
-    ref: domRef,
-    className: styles.base,
-  }), [props, domRef, styles.base])
+  }), [props])
 
   const context = useMemo<CalendarContextType<RangeCalendarState>>(() => ({
     state,
+    months,
+    currentMonth,
+    minValue,
+    maxValue,
     slots,
-    styles,
     locale,
-    size,
-    weekdayStyle,
     firstDayOfWeek,
-    isRange,
-    classNames,
-    isYMPickerExpanded,
-    setIsYMPickerExpanded,
-  }), [state, slots, styles, locale, weekdayStyle, firstDayOfWeek, size, isRange, classNames, isYMPickerExpanded, setIsYMPickerExpanded])
+    size,
+    classNames: props.classNames,
+  }), [state, months, slots, locale, firstDayOfWeek, size, minValue, maxValue, props.classNames])
 
   return {
     context,
-    state,
-    styles,
-    getBaseCalendarProps,
+    getCalendarProps,
   }
 }
-
-export type UseCalendarRangeState = ReturnType<typeof useRangeCalendar>

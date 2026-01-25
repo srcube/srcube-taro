@@ -1,7 +1,6 @@
 import type { CheckboxProps } from '@srcube-taro/ui'
 import { ButtonGroup } from '@srcube-taro/button'
-import { Button, Checkbox, CheckboxGroup } from '@srcube-taro/ui'
-import { View } from '@tarojs/components'
+import { Box, Button, Checkbox, CheckboxGroup } from '@srcube-taro/ui'
 import { capitalize } from 'lodash-es'
 import { useMutative } from 'use-mutative'
 import { Page, Section, StateAction, StateDemo } from '@/components'
@@ -113,10 +112,10 @@ export default function CheckboxPage() {
               Read Only
             </Button>
           </ButtonGroup>
-          <View className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
-            <View className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
-            <View className="text-sm text-gray-800">Button will be auto loading when `onTap` is async function.</View>
-          </View>
+          <Box className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
+            <Box className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
+            <Box className="text-sm text-gray-800">Button will be auto loading when `onTap` is async function.</Box>
+          </Box>
           <ButtonGroup size="sm">
             <Button
               color={state.isIndeterminate ? 'primary' : void 0}
@@ -138,35 +137,35 @@ export default function CheckboxPage() {
       <Section title="Icon" contentClass="grid grid-cols-3 gap-2">
         <Checkbox
           defaultSelected
-          icon={<View className="i-[ic--twotone-circle] w-inherit h-inherit" />}
+          icon={<Box className="i-[ic--twotone-circle] w-inherit h-inherit" />}
         >
           Check
         </Checkbox>
         <Checkbox
           color="primary"
           defaultSelected
-          icon={<View className="i-[ph--flying-saucer-fill] w-inherit h-inherit" />}
+          icon={<Box className="i-[ph--flying-saucer-fill] w-inherit h-inherit" />}
         >
           UFO
         </Checkbox>
         <Checkbox
           color="success"
           defaultSelected
-          icon={<View className="i-[mingcute--grass-fill]" />}
+          icon={<Box className="i-[mingcute--grass-fill]" />}
         >
           Grass
         </Checkbox>
         <Checkbox
           color="warning"
           defaultSelected
-          icon={<View className="i-[streamline--flower-solid]" />}
+          icon={<Box className="i-[streamline--flower-solid]" />}
         >
           Flower
         </Checkbox>
         <Checkbox
           color="danger"
           defaultSelected
-          icon={<View className="i-[mdi--heart] w-inherit h-inherit" />}
+          icon={<Box className="i-[mdi--heart] w-inherit h-inherit" />}
         >
           Heart
         </Checkbox>
@@ -181,10 +180,10 @@ export default function CheckboxPage() {
           <Checkbox value="1">Horizontal 1</Checkbox>
           <Checkbox value="2">Horizontal 2</Checkbox>
         </CheckboxGroup>
-        <View className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
-          <View className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
-          <View className="text-sm text-gray-800">Group support checkboxs `color`, `size`, `radius`, `isDisabled` and `isReadOnly` properties.</View>
-        </View>
+        <Box className="flex gap-2 p-2 rounded-xl border-4 border-primary-500 bg-primary-50">
+          <Box className="flex-shrink-0 i-[mage--stars-c-fill] size-4 text-primary-500" />
+          <Box className="text-sm text-gray-800">Group support checkboxs `color`, `size`, `radius`, `isDisabled` and `isReadOnly` properties.</Box>
+        </Box>
       </Section>
     </Page>
   )

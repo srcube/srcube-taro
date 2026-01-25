@@ -1,22 +1,26 @@
 import type { ListState } from '@react-stately/list'
-import type { CollectionBase, MultipleSelection, Node } from '@react-types/shared'
+import type { CollectionBase, Node } from '@react-types/shared'
 import type { VirtualizerOptions } from '@srcube-taro/hooks'
 import type { ScrollboxProps } from '@srcube-taro/scrollbox'
 import type { ListboxSlots, ListboxVariantProps } from '@srcube-taro/theme'
-import type { ReactRef } from '@srcube-taro/utils-react'
 import type { SlotsToClasses } from '@srcube-taro/utils-tv'
 import type { MergeVariantProps } from '@srcube-taro/utils-types'
 import type { BaseEventOrig, ScrollViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, ReactNode, Ref } from 'react'
 import { useListState } from '@react-stately/list'
 import { defaultRangeExtractor, useVirtualizer } from '@srcube-taro/hooks'
 import { listbox } from '@srcube-taro/theme'
+import { isNumber } from '@srcube-taro/utils-func'
 import { useDOMRef } from '@srcube-taro/utils-react'
-import { useCallback, useMemo, useRef } from 'react'
+import { useCallback, useImperativeHandle, useMemo, useRef } from 'react'
 import i18n from './i18n'
 
 type OmitNativeKeys = 'children'
+
+export type ListboxRef = TaroElement & {
+  virtualizer: ReturnType<typeof useVirtualizer>
+}
 
 function flattenCollection<T>(collection: Iterable<Node<T>>): Node<T>[] {
   const items: Node<T>[] = []
@@ -34,11 +38,11 @@ function flattenCollection<T>(collection: Iterable<Node<T>>): Node<T>[] {
   return items
 }
 
-interface Props<T> extends Omit<ScrollboxProps, OmitNativeKeys> {
+interface Props<T> extends Omit<ScrollboxProps, OmitNativeKeys | 'ref'> {
   /**
    * Ref to the DOM element
    */
-  ref?: ReactRef
+  ref?: Ref<ListboxRef>
   /**
    * The controlled state of the listbox.
    */
@@ -68,14 +72,27 @@ interface Props<T> extends Omit<ScrollboxProps, OmitNativeKeys> {
    */
   classNames?: SlotsToClasses<ListboxSlots> & ScrollboxProps['classNames']
   /**
-   * Virtualizer options
-   * @reference https://tanstack.com/virtual/latest/docs/api/virtualizer#virtualizeroptions
+   * The estimated size of each item in pixels.
    */
-  virtualizerOptions?: Partial<VirtualizerOptions<any, any>>
+  estimateSize: VirtualizerOptions<any, any>['estimateSize'] | number
   /**
    * The indices of the sticky items.
    */
   stickyIndices?: number[]
+  /**
+   * Whether to measure the item size.
+   * @default false
+   */
+  measureItem?: boolean | ((item: Node<T>, index: number) => boolean)
+  /**
+   * Handler that is called when the active sticky index changes.
+   */
+  onActiveStickyChange?: (index: number) => void
+  /**
+   * Virtualizer options
+   * @reference https://tanstack.com/virtual/latest/docs/api/virtualizer#virtualizeroptions
+   */
+  virtualizerOptions?: Partial<VirtualizerOptions<any, any>>
 }
 
 export type UseListboxProps<T> = MergeVariantProps<Props<T> & CollectionBase<T>, ListboxVariantProps>
@@ -90,15 +107,18 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     onScroll,
     emptyContent,
     hideEmptyContent = false,
+    measureItem: measureItemProp = false,
     classNames,
     locale = 'en',
     id: idProp,
-    virtualizerOptions,
+    estimateSize: estimateSizeProp,
     stickyIndices,
+    virtualizerOptions,
+    onActiveStickyChange,
     ...rest
   } = props
 
-  const domRef = useDOMRef(ref)
+  const domRef = useDOMRef()
 
   const t = i18n[locale]
 
@@ -121,27 +141,29 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
 
   const items = useMemo(() => flattenCollection(state.collection), [state.collection])
 
-  const defaultEstimateSize = isHorizontal ? 100 : 50
-  const estimateSize = virtualizerOptions?.estimateSize ?? (() => defaultEstimateSize)
+  const estimateSize = virtualizerOptions?.estimateSize ?? (isNumber(estimateSizeProp) ? () => estimateSizeProp : estimateSizeProp)
 
   const rangeExtractor = useCallback(
     (range: { startIndex: number, endIndex: number, overscan: number, count: number }) => {
+      const defaultIndices = defaultRangeExtractor(range)
       if (!stickyIndices?.length)
-        return []
+        return defaultIndices
 
       activeStickyIndexRef.current
           = [...stickyIndices]
           .reverse()
           .find(index => range.startIndex >= index) ?? 0
 
+      onActiveStickyChange?.(activeStickyIndexRef.current)
+
       const next = new Set([
         activeStickyIndexRef.current,
-        ...defaultRangeExtractor(range),
+        ...defaultIndices,
       ])
 
       return [...next].sort((a, b) => a - b)
     },
-    [stickyIndices],
+    [stickyIndices, onActiveStickyChange],
   )
 
   // We always run the hook
@@ -162,6 +184,12 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     stickyIndices?.length && stickyIndices?.includes(index), [stickyIndices])
   const isActiveSticky = useCallback((index: number) =>
     stickyIndices?.length && index === activeStickyIndexRef.current, [stickyIndices?.length, activeStickyIndexRef])
+
+  const measureItem = useCallback((item: Node<T>, index: number) => {
+    if (typeof measureItemProp === 'function')
+      return measureItemProp(item, index)
+    return measureItemProp === true
+  }, [measureItemProp])
 
   const handleScroll = useCallback((e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => {
     onScroll?.(e)
@@ -200,15 +228,20 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     return {
       id,
       orientation,
+      classNames,
       onScroll: handleScroll,
       contentProps: getContentProps(),
       ...rest,
     }
-  }, [id, orientation, handleScroll, getContentProps, rest])
+  }, [id, orientation, classNames, handleScroll, getContentProps, rest])
 
   const getEmptyContentProps = useCallback(() => ({
     className: slots.emptyContent({ class: [classNames?.emptyContent] }),
   }), [slots, classNames])
+
+  useImperativeHandle(ref, () => {
+    return Object.assign(domRef.current || {}, { virtualizer }) as unknown as ListboxRef
+  }, [domRef, virtualizer])
 
   return {
     domRef,
@@ -223,6 +256,7 @@ export function useListbox<T extends object>(props: UseListboxProps<T>) {
     virtualizer,
     isSticky,
     isActiveSticky,
+    measureItem,
     getItemId,
     getScrollboxProps,
     getEmptyContentProps,

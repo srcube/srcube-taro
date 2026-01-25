@@ -49,21 +49,15 @@ export function useVirtualizer<TScrollElement = any, TItemElement = any>(
       observeElementRect,
       observeElementOffset,
       scrollToFn,
-      measureElement,
     })
 
     // Monkey-patch indexFromElement to support Taro's dataset
     virtualizer.indexFromElement = indexFromElement
 
-    // Monkey-patch measureElement (ref callback) to trigger manual measurement
-    // because Taro doesn't support ResizeObserver for items
-    const originalMeasureElement = virtualizer.measureElement
+    const originalMeasureElement = virtualizer.measureElement.bind(virtualizer)
     virtualizer.measureElement = (node: any) => {
-      // Call original to maintain internal consistency (e.g. unobserving if null)
       originalMeasureElement(node)
-
       if (node) {
-        // Manually trigger measurement logic
         measureElement(node, virtualizer)
       }
     }
@@ -77,7 +71,6 @@ export function useVirtualizer<TScrollElement = any, TItemElement = any>(
     observeElementRect,
     observeElementOffset,
     scrollToFn,
-    measureElement,
     indexFromElement,
   })
 

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@srcube-taro/ts-config/ui.json",
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

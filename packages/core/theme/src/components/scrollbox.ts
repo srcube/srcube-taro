@@ -18,12 +18,12 @@ export const scrollbox = tv({
     },
     orientation: {
       y: {
-        content: 'flex flex-col',
+        content: 'h-max',
         maskLeft: 'hidden',
         maskRight: 'hidden',
       },
       x: {
-        content: 'inline-flex flex-row whitespace-nowrap',
+        content: 'w-max whitespace-nowrap',
         maskTop: 'hidden',
         maskBottom: 'hidden',
       },

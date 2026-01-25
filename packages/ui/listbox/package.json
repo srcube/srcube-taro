@@ -28,6 +28,7 @@
     "@react-aria/utils": "catalog:",
     "@react-stately/collections": "catalog:",
     "@react-stately/list": "^3.13.2",
+    "@srcube-taro/box": "workspace:^",
     "@srcube-taro/hooks": "workspace:^",
     "@srcube-taro/scrollbox": "workspace:^",
     "@srcube-taro/theme": "workspace:^",

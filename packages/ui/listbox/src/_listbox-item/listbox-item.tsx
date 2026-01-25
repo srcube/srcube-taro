@@ -1,7 +1,7 @@
 import type { NativeProps } from '@srcube-taro/utils-types'
 import type { ViewProps } from '@tarojs/components'
 import type { TaroElement } from '@tarojs/runtime'
-import { View } from '@tarojs/components'
+import { Box } from '@srcube-taro/box'
 import { forwardRef } from 'react'
 
 export interface ListboxItemProps<T> extends NativeProps<ViewProps> {
@@ -16,9 +16,9 @@ export const ListboxItem = forwardRef<TaroElement, ListboxItemProps<any>>((props
   const { className, children, item, ...rest } = props
 
   return (
-    <View ref={ref} className={className} {...rest}>
+    <Box ref={ref} className={className} {...rest}>
       {children}
-    </View>
+    </Box>
   )
 })
 

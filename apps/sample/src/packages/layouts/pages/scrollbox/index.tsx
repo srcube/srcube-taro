@@ -13,7 +13,7 @@ export default function ScrollboxPage() {
       <Section title="Vertical" contentClass="flex flex-col gap-2">
         <Scrollbox
           className="relative w-full h-40 overflow-hidden rounded-lg bg-gray-100"
-          classNames={{ content: 'gap-2 p-2' }}
+          classNames={{ content: 'flex flex-col gap-2 p-2' }}
         >
           {list.map(i => (
             <View key={`v-${i}`} className="px-3 py-2 rounded-md bg-white">
@@ -27,7 +27,7 @@ export default function ScrollboxPage() {
         <Scrollbox
           orientation="x"
           className="relative w-full h-fit overflow-hidden rounded-lg bg-gray-100"
-          classNames={{ content: 'gap-2 p-2' }}
+          classNames={{ content: 'flex flex-row gap-2 p-2' }}
         >
           {list.slice(0, 20).map(i => (
             <View key={`h-${i}`} className="flex-shrink-0 inline-flex items-center justify-center px-2 size-8 rounded-md bg-white">
